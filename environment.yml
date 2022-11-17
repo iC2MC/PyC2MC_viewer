@@ -1,0 +1,18 @@
+name: PyC2MC
+channels:
+  - defaults
+dependencies:
+  - matplotlib=3.5.1
+  - numpy=1.21.2
+  - pandas=1.4.1
+  - pip=21.2.4
+  - pyqt=5.9.2
+  - python=3.9.7
+  - openpyxl=3.0.9
+  - qt=5.9.7
+  - scikit-learn=1.0.2
+  - scipy=1.7.3
+  - seaborn=0.11.2
+  - pip:
+    - chemparse==0.1.1
+    - mplcursors==0.5.1
