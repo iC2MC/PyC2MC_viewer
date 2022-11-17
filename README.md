@@ -12,13 +12,15 @@ lab (IC2MC) which collaborators are :
 
 *Mass spectrometry group of COBRA laboratory. (Université de Rouen Normandie)
 
+*Joint Mass Spectrometry Centre, Chair of Analytical Chemistry, University of Rostock, 18059 Rostock, Germany; Interdisciplinary Faculty, Department Life, Light & Matter (LL&M), University of Rostock, 18051 Rostock, Germany
+
 *Analytical chemistry group of IPREM laboratory (Université de Pau et des Pays de l’Adour)
 
 *FT-ICR research group of the National High Magnetic Field Laboratory (NHMFL)
 
-This software is distributed under the MIT licence.
+This software is distributed under the GPL licence.
 
-Authors : 
+Contributors : 
 
 -Maxime Sueur: maxime.sueur1@univ-rouen.fr 
 
