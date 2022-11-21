@@ -29,3 +29,5 @@ Contributors :
 -Oscar Lacroix-Andrivet: oscar.lacroix-andrivet@univ-rouen.fr 
 
 An executable version is available at the following link : https://drive.google.com/drive/folders/1OMtJDZCwe74-ee_H1nZcsgWVfCBcNWrO?usp=share_link
+
+When using the software, please cite : https://doi.org/10.26434/chemrxiv-2022-cmnk3
