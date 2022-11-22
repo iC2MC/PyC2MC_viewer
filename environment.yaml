@@ -71,7 +71,7 @@ dependencies:
     - pyqt5-sip==12.11.0
     - pytz==2022.6
     - pywin32-ctypes==0.2.0
-    - scikit-learn==1.1.3
-    - scipy==1.9.3
+    - scikit-learn==1.0.2
+    - scipy==1.7.3
     - sklearn==0.0.post1
     - threadpoolctl==3.1.0
