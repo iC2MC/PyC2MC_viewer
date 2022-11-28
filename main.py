@@ -1,4 +1,4 @@
-# ///////////////////////////////////////////////////////////////
+8# ///////////////////////////////////////////////////////////////
 #
 #----------------------------------------------------------------
 # Written by Julien Maillard, Maxime Sueur, Oscar Lacroix-Andrivet
@@ -50,6 +50,7 @@ from src.stats.HCA_function import plot_dendrogram
 from src.stats.PCA_function import plot_pca
 from src.processing.merge_unattributed import merge_non_attributed
 import imageio #For GIF
+from PIL import Image, ImageSequence
 from IPython import display
 
 try:
@@ -815,9 +816,14 @@ class MainWindow(QtWidgets.QMainWindow):
         """
         Links the github page in a new window
         """
-        link_git = "https://github.com/MaximeS5/PyC2MC"
-        msg = "PyC2MC Viewer: a FTMS data visualization software<br>Want to improve the application ? Join us on <a href='%s'>GitHub</a> <br> \
-        Version modified on %s" % (link_git,self.last_modified)
+        link_git = "https://github.com/iC2MC/PyC2MC_viewer"
+        email = "maxime.sueur1@univ-rouen.fr"
+        link_preprint = "https://doi.org/10.26434/chemrxiv-2022-cmnk3"
+        msg = "PyC2MC Viewer: a FTMS data visualization software. <br><br>\
+            Want to improve the application ? Join us on <a href='%s'>GitHub</a> <br><br> \
+            When using PyC2MC, please cite our <a href='%s'>preprint article</a>. <br><br>\
+            Version modified on %s <br><br> \
+            GUI based on PyDracula by Wanderson M. Pimenta." % (link_git,link_preprint,self.last_modified)
         reply = QMessageBox.information(self, 'Message', msg, QMessageBox.Ok, QMessageBox.Ok)
     # RECOLOR EVENTS
     # ///////////////////////////////////////////////////////////////
@@ -3197,7 +3203,11 @@ class MainWindow(QtWidgets.QMainWindow):
                 return
 
             for j in list_series_index :
-                m = float(list_series[j].text())
+                try:
+                    m = float(list_series[j].text())
+                except:
+                    QMessageBox.about(self, "FYI box", "Only use digits and dots for m/z values (no comma !)")
+                    return
                 rep_pattern=repetive_unit_mass
                 nominal_pattern=round(rep_pattern)
                 km= m * (nominal_pattern/rep_pattern)
@@ -5463,7 +5473,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 else:
                     Figure.clear()
                     transf = Figure.transFigure
-
+                frames.sort_values(by=["third_dimension","Normalized_intensity"],ascending = [True,True], inplace = True)               
                 plot_fun("scatter",x=frames["x_axes"],y=frames["y_axes"],d_color=frames["third_dimension"],size=dot_size*frames["Normalized_intensity"],dot_type=self.dot_type,edge=self.edge,cmap=self.color_map)
 
 
