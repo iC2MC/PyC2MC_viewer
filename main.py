@@ -178,6 +178,11 @@ class MainWindow(QtWidgets.QMainWindow):
         #GET PARAMETERS
         UIFunctions.uiDefinitions(self)
         
+        
+        
+        
+        
+        
         def getSettings():
             
             if QSettings('PyC2MC','def').value('def') == 'false':
@@ -811,7 +816,29 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.start_counter=time.time()
             self.click_count=1
-            
+    
+    def write_csv_df(self,path, filename, df):
+        # Give the filename you wish to save the file to
+        pathfile = os.path.normpath(os.path.join(path,filename))
+
+        # Use this function to search for any files which match your filename
+        files_present = os.path.isfile(pathfile) 
+        # if no matching files, write to csv, if there are matching files, print statement
+        if not files_present:
+            df.to_csv(pathfile, sep=';')
+        else:
+            overwrite_msg = "A file with this name already exist in this directory. Would you like to overwrite it ?"
+            overwrite = QMessageBox.question(self, 'Message',
+                             overwrite_msg, QMessageBox.Yes, QMessageBox.No)
+            if overwrite == QMessageBox.Yes:
+                df.to_csv(pathfile, sep=';', index = False)
+            elif overwrite == QMessageBox.No:
+                new_filename, okPressed = QInputDialog.getText(self, "Save Name","Name of the merged file: (Don't forget '.csv' !)", QLineEdit.Normal, "")
+                self.write_csv_df(path,new_filename,df)
+            else:
+                msg = "Not a valid input. Data is NOT saved!\n"
+                reply = QMessageBox.information(self, 'Message', msg, QMessageBox.Ok, QMessageBox.Ok)      
+                
     def about(self,last_modified):
         """
         Links the github page in a new window
@@ -1285,8 +1312,9 @@ class MainWindow(QtWidgets.QMainWindow):
             QMessageBox.about(self, "FYI box", "Impossible to merge selected files")
             return
         
-        os.chdir(path_to_file)
-        self.merged_data.to_csv(save_name +".csv",index = False)
+        # os.chdir(path_to_file)
+        # self.merged_data.to_csv(save_name +".csv",index = False)
+        self.write_csv_df(path_to_file, save_name +".csv", self.merged_data)
         filename = save_name +".csv"
         dataframe = load_MS_file(filename)
         os.chdir(path_old)
@@ -1337,8 +1365,9 @@ class MainWindow(QtWidgets.QMainWindow):
             # except:
             #     widgets.pbar.hide()
             #     QMessageBox.about(self, "FYI box", "Error, no files merged")
-        os.chdir(path_to_file)
-        self.merged_data.to_csv(save_name +".csv",index = False)
+        # os.chdir(path_to_file)
+        # self.merged_data.to_csv(save_name +".csv",index = False)
+        self.write_csv_df(path_to_file, save_name +".csv", self.merged_data)
         os.chdir(path_old)
         widgets.pbar.hide()
         QMessageBox.about(self, "FYI box", "Your files were correctly merged :)")
@@ -1364,8 +1393,10 @@ class MainWindow(QtWidgets.QMainWindow):
                 widgets.pbar.hide()
                 QMessageBox.about(self, "FYI box", "You can only merge the same type of file")
                 return
-        os.chdir(path_to_file)
-        self.merged_data.to_csv(save_name +".csv",index = False)
+        # os.chdir(path_to_file)
+        # self.merged_data.to_csv(save_name +".csv",index = False)
+        self.write_csv_df(path_to_file, save_name +".csv", self.merged_data)
+
         os.chdir(path_old)
         widgets.pbar.hide()
         QMessageBox.about(self, "FYI box", "Your files were correctly merged :)")
@@ -1388,8 +1419,10 @@ class MainWindow(QtWidgets.QMainWindow):
             QMessageBox.about(self, "FYI box", "An error has occurred")
             widgets.pbar.hide()
             return
-        os.chdir(path_to_file)
-        self.merged_data.to_csv(save_name +".csv",index = False)
+        # os.chdir(path_to_file)
+        # self.merged_data.to_csv(save_name +".csv",index = False)
+        self.write_csv_df(path_to_file, save_name +".csv", self.merged_data)
+
         os.chdir(path_old)
         widgets.pbar.hide()
         QMessageBox.about(self, "FYI box", "Your files were correctly merged :)")
@@ -1426,7 +1459,9 @@ class MainWindow(QtWidgets.QMainWindow):
             QMessageBox.about(self, "FYI box", "No or wrong saving name")
             return
         try :
-            self.merged_data.to_csv(save_name +".csv",index = False)
+            # self.merged_data.to_csv(save_name +".csv",index = False)
+            self.write_csv_df(path_to_file, save_name +".csv", self.merged_data)
+
             filename = save_name +".csv"
             dataframe = load_MS_file(filename)
             os.chdir(path_old)
@@ -1751,23 +1786,23 @@ class MainWindow(QtWidgets.QMainWindow):
                 widgets.list_sample_2.addItem(item_sample)
                 n=n+1
                             
-    def save_classes(self):
-        """
-        Export chemical classes data of the selected file to .csv
-        """
+    # def save_classes(self):
+    #     """
+    #     Export chemical classes data of the selected file to .csv
+    #     """
 
         
-        item_file = widgets.list_loaded_file.selectedItems()
-        if not item_file:
-            return
-        item = item_file[0]
-        data_selected = item.data(self.USERDATA_ROLE)
+    #     item_file = widgets.list_loaded_file.selectedItems()
+    #     if not item_file:
+    #         return
+    #     item = item_file[0]
+    #     data_selected = item.data(self.USERDATA_ROLE)
         
-        save_path = QtWidgets.QFileDialog.getExistingDirectory()
-        save_name, okPressed = QInputDialog.getText(self, "Save Name","Your name:", QLineEdit.Normal, "")
-        os.chdir(save_path)
-        data_selected.classes.to_csv(save_name +".csv",index = False)
-        QMessageBox.about(self, "FYI box", "Your file was correctly saved.")
+    #     save_path = QtWidgets.QFileDialog.getExistingDirectory()
+    #     save_name, okPressed = QInputDialog.getText(self, "Save Name","Your name:", QLineEdit.Normal, "")
+    #     os.chdir(save_path)
+    #     data_selected.classes.to_csv(save_name +".csv",index = False)
+    #     QMessageBox.about(self, "FYI box", "Your file was correctly saved.")
 
 #---------------------------------------
 #   Plot section
@@ -2917,8 +2952,10 @@ class MainWindow(QtWidgets.QMainWindow):
         
         
         
-        os.chdir(save_path)
-        self.data_with_coef.to_csv(save_name +".csv",index = False)
+        # os.chdir(save_path)
+        # self.data_with_coef.to_csv(save_name +".csv",index = False)
+        self.write_csv_df(save_path, save_name +".csv", self.data_with_coef)
+
         QMessageBox.about(self, "FYI box", "Your file was correctly saved.")
 
     def plot_HCA(self):
@@ -3518,8 +3555,10 @@ class MainWindow(QtWidgets.QMainWindow):
         save_path = QtWidgets.QFileDialog.getExistingDirectory()
         save_name, okPressed = QInputDialog.getText(self, "Save Name","Your name:", QLineEdit.Normal, "")
         if save_name != '' and save_path!= '':
-            os.chdir(save_path)
-            self.kendrickSeries.to_csv(save_name +".csv",index = False)
+            # os.chdir(save_path)
+            # self.kendrickSeries.to_csv(save_name +".csv",index = False)
+            self.write_csv_df(save_path, save_name +".csv", self.kendrickSeries)
+            
             QMessageBox.about(self, "FYI box", "Your file was correctly saved :)")
         else:
             QMessageBox.about(self, "Error box", "Either the save path or the  file name is missing.")
@@ -5628,8 +5667,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     index_classes = (self.compared_datas.df[classe_selected] == True)
                 else:
                     index_classes = (self.compared_datas.df[self.compared_datas.heteroatoms.columns] == self.compared_datas.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                data_extract = self.compared_datas.df[index_classes]     
-            
+                data_filtered = self.compared_datas.df[index_classes]     
             #KMD calculation
             if widgets.edit_motif_comp.text():
                 edit_repetive_unit = widgets.edit_motif_comp.text()
