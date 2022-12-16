@@ -825,7 +825,7 @@ class MainWindow(QtWidgets.QMainWindow):
         files_present = os.path.isfile(pathfile) 
         # if no matching files, write to csv, if there are matching files, print statement
         if not files_present:
-            df.to_csv(pathfile, sep=';')
+            df.to_csv(pathfile, sep=';',index = False)
         else:
             overwrite_msg = "A file with this name already exist in this directory. Would you like to overwrite it ?"
             overwrite = QMessageBox.question(self, 'Message',
@@ -833,8 +833,8 @@ class MainWindow(QtWidgets.QMainWindow):
             if overwrite == QMessageBox.Yes:
                 df.to_csv(pathfile, sep=';', index = False)
             elif overwrite == QMessageBox.No:
-                new_filename, okPressed = QInputDialog.getText(self, "Save Name","Name of the merged file: (Don't forget '.csv' !)", QLineEdit.Normal, "")
-                self.write_csv_df(path,new_filename,df)
+                new_filename, okPressed = QInputDialog.getText(self, "Save Name","Name of the merged file: ", QLineEdit.Normal, "")
+                self.write_csv_df(path,new_filename+'.csv',df)
             else:
                 msg = "Not a valid input. Data is NOT saved!\n"
                 reply = QMessageBox.information(self, 'Message', msg, QMessageBox.Ok, QMessageBox.Ok)      
@@ -1469,19 +1469,19 @@ class MainWindow(QtWidgets.QMainWindow):
             QMessageBox.about(self, "FYI box", "Your files were correctly merged :)")   
             
             #Load the created merged file
-            item = QtWidgets.QListWidgetItem(filename)
+            # item = QtWidgets.QListWidgetItem(filename)
             item_2 = QtWidgets.QListWidgetItem(filename+" ")
             #Attribute data loaded to the items
-            item.setData(self.USERDATA_ROLE, dataframe)
+            # item.setData(self.USERDATA_ROLE, dataframe)
             item_2.setData(self.USERDATA_ROLE, dataframe)
             #Display items in their respective Qlist
-            widgets.list_loaded_file.addItem(item)
+            # widgets.list_loaded_file.addItem(item)
             widgets.list_loaded_file_2.addItem(item_2)
             #Set the color of the item for better identification
-            j=widgets.list_loaded_file.count()-1
+            j=widgets.list_loaded_file_2.count()-1
             qcolor=QColor('#bfb0b7')
             qcolor.setAlphaF(0.3)
-            widgets.list_loaded_file.item(j).setBackground(QColor(qcolor))
+            widgets.list_loaded_file_2.item(j).setBackground(QColor(qcolor))
         except:
             widgets.pbar.hide()
             QMessageBox.about(self, "FYI box", "An error occurs during the saving of your file")
@@ -2070,7 +2070,7 @@ class MainWindow(QtWidgets.QMainWindow):
                             plt.gca().set_xlim(right=error_max)
                         if widgets.font_size.text():
                             font_size = float(widgets.font_size.text())
-                        plt.suptitle(f'{frames.classe_selected}',fontsize=font_size+4,y=0.95,x=0.5)
+                        plt.suptitle(f'{frames.classe_selected}',fontsize=font_size+4,y=0.97,x=0.5)
                         plt.title("error distribution", fontsize=font_size+2)
                         plt.xlabel('Errors', fontsize=font_size)
                         if widgets.radio_histo.isChecked():
@@ -3086,7 +3086,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 volc_data.sort_values("DBE" , inplace = True)
             scatter = plot_fun('scatter',volc_data['fc'],volc_data['p'],d_color = volc_data['DBE'])
             cbar= plt.colorbar()
-            cbar.set_label('DBE', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+            cbar.set_label('DBE', labelpad=-3.25*(font_size), rotation=90,fontsize=font_size)
             cbar.ax.tick_params(labelsize=font_size-2)
             
         elif widgets.volc_color_mz.isChecked():
@@ -3094,7 +3094,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 volc_data.sort_values("m/z" , inplace = True)
             scatter = plot_fun('scatter',volc_data['fc'],volc_data['p'],d_color = volc_data['m/z'])
             cbar= plt.colorbar()
-            cbar.set_label('m/z', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+            cbar.set_label('m/z', labelpad=-3.25*(font_size), rotation=90,fontsize=font_size)
             cbar.ax.tick_params(labelsize=font_size-2)
         elif widgets.volc_color_oc.isChecked():
             if widgets.cb_volc_sort.isChecked():
@@ -3669,7 +3669,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     data_extract["point_size"]=1
                 else :
                     QMessageBox.about(self, "Error", "No species to be displayed.")
-                    continue
+                    continue 
 
 
         #-----------------------------------------#
@@ -4134,7 +4134,7 @@ class MainWindow(QtWidgets.QMainWindow):
         for b in logic:
             widgets.list_sets.addItem(str(b))
 
-
+        plt.tight_layout()
         #Variables globalization
         self.sets_all=sets
         self.sets_names=logic

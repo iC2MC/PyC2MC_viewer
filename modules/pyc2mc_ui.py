@@ -304,7 +304,7 @@ class Ui_MainWindow(object):
 "    gridline-color: rgb(44, 49, 60);\n"
 "}\n"
 "QTableWidget::item:selected{\n"
-"    background-color: rgb(189, 147, 249);\n"
+"    background-color: rgb(15,79,163);\n"
 "}\n"
 "QHeaderView::section{\n"
 "    background-color: rgb(33, 37, 43);\n"
@@ -496,7 +496,7 @@ class Ui_MainWindow(object):
 "/* /////////////////////////////////////////////////////////////////////////////////////////////////\n"
 "ComboBox */\n"
 "QComboBox{\n"
-"    background-color: rgb(27, 29, 35);\n"
+"    background-color: rgb(208,208,208);\n"
 "    border-radius: 5px;\n"
 "    border: 2px solid rgb(33, 37, 43);\n"
 "    padding: 5px;\n"
@@ -519,7 +519,7 @@ class Ui_MainWindow(object):
 "    background-repeat: no-reperat;\n"
 " }\n"
 "QComboBox QAbstractItemView {\n"
-"    color: rgb(255, 121, 198);    \n"
+"    color: black;    \n"
 "    background-color: rgb(33, 37, 43);\n"
 "    padding: 10px;\n"
 "    selection-background-color: rgb(39, 44, 54);\n"
@@ -10732,7 +10732,7 @@ class Ui_MainWindow(object):
         self.btn_settings.setText(_translate("MainWindow", "Graphic \n"
 "settings"))
         self.btn_about.setText(_translate("MainWindow", "About"))
-        self.titleRightInfo.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" color:#4294d0;\">Py</span><span style=\" color:#f7971c;\">C2</span><span style=\" color:#ec1a3b;\">MC</span><span style=\" color:#ffffff;\">: Pyton tools for complex matrices molecular characterization</span></p></body></html>"))
+        self.titleRightInfo.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" color:#4294d0;\">Py</span><span style=\" color:#f7971c;\">C2</span><span style=\" color:#ec1a3b;\">MC</span><span style=\" color:#ffffff;\">: Python tools for complex matrices molecular characterization</span></p></body></html>"))
         self.settingsTopBtn.setToolTip(_translate("MainWindow", "Settings"))
         self.minimizeAppBtn.setToolTip(_translate("MainWindow", "Minimize"))
         self.maximizeRestoreAppBtn.setToolTip(_translate("MainWindow", "Maximize"))

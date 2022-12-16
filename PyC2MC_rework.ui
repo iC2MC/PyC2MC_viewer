@@ -318,7 +318,7 @@ QTableWidget::item{
 	gridline-color: rgb(44, 49, 60);
 }
 QTableWidget::item:selected{
-	background-color: rgb(189, 147, 249);
+	background-color: rgb(15,79,163);
 }
 QHeaderView::section{
 	background-color: rgb(33, 37, 43);
@@ -510,7 +510,7 @@ QRadioButton::indicator:checked {
 /* /////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBox */
 QComboBox{
-	background-color: rgb(27, 29, 35);
+	background-color: rgb(208,208,208);
 	border-radius: 5px;
 	border: 2px solid rgb(33, 37, 43);
 	padding: 5px;
@@ -533,7 +533,7 @@ QComboBox::drop-down {
 	background-repeat: no-reperat;
  }
 QComboBox QAbstractItemView {
-	color: rgb(255, 121, 198);	
+	color: black;	
 	background-color: rgb(33, 37, 43);
 	padding: 10px;
 	selection-background-color: rgb(39, 44, 54);
@@ -1464,7 +1464,7 @@ settings</string>
                    <enum>QFrame::NoFrame</enum>
                   </property>
                   <property name="text">
-                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#4294d0;&quot;&gt;Py&lt;/span&gt;&lt;span style=&quot; color:#f7971c;&quot;&gt;C2&lt;/span&gt;&lt;span style=&quot; color:#ec1a3b;&quot;&gt;MC&lt;/span&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;: Pyton tools for complex matrices molecular characterization&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#4294d0;&quot;&gt;Py&lt;/span&gt;&lt;span style=&quot; color:#f7971c;&quot;&gt;C2&lt;/span&gt;&lt;span style=&quot; color:#ec1a3b;&quot;&gt;MC&lt;/span&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;: Python tools for complex matrices molecular characterization&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                   </property>
                  </widget>
                 </item>

@@ -301,7 +301,7 @@ class Peak_list:
     @classmethod
     def from_csv_other(cls, df_initial):
         """
-        Initialize the Peak_list class for an attributed csv file not coming from Burker's software.
+        Initialize the Peak_list class for an attributed csv file not coming from a compatible software.
 
         Args:
             df (pandas.DataFrame): A pandas DataFrame containing the csv file
