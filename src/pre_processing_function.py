@@ -279,7 +279,12 @@ def split_classes_merged(df,heteroatoms,pca_data):
     
 
     d["sum_formula"]=df['molecular_formula']
-    d["DBE"] = df["C"] - ((df["H"])/2) + (df["N"]/2) + 1
+    if 'Na' in df:
+        d["DBE"] = df["C"] - ((df["H"]+df["Na"])/2) + (df["N"]/2) + 1
+    elif 'K' in df:
+        d["DBE"] = df["C"] - ((df["H"]+df["K"])/2) + (df["N"]/2) + 1
+    else:    
+        d["DBE"] = df["C"] - ((df["H"])/2) + (df["N"]/2) + 1
     d["O/C"] = df["O"] / df["C"]
     
     volc_data=pd.concat([pca_data.copy(),d],axis=1)
@@ -422,7 +427,13 @@ def formating_merged(df):
             df["N/C"] = df["N"] / df["C"]
         if 'S' in df:
             df["S/C"] = df["S"] / df["C"]
-        df["DBE"] = df["C"] - ((df["H"])/2) + (df["N"]/2) + 1
+            
+        if 'Na' in df:
+            df["DBE"] = df["C"] - ((df["H"]+df["Na"])/2) + (df["N"]/2) + 1
+        elif 'K' in df:
+            df["DBE"] = df["C"] - ((df["H"]+df["K"])/2) + (df["N"]/2) + 1
+        else:    
+            df["DBE"] = df["C"] - ((df["H"])/2) + (df["N"]/2) + 1
         df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
 
         dbe_both = dict()
@@ -495,7 +506,13 @@ def formating(df):
         df['N'] = 0
     if 'S' in df:
         df["S/C"] = df["S"] / df["C"]
-    df["DBE"] = df["C"] - ((df["H"])/2) + (df["N"]/2) + 1
+        
+    if 'Na' in df:
+        df["DBE"] = df["C"] - ((df["H"]+df["Na"])/2) + (df["N"]/2) + 1
+    elif 'K' in df:
+        df["DBE"] = df["C"] - ((df["H"]+df["K"])/2) + (df["N"]/2) + 1
+    else:    
+        df["DBE"] = df["C"] - ((df["H"])/2) + (df["N"]/2) + 1
     df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
     dbe_both = dict()
     dbe_odd = dict()
