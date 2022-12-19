@@ -1,4 +1,4 @@
-8# ///////////////////////////////////////////////////////////////
+# ///////////////////////////////////////////////////////////////
 #
 #----------------------------------------------------------------
 # Written by Julien Maillard, Maxime Sueur, Oscar Lacroix-Andrivet
@@ -4805,11 +4805,16 @@ class MainWindow(QtWidgets.QMainWindow):
                 plt.close("all")
         sample_1 = widgets.list_compare_sample_1.currentRow()
         sample_2 = widgets.list_compare_sample_2.currentRow()
+        n_sample = max(self.compared_datas.df['count'])
         if widgets.radio_fold_rel.isChecked():
-            fold_intens_1 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_1].astype(float).copy()
-            fold_intens_2 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_2].astype(float).copy()
-            leg_1 = str(fold_intens_1.name)
-            leg_2 = str(fold_intens_2.name)
+            fold_intens_1 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_1].values.astype(float).copy().reshape(-1, 1)
+            fold_intens_2 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_2].values.astype(float).copy().reshape(-1, 1)
+            min_max_scaler = preprocessing.MinMaxScaler()
+            fold_intens_1 = min_max_scaler.fit_transform(fold_intens_1)
+            fold_intens_2 = min_max_scaler.fit_transform(fold_intens_2)
+            
+            leg_1 = str(self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+1+sample_1].name)
+            leg_2 = str(self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+1+sample_2].name)
             leg_1 = leg_1.replace(".csv","")
             leg_2 = leg_2.replace(".csv","")
             leg_1 = leg_1.replace(".xlsx","")
@@ -4887,7 +4892,6 @@ class MainWindow(QtWidgets.QMainWindow):
             if len(data_extract) == 0:
                 QMessageBox.about(self, "FYI box", f"Something went wrong trying to display {classe_selected}'s data \nNo common attributions")
                 continue
-            print(data_extract.columns)
             data = pandas.DataFrame()
             data.data_extract = data_extract 
             data.data_inf_neg = data_inf_neg 
@@ -4903,9 +4907,9 @@ class MainWindow(QtWidgets.QMainWindow):
                     transf = Figure.transFigure
                 self.read_param()
                 if widgets.CheckBox_size_fc.isChecked() :
-                    size = self.d_size* frames.data_extract.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-2].astype(float)
-                    size_inf_neg = self.d_size*frames.data_inf_neg.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-2].astype(float)
-                    size_inf_pos = self.d_size*frames.data_inf_pos.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-2].astype(float)
+                    size = self.d_size*frames.data_extract.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-(n_sample)+sample_1].astype(float)
+                    size_inf_neg = self.d_size*frames.data_inf_neg.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-(n_sample)+sample_1].astype(float)
+                    size_inf_pos = self.d_size*frames.data_inf_pos.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-(n_sample)+sample_1].astype(float)
                 else:
                     size = self.d_size
                     size_inf_neg = self.d_size
