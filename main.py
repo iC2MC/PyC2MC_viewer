@@ -2050,18 +2050,20 @@ class MainWindow(QtWidgets.QMainWindow):
                         lst_error= []
                         min_error = min(frames['err_ppm'])
                         max_error = max(frames['err_ppm'])
-                        error_range = (max(frames['err_ppm'])+abs(min(frames['err_ppm'])))/30 # Calculates error range and divides it into 20 sections
+                        n_bin = 50
+                        error_range = (max(frames['err_ppm'])+abs(min(frames['err_ppm'])))/(n_bin+1) # Calculates error range and divides it into 50 sections
                         if widgets.radio_histo.isChecked():
                             Data= frames.groupby(pandas.cut(frames['err_ppm'], np.arange(min_error, max_error, error_range))).sum()
                         elif widgets.radio_histo_2.isChecked():
                             Data= frames.groupby(pandas.cut(frames['err_ppm'], np.arange(min_error, max_error, error_range))).count()
                         # Creates the 20 sections and determines errors value for each
+                        print(len(Data['err_ppm']))
                         for i in range(len(Data['err_ppm'])) :
                             lst_error.append(min_error+(error_range/2)+i*error_range)
                         #Mean error list
                         d = {'col1': lst_error,'col2': Data['absolute_intensity']}
                         df = pandas.DataFrame(data=d)
-                        plt.bar(df['col1'],df['col2'], width=0.025)
+                        plt.bar(df['col1'],df['col2'], width=1/n_bin)
                         if widgets.error_min.text():
                             error_min = float(widgets.error_min.text())
                             plt.gca().set_xlim(left=error_min)

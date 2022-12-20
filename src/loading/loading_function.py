@@ -587,7 +587,8 @@ class Peak_list:
         if '13C' in df_initial.columns:
             df_initial = df_initial[df_initial['13C'] == 0]
             df_initial = df_initial.drop('13C',axis = 1)
-        het_for_formula = df_initial.iloc[:,start+1:-1]
+        het_for_formula = df_initial.iloc[:,start+1:]
+        print(het_for_formula)
         for atom in het_for_formula:
             mol_form = mol_form + ' ' + atom + het_for_formula[atom].astype(str) 
             mol_form = mol_form.replace(atom +'0','',regex = True)
