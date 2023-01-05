@@ -1311,7 +1311,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_10.setFont(font)
-        self.groupBox_10.setStyleSheet("background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;")
+        self.groupBox_10.setStyleSheet("QGroupBox{background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;}")
         self.groupBox_10.setObjectName("groupBox_10")
         self.gridLayout_99 = QtWidgets.QGridLayout(self.groupBox_10)
         self.gridLayout_99.setContentsMargins(-1, 20, -1, -1)
@@ -1325,10 +1325,10 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_12.setFont(font)
-        self.groupBox_12.setStyleSheet("background-color: rgba(240,240,240,1);\n"
+        self.groupBox_12.setStyleSheet("QGroupBox{background-color: rgba(240,240,240,1);\n"
 "border-style: ouset;\n"
 "border-width: 1px;\n"
-"border-radius: 10px;")
+"border-radius: 10px;}")
         self.groupBox_12.setObjectName("groupBox_12")
         self.gridLayout_30 = QtWidgets.QGridLayout(self.groupBox_12)
         self.gridLayout_30.setContentsMargins(-1, 20, -1, -1)
@@ -1338,6 +1338,7 @@ class Ui_MainWindow(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.radioButton_norm_a.setFont(font)
+        self.radioButton_norm_a.setStyleSheet("Normalization on the whole data file.")
         self.radioButton_norm_a.setChecked(False)
         self.radioButton_norm_a.setObjectName("radioButton_norm_a")
         self.gridLayout_30.addWidget(self.radioButton_norm_a, 0, 0, 1, 1)
@@ -10753,8 +10754,10 @@ class Ui_MainWindow(object):
         self.label_27.setText(_translate("MainWindow", "Font Size:"))
         self.groupBox_10.setTitle(_translate("MainWindow", "Color coding:"))
         self.groupBox_12.setTitle(_translate("MainWindow", "Normalization on :"))
-        self.radioButton_norm_a.setText(_translate("MainWindow", "All data"))
+        self.radioButton_norm_a.setText(_translate("MainWindow", "Whole file"))
+        self.radioButton_norm_d.setToolTip(_translate("MainWindow", "Normalization on displayed class AND ion parity."))
         self.radioButton_norm_d.setText(_translate("MainWindow", "Displayed data"))
+        self.radioButton_norm_c.setToolTip(_translate("MainWindow", "Normalization on displayed class."))
         self.radioButton_norm_c.setText(_translate("MainWindow", "Selected class"))
         self.groupBox_32.setTitle(_translate("MainWindow", "Colormap:"))
         __sortingEnabled = self.list_color_map.isSortingEnabled()

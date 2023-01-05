@@ -2203,7 +2203,7 @@ border-radius: 10px;</string>
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;</string>
+                          <string notr="true">QGroupBox{background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;}</string>
                          </property>
                          <property name="title">
                           <string>Color coding:</string>
@@ -2235,10 +2235,10 @@ border-radius: 10px;</string>
                              </font>
                             </property>
                             <property name="styleSheet">
-                             <string notr="true">background-color: rgba(240,240,240,1);
+                             <string notr="true">QGroupBox{background-color: rgba(240,240,240,1);
 border-style: ouset;
 border-width: 1px;
-border-radius: 10px;</string>
+border-radius: 10px;}</string>
                             </property>
                             <property name="title">
                              <string>Normalization on :</string>
@@ -2255,8 +2255,11 @@ border-radius: 10px;</string>
                                  <pointsize>10</pointsize>
                                 </font>
                                </property>
+                               <property name="styleSheet">
+                                <string notr="true">Normalization on the whole data file.</string>
+                               </property>
                                <property name="text">
-                                <string>All data</string>
+                                <string>Whole file</string>
                                </property>
                                <property name="checked">
                                 <bool>false</bool>
@@ -2270,6 +2273,9 @@ border-radius: 10px;</string>
                                  <family>Segoe UI</family>
                                  <pointsize>10</pointsize>
                                 </font>
+                               </property>
+                               <property name="toolTip">
+                                <string>Normalization on displayed class AND ion parity.</string>
                                </property>
                                <property name="text">
                                 <string>Displayed data</string>
@@ -2286,6 +2292,9 @@ border-radius: 10px;</string>
                                  <family>Segoe UI</family>
                                  <pointsize>10</pointsize>
                                 </font>
+                               </property>
+                               <property name="toolTip">
+                                <string>Normalization on displayed class.</string>
                                </property>
                                <property name="text">
                                 <string>Selected class</string>

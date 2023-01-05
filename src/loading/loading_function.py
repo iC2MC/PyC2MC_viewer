@@ -326,14 +326,12 @@ class Peak_list:
         heteroatoms = pd.DataFrame(list([chemparse.parse_formula(formula) for formula in df['molecular_formula']]))
         heteroatoms.fillna(0,inplace = True)
         heteroatoms = heteroatoms.astype(int)
+        
         if "N" not in heteroatoms.columns:
-            df.insert(df.columns.get_loc('H')+1,"N",0)
             heteroatoms.insert(heteroatoms.columns.get_loc('H')+1,"N",0)
         if "O" not in heteroatoms.columns:
-            df.insert(df.columns.get_loc('N')+1,"O",0)
             heteroatoms.insert(heteroatoms.columns.get_loc('N')+1,"O",0)
         if "S" not in heteroatoms.columns:
-            df.insert(df.columns.get_loc('O')+1,"S",0)
             heteroatoms.insert(heteroatoms.columns.get_loc('O')+1,"S",0)
         df=df.join(heteroatoms)
         df_type = 'Attributed'
@@ -588,7 +586,6 @@ class Peak_list:
             df_initial = df_initial[df_initial['13C'] == 0]
             df_initial = df_initial.drop('13C',axis = 1)
         het_for_formula = df_initial.iloc[:,start+1:]
-        print(het_for_formula)
         for atom in het_for_formula:
             mol_form = mol_form + ' ' + atom + het_for_formula[atom].astype(str) 
             mol_form = mol_form.replace(atom +'0','',regex = True)

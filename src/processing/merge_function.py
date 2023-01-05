@@ -14,7 +14,7 @@ from ..loading.loading_function import load_MS_file
 def merge_file(names):
         """
         This function is used to concatenate .csv files together in one unique file "merged".
-        The merge is working using the calculated mass-to-charge ratio
+        The merge is working using the molecular formulas
         
         Args: 
             names(dict): list of path of .csv to load and process.

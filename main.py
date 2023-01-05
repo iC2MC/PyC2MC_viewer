@@ -793,7 +793,8 @@ class MainWindow(QtWidgets.QMainWindow):
         """
         Starts the SplitFinder module.
         """
-        
+        if self.splitfinder:
+            self.splitfinder.close()
         self.splitfinder = Splitfinder()
         self.splitfinder.show()
 
@@ -1399,14 +1400,36 @@ class MainWindow(QtWidgets.QMainWindow):
         QMessageBox.about(self, "FYI box", "Your files were correctly merged :)")
 
     def merge_Multicsv(self) : #Merged files from sequential attribution (Obritrap only) (To update ?)
+        
         widgets.pbar.show()
+        i=0
+        widgets.pbar.setValue(i)
         try:
-            names = QtWidgets.QFileDialog.getOpenFileNames(filter = "CSV (*.CSV)")
+            filepath,_ = QtWidgets.QFileDialog.getOpenFileNames(filter="Results files (*.csv;*.asc;*.xlsx;*.xls)")
+            names = []
+            n = 0
+            while n<len(filepath):
+                i = (n+1)/len(filepath)*100
+                widgets.pbar.setValue(i)
+                
+                filename = str(os.path.basename(filepath[n]))
+                names.append(filename)
+                n = n + 1
+            path_to_file = os.path.dirname(filepath[0])
+            os.chdir(path_to_file)
             path_old = os.getcwd()
-            path_to_file = os.path.dirname(names[0][0])
-            save_name, okPressed = QInputDialog.getText(self, "Save Name","Name of the merged file:", QLineEdit.Normal, "")
+            
         except:
+            path_old = os.getcwd()
             return
+        if len(names) == 1 :
+            QMessageBox.about(self, "FYI box", "Only one file was selected ! Please, select several files.")
+            widgets.pbar.hide()
+            return
+    
+        
+        save_name, okPressed = QInputDialog.getText(self, "Save Name","Name of the merged file:", QLineEdit.Normal, "")
+        
         i = 50
         widgets.pbar.setValue(i)
         try:
@@ -1416,9 +1439,8 @@ class MainWindow(QtWidgets.QMainWindow):
             QMessageBox.about(self, "FYI box", "An error has occurred")
             widgets.pbar.hide()
             return
-        # os.chdir(path_to_file)
-        # self.merged_data.to_csv(save_name +".csv",index = False)
-        self.write_csv_df(path_to_file, save_name +".csv", self.merged_data)
+        os.chdir(path_to_file)
+        self.write_csv_df(path_to_file, save_name +".csv", widgets.merged_data)
 
         os.chdir(path_old)
         widgets.pbar.hide()
@@ -2054,7 +2076,6 @@ class MainWindow(QtWidgets.QMainWindow):
                         elif widgets.radio_histo_2.isChecked():
                             Data= frames.groupby(pandas.cut(frames['err_ppm'], np.arange(min_error, max_error, error_range))).count()
                         # Creates the 20 sections and determines errors value for each
-                        print(len(Data['err_ppm']))
                         for i in range(len(Data['err_ppm'])) :
                             lst_error.append(min_error+(error_range/2)+i*error_range)
                         #Mean error list
