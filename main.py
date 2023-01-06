@@ -750,7 +750,7 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.btn_load_file.clicked.connect(self.load_file_method)
         widgets.btn_clear.clicked.connect(self.clear_loaded_list)
         widgets.btn_settings.clicked.connect(lambda : widgets.stackedWidget.setCurrentWidget(widgets.graph_param))
-        # self.actionSave_classes.triggered.connect(self.save_classes)  NOT YET
+        widgets.btn_save.clicked.connect(self.save_file)  
     
     #Process
         widgets.btn_merge_att.clicked.connect(self.merge_files)
@@ -824,12 +824,19 @@ class MainWindow(QtWidgets.QMainWindow):
         # if no matching files, write to csv, if there are matching files, print statement
         if not files_present:
             df.to_csv(pathfile, sep=';',index = False)
+            QMessageBox.about(self, "FYI box", "Your file was correctly saved.")
         else:
             overwrite_msg = "A file with this name already exist in this directory. Would you like to overwrite it ?"
             overwrite = QMessageBox.question(self, 'Message',
                              overwrite_msg, QMessageBox.Yes, QMessageBox.No)
             if overwrite == QMessageBox.Yes:
-                df.to_csv(pathfile, sep=';', index = False)
+                try:
+                    df.to_csv(pathfile, sep=';', index = False)
+                    QMessageBox.about(self, "FYI box", "Your file was correctly saved.")
+                except:
+                    msg = "A problem occured. Check if the file to replace is open."
+                    reply = QMessageBox.information(self, 'Message', msg, QMessageBox.Ok, QMessageBox.Ok)   
+                    return
             elif overwrite == QMessageBox.No:
                 new_filename, okPressed = QInputDialog.getText(self, "Save Name","Name of the merged file: ", QLineEdit.Normal, "")
                 self.write_csv_df(path,new_filename+'.csv',df)
@@ -1762,6 +1769,7 @@ class MainWindow(QtWidgets.QMainWindow):
             widgets.list_classes_error.addItem(item_classes)
             n = n+1
         widgets.list_classes_distrib.setCurrentRow(0)
+        widgets.list_classes_error.setCurrentRow(0)
 
     def split_classes_merged(self):
         """
@@ -1805,23 +1813,24 @@ class MainWindow(QtWidgets.QMainWindow):
                 widgets.list_sample_2.addItem(item_sample)
                 n=n+1
                             
-    # def save_classes(self):
-    #     """
-    #     Export chemical classes data of the selected file to .csv
-    #     """
+    def save_file(self):
+        """
+        Export chemical classes data of the selected file to .csv
+        """
 
         
-    #     item_file = widgets.list_loaded_file.selectedItems()
-    #     if not item_file:
-    #         return
-    #     item = item_file[0]
-    #     data_selected = item.data(self.USERDATA_ROLE)
+        item_file = widgets.list_loaded_file.selectedItems()
+        if not item_file:
+            return
+        item = item_file[0]
+        data_selected = item.data(self.USERDATA_ROLE)
         
-    #     save_path = QtWidgets.QFileDialog.getExistingDirectory()
-    #     save_name, okPressed = QInputDialog.getText(self, "Save Name","Your name:", QLineEdit.Normal, "")
-    #     os.chdir(save_path)
-    #     data_selected.classes.to_csv(save_name +".csv",index = False)
-    #     QMessageBox.about(self, "FYI box", "Your file was correctly saved.")
+        save_path = QtWidgets.QFileDialog.getExistingDirectory()
+        save_name, okPressed = QInputDialog.getText(self, "Save Name","Your name:", QLineEdit.Normal, "")
+        os.chdir(save_path)
+        # data_selected.df.to_csv(save_name +".csv",index = False)
+        self.write_csv_df(save_path, save_name +".csv", data_selected.df)
+        
 
 #---------------------------------------
 #   Plot section

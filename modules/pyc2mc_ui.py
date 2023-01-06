@@ -868,6 +868,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_9.setSpacing(0)
         self.verticalLayout_9.setObjectName("verticalLayout_9")
+        self.btn_save = QtWidgets.QPushButton(self.bottomMenu)
+        self.btn_save.setMinimumSize(QtCore.QSize(0, 45))
+        self.btn_save.setStyleSheet("background-image: url(:/icons/images/icons/cil-save.png);")
+        self.btn_save.setObjectName("btn_save")
+        self.verticalLayout_9.addWidget(self.btn_save)
         self.btn_clear = QtWidgets.QPushButton(self.bottomMenu)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -10729,6 +10734,7 @@ class Ui_MainWindow(object):
         self.btn_stats.setText(_translate("MainWindow", "Stats"))
         self.btn_split.setText(_translate("MainWindow", "Split \n"
 "Finder"))
+        self.btn_save.setText(_translate("MainWindow", "Save"))
         self.btn_clear.setText(_translate("MainWindow", "Clear"))
         self.btn_settings.setText(_translate("MainWindow", "Graphic \n"
 "settings"))
