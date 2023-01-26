@@ -34,8 +34,8 @@ def merge_Multicsv(names):
         while n < len(names):
             _, filename["%s" %n] = os.path.split(names[n])
             data["%s" %n] =  load_MS_file(names[n]).df
-            print(len(data["%s" %n]))
             data["%s" %n] = data["%s" %n].iloc[:,0:5]
+            data["%s" %n] = data["%s" %n].drop('normalized_intensity',axis=1)
             sumformula = sumformula.append(data["%s" %n]['molecular_formula'])
             n = n+1
         
@@ -68,7 +68,7 @@ def merge_Multicsv(names):
         
         merged = pandas.concat(data, axis=0)      
         merged = merged.drop_duplicates(subset='molecular_formula')
-     
+        
 
 
         

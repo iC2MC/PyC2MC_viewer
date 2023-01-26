@@ -1,11 +1,17 @@
 # PyC2MC
-This package, called PyC2MC, has been in development since 2020 and is based on the commonly used Python language with the goal of being 
-improvable even by people outside of the initial project. Indeed, the goal of this work is to provide a robust data visualization tool producing 
-numerous plots as well as statistical analysis to ease the sample molecular fingerprinting and the inter-sample comparison. With the aim to deliver 
-an easy-to-use application, we use a PyQT based graphical user interface designed under QtDesigner. Most of the application’s features are based on 
+This package, called PyC2MC, has been in development since 2020 and is based on the commonly used Python language with the goal of being
+improvable even by people outside of the initial project. Indeed, the goal of this work is to provide a robust data visualization tool producing
+numerous plots as well as statistical analysis to ease the sample molecular fingerprinting and the inter-sample comparison. With the aim to deliver
+an easy-to-use application, we use a PyQT based graphical user interface designed under QtDesigner. Most of the application’s features are based on
 the molecular formulae attributed by either constructor or third-party software.
 
-This software was developped at the Université de Rouen Normandie within the International Complex Matrices Molecular Characterization joint 
+To use this software, there are two options:
+
+=> Download and start the executable version at the following link : https://drive.google.com/drive/folders/1OMtJDZCwe74-ee_H1nZcsgWVfCBcNWrO?usp=share_link .
+
+=> Run "Main.py" in the Python interpreter of your choice after having installed the required packages found in "Requirements.txt" or importing "environment.yaml" via Anaconda3.
+
+This software was developped at the Université de Rouen Normandie within the International Complex Matrices Molecular Characterization joint
 lab (IC2MC) which collaborators are :
 
 *Analytical department team of Total Research and Technology Gonfreville. (TotalEnergies)
@@ -20,14 +26,14 @@ lab (IC2MC) which collaborators are :
 
 This software is distributed under the GPL licence.
 
-Contributors : 
+Contributors :
 
--Maxime Sueur: maxime.sueur1@univ-rouen.fr 
+-Maxime Sueur: maxime.sueur1@univ-rouen.fr
 
--Julien Maillard: julien.maillard@univ-rouen.fr 
+-Julien Maillard: julien.maillard@totalenergies.com
 
--Oscar Lacroix-Andrivet: oscar.lacroix-andrivet@univ-rouen.fr 
+-Oscar Lacroix-Andrivet: oscar.lacroix-andrivet@external.totalenergies.com
 
-An executable version is available at the following link : https://drive.google.com/drive/folders/1OMtJDZCwe74-ee_H1nZcsgWVfCBcNWrO?usp=share_link
+
 
 When using the software, please cite : https://doi.org/10.26434/chemrxiv-2022-cmnk3

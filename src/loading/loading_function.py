@@ -60,7 +60,7 @@ def load_csv_file(filename):
         data_df = pd.read_csv(filename, skiprows = 2,header=None,sep=',|;',encoding="utf-8", engine='python')
         data = Peak_list.from_csv_petroOrg(data_df)
     else:    
-        data_df = pd.read_csv(filename, skiprows = header,sep=',|;',encoding="utf-8", engine='python')
+        data_df = pd.read_csv(filename, header = header,sep=',|;',encoding="utf-8", engine='python')
         if "#" in data_df: # non-attributed csv file from DA
             data = Peak_list.from_csv_raw(data_df)
         elif "Observed Intens" in data_df: #attributed CSV file from DA
@@ -72,11 +72,16 @@ def load_csv_file(filename):
                 data = Peak_list.from_fusionned(data_df)
             else : #merged non attributed from DA
                 data = Peak_list.from_merged_unattributed(data_df)
+        elif "SPECTRUM - MS" in data_df:
+            data_df = pd.read_csv(filename, header = 6,sep=',|;',encoding="utf-8", engine='python')
+            data = Peak_list.from_csv_orbitrap(data_df)
         elif "Relative" in data_df:
             if "Delta (ppm)" in data_df: # attributed orbitrap csv file
                 data = Peak_list.from_csv_orbitrap(data_df)
             else: # non-attributed orbitrap csv file
                 data = Peak_list.from_csv_raw_orbitrap(data_df)
+        elif "Flags" in data_df: #Frestyle export w/o attributions
+            data = Peak_list.from_csv_raw_orbitrap(data_df)
         else: # other file
             data = Peak_list.from_csv_other(data_df)
 
@@ -249,11 +254,12 @@ class Peak_list:
 
         Returns an object of the class RawData.
         """
-        df = df.iloc[:,[0,1,2]]
+        df = df.iloc[:,[0,1]]
         names = ['m/z',
-                 'absolute_intensity',
-                 'normalized_intensity']
+                 'absolute_intensity']
         df.columns = names
+        df['normalized_intensity'] = df["absolute_intensity"].values/ \
+            df["absolute_intensity"].values.max()*100
         df_type = 'Peaklist'
         return cls(df,df_type)
 
@@ -358,8 +364,8 @@ class Peak_list:
         df = df.loc[:, ~df.columns.str.contains('RDB equiv')]
         dict_data={'C': 12,'H':1.007825,'N':14.003074,'O':15.994915,'S':31.972072,'Cl':34.968853,'Si':27.976928,'P':30.9737634\
         ,'V':50.943963,'K':39.0983,'Na':22.989769,'Li':7.016005,'Cu':62.929599,'Ni':57.935347,'F':18.998403,'B':11.009305, 'Zn':63.92915}
-        df['Composition'] = df['Composition'].replace(['³²S','₀','₁','₂','₃','₄','₅','₆','₇','₈','₉'],
-                                                      ['S','0','1','2','3','4','5','6','7','8','9'],regex=True)
+        df['Composition'] = df['Composition'].replace(['³²S','₀','₁','₂','₃','₄','₅','₆','₇','₈','₉',' '],
+                                                      ['S','0','1','2','3','4','5','6','7','8','9',''],regex=True)
         heteroatoms = pd.DataFrame(list([chemparse.parse_formula(formula) for formula in df['Composition']]))
         heteroatoms.fillna(0,inplace = True)
         heteroatoms = heteroatoms.astype(int)
@@ -582,6 +588,8 @@ class Peak_list:
             list_to_drop.append(i)
             i = i+2
         df_initial.drop(df_initial.columns[list_to_drop],axis=1,inplace=True)
+        if df_initial.iloc[:,len(df_initial.columns)-1].isnull().values.any():
+            df_initial.drop(df_initial.columns[len(df_initial.columns)-1],axis=1,inplace=True)
         if '13C' in df_initial.columns:
             df_initial = df_initial[df_initial['13C'] == 0]
             df_initial = df_initial.drop('13C',axis = 1)

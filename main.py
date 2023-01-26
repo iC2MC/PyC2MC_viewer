@@ -37,6 +37,7 @@ import mplcursors
 import matplotlib
 import matplotlib.patches as mpatches
 import matplotlib.backends.backend_svg
+import openpyxl
 from Image import easter
 from src.splitFinder.splitfinder import Splitfinder
 import time
@@ -58,7 +59,7 @@ except:
     pass
 matplotlib.use('qt5agg')
 
-matplotlib.rcParams['savefig.dpi'] = 300 #High res figures
+# matplotlib.rcParams['savefig.dpi'] = 300 #High res figures
 os.environ["QT_FONT_DPI"] = "96" # FIX Problem for High DPI and Scale above 100%
 
 
@@ -180,6 +181,7 @@ class MainWindow(QtWidgets.QMainWindow):
         
         
         
+        
         def getSettings():
             
             if QSettings('PyC2MC','def').value('def') == 'false':
@@ -198,11 +200,17 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.settingsFontSize = QSettings('PyC2MC','FontSize')
                 self.settingsFontSize.setValue('FontSize','16')
                 
+                self.settingsSaveDPI = QSettings('PyC2MC','SaveDPI')
+                self.settingsSaveDPI.setValue('SaveDPI','300')
+                
                 self.settingsFPS = QSettings('PyC2MC','FPS')
                 self.settingsFPS.setValue('FPS','2')
                 
                 self.settingsDotType = QSettings('PyC2MC','DotType')
                 self.settingsDotType.setValue('DotType','size_and_color')
+                
+                self.settingsColormap = QSettings('PyC2MC','Colormap')
+                self.settingsDotType.setValue('Colormap','viridis')
                     
                 self.settingsDotEdge = QSettings('PyC2MC','Edge')  
                 self.settingsDotEdge.setValue('Edge','true')
@@ -225,6 +233,9 @@ class MainWindow(QtWidgets.QMainWindow):
             self.settingsFontSize = QSettings('PyC2MC','FontSize')
             widgets.font_size.setText(self.settingsFontSize.value('FontSize'))
             
+            self.settingsSaveDPI = QSettings('PyC2MC','SaveDPI')
+            widgets.saveDPI.setText(self.settingsSaveDPI.value('SaveDPI'))
+            
             self.settingsFPS = QSettings('PyC2MC','FPS')
             widgets.gif_fps.setText(self.settingsFPS.value('FPS'))
             
@@ -241,6 +252,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 widgets.radio_color.setChecked(True)
             elif self.settingsDotType.value('DotType') == 'size':
                 widgets.radio_size.setChecked(True)
+            
+            self.settingsColormap = QSettings('PyC2MC','Colormap')
+            [widgets.list_color_map.setCurrentItem(x) for x in widgets.list_color_map.findItems(self.settingsColormap.value('Colormap'),QtCore.Qt.MatchExactly)]
             
             self.settingsDotEdge = QSettings('PyC2MC','Edge')  
             if self.settingsDotEdge.value('Edge') == 'true':
@@ -267,6 +281,8 @@ class MainWindow(QtWidgets.QMainWindow):
             
             self.settingsFontSize.setValue('FontSize',widgets.font_size.text())
             
+            self.settingsSaveDPI.setValue('SaveDPI', widgets.saveDPI.text())
+            
             self.settingsFPS.setValue('FPS',widgets.gif_fps.text())
             
             if widgets.radio_size_and_color.isChecked():
@@ -275,6 +291,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.settingsDotType.setValue('DotType','color')
             elif widgets.radio_size.isChecked():
                 self.settingsDotType.setValue('DotType','size')
+                
+            self.settingsColormap.setValue('Colormap',self.color_map)
             
             self.settingsDotEdge.setValue('Edge',widgets.CheckBox_edge.isChecked())
             
@@ -297,7 +315,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.titleRightInfo.mouseMoveEvent = moveWindow
         
         getSettings()
-
+        self.colormap()
+        # matplotlib.rcParams['savefig.dpi'] = widgets.saveDPI.text() #res figures
         # APP NAME
         # ///////////////////////////////////////////////////////////////
         title = "PyC2MC Viewer Edition"
@@ -717,7 +736,7 @@ class MainWindow(QtWidgets.QMainWindow):
     #Graphic parameters
      
         widgets.list_color_map.itemSelectionChanged.connect(self.colormap)
-        self.color_map="jet"
+        
     
     
     #Compare buttons
@@ -793,8 +812,11 @@ class MainWindow(QtWidgets.QMainWindow):
         """
         Starts the SplitFinder module.
         """
-        if self.splitfinder:
-            self.splitfinder.close()
+        try:
+            if self.splitfinder:
+                self.splitfinder.close()
+        except:
+            pass
         self.splitfinder = Splitfinder()
         self.splitfinder.show()
 
@@ -809,7 +831,10 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.click_count=[]
                 return
             if self.click_count==5:
-                easter()
+                try:
+                    easter()
+                except:
+                    return
 
         else:
             self.start_counter=time.time()
@@ -1083,6 +1108,12 @@ class MainWindow(QtWidgets.QMainWindow):
         """
         cmp=widgets.list_color_map.currentItem()
         self.color_map=cmp.text()
+        white_text_cm =['viridis','cividis','plasma']
+    
+        if cmp.text() in white_text_cm:
+            self.cm_text_color = "white"
+        else:
+            self.cm_text_color = "black"
         
     #---------------------------------------
     #       Clear loaded lists
@@ -1143,22 +1174,22 @@ class MainWindow(QtWidgets.QMainWindow):
             filename = str(os.path.basename(filepath[n]))
             # read data and create data frame
             os.chdir(path_to_file)
-            try :
-                dataframe = load_MS_file(filename)
-            except :  
-                QMessageBox.about(self, "FYI box", f"A problem has occured with the following file: '{filename}'")
-                n = n +1
-                if n<len(filepath):
-                    p = (n+1)/len(filepath)*100
+            # try :
+            dataframe = load_MS_file(filename)
+            # except Exception as err:  
+            #     QMessageBox.about(self, "FYI box", f"A problem has occured with the following file: '{filename}', error is : {err}")
+            #     n = n +1
+            #     if n<len(filepath):
+            #         p = (n+1)/len(filepath)*100
 
-                    path_to_file = os.path.dirname(filepath[n])
-                    filename = str(os.path.basename(filepath[n]))
-                    os.chdir(path_to_file)
-                    try :
-                        dataframe = load_MS_file(filename)
-                    except :  
-                        QMessageBox.about(self, "FYI box", f"A problem has occured with the following file: '{filename}'")
-                pass
+            #         path_to_file = os.path.dirname(filepath[n])
+            #         filename = str(os.path.basename(filepath[n]))
+            #         os.chdir(path_to_file)
+            #         try :
+            #             dataframe = load_MS_file(filename)
+            #         except :  
+            #             QMessageBox.about(self, "FYI box", f"A problem has occured with the following file: '{filename}'")
+            pass
             
             try :
                 test_var = dataframe.df 
@@ -1323,7 +1354,6 @@ class MainWindow(QtWidgets.QMainWindow):
         filename = save_name +".csv"
         dataframe = load_MS_file(filename)
         os.chdir(path_old)
-        QMessageBox.about(self, "FYI box", "Your files were correctly merged :)")
         
         widgets.pbar.hide()
         
@@ -1365,17 +1395,14 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.pbar.setValue(i)
         replicats = replicats_tuple[0]
         if okPressed and save_name != '':
-            # try :
-            self.merged_data = fuse_replicates(names,replicats)
-            # except:
-            #     widgets.pbar.hide()
-            #     QMessageBox.about(self, "FYI box", "Error, no files merged")
-        # os.chdir(path_to_file)
-        # self.merged_data.to_csv(save_name +".csv",index = False)
+            try :
+                self.merged_data = fuse_replicates(names,replicats)
+            except:
+                widgets.pbar.hide()
+                QMessageBox.about(self, "FYI box", "Error, no files merged")
         self.write_csv_df(path_to_file, save_name +".csv", self.merged_data)
         os.chdir(path_old)
         widgets.pbar.hide()
-        QMessageBox.about(self, "FYI box", "Your files were correctly merged :)")
 
     def merge_merged_files(self): 
         """
@@ -1404,7 +1431,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
         os.chdir(path_old)
         widgets.pbar.hide()
-        QMessageBox.about(self, "FYI box", "Your files were correctly merged :)")
 
     def merge_Multicsv(self) : #Merged files from sequential attribution (Obritrap only) (To update ?)
         
@@ -1451,7 +1477,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
         os.chdir(path_old)
         widgets.pbar.hide()
-        QMessageBox.about(self, "FYI box", "Your files were correctly merged :)")
 
     def merge_asc(self):
         """
@@ -1485,23 +1510,18 @@ class MainWindow(QtWidgets.QMainWindow):
             QMessageBox.about(self, "FYI box", "No or wrong saving name")
             return
         try :
-            # self.merged_data.to_csv(save_name +".csv",index = False)
             self.write_csv_df(path_to_file, save_name +".csv", self.merged_data)
 
             filename = save_name +".csv"
             dataframe = load_MS_file(filename)
             os.chdir(path_old)
             widgets.pbar.hide()
-            QMessageBox.about(self, "FYI box", "Your files were correctly merged :)")   
             
             #Load the created merged file
-            # item = QtWidgets.QListWidgetItem(filename)
             item_2 = QtWidgets.QListWidgetItem(filename+" ")
             #Attribute data loaded to the items
-            # item.setData(self.USERDATA_ROLE, dataframe)
             item_2.setData(self.USERDATA_ROLE, dataframe)
             #Display items in their respective Qlist
-            # widgets.list_loaded_file.addItem(item)
             widgets.list_loaded_file_2.addItem(item_2)
             #Set the color of the item for better identification
             j=widgets.list_loaded_file_2.count()-1
@@ -1530,11 +1550,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.d_size=float(widgets.dot_size.text())
         self.fontsize = float(widgets.font_size.text())
-        
         self.edge=widgets.CheckBox_edge.isChecked()
         self.para_dict = {'dt' : self.dot_type,'ds' : self.d_size, 'fs' : self.fontsize, 'cm' : self.color_map}
         
         self.fps = float(widgets.gif_fps.text())
+        matplotlib.rcParams['savefig.dpi'] = widgets.saveDPI.text()
 
 
 #---------------------------------------
@@ -2006,7 +2026,7 @@ class MainWindow(QtWidgets.QMainWindow):
             #-----------------------------------------#
             #  Normalization on displayed data (end)  #
             #-----------------------------------------#   
-            
+                    self.read_param()
                     data_extract.classe_selected = classe_selected
                     frames.append(data_extract)
                 
@@ -2044,7 +2064,7 @@ class MainWindow(QtWidgets.QMainWindow):
                             font_size = float(widgets.font_size.text())
                         plt.suptitle(f'{frames.classe_selected}',fontsize=font_size+4,y=0.95,x=0.5)
                         cbar = plt.colorbar()
-                        cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                        cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                         plt.xlabel('m/z', fontsize=font_size+2)
                         plt.ylabel('Error (ppm)', fontsize=font_size+2)
                         plt.xticks(fontsize=font_size)
@@ -2626,11 +2646,11 @@ class MainWindow(QtWidgets.QMainWindow):
                 plt.suptitle(f'{frames.classe_selected}',fontsize=font_size+4,y=0.95,x=0.45)
                 cbar = plt.colorbar()
                 if widgets.radio_color_intensity_2.isChecked():
-                    cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 elif widgets.radio_color_pc1.isChecked():
-                    cbar.set_label('PC1', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('PC1', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 elif widgets.radio_color_pc2.isChecked():
-                    cbar.set_label('PC2', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('PC2', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
         
                 cbar.ax.tick_params(labelsize=font_size-2)
                 if widgets.radio_color_pc1.isChecked():
@@ -2827,13 +2847,13 @@ class MainWindow(QtWidgets.QMainWindow):
                 plt.suptitle(f'{frames.classe_selected}',fontsize=font_size+4,y=0.95,x=0.45)
                 cbar = plt.colorbar()
                 if widgets.radio_color_intensity_3.isChecked():
-                    cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 elif widgets.radio_color_pc1_VK.isChecked():
-                    cbar.set_label('PC1', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('PC1', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 elif widgets.radio_color_pc2_VK.isChecked():
-                    cbar.set_label('PC2', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('PC2', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 elif widgets.radio_color_O_vk.isChecked():
-                    cbar.set_label('#O', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('#O', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 cbar.ax.tick_params(labelsize=font_size-2)
                 if widgets.radio_color_pc1_VK.isChecked():
                     plt.clim(np.min(data_selected.df['PC1']), np.max(data_selected.df['PC1']))
@@ -2979,13 +2999,7 @@ class MainWindow(QtWidgets.QMainWindow):
         if save_name == '':
             return
         
-        
-        
-        # os.chdir(save_path)
-        # self.data_with_coef.to_csv(save_name +".csv",index = False)
         self.write_csv_df(save_path, save_name +".csv", self.data_with_coef)
-
-        QMessageBox.about(self, "FYI box", "Your file was correctly saved.")
 
     def plot_HCA(self):
         """
@@ -3001,7 +3015,6 @@ class MainWindow(QtWidgets.QMainWindow):
         hca_data = hca_data.transpose()
         model = AgglomerativeClustering(distance_threshold=True, n_clusters=None)
         labelist=hca_data.index.values.tolist()
-
         for i in range(len(labelist)):
             labelist[i]=labelist[i].replace('Rel_intens_','')
             labelist[i]=labelist[i].replace('.csv','')
@@ -3025,6 +3038,7 @@ class MainWindow(QtWidgets.QMainWindow):
         mngr = plt.get_current_fig_manager()
         plt.xticks(rotation=val)
         mngr.window.setGeometry(self.pos().x()+640,self.pos().y()+200,640, 545)
+        plt.show()
         plt.tight_layout()
 
     def volcano(self):
@@ -3113,24 +3127,25 @@ class MainWindow(QtWidgets.QMainWindow):
         elif widgets.volc_color_dbe.isChecked():
             if widgets.cb_volc_sort.isChecked():
                 volc_data.sort_values("DBE" , inplace = True)
-            scatter = plot_fun('scatter',volc_data['fc'],volc_data['p'],d_color = volc_data['DBE'])
+            scatter = plot_fun('scatter',volc_data['fc'],volc_data['p'],d_color = volc_data['DBE'],cmap = self.color_map)
             cbar= plt.colorbar()
-            cbar.set_label('DBE', labelpad=-3.25*(font_size), rotation=90,fontsize=font_size)
+            cbar.set_label('DBE', labelpad=-2.4*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
             cbar.ax.tick_params(labelsize=font_size-2)
             
         elif widgets.volc_color_mz.isChecked():
             if widgets.cb_volc_sort.isChecked():
                 volc_data.sort_values("m/z" , inplace = True)
-            scatter = plot_fun('scatter',volc_data['fc'],volc_data['p'],d_color = volc_data['m/z'])
+            scatter = plot_fun('scatter',volc_data['fc'],volc_data['p'],d_color = volc_data['m/z'],cmap = self.color_map)
             cbar= plt.colorbar()
-            cbar.set_label('m/z', labelpad=-3.25*(font_size), rotation=90,fontsize=font_size)
+            cbar.set_label('m/z', labelpad=-3*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
             cbar.ax.tick_params(labelsize=font_size-2)
+            
         elif widgets.volc_color_oc.isChecked():
             if widgets.cb_volc_sort.isChecked():
                 volc_data.sort_values("O/C" , inplace = True)
-            scatter = plot_fun('scatter',volc_data['fc'],volc_data['p'],d_color = volc_data['O/C'])
+            scatter = plot_fun('scatter',volc_data['fc'],volc_data['p'],d_color = volc_data['O/C'],cmap = self.color_map)
             cbar= plt.colorbar()
-            cbar.set_label('O/C', labelpad=-3.25*(font_size), rotation=90,fontsize=font_size)
+            cbar.set_label('O/C', labelpad=-3.15*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
             cbar.ax.tick_params(labelsize=font_size-2)
             
         if widgets.cb_significancy_volc.isChecked():
@@ -3532,7 +3547,7 @@ class MainWindow(QtWidgets.QMainWindow):
                         plt.gca().set_ylim(top=KMD_max)
                     cbar = plt.colorbar()
                     cbar.ax.tick_params(labelsize=font_size-2)
-                    cbar.set_label(c_label, labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label(c_label, labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
 
                     plt.suptitle(f'{y_label} vs {x_label}',fontsize=font_size+4,y=0.96,x=0.45)
                     plt.xlabel(x_label, fontsize=font_size+4)
@@ -3737,7 +3752,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     plt.gca().set_ylim(top=ACOS_max)
                 plt.suptitle('Average carbon oxidation state vs #C',fontsize=font_size+4,y=0.97,x=0.45)
                 cbar = plt.colorbar()
-                cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 cbar.ax.tick_params(labelsize=font_size-2)
                 if widgets.radioButton_norm_c.isChecked() or widgets.radioButton_norm_d.isChecked():
                     plt.clim(0,1)
@@ -3813,9 +3828,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 data_extract = data_extract[index_classes]
     
             if widgets.MAI_box.isChecked():
-                data_extract['AI']=(1+data_extract['C']-0.5*data_extract['O']-data_extract['S']-0.5*data_extract['H'])/(data_extract['C']-0.5*data_extract['O']-data_extract['S']-data_extract['N']-data_extract['P'])
+                data_extract['AI']=(1+data_extract['C']-0.5*data_extract['O']-data_extract['S']-0.5*(data_extract['N']+data_extract['P']+data_extract['H']))/(data_extract['C']-0.5*data_extract['O']-data_extract['S']-data_extract['N']-data_extract['P'])
             else:
-                data_extract['AI']=(1+data_extract['C']-data_extract['O']-data_extract['S']-0.5*data_extract['H'])/(data_extract['C']-data_extract['O']-data_extract['S']-data_extract['N']-data_extract['P'])
+                data_extract['AI']=(1+data_extract['C']-data_extract['O']-data_extract['S']-0.5*(data_extract['N']+data_extract['P']+data_extract['H']))/(data_extract['C']-data_extract['O']-data_extract['S']-data_extract['N']-data_extract['P'])
             data_extract['AI'][data_extract['AI']<0]=0
             data_extract['AI'][data_extract['AI']>1]=1
     
@@ -4070,7 +4085,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     spacing='proportional',
                     orientation='vertical',
                 )
-                cbar.set_label('Maximum carbonyl ratio', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                cbar.set_label('Maximum carbonyl ratio', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = "white")
                 cbar.ax.tick_params(labelsize=font_size-2)
                 if gif == False:
                     mngr = plt.get_current_fig_manager()
@@ -4162,7 +4177,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         for b in logic:
             widgets.list_sets.addItem(str(b))
-
+        plt.show
         plt.tight_layout()
         #Variables globalization
         self.sets_all=sets
@@ -4216,6 +4231,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 df=data.loc[data['m/z'].isin(self.sets_all[s])]
                 df.set_index('m/z',inplace=True)
                 df.sort_index(ascending=True,inplace=True)
+                names_dict = {'m/z':'calc. m/z'}
+                df = df.rename(columns=names_dict)
                 df.to_excel(writer,sheet_name=str(s))
                 #Progress Bar#
                 value_pb_1=value_pb_1+1
@@ -5351,11 +5368,11 @@ class MainWindow(QtWidgets.QMainWindow):
                 plt.suptitle(f'{frames.classe_selected}',fontsize=font_size+4,y=0.95,x=0.45)
                 cbar = plt.colorbar()
                 if widgets.radio_color_intensity_comp.isChecked():
-                    cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 elif widgets.radio_color_pc1_comp.isChecked():
-                    cbar.set_label('PC1', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('PC1', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 elif widgets.radio_color_pc2_comp.isChecked():
-                    cbar.set_label('PC2', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('PC2', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
         
                 cbar.ax.tick_params(labelsize=font_size-2)
                 if widgets.radio_color_pc1_comp.isChecked():
@@ -5564,13 +5581,13 @@ class MainWindow(QtWidgets.QMainWindow):
                 plt.suptitle(f'{frames.classe_selected}',fontsize=font_size+4,y=0.95,x=0.45)
                 cbar = plt.colorbar()
                 if widgets.radio_color_intensity_comp_2.isChecked():
-                    cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 elif widgets.radio_color_pc1_VK_comp.isChecked():
-                    cbar.set_label('PC1', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('PC1', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 elif widgets.radio_color_pc2_VK_comp.isChecked():
-                    cbar.set_label('PC2', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('PC2', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 elif widgets.radio_color_O_vk_comp.isChecked():
-                    cbar.set_label('#O', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('#O', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 cbar.ax.tick_params(labelsize=font_size-2)
                 if widgets.radio_color_pc1_VK_comp.isChecked():
                     plt.clim(np.min(data_selected.df['PC1']), np.max(data_selected.df['PC1']))
@@ -5836,13 +5853,13 @@ class MainWindow(QtWidgets.QMainWindow):
                     plt.gca().set_ylim(top=KMD_max)
                 cbar = plt.colorbar()
                 if widgets.K_intensity_univ.isChecked():
-                    cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 if widgets.K_nitrogen_univ.isChecked():
-                    cbar.set_label('Nitrogen number', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('Nitrogen number', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 if widgets.K_oxygen_univ.isChecked():
-                    cbar.set_label('Oxygen number', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('Oxygen number', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 if widgets.K_sulfur_univ.isChecked():
-                    cbar.set_label('Sulfur number', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                    cbar.set_label('Sulfur number', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 cbar.ax.tick_params(labelsize=font_size-2)
                 plt.suptitle(f'{y_label} vs {x_label}',fontsize=font_size+4,y=0.96,x=0.45)
                 plt.xlabel(x_label, fontsize=font_size+4)
@@ -6036,7 +6053,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     plt.gca().set_ylim(top=ACOS_max)
                 plt.suptitle('Average carbon oxidation state vs #C',fontsize=font_size+4,y=0.97,x=0.45)
                 cbar = plt.colorbar()
-                cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 cbar.ax.tick_params(labelsize=font_size-2)
                 if widgets.radioButton_norm_c.isChecked() or widgets.radioButton_norm_d.isChecked():
                     plt.clim(0,1)
@@ -6119,9 +6136,9 @@ class MainWindow(QtWidgets.QMainWindow):
             
     
             if widgets.MAI_box_comp.isChecked():
-                data_extract['AI']=(1+data_extract['C']-0.5*data_extract['O']-data_extract['S']-0.5*data_extract['H'])/(data_extract['C']-0.5*data_extract['O']-data_extract['S']-data_extract['N']-data_extract['P'])
+                data_extract['AI']=(1+data_extract['C']-0.5*data_extract['O']-data_extract['S']-0.5*(data_extract['N']+data_extract['P']+data_extract['H']))/(data_extract['C']-0.5*data_extract['O']-data_extract['S']-data_extract['N']-data_extract['P'])
             else:
-                data_extract['AI']=(1+data_extract['C']-data_extract['O']-data_extract['S']-0.5*data_extract['H'])/(data_extract['C']-data_extract['O']-data_extract['S']-data_extract['N']-data_extract['P'])
+                data_extract['AI']=(1+data_extract['C']-data_extract['O']-data_extract['S']-0.5*(data_extract['N']+data_extract['P']+data_extract['H']))/(data_extract['C']-data_extract['O']-data_extract['S']-data_extract['N']-data_extract['P'])
             data_extract['AI'][data_extract['AI']<0]=0
             data_extract['AI'][data_extract['AI']>1]=1
     
@@ -6431,6 +6448,11 @@ class MainWindow(QtWidgets.QMainWindow):
                 plt.close("all")
             except:
                 pass
+            try:
+                if self.splitfinder:
+                    self.splitfinder.close()
+            except:
+                pass
             event.accept()
         else  : 
             quit_msg = "No data will be saved. Confirm ?"
@@ -6440,6 +6462,11 @@ class MainWindow(QtWidgets.QMainWindow):
             if reply == QMessageBox.Yes:
                 try :
                     plt.close("all")
+                except:
+                    pass
+                try:
+                    if self.splitfinder:
+                        self.splitfinder.close()
                 except:
                     pass
                 event.accept()

@@ -9,4 +9,4 @@ scipy=1.7.3
 seaborn=0.11.2
 chemparse==0.1.1
 mplcursors==0.5.1
-pyinstaller
+pyinstaller==5.6.2

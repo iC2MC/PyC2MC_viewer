@@ -446,7 +446,7 @@ border-radius: 10px;</string>
              </font>
             </property>
             <property name="text">
-             <string>Mass of the split (Da):</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delta &lt;span style=&quot; font-style:italic;&quot;&gt;m/z&lt;/span&gt; of the split:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -461,7 +461,7 @@ border-radius: 10px;</string>
              </font>
             </property>
             <property name="text">
-             <string>Tolerance (Da):</string>
+             <string>Tolerance:</string>
             </property>
            </widget>
           </item>
@@ -657,7 +657,7 @@ selection-color: rgb(18, 1, 255);</string>
           </font>
          </property>
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tip 2 : Results are not sorted, you need to check which one is the good one&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tip 3: Results are not sorted, you need to check which one is the good one&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
@@ -746,7 +746,7 @@ border-radius: 10px;selection-background-color: blue</string>
           </font>
          </property>
          <property name="text">
-          <string>Tip 1 : Only the first 7 decimals of the error are displayed</string>
+          <string>Tip 2 : Only the first 7 decimals of the error are displayed</string>
          </property>
         </widget>
        </item>
@@ -761,7 +761,20 @@ border-radius: 10px;selection-background-color: blue</string>
           </font>
          </property>
          <property name="text">
-          <string>Error (Da) :</string>
+          <string>Error :</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="2">
+        <widget class="QLabel" name="label_8">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Tip 1: Currently this tool can only be used for monocharged ions</string>
          </property>
         </widget>
        </item>
