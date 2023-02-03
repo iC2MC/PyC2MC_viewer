@@ -72,7 +72,7 @@ def load_csv_file(filename):
                 data = Peak_list.from_fusionned(data_df)
             else : #merged non attributed from DA
                 data = Peak_list.from_merged_unattributed(data_df)
-        elif "SPECTRUM - MS" in data_df:
+        elif "SPECTRUM - MS" in data_df: #Qual browser ( orbi with special header)
             data_df = pd.read_csv(filename, header = 6,sep=',|;',encoding="utf-8", engine='python')
             data = Peak_list.from_csv_orbitrap(data_df)
         elif "Relative" in data_df:
@@ -82,6 +82,8 @@ def load_csv_file(filename):
                 data = Peak_list.from_csv_raw_orbitrap(data_df)
         elif "Flags" in data_df: #Frestyle export w/o attributions
             data = Peak_list.from_csv_raw_orbitrap(data_df)
+        elif "H/C" in data_df:
+            data = Peak_list.from_csv_saved(data_df)
         else: # other file
             data = Peak_list.from_csv_other(data_df)
 
@@ -343,6 +345,38 @@ class Peak_list:
         df_type = 'Attributed'
         return cls(df,df_type,heteroatoms)
 
+    @classmethod
+    def from_csv_saved(cls, df_initial):
+        """
+        Initialize the Peak_list class for an attributed csv file not coming from a compatible software.
+
+        Args:
+            df (pandas.DataFrame): A pandas DataFrame containing the csv file
+                information.
+
+        Returns an object of the class RawData.
+        """
+        
+        df_initial = df_initial.loc[:, ~df_initial.columns.str.contains('^Unnamed')]
+        df = df_initial
+        heteroatoms = pd.DataFrame(list([chemparse.parse_formula(formula) for formula in df['molecular_formula']]))
+        heteroatoms.fillna(0,inplace = True)
+        heteroatoms = heteroatoms.astype(int)
+        if "N" not in heteroatoms.columns:
+            heteroatoms.insert(heteroatoms.columns.get_loc('H')+1,"N",0)
+            if "N" not in df.columns:
+                df.insert(df.columns.get_loc('H')+1,"N",0)
+        if "O" not in heteroatoms.columns:
+            heteroatoms.insert(heteroatoms.columns.get_loc('N')+1,"O",0)
+            if "O" not in df.columns:
+                df.insert(df.columns.get_loc('N')+1,"O",0)
+        if "S" not in heteroatoms.columns:
+            heteroatoms.insert(heteroatoms.columns.get_loc('O')+1,"S",0)
+            if "S" not in df.columns:
+                df.insert(df.columns.get_loc('O')+1,"S",0)
+        df_type = 'Attributed'
+        return cls(df,df_type,heteroatoms)
+
 
     @classmethod
     def from_csv_orbitrap(cls, df):
@@ -363,12 +397,18 @@ class Peak_list:
         df = df.loc[:, ~df.columns.str.contains('Flags')]
         df = df.loc[:, ~df.columns.str.contains('RDB equiv')]
         dict_data={'C': 12,'H':1.007825,'N':14.003074,'O':15.994915,'S':31.972072,'Cl':34.968853,'Si':27.976928,'P':30.9737634\
-        ,'V':50.943963,'K':39.0983,'Na':22.989769,'Li':7.016005,'Cu':62.929599,'Ni':57.935347,'F':18.998403,'B':11.009305, 'Zn':63.92915}
+        ,'V':50.943963,'K':39.0983,'Na':22.989769,'Li':7.016005,'Cu':62.929599,'Ni':57.935347,'F':18.998403,'B':11.009305, 'Zn':63.92915, 'Br':78.91834}
         df['Composition'] = df['Composition'].replace(['³²S','₀','₁','₂','₃','₄','₅','₆','₇','₈','₉',' '],
                                                       ['S','0','1','2','3','4','5','6','7','8','9',''],regex=True)
         heteroatoms = pd.DataFrame(list([chemparse.parse_formula(formula) for formula in df['Composition']]))
         heteroatoms.fillna(0,inplace = True)
         heteroatoms = heteroatoms.astype(int)
+        if "N" not in heteroatoms.columns:
+            heteroatoms.insert(heteroatoms.columns.get_loc('H')+1,"N",0)
+        if "O" not in heteroatoms.columns:
+            heteroatoms.insert(heteroatoms.columns.get_loc('N')+1,"O",0)
+        if "S" not in heteroatoms.columns:
+            heteroatoms.insert(heteroatoms.columns.get_loc('O')+1,"S",0)
         df['m/z']=0.0
         v = 0
         ratio_mz = []
@@ -384,7 +424,7 @@ class Peak_list:
         df = df.reindex(['m/z','absolute_intensity','normalized_intensity','err_ppm','molecular_formula'],axis = 1)
         df=df.join(heteroatoms)
         df_type='Attributed'
-        
+        print(df.columns)
         return cls(df,df_type,heteroatoms)
 
 
@@ -487,8 +527,8 @@ class Peak_list:
 
         Returns an object of the class RawData.
         """
-        Atoms_mass={'C': 12,'H':1.007825,'N':14.003074,'O':15.994915,'S':31.972072,'Cl':34.968853,'Si':27.976928,'P':30.9737634\
-                   ,'V':50.943963,'Li':7.016005,'Cu':62.929599,'Ni':57.935347,'F':18.998403,'B':11.009305} 
+        Atoms_mass = {'C': 12,'H':1.007825,'N':14.003074,'O':15.994915,'S':31.972072,'Cl':34.968853,'Si':27.976928,'P':30.9737634\
+        ,'V':50.943963,'K':39.0983,'Na':22.989769,'Li':7.016005,'Cu':62.929599,'Ni':57.935347,'F':18.998403,'B':11.009305, 'Zn':63.92915, 'Br':78.91834}
         
         mol_form =''
         mass = 0

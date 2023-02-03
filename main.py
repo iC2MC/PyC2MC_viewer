@@ -1174,21 +1174,21 @@ class MainWindow(QtWidgets.QMainWindow):
             filename = str(os.path.basename(filepath[n]))
             # read data and create data frame
             os.chdir(path_to_file)
-            # try :
-            dataframe = load_MS_file(filename)
-            # except Exception as err:  
-            #     QMessageBox.about(self, "FYI box", f"A problem has occured with the following file: '{filename}', error is : {err}")
-            #     n = n +1
-            #     if n<len(filepath):
-            #         p = (n+1)/len(filepath)*100
+            try :
+                dataframe = load_MS_file(filename)
+            except Exception as err:  
+                QMessageBox.about(self, "FYI box", f"A problem has occured with the following file: '{filename}', error is : {err}")
+                n = n +1
+                if n<len(filepath):
+                    p = (n+1)/len(filepath)*100
 
-            #         path_to_file = os.path.dirname(filepath[n])
-            #         filename = str(os.path.basename(filepath[n]))
-            #         os.chdir(path_to_file)
-            #         try :
-            #             dataframe = load_MS_file(filename)
-            #         except :  
-            #             QMessageBox.about(self, "FYI box", f"A problem has occured with the following file: '{filename}'")
+                    path_to_file = os.path.dirname(filepath[n])
+                    filename = str(os.path.basename(filepath[n]))
+                    os.chdir(path_to_file)
+                    try :
+                        dataframe = load_MS_file(filename)
+                    except Exception as err:  
+                        MessageBox.about(self, "FYI box", f"A problem has occured with the following file: '{filename}', error is : {err}")
             pass
             
             try :
