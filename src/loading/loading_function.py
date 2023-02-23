@@ -424,7 +424,6 @@ class Peak_list:
         df = df.reindex(['m/z','absolute_intensity','normalized_intensity','err_ppm','molecular_formula'],axis = 1)
         df=df.join(heteroatoms)
         df_type='Attributed'
-        print(df.columns)
         return cls(df,df_type,heteroatoms)
 
 

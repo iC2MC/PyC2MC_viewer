@@ -32,7 +32,7 @@ which collaborators are :
 - FT-ICR research group of the National High Magnetic Field Laboratory (`NHMFL <https://nationalmaglab.org/>`_)
 
 
-This software is distributed under the `MIT licence <https://opensource.org/licenses/MIT>`_.
+This software is distributed under the `GNU GPL licence <https://www.gnu.org/licenses/gpl-3.0.html>`_.
 
 **Authors**
 

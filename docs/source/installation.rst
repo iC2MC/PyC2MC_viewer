@@ -11,7 +11,7 @@ Installation
 ============
 
 The software's source code is available at https://www.github.com/MaximeS5/PyC2MC_public . It can be launched using a Python interpreter on PyC2MC_Viewer.py script.
-Another way to use the software is to download the executable version available here : https://drive.google.com/file/d/1DHXld2HA4la0mBpXMEEOjoxsGhWE5scl/view?usp=sharing .
+Another way to use the software is to download the executable version available here : https://doi.org/10.5281/zenodo.7602288 .
 
 Issues report
 ==============
