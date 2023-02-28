@@ -1,4 +1,4 @@
-# PyC2MC
+# PyC2MC Viewer
 This package, called PyC2MC, has been in development since 2020 and is based on the commonly used Python language with the goal of being
 improvable even by people outside of the initial project. Indeed, the goal of this work is to provide a robust data visualization tool producing
 numerous plots as well as statistical analysis to ease the sample molecular fingerprinting and the inter-sample comparison. With the aim to deliver
@@ -27,7 +27,11 @@ lab (IC2MC) which collaborators are :
 
 This software is distributed under the GPL licence.
 
-Contributors :
+# Bug report :
+
+For bug report, please contact Maxime SUEUR at maxime.sueur1@univ-rouen.fr. Furthermore, you can also send an example dataset if relevant, it helps a lot to reproduce and identify the problem.
+
+# Contributors :
 
 -Maxime Sueur: maxime.sueur1@univ-rouen.fr
 
