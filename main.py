@@ -406,6 +406,20 @@ class MainWindow(QtWidgets.QMainWindow):
                 
         # INITIALIZATIONS
         self.start_counter=False
+        widgets.radio_color_pc1.hide()
+        widgets.radio_color_pc2.hide()
+        widgets.radio_color_pc1_comp.hide()
+        widgets.radio_color_pc2_comp.hide()
+        widgets.radio_color_pc1_VK.hide()
+        widgets.radio_color_pc2_VK.hide()
+        widgets.radio_color_pc1_VK_comp.hide()
+        widgets.radio_color_pc2_VK_comp.hide()
+        widgets.radio_color_pc1_ACOS.hide()
+        widgets.radio_color_pc2_ACOS.hide()
+        widgets.radio_color_pc1_ACOS_comp.hide()
+        widgets.radio_color_pc2_ACOS_comp.hide()
+        widgets.K_PC1.hide()
+        widgets.K_PC2.hide()
         widgets.radio_color_pc1.setEnabled(False)
         widgets.radio_color_pc2.setEnabled(False)
         widgets.radio_color_pc1_comp.setEnabled(False)
@@ -418,6 +432,8 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.radio_color_pc2_ACOS.setEnabled(False)
         widgets.radio_color_pc1_ACOS_comp.setEnabled(False)
         widgets.radio_color_pc2_ACOS_comp.setEnabled(False)
+        widgets.K_PC1.setEnabled(False)
+        widgets.K_PC2.setEnabled(False)
         widgets.volc_color_classes.setEnabled(True)
         widgets.volc_color_dbe.setEnabled(True)
         widgets.pbar.hide()
@@ -875,10 +891,10 @@ class MainWindow(QtWidgets.QMainWindow):
         """
         link_git = "https://github.com/iC2MC/PyC2MC_viewer"
         email = "maxime.sueur1@univ-rouen.fr"
-        link_preprint = "https://doi.org/10.26434/chemrxiv-2022-cmnk3"
+        link_preprint = "https://doi.org/10.1021/jasms.2c00323"
         msg = "PyC2MC Viewer: a FTMS data visualization software. <br><br>\
             Want to improve the application ? Join us on <a href='%s'>GitHub</a> <br><br> \
-            When using PyC2MC, please cite our <a href='%s'>preprint article</a>. <br><br>\
+            When using PyC2MC, please cite our <a href='%s'>article</a>. <br><br>\
             Version modified on %s <br><br> \
             GUI based on PyDracula by Wanderson M. Pimenta." % (link_git,link_preprint,self.last_modified)
         reply = QMessageBox.information(self, 'Message', msg, QMessageBox.Ok, QMessageBox.Ok)
@@ -1202,13 +1218,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 dataframe.df = pandas.DataFrame()
                 pass
             os.chdir(path_old)
-            if 'PC1' in dataframe.df: #Activates option if PCA coefficient are in dataframe
-                widgets.radio_color_pc1.show()
-                widgets.radio_color_pc2.show()
-                widgets.radio_color_pc1_VK.show()
-                widgets.radio_color_pc2_VK.show()
-                widgets.radio_color_pc1_ACOS.show()
-                widgets.radio_color_pc2_ACOS.show()
+            
 
             ###-----------------------------------------------------------###
             # Display the dataframe(s) item(s) in the appropriate GUI lists #
@@ -1684,14 +1694,32 @@ class MainWindow(QtWidgets.QMainWindow):
         if 'PC1' in self.data.df:
             widgets.radio_color_pc1.show()
             widgets.radio_color_pc2.show()
+            widgets.radio_color_pc1_comp.show()
+            widgets.radio_color_pc2_comp.show()
             widgets.radio_color_pc1_VK.show()
             widgets.radio_color_pc2_VK.show()
+            widgets.radio_color_pc1_VK_comp.show()
+            widgets.radio_color_pc2_VK_comp.show()
+            widgets.radio_color_pc1_ACOS.show()
+            widgets.radio_color_pc2_ACOS.show()
+            widgets.radio_color_pc1_ACOS_comp.show()
+            widgets.radio_color_pc2_ACOS_comp.show()
+            widgets.K_PC1.show()
+            widgets.K_PC2.show()
             widgets.radio_color_pc1.setEnabled(True)
             widgets.radio_color_pc2.setEnabled(True)
+            widgets.radio_color_pc1_comp.setEnabled(True)
+            widgets.radio_color_pc2_comp.setEnabled(True)
             widgets.radio_color_pc1_VK.setEnabled(True)
             widgets.radio_color_pc2_VK.setEnabled(True)
+            widgets.radio_color_pc1_VK_comp.setEnabled(True)
+            widgets.radio_color_pc2_VK_comp.setEnabled(True)
             widgets.radio_color_pc1_ACOS.setEnabled(True)
             widgets.radio_color_pc2_ACOS.setEnabled(True)
+            widgets.radio_color_pc1_ACOS_comp.setEnabled(True)
+            widgets.radio_color_pc2_ACOS_comp.setEnabled(True)
+            widgets.K_PC1.setEnabled(True)
+            widgets.K_PC2.setEnabled(True)
             widgets.K_nitrogen.setEnabled(True)
             widgets.K_oxygen.setEnabled(True)
             widgets.K_sulfur.setEnabled(True)
@@ -1700,14 +1728,32 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             widgets.radio_color_pc1.hide()
             widgets.radio_color_pc2.hide()
+            widgets.radio_color_pc1_comp.hide()
+            widgets.radio_color_pc2_comp.hide()
             widgets.radio_color_pc1_VK.hide()
             widgets.radio_color_pc2_VK.hide()
+            widgets.radio_color_pc1_VK_comp.hide()
+            widgets.radio_color_pc2_VK_comp.hide()
+            widgets.radio_color_pc1_ACOS.hide()
+            widgets.radio_color_pc2_ACOS.hide()
+            widgets.radio_color_pc1_ACOS_comp.hide()
+            widgets.radio_color_pc2_ACOS_comp.hide()
+            widgets.K_PC1.hide()
+            widgets.K_PC2.hide()
             widgets.radio_color_pc1.setEnabled(False)
             widgets.radio_color_pc2.setEnabled(False)
+            widgets.radio_color_pc1_comp.setEnabled(False)
+            widgets.radio_color_pc2_comp.setEnabled(False)
             widgets.radio_color_pc1_VK.setEnabled(False)
             widgets.radio_color_pc2_VK.setEnabled(False)
+            widgets.radio_color_pc1_VK_comp.setEnabled(False)
+            widgets.radio_color_pc2_VK_comp.setEnabled(False)
             widgets.radio_color_pc1_ACOS.setEnabled(False)
             widgets.radio_color_pc2_ACOS.setEnabled(False)
+            widgets.radio_color_pc1_ACOS_comp.setEnabled(False)
+            widgets.radio_color_pc2_ACOS_comp.setEnabled(False)
+            widgets.K_PC1.setEnabled(False)
+            widgets.K_PC2.setEnabled(False)
             widgets.radio_color_intensity_2.setChecked(True)
             widgets.radio_color_intensity_3.setChecked(True)
             widgets.K_nitrogen.setEnabled(True)
@@ -3493,6 +3539,20 @@ class MainWindow(QtWidgets.QMainWindow):
                         if widgets.K_sulfur.isChecked() :   
                             frames['third_dimension'] = frames["S"]
                             c_label = 'Sulfur number'
+                            
+                        #-----------------------------------#
+                        #  Color by PC1                 #
+                        #-----------------------------------#
+                        if widgets.K_PC1.isChecked() :   
+                            frames['third_dimension'] = frames["PC1"]
+                            c_label = 'PC1'
+                            
+                        #-----------------------------------#
+                        #  Color by PC2                #
+                        #-----------------------------------#
+                        if widgets.K_PC2.isChecked() :   
+                            frames['third_dimension'] = frames["PC2"]
+                            c_label = 'PC2'
 
                         
                     elif  widgets.stackedWidget_Kendrick.currentIndex()==2: #Mass defect VS Nominal mass
@@ -3528,6 +3588,20 @@ class MainWindow(QtWidgets.QMainWindow):
                         if widgets.K_sulfur_univ.isChecked() :   
                             frames['third_dimension'] = frames["S"]
                             c_label = 'Sulfur number'
+                            
+                        #-----------------------------------#
+                        #  Color by PC1                 #
+                        #-----------------------------------#
+                        if widgets.K_PC1.isChecked() :   
+                            frames['third_dimension'] = frames["PC1"]
+                            c_label = 'PC1'
+                            
+                        #-----------------------------------#
+                        #  Color by PC2                #
+                        #-----------------------------------#
+                        if widgets.K_PC2.isChecked() :   
+                            frames['third_dimension'] = frames["PC2"]
+                            c_label = 'PC2'
                     
                     frames.sort_values(by=["third_dimension","normalized_intensity"],ascending = [True,True], inplace = True)
 

@@ -2310,7 +2310,7 @@ border-width: 1px;
 border-radius: 10px;</string>
                                </property>
                                <property name="currentRow">
-                                <number>0</number>
+                                <number>1</number>
                                </property>
                                <item>
                                 <property name="text">
@@ -6785,8 +6785,8 @@ border-radius: 4px;</string>
                                      <enum>QFrame::Raised</enum>
                                     </property>
                                     <layout class="QGridLayout" name="gridLayout_26">
-                                     <item row="2" column="0">
-                                      <widget class="QRadioButton" name="K_nitrogen">
+                                     <item row="1" column="0">
+                                      <widget class="QRadioButton" name="K_oxygen">
                                        <property name="font">
                                         <font>
                                          <family>Segoe UI</family>
@@ -6797,7 +6797,7 @@ border-radius: 4px;</string>
                                         <string notr="true">text-align: center;</string>
                                        </property>
                                        <property name="text">
-                                        <string>Nitrogen #</string>
+                                        <string>Oxygen #</string>
                                        </property>
                                       </widget>
                                      </item>
@@ -6820,22 +6820,6 @@ border-radius: 4px;</string>
                                        </property>
                                       </widget>
                                      </item>
-                                     <item row="1" column="0">
-                                      <widget class="QRadioButton" name="K_oxygen">
-                                       <property name="font">
-                                        <font>
-                                         <family>Segoe UI</family>
-                                         <pointsize>10</pointsize>
-                                        </font>
-                                       </property>
-                                       <property name="styleSheet">
-                                        <string notr="true">text-align: center;</string>
-                                       </property>
-                                       <property name="text">
-                                        <string>Oxygen #</string>
-                                       </property>
-                                      </widget>
-                                     </item>
                                      <item row="3" column="0">
                                       <widget class="QRadioButton" name="K_sulfur">
                                        <property name="font">
@@ -6849,6 +6833,48 @@ border-radius: 4px;</string>
                                        </property>
                                        <property name="text">
                                         <string>Sulfur #</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                     <item row="2" column="0">
+                                      <widget class="QRadioButton" name="K_nitrogen">
+                                       <property name="font">
+                                        <font>
+                                         <family>Segoe UI</family>
+                                         <pointsize>10</pointsize>
+                                        </font>
+                                       </property>
+                                       <property name="styleSheet">
+                                        <string notr="true">text-align: center;</string>
+                                       </property>
+                                       <property name="text">
+                                        <string>Nitrogen #</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                     <item row="4" column="0">
+                                      <widget class="QRadioButton" name="K_PC1">
+                                       <property name="font">
+                                        <font>
+                                         <family>Segoe UI</family>
+                                         <pointsize>10</pointsize>
+                                        </font>
+                                       </property>
+                                       <property name="text">
+                                        <string>PC1</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                     <item row="5" column="0">
+                                      <widget class="QRadioButton" name="K_PC2">
+                                       <property name="font">
+                                        <font>
+                                         <family>Segoe UI</family>
+                                         <pointsize>10</pointsize>
+                                        </font>
+                                       </property>
+                                       <property name="text">
+                                        <string>PC2</string>
                                        </property>
                                       </widget>
                                      </item>
