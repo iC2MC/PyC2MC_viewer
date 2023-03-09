@@ -402,10 +402,7 @@ class MainWindow(QtWidgets.QMainWindow):
             if widgets.check_alphabetic_distrib_compare.isChecked():
                 widgets.list_classes_distrib_compare.sortItems()    
                 
- 
-                
 
-                
         # INITIALIZATIONS
         self.start_counter=False
         widgets.radio_color_pc1.hide()
