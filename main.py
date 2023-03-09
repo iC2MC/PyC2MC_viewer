@@ -21,6 +21,7 @@ from src.processing.merge_csv_from_same_spectrum import merge_Multicsv
 from src.processing.fuse_replicates import fuse_replicates
 from src.processing.merge_merged_function import merge_merged_file
 from src.loading.loading_function import load_MS_file
+from src.graphics.normalization_function import Normalize
 from PyQt5 import QtCore, QtGui, QtWidgets, QtSvg, uic
 from src.pyc2mc_ui import Ui_PyC2MC
 from PyQt5.QtWidgets import  QMessageBox, QLineEdit, QInputDialog, QTableWidgetItem
@@ -2563,12 +2564,7 @@ class MainWindow(QtWidgets.QMainWindow):
         #  3rd dimension selection    #
         #-----------------------------#
         
-            
-
             Intens = data_extract["Normalized_intensity"].values.reshape(-1,1)
-    
-            
-            
             if widgets.check_classic.isChecked():
                 Intens= Intens
             if widgets.check_sqrt.isChecked():
@@ -2578,7 +2574,6 @@ class MainWindow(QtWidgets.QMainWindow):
             min_max_scaler = preprocessing.MinMaxScaler()
             Intens_scaled = min_max_scaler.fit_transform(Intens)
             data_extract["Normalized_intensity"] = Intens_scaled
-            data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
     
             if classe_selected == 'All':
                 pass
@@ -2595,16 +2590,8 @@ class MainWindow(QtWidgets.QMainWindow):
         #-----------------------------------#
     
             if widgets.radioButton_norm_c.isChecked():
-                intens=data_extract["Normalized_intensity"].copy()
-                intens=intens.values.reshape(-1,1)
-                if intens.shape[0]>1:
-                    min_max_scaler = preprocessing.MinMaxScaler()
-                    Intens_scaled = min_max_scaler.fit_transform(intens)
-                    data_extract["Normalized_intensity"] = Intens_scaled
-                    data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
-                elif intens.shape[0]==1:
-                    data_extract["Normalized_intensity"]=1
-                else :
+                data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
+                if error == 1:
                     QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
                     continue
     
@@ -2632,23 +2619,15 @@ class MainWindow(QtWidgets.QMainWindow):
         #-----------------------------------#
     
             if widgets.radioButton_norm_d.isChecked():
-                intens=data_extract["Normalized_intensity"].copy()
-                intens=intens.values.reshape(-1,1)
-                if intens.shape[0]>1:
-                    min_max_scaler = preprocessing.MinMaxScaler()
-                    Intens_scaled = min_max_scaler.fit_transform(intens)
-                    data_extract["Normalized_intensity"] = Intens_scaled
-                    data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
-                elif intens.shape[0]==1:
-                    data_extract["Normalized_intensity"]=1
-                else :
+                data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
+                if error == 1:
                     QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
                     continue
     
         #-----------------------------------------#
         #  Normalization on displayed data (end)  #
         #-----------------------------------------#
-        
+            data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)        
             if widgets.radio_color_intensity_2.isChecked():
                 third_dimension = data_extract["Normalized_intensity"]
             elif widgets.radio_color_pc1.isChecked():
@@ -3481,17 +3460,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 #  Normalization on selected class  #
                 #-----------------------------------#
                 if widgets.radioButton_norm_d.isChecked():
-                    intens=data_filtered["normalized_intensity"].copy()
-                    intens=intens.values.reshape(-1,1)
-                    if intens.shape[0]>1:
-                        min_max_scaler = preprocessing.MinMaxScaler()
-                        Intens_scaled = min_max_scaler.fit_transform(intens)
-                        data_filtered["normalized_intensity"] = Intens_scaled
-                        data_filtered = data_filtered.sort_values(by=["normalized_intensity"], ascending=True)
-                    elif intens.shape[0]==1:
-                        data_filtered["normalized_intensity"]=1
-                    else :
-                        QMessageBox.about(self, "Error", "No species to be displayed.")
+                    data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
+                    if error == 1:
+                        QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
                         continue
     
                 
@@ -3891,7 +3862,6 @@ class MainWindow(QtWidgets.QMainWindow):
             min_max_scaler = preprocessing.MinMaxScaler()
             Intens_scaled = min_max_scaler.fit_transform(Intens)
             data_extract["Normalized_intensity"] = Intens_scaled
-            data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
     
             if not classe_selected == 'All':
                 classes_index = data_selected.classes[data_selected.classes['variable'] == classe_selected]
@@ -3919,17 +3889,9 @@ class MainWindow(QtWidgets.QMainWindow):
         #-----------------------------------#
     
             if widgets.radioButton_norm_c.isChecked() or widgets.radioButton_norm_d.isChecked():
-                intens=data_extract["Normalized_intensity"].copy()
-                intens=intens.values.reshape(-1,1)
-                if intens.shape[0]>1:
-                    min_max_scaler = preprocessing.MinMaxScaler()
-                    Intens_scaled = min_max_scaler.fit_transform(intens)
-                    data_extract["Normalized_intensity"] = Intens_scaled
-                    data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
-                elif intens.shape[0]==1:
-                    data_extract["Normalized_intensity"]=1
-                else :
-                    QMessageBox.about(widgets, "Error", "No species to be displayed.")
+                data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
+                if error == 1:
+                    QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
                     continue
     
     
@@ -3943,7 +3905,7 @@ class MainWindow(QtWidgets.QMainWindow):
             data_extract.cond_3 = cond_3.values
             frames.append(data_extract)
             self.read_param()
-            
+            data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
             def Anim(frames):
                 if gif == False:
                     fig = plt.figure()
@@ -4085,17 +4047,9 @@ class MainWindow(QtWidgets.QMainWindow):
         #-----------------------------------#
     
             if widgets.radioButton_norm_c.isChecked() or widgets.radioButton_norm_d.isChecked():
-                intens=data_extract["Normalized_intensity"].copy()
-                intens=intens.values.reshape(-1,1)
-                if intens.shape[0]>1:
-                    min_max_scaler = preprocessing.MinMaxScaler()
-                    Intens_scaled = min_max_scaler.fit_transform(intens)
-                    data_extract["Normalized_intensity"] = Intens_scaled
-                    data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
-                elif intens.shape[0]==1:
-                    data_extract["Normalized_intensity"]=1
-                else :
-                    QMessageBox.about(self, "Error", "No species to be displayed.")
+                data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
+                if error == 1:
+                    QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
                     continue
     
     
@@ -5344,16 +5298,8 @@ class MainWindow(QtWidgets.QMainWindow):
         #-----------------------------------#
     
             if widgets.radioButton_norm_c.isChecked():
-                intens=data_extract["Normalized_intensity"].copy()
-                intens=intens.values.reshape(-1,1)
-                if intens.shape[0]>1:
-                    min_max_scaler = preprocessing.MinMaxScaler()
-                    Intens_scaled = min_max_scaler.fit_transform(intens)
-                    data_extract["Normalized_intensity"] = Intens_scaled
-                    data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
-                elif intens.shape[0]==1:
-                    data_extract["Normalized_intensity"]=1
-                else :
+                data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
+                if error == 1:
                     QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
                     continue
     
@@ -5381,16 +5327,8 @@ class MainWindow(QtWidgets.QMainWindow):
         #-----------------------------------#
     
             if widgets.radioButton_norm_d.isChecked():
-                intens=data_extract["Normalized_intensity"].copy()
-                intens=intens.values.reshape(-1,1)
-                if intens.shape[0]>1:
-                    min_max_scaler = preprocessing.MinMaxScaler()
-                    Intens_scaled = min_max_scaler.fit_transform(intens)
-                    data_extract["Normalized_intensity"] = Intens_scaled
-                    data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
-                elif intens.shape[0]==1:
-                    data_extract["Normalized_intensity"]=1
-                else :
+                data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
+                if error == 1:
                     QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
                     continue
     
@@ -5831,17 +5769,9 @@ class MainWindow(QtWidgets.QMainWindow):
             #  Normalization on selected class  #
             #-----------------------------------#
             if widgets.radioButton_norm_d.isChecked():
-                intens=data_filtered["Normalized_intensity"].copy()
-                intens=intens.values.reshape(-1,1)
-                if intens.shape[0]>1:
-                    min_max_scaler = preprocessing.MinMaxScaler()
-                    Intens_scaled = min_max_scaler.fit_transform(intens)
-                    data_filtered["Normalized_intensity"] = Intens_scaled
-                    data_filtered = data_filtered.sort_values(by=["Normalized_intensity"], ascending=True)
-                elif intens.shape[0]==1:
-                    data_filtered["Normalized_intensity"]=1
-                else :
-                    QMessageBox.about(self, "Error", "No species to be displayed.")
+                data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
+                if error == 1:
+                    QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
                     continue
 
             data_filtered.sample_name = item
@@ -6227,17 +6157,9 @@ class MainWindow(QtWidgets.QMainWindow):
         #-----------------------------------#
     
             if widgets.radioButton_norm_c.isChecked() or widgets.radioButton_norm_d.isChecked():
-                intens=data_extract["Normalized_intensity"].copy()
-                intens=intens.values.reshape(-1,1)
-                if intens.shape[0]>1:
-                    min_max_scaler = preprocessing.MinMaxScaler()
-                    Intens_scaled = min_max_scaler.fit_transform(intens)
-                    data_extract["Normalized_intensity"] = Intens_scaled
-                    data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
-                elif intens.shape[0]==1:
-                    data_extract["Normalized_intensity"]=1
-                else :
-                    QMessageBox.about(widgets, "Error", "No species to be displayed.")
+                data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
+                if error == 1:
+                    QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
                     continue
     
     
@@ -6406,17 +6328,9 @@ class MainWindow(QtWidgets.QMainWindow):
         #-----------------------------------#
     
             if widgets.radioButton_norm_c.isChecked() or widgets.radioButton_norm_d.isChecked():
-                intens=data_extract["Normalized_intensity"].copy()
-                intens=intens.values.reshape(-1,1)
-                if intens.shape[0]>1:
-                    min_max_scaler = preprocessing.MinMaxScaler()
-                    Intens_scaled = min_max_scaler.fit_transform(intens)
-                    data_extract["Normalized_intensity"] = Intens_scaled
-                    data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
-                elif intens.shape[0]==1:
-                    data_extract["Normalized_intensity"]=1
-                else :
-                    QMessageBox.about(self, "Error", "No species to be displayed.")
+                data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
+                if error == 1:
+                    QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
                     continue
     
     
