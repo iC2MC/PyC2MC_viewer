@@ -46,7 +46,6 @@ from sklearn.cluster import AgglomerativeClustering
 from scipy.cluster.hierarchy import dendrogram
 from scipy import stats
 from src.stats.HCA_function import plot_dendrogram
-
 from src.stats.PCA_function import plot_pca
 from src.processing.merge_unattributed import merge_non_attributed
 import imageio #For GIF
@@ -2036,17 +2035,9 @@ class MainWindow(QtWidgets.QMainWindow):
             #-----------------------------------#
         
                 if widgets.radioButton_norm_c.isChecked():
-                    intens=data_extract["Normalized_intensity"].copy()
-                    intens=intens.values.reshape(-1,1)
-                    if intens.shape[0]>1:
-                        min_max_scaler = preprocessing.MinMaxScaler()
-                        Intens_scaled = min_max_scaler.fit_transform(intens)
-                        data_extract["Normalized_intensity"] = Intens_scaled
-                        data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
-                    elif intens.shape[0]==1:
-                        data_extract["Normalized_intensity"]=1
-                    else :
-                        QMessageBox.about(self, "Error", "No species to be displayed.")
+                    data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
+                    if error == 1:
+                        QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
                         continue
         
             #-----------------------------------------#
@@ -2058,19 +2049,11 @@ class MainWindow(QtWidgets.QMainWindow):
             #-----------------------------------#
         
                 if widgets.radioButton_norm_d.isChecked():
-                    intens=data_extract["Normalized_intensity"].copy()
-                    intens=intens.values.reshape(-1,1)
-                    if intens.shape[0]>1:
-                        min_max_scaler = preprocessing.MinMaxScaler()
-                        Intens_scaled = min_max_scaler.fit_transform(intens)
-                        data_extract["Normalized_intensity"] = Intens_scaled
-                        data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
-                    elif intens.shape[0]==1:
-                        data_extract["Normalized_intensity"]=1
-                    else :
-                        QMessageBox.about(self, "Error", "No species to be displayed.")
+                    data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
+                    if error == 1:
+                        QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
                         continue
-        
+            
             #-----------------------------------------#
             #  Normalization on displayed data (end)  #
             #-----------------------------------------#   
@@ -3091,7 +3074,6 @@ class MainWindow(QtWidgets.QMainWindow):
         volc_data['Mean_int_2']=volc_data[list_samp_2].mean(axis=1) #Mean intensities in sample 2
         volc_data["fc"]=pandas.DataFrame(np.log2(volc_data['Mean_int_2']/volc_data['Mean_int_1'])) #Calculates log2(FC) values
         volc_data['p']=stats.ttest_ind(volc_data[list_samp_1],volc_data[list_samp_2],axis=1)[1].tolist() #Calculates p-values
-
 
         ####
         #Excluding infinite and NaN values (attribution in neither of the sample)
