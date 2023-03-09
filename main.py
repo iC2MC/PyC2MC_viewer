@@ -22,6 +22,7 @@ from src.processing.fuse_replicates import fuse_replicates
 from src.processing.merge_merged_function import merge_merged_file
 from src.loading.loading_function import load_MS_file
 from src.graphics.normalization_function import Normalize
+from src.graphics.select_classe import Select_classe
 from PyQt5 import QtCore, QtGui, QtWidgets, QtSvg, uic
 from src.pyc2mc_ui import Ui_PyC2MC
 from PyQt5.QtWidgets import  QMessageBox, QLineEdit, QInputDialog, QTableWidgetItem
@@ -2018,17 +2019,7 @@ class MainWindow(QtWidgets.QMainWindow):
                         plt.close("all")
             for item in item_classes:
                 classe_selected = item.data(self.USERDATA_ROLE)
-                data_extract = data_selected.df.copy()
-                
-                if classe_selected == 'All':
-                    pass
-                else:
-                    classes_index = data_selected.classes[data_selected.classes['variable'] == classe_selected]
-                    if 'x' in classe_selected:
-                        index_classes = (data_selected.df[classe_selected] == True)
-                    else:
-                        index_classes = (data_selected.df[data_selected.heteroatoms.columns] == data_selected.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                    data_extract = data_extract[index_classes]
+                data_extract = Select_classe(classe_selected,data_selected.df,data_selected.heteroatoms,data_selected.classes)
                     
             #-----------------------------------#
             #  Normalization on selected class  #
@@ -2059,8 +2050,8 @@ class MainWindow(QtWidgets.QMainWindow):
             #-----------------------------------------#   
                     self.read_param()
                     data_extract.classe_selected = classe_selected
+                    data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
                     frames.append(data_extract)
-                
                 def Anim(frames):
                     if gif == False:
                         fig = plt.figure()
@@ -2221,22 +2212,12 @@ class MainWindow(QtWidgets.QMainWindow):
                 for i in range(len(item_classes)):
                     
                     classe_selected = item_classes[i].data(self.USERDATA_ROLE)
-    
-                    if classe_selected == 'All':
-                        data_filtered = data_selected.df
-                        
-                    else:
-                        classes_index = data_selected.classes[data_selected.classes['variable'] == classe_selected]
-                        if 'x' in classe_selected:
-                            index_classes = (data_selected.df[classe_selected] == True)
-                        else:
-                            index_classes = (data_selected.df[data_selected.heteroatoms.columns] == data_selected.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                        data_filtered = data_selected.df[index_classes]
-                        third_dimension = data_filtered["Normalized_intensity"]
-                        Intens = third_dimension.values.reshape(-1,1)
-                        min_max_scaler = preprocessing.MinMaxScaler()
-                        Intens_scaled = min_max_scaler.fit_transform(Intens)
-                        data_filtered["Normalized_intensity"] = Intens_scaled
+                    data_filtered = Select_classe(classe_selected,data_selected.df,data_selected.heteroatoms,data_selected.classes)
+                    third_dimension = data_filtered["Normalized_intensity"]
+                    Intens = third_dimension.values.reshape(-1,1)
+                    min_max_scaler = preprocessing.MinMaxScaler()
+                    Intens_scaled = min_max_scaler.fit_transform(Intens)
+                    data_filtered["Normalized_intensity"] = Intens_scaled
                     data_filtered = data_filtered.sort_values(by=["Normalized_intensity"], ascending=True)
                     if i == 0:
                         c = 'k'
@@ -2302,20 +2283,7 @@ class MainWindow(QtWidgets.QMainWindow):
             
             for item in item_classes:
                 classe_selected = item.data(self.USERDATA_ROLE)
-                
-                data_extract = data_selected.df.copy()
-            
-            
-                if classe_selected == 'All':
-                    pass
-                else:
-                    classes_index = data_selected.classes[data_selected.classes['variable'] == classe_selected]
-                    if 'x' in classe_selected:
-                        index_classes = (data_selected.df[classe_selected] == True)
-                    else:
-                        index_classes = (data_selected.df[data_selected.heteroatoms.columns] == data_selected.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                    data_extract = data_extract[index_classes]
-                    
+                data_extract = Select_classe(classe_selected,data_selected.df,data_selected.heteroatoms,data_selected.classes)
                 data_extract.classe_selected = classe_selected
                 frames.append(data_extract)   
                 
@@ -2558,16 +2526,7 @@ class MainWindow(QtWidgets.QMainWindow):
             min_max_scaler = preprocessing.MinMaxScaler()
             Intens_scaled = min_max_scaler.fit_transform(Intens)
             data_extract["Normalized_intensity"] = Intens_scaled
-    
-            if classe_selected == 'All':
-                pass
-            else:
-                classes_index = data_selected.classes[data_selected.classes['variable'] == classe_selected]
-                if 'x' in classe_selected:
-                    index_classes = (data_selected.df[classe_selected] == True)
-                else:
-                    index_classes = (data_selected.df[data_selected.heteroatoms.columns] == data_selected.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                data_extract = data_extract[index_classes]
+            data_extract = Select_classe(classe_selected,data_selected.df,data_selected.heteroatoms,data_selected.classes)
     
         #-----------------------------------#
         #  Normalization on selected class  #
@@ -2714,23 +2673,7 @@ class MainWindow(QtWidgets.QMainWindow):
         
         for item in item_classes:
             classe_selected = item.data(self.USERDATA_ROLE)
-            
-            data_filtered = data_selected.df.copy()
-
-            if classe_selected == 'All':
-                pass
-            elif 'x' in classe_selected:
-                index_classes = (data_selected.df[classe_selected] == True)
-                data_filtered = data_selected.df[index_classes]
-            else:
-                classes_index = data_selected.classes[data_selected.classes['variable'] == classe_selected]
-                index_classes = (data_selected.df[data_selected.heteroatoms.columns] == data_selected.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                data_filtered = data_selected.df[index_classes]
-            
-        
-
-        
-                
+            data_filtered = Select_classe(classe_selected,data_selected.df,data_selected.heteroatoms,data_selected.classes)
             Intens = data_filtered["Normalized_intensity"].values.reshape(-1,1)
             if widgets.check_classic_vk.isChecked():
                 Intens= Intens
@@ -3387,15 +3330,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     pass
                 else:
                     classe_selected = item.data(self.USERDATA_ROLE)
-                    if classe_selected == 'All':
-                        pass
-                    elif 'x' in classe_selected:
-                        index_classes = (data_filtered[classe_selected] == True)
-                        data_filtered = data_filtered[index_classes]
-                    else:
-                        classes_index = data_selected.classes[data_selected.classes['variable'] == classe_selected]
-                        index_classes = (data_filtered[data_selected.heteroatoms.columns] == data_selected.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                        data_filtered = data_filtered[index_classes]   
+                    data_filtered = Select_classe(classe_selected,data_selected.df,data_selected.heteroatoms,data_selected.classes) 
                 
                 #KMD calculation
                 if widgets.edit_motif.text():
@@ -3700,19 +3635,9 @@ class MainWindow(QtWidgets.QMainWindow):
             min_max_scaler = preprocessing.MinMaxScaler()
             Intens_scaled = min_max_scaler.fit_transform(Intens)
             data_extract["Normalized_intensity"] = Intens_scaled
-            data_extract["point_size"]=intens_for_size
             data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
-
-            if classe_selected == 'All':
-                pass
-            else:
-                classes_index = data_selected.classes[data_selected.classes['variable'] == classe_selected]
-                if 'x' in classe_selected:
-                    index_classes = (data_selected.df[classe_selected] == True)
-                else:
-                    index_classes = (data_selected.df[data_selected.heteroatoms.columns] == data_selected.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                data_extract = data_extract[index_classes]
-    
+            data_extract = Select_classe(classe_selected,data_selected.df,data_selected.heteroatoms,data_selected.classes)
+            data_extract["point_size"]=intens_for_size
     
             if nc==True:
                 data_extract['OSc']=2*data_extract["O/C"]-data_extract["H/C"]-5*data_extract["N/C"]
@@ -3824,11 +3749,6 @@ class MainWindow(QtWidgets.QMainWindow):
         for item in item_classes:
             data_extract = data_selected.df.copy()
             classe_selected = item.data(self.USERDATA_ROLE)
-
-            if not 'S' in data_extract:
-                data_extract['S']=0
-            if not 'P' in data_extract:
-                data_extract['P']=0
     
         #-----------------------------#
         #  3rd dimension selection    #
@@ -3845,18 +3765,15 @@ class MainWindow(QtWidgets.QMainWindow):
             min_max_scaler = preprocessing.MinMaxScaler()
             Intens_scaled = min_max_scaler.fit_transform(Intens)
             data_extract["Normalized_intensity"] = Intens_scaled
-    
-            if not classe_selected == 'All':
-                classes_index = data_selected.classes[data_selected.classes['variable'] == classe_selected]
-                if 'x' in classe_selected:
-                    index_classes = (data_selected.df[classe_selected] == True)
-                else:
-                    index_classes = (data_selected.df[data_selected.heteroatoms.columns] == data_selected.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                data_extract = data_extract[index_classes]
-    
+            data_extract = Select_classe(classe_selected,data_selected.df,data_selected.heteroatoms,data_selected.classes)
+            if not 'S' in data_extract:
+                data_extract['S']=0
+            if not 'P' in data_extract:
+                data_extract['P']=0
             if widgets.MAI_box.isChecked():
                 data_extract['AI']=(1+data_extract['C']-0.5*data_extract['O']-data_extract['S']-0.5*(data_extract['N']+data_extract['P']+data_extract['H']))/(data_extract['C']-0.5*data_extract['O']-data_extract['S']-data_extract['N']-data_extract['P'])
             else:
+                print(data_extract)
                 data_extract['AI']=(1+data_extract['C']-data_extract['O']-data_extract['S']-0.5*(data_extract['N']+data_extract['P']+data_extract['H']))/(data_extract['C']-data_extract['O']-data_extract['S']-data_extract['N']-data_extract['P'])
             data_extract['AI'][data_extract['AI']<0]=0
             data_extract['AI'][data_extract['AI']>1]=1
@@ -4002,18 +3919,7 @@ class MainWindow(QtWidgets.QMainWindow):
             Intens_scaled = min_max_scaler.fit_transform(Intens)
             data_extract["Normalized_intensity"] = Intens_scaled
             data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
-    
-            if classe_selected == 'All':
-                pass
-            else:
-                classes_index = data_selected.classes[data_selected.classes['variable'] == classe_selected]
-                if 'x' in classe_selected:
-                    index_classes = (data_selected.df[classe_selected] == True)
-                else:
-                    index_classes = (data_selected.df[data_selected.heteroatoms.columns] == data_selected.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                data_extract = data_extract[index_classes]
-    
-    
+            data_extract = Select_classe(classe_selected,data_selected.df,data_selected.heteroatoms,data_selected.classes)
             data_extract['MCR']=data_extract['DBE']/data_extract['O']
             data_extract['MCR'][data_extract['MCR']<0]=0
             data_extract['MCR'][data_extract['MCR']>1]=1
@@ -4368,16 +4274,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 plt.close("all")
         for classe_selected in item_classes:
             classe_selected = classe_selected.data(self.USERDATA_ROLE)
-            if classe_selected == 'All':
-                data = self.compared_datas.df
-                pass
-            else:
-                classes_index = self.compared_datas.classes[self.compared_datas.classes['variable'] == classe_selected]
-                if 'x' in classe_selected:
-                    index_classes = (self.compared_datas.df[classe_selected] == True)
-                else:
-                    index_classes = (self.compared_datas.df[self.compared_datas.heteroatoms.columns] == self.compared_datas.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                data = self.compared_datas.df[index_classes]
+            data = Select_classe(classe_selected,self.compared_datas.df,self.compared_datas.heteroatoms,self.compared_datas.classes)
             if len(data) == 0:
                 QMessageBox.about(self, "FYI box", f"Nothing to display for {classe_selected} class.")
                 continue
@@ -4628,17 +4525,7 @@ class MainWindow(QtWidgets.QMainWindow):
         leg=list()
         for i in range(len(item_classes)):
             classe_selected = item_classes[i].data(self.USERDATA_ROLE)
-
-            if classe_selected == 'All':
-                data_filtered=data_selected.df
-            else:
-                classes_index = data_selected.classes[data_selected.classes['variable'] == classe_selected]
-                if 'x' in classe_selected:
-                    index_classes = (data_selected.df[classe_selected] == True)
-                else:
-                    index_classes = (data_selected.df[data_selected.heteroatoms.columns] == data_selected.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                data_filtered = data_selected.df[index_classes]
-
+            data_filtered = Select_classe(classe_selected,data_selected.df,data_selected.heteroatoms,data_selected.classes)
             data_filtered = data_filtered.sort_values(by=["summed_intensity"], ascending=True)
             if i == 0:
                 c = 'k'
@@ -5246,17 +5133,7 @@ class MainWindow(QtWidgets.QMainWindow):
             if 'PC1' in data_selected:
                 widgets.radio_color_pc1_comp.show()
                 widgets.radio_color_pc2_comp.show()
-    
-            data_extract = data_selected.copy()
-            if classe_selected == 'All':
-                pass
-            else:
-                classes_index = self.compared_datas.classes[self.compared_datas.classes['variable'] == classe_selected]
-                if 'x' in classe_selected:
-                    index_classes = (self.compared_datas.df[classe_selected] == True)
-                else:
-                    index_classes = (self.compared_datas.df[self.compared_datas.heteroatoms.columns] == self.compared_datas.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                data_extract = self.compared_datas.df[index_classes]   
+            data_extract = Select_classe(classe_selected,data_selected,self.compared_datas.heteroatoms,self.compared_datas.classes)
         #-----------------------------#
         #  3rd dimension selection    #
         #-----------------------------#
@@ -5423,26 +5300,13 @@ class MainWindow(QtWidgets.QMainWindow):
         sample_list = data_selected.iloc[:,data_selected.columns.get_loc('count')+item_count+1:
                                     data_selected.columns.get_loc('count')+item_count*2+1].columns
         for item in sample_list:
-        
             if not item_classes:
                 return
             if 'PC1' in data_selected:
                 widgets.radio_color_pc1_VK_comp.show()
                 widgets.radio_color_pc2_VK_comp.show()
-        
-            
-            data_filtered = data_selected.copy()
-
-            if classe_selected == 'All':
-                pass
-            else:
-                classes_index = self.compared_datas.classes[self.compared_datas.classes['variable'] == classe_selected]
-                if 'x' in classe_selected:
-                    index_classes = (self.compared_datas.df[classe_selected] == True)
-                else:
-                    index_classes = (self.compared_datas.df[self.compared_datas.heteroatoms.columns] == self.compared_datas.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                data_filtered = self.compared_datas.df[index_classes]   
-            
+                
+            data_filtered = Select_classe(classe_selected,data_selected,self.compared_datas.heteroatoms,self.compared_datas.classes)
             #-----------------------------#
             #  3rd dimension selection    #
             #-----------------------------#
@@ -5702,17 +5566,7 @@ class MainWindow(QtWidgets.QMainWindow):
             return
         
         for item in sample_list:
-            data_filtered = data_selected.copy()  
-            
-            if classe_selected == 'All':
-                pass
-            else:
-                classes_index = self.compared_datas.classes[self.compared_datas.classes['variable'] == classe_selected]
-                if 'x' in classe_selected:
-                    index_classes = (self.compared_datas.df[classe_selected] == True)
-                else:
-                    index_classes = (self.compared_datas.df[self.compared_datas.heteroatoms.columns] == self.compared_datas.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                data_filtered = self.compared_datas.df[index_classes]     
+            data_filtered = Select_classe(classe_selected,data_selected,self.compared_datas.heteroatoms,self.compared_datas.classes) 
             #KMD calculation
             if widgets.edit_motif_comp.text():
                 edit_repetive_unit = widgets.edit_motif_comp.text()
@@ -5752,7 +5606,7 @@ class MainWindow(QtWidgets.QMainWindow):
             #  Normalization on selected class  #
             #-----------------------------------#
             if widgets.radioButton_norm_d.isChecked():
-                data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
+                data_filtered["Normalized_intensity"], error = Normalize(data_filtered["Normalized_intensity"])
                 if error == 1:
                     QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
                     continue
@@ -5923,20 +5777,10 @@ class MainWindow(QtWidgets.QMainWindow):
         #-----------------------------#
         #  3rd dimension selection    #
         #-----------------------------#
-            if classe_selected == 'All':
-                pass
-            else:
-                classes_index = self.compared_datas.classes[self.compared_datas.classes['variable'] == classe_selected]
-                if 'x' in classe_selected:
-                    index_classes = (self.compared_datas.df[classe_selected] == True)
-                else:
-                    index_classes = (self.compared_datas.df[self.compared_datas.heteroatoms.columns] == self.compared_datas.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                data_extract = self.compared_datas.df[index_classes]  
-                
+            data_extract = Select_classe(classe_selected,data_selected,self.compared_datas.heteroatoms,self.compared_datas.classes)
             data_extract.drop(['Normalized_intensity'], axis = 1, inplace = True)
             data_extract.rename(columns = {item:'Normalized_intensity'},inplace = True) #item_name.csv => Normalized intensity
-    
-            
+ 
             if widgets.radio_color_intensity_ACOS_comp.isChecked():
                 third_dimension = data_extract["Normalized_intensity"]
                 intens_for_size= data_extract["Normalized_intensity"]
@@ -6081,19 +5925,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                      data_selected.columns.get_loc('count')+item_count*2+1].columns
          
         for item in sample_list:
-            data_extract = data_selected.copy()
-
-            
-                
-            if classe_selected == 'All':
-                pass
-            else:
-                classes_index = self.compared_datas.classes[self.compared_datas.classes['variable'] == classe_selected]
-                if 'x' in classe_selected:
-                    index_classes = (self.compared_datas.df[classe_selected] == True)
-                else:
-                    index_classes = (self.compared_datas.df[self.compared_datas.heteroatoms.columns] == self.compared_datas.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                data_extract = self.compared_datas.df[index_classes]   
+            data_extract = Select_classe(classe_selected,data_selected,self.compared_datas.heteroatoms,self.compared_datas.classes) 
                 
             if not 'S' in data_extract:
                 data_extract['S']=0
@@ -6253,19 +6085,7 @@ class MainWindow(QtWidgets.QMainWindow):
         if not item_classes:
             return
         for item in sample_list:
-            
-            data_extract = data_selected.copy()
-            
-            if classe_selected == 'All':
-                pass
-            else:
-                classes_index = self.compared_datas.classes[self.compared_datas.classes['variable'] == classe_selected]
-                if 'x' in classe_selected:
-                    index_classes = (self.compared_datas.df[classe_selected] == True)
-                else:
-                    index_classes = (self.compared_datas.df[self.compared_datas.heteroatoms.columns] == self.compared_datas.heteroatoms.iloc[classes_index.index[0]]).all(1)
-                data_extract = self.compared_datas.df[index_classes]   
-                
+            data_extract = Select_classe(classe_selected,data_selected,self.compared_datas.heteroatoms,self.compared_datas.classes)
             if not 'S' in data_extract:
                 data_extract['S']=0
             if not 'P' in data_extract:
