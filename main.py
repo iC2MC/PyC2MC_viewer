@@ -23,6 +23,10 @@ from src.processing.merge_merged_function import merge_merged_file
 from src.loading.loading_function import load_MS_file
 from src.graphics.normalization_function import Normalize
 from src.graphics.select_classe import Select_classe
+from src.stats.HCA_function import plot_dendrogram
+from src.stats.PCA_function import plot_pca
+from src.stats.volcano_function import Make_Volcano
+from src.processing.merge_unattributed import merge_non_attributed
 from PyQt5 import QtCore, QtGui, QtWidgets, QtSvg, uic
 from src.pyc2mc_ui import Ui_PyC2MC
 from PyQt5.QtWidgets import  QMessageBox, QLineEdit, QInputDialog, QTableWidgetItem
@@ -46,9 +50,6 @@ import time
 from sklearn.cluster import AgglomerativeClustering
 from scipy.cluster.hierarchy import dendrogram
 from scipy import stats
-from src.stats.HCA_function import plot_dendrogram
-from src.stats.PCA_function import plot_pca
-from src.processing.merge_unattributed import merge_non_attributed
 import imageio #For GIF
 from PIL import Image, ImageSequence
 from IPython import display
@@ -2493,7 +2494,6 @@ class MainWindow(QtWidgets.QMainWindow):
             return
         item = item_file[0]
         data_selected = item.data(self.USERDATA_ROLE)
-
         item_classes = widgets.list_classes_DBE.selectedItems()
         if not item_classes:
             return
@@ -3008,22 +3008,10 @@ class MainWindow(QtWidgets.QMainWindow):
         list_samp_2=[] #Sample 2 selection
         for j in widgets.list_sample_2.selectedItems():
             list_samp_2.append(j.text())
-
-
-        volc_data['Mean_int_1']=volc_data[list_samp_1].mean(axis=1) #Mean intensities in sample 1
-        volc_data['Mean_int_2']=volc_data[list_samp_2].mean(axis=1) #Mean intensities in sample 2
-        volc_data["fc"]=pandas.DataFrame(np.log2(volc_data['Mean_int_2']/volc_data['Mean_int_1'])) #Calculates log2(FC) values
-        volc_data['p']=stats.ttest_ind(volc_data[list_samp_1],volc_data[list_samp_2],axis=1)[1].tolist() #Calculates p-values
-
-        ####
-        #Excluding infinite and NaN values (attribution in neither of the sample)
-        volc_data['fc'].fillna(2e20,inplace=True)
-        p_inf=(volc_data['fc'] >1e20).tolist()
-        n_inf=(volc_data['fc'] <-1e20).tolist()
-
-        inf_index=[i or j for i, j in zip(n_inf,p_inf)]
-        widgets.lineEdit_tot_spec_volc.setText(str(volc_data.shape[0]))
-        volc_data.drop(index=volc_data.index[inf_index],inplace=True,axis=0)
+            
+        volc_data , string = Make_Volcano(volc_data,list_samp_1,list_samp_2)
+        widgets.lineEdit_tot_spec_volc.setText(string)
+        
         try :
            min_fc=min(volc_data['fc'])
            max_fc=max(volc_data['fc'])
