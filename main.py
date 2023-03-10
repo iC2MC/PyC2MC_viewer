@@ -23,6 +23,7 @@ from src.processing.merge_merged_function import merge_merged_file
 from src.loading.loading_function import load_MS_file
 from src.graphics.normalization_function import Normalize
 from src.graphics.select_classe import Select_classe
+from src.graphics.select_axes_VK import Select_Axes_VK,Select_Axes_VK_mol
 from src.stats.HCA_function import plot_dendrogram
 from src.stats.PCA_function import plot_pca
 from src.stats.volcano_function import Make_Volcano
@@ -2724,36 +2725,8 @@ class MainWindow(QtWidgets.QMainWindow):
                     QMessageBox.about(self, "Error", "No hydrogen in the selected data")
                     continue
                     
-            if x_axes == 0:
-                x_axes = data_filtered["O/C"]
-                x_label = "O/C"
-            elif x_axes == 1:
-                x_axes = data_filtered["N/C"]
-                x_label = "N/C"
-            elif x_axes == 2:
-                x_axes = data_filtered["S/C"]
-                x_label = "S/C"
-            elif x_axes == 3:
-                x_axes = data_filtered["H/C"]
-                x_label = "H/C"
-            elif x_axes == 4:
-                x_axes = data_filtered["m/z"]
-                x_label = "m/z"
-            if y_axes == 0:
-                y_axes = data_filtered["H/C"]
-                y_label = "H/C"
-            elif y_axes == 1:
-                y_axes = data_filtered["O/C"]
-                y_label = "O/C"
-            elif y_axes == 2:
-                y_axes = data_filtered["N/C"]
-                y_label = "N/C"
-            elif y_axes == 3:
-                y_axes = data_filtered["S/C"]
-                y_label = "S/C"
-        
-                
-
+            x_axes, y_axes , x_label, y_label, = Select_Axes_VK(x_axes,y_axes,data_filtered)        
+      
             if widgets.radio_color_pc1_VK.isChecked():
                 third_dimension = data_filtered["PC1"]
             elif widgets.radio_color_pc2_VK.isChecked():
@@ -4970,51 +4943,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 data_inf_n = data_inf_n[index_classes]
             x_axes = widgets.list_VK_x_2.currentRow()
             y_axes = widgets.list_VK_y_2.currentRow()
-            if x_axes == 0:
-                x_axes = data_extract["O/C"]
-                x_axes_p = data_inf_p["O/C"]
-                x_axes_n = data_inf_n["O/C"]
-                x_label = "O/C"
-            elif x_axes == 1:
-                x_axes = data_extract["N/C"]
-                x_axes_p = data_inf_p["N/C"]
-                x_axes_n = data_inf_n["N/C"]
-                x_label = "N/C"
-            elif x_axes == 2:
-                x_axes = data_extract["S/C"]
-                x_axes_p = data_inf_p["S/C"]
-                x_axes_n = data_inf_n["S/C"]
-                x_label = "S/C"
-            elif x_axes == 3:
-                x_axes = data_extract["H/C"]
-                x_axes_p = data_inf_p["H/C"]
-                x_axes_n = data_inf_n["H/C"]
-                x_label = "H/C"
-            elif x_axes == 4:
-                x_axes = data_extract["m/z"]
-                x_axes_p = data_inf_p["m/z"]
-                x_axes_n = data_inf_n["m/z"]
-                x_label = "m/z"
-            if y_axes == 0:
-                y_axes = data_extract["H/C"]
-                y_axes_p = data_inf_p["H/C"]
-                y_axes_n = data_inf_n["H/C"]
-                y_label = "H/C"
-            elif y_axes == 1:
-                y_axes = data_extract["O/C"]
-                y_axes_p = data_inf_p["O/C"]
-                y_axes_n = data_inf_n["O/C"]
-                y_label = "O/C"
-            elif y_axes == 2:
-                y_axes = data_extract["N/C"]
-                y_axes_p = data_inf_p["N/C"]
-                y_axes_n = data_inf_n["N/C"]
-                y_label = "N/C"
-            elif y_axes == 3:
-                y_axes = data_extract["S/C"]
-                y_axes_p = data_inf_p["S/C"]
-                y_axes_n = data_inf_n["S/C"]
-                y_label = "S/C"
+            
+            x_axes, x_axes_p, x_axes_n, y_axes ,y_axes_p,y_axes_n, x_label, y_label = Select_Axes_VK_mol(x_axes,y_axes,data_extract,data_inf_p,data_inf_n)     
+
             if widgets.font_size.text():
                 font_size = float(widgets.font_size.text())
             if widgets.checkBox_old_figures.isChecked():
@@ -5352,36 +5283,8 @@ class MainWindow(QtWidgets.QMainWindow):
                     QMessageBox.about(self, "Error", "No hydrogen in the selected data")
                     continue
                     
-            if x_axes == 0:
-                x_axes = data_filtered["O/C"]
-                x_label = "O/C"
-            elif x_axes == 1:
-                x_axes = data_filtered["N/C"]
-                x_label = "N/C"
-            elif x_axes == 2:
-                x_axes = data_filtered["S/C"]
-                x_label = "S/C"
-            elif x_axes == 3:
-                x_axes = data_filtered["H/C"]
-                x_label = "H/C"
-            elif x_axes == 4:
-                x_axes = data_filtered["m/z"]
-                x_label = "m/z"
-            if y_axes == 0:
-                y_axes = data_filtered["H/C"]
-                y_label = "H/C"
-            elif y_axes == 1:
-                y_axes = data_filtered["O/C"]
-                y_label = "O/C"
-            elif y_axes == 2:
-                y_axes = data_filtered["N/C"]
-                y_label = "N/C"
-            elif y_axes == 3:
-                y_axes = data_filtered["S/C"]
-                y_label = "S/C"
+            x_axes, y_axes , x_label, y_label, = Select_Axes_VK(x_axes,y_axes,data_filtered)     
         
-                
-
             if widgets.radio_color_pc1_VK_comp.isChecked():
                 third_dimension = data_filtered["PC1"]
             elif widgets.radio_color_pc2_VK_comp.isChecked():
