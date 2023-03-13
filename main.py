@@ -2670,43 +2670,17 @@ class MainWindow(QtWidgets.QMainWindow):
             x_axes = widgets.list_VK_x.currentRow()
             y_axes = widgets.list_VK_y.currentRow()
             
-            #Tests the presence of sulfur
-            if x_axes == 2 or y_axes == 3:
-                try:
-                    test=data_filtered["S/C"]
-                    del test
-                except:
-                    x_axes = 3
-                    y_axes = 0
-                    QMessageBox.about(self, "Error", "No sulfur in the selected data, (H/C)=f[(H/C)] will be plotted instead to avoid crash.")
-            #Tests the presence of oxygen
-            if x_axes == 0 or y_axes == 1:
-                try:
-                    test=data_filtered["O/C"]
-                    del test
-                except:
-                    x_axes = 3
-                    y_axes = 0
-                    QMessageBox.about(self, "Error", "No oxygen in the selected data, (H/C)=f[(H/C)] will be plotted instead to avoid crash.")
-            #Tests the presence of nitrogen
-            if x_axes == 1 or y_axes == 2:
-                try:
-                    test=data_filtered["N/C"]
-                    del test
-                except:
-                    x_axes = 3
-                    y_axes = 0
-                    QMessageBox.about(self, "Error", "No nitrogen in the selected data, (H/C)=f[(H/C)] will be plotted instead to avoid crash.")
-    
-            #Tests the presence of hydrogen
-            if x_axes == 3 or y_axes == 0:
-                try:
-                    test=data_filtered["H/C"]
-                    del test
-                except:
-                    QMessageBox.about(self, "Error", "No hydrogen in the selected data")
-                    continue
-                    
+            element_list = ["O/C", "N/C", "S/C", "H/C"]
+            element_present = False
+            for i in [x_axes, y_axes]:
+                if i < len(element_list):
+                    if element_list[i] not in data_filtered.columns:
+                        QMessageBox.about(self, "Error", f"No {element_list[i][0]} in the selected data, (H/C)=f[(H/C)] will be plotted instead to avoid crash.")
+                        x_axes, y_axes = 3, 0
+                        element_present = True
+            if not element_present and ("H/C" not in data_filtered.columns):
+                QMessageBox.about(self, "Error", "No hydrogen in the selected data")
+                
             x_axes, y_axes , x_label, y_label, = Select_Axes_VK(x_axes,y_axes,data_filtered)        
       
             if widgets.radio_color_pc1_VK.isChecked():
@@ -5431,100 +5405,81 @@ class MainWindow(QtWidgets.QMainWindow):
                     x_label = 'Kendrick nominal mass'
                     y_label = 'Kendrick mass defect'
                     
-                    #-----------------------------------#
-                    #  Color by intensity               #
-                    #-----------------------------------#
-                    if widgets.K_intensity_comp.isChecked():    
-                        third_dimension = frames["Normalized_intensity"]
-                    #-----------------------------------#
-                    #  Color by oxygen                  #
-                    #-----------------------------------#
-                    if widgets.K_oxygen_comp.isChecked() :    
-                        third_dimension = frames["O"]
-                    #-----------------------------------#
-                    #  Color by nitrogen                #
-                    #-----------------------------------#
-                    if widgets.K_nitrogen_comp.isChecked() :   
-                        third_dimension = frames["N"]
-                    #-----------------------------------#
-                    #  Color by sulfur                  #
-                    #-----------------------------------#
-                    if widgets.K_sulfur_comp.isChecked() :   
-                        third_dimension = frames["S"]
-                        
-                elif  widgets.stackedWidget_Kendrick_comp.currentIndex()==1: #Mass defect VS Nominal mass
+                if widgets.stackedWidget_Kendrick_comp.currentIndex() == 0:
+                    x_data = frames['Kendrick nominal mass']
+                    y_data = frames['Kendrick mass defect']
+                    x_label = 'Kendrick nominal mass'
+                    y_label = 'Kendrick mass defect'
+                elif widgets.stackedWidget_Kendrick_comp.currentIndex() == 1:
                     x_data = frames['nominal_mass']
                     y_data = frames['mass_defect']
                     x_label = 'Nominal mass'
                     y_label = 'Mass defect'
+                
+                color_options = {
+                    'K_intensity_comp': 'Normalized_intensity',
+                    'K_oxygen_comp': 'O',
+                    'K_nitrogen_comp': 'N',
+                    'K_sulfur_comp': 'S',
+                    'K_intensity_univ_comp': 'Normalized_intensity',
+                    'K_oxygen_univ_comp': 'O',
+                    'K_nitrogen_univ_comp': 'N',
+                    'K_sulfur_univ_comp': 'S'
+                }
+                try:
+                    third_dimension = None
+                    for option, column_name in color_options.items():
+                        if getattr(widgets, option).isChecked():
+                            third_dimension = frames[column_name]
+                            break
+                    plot_fun("scatter",x = x_data,y = y_data,d_color = third_dimension ,size = 1.5*dot_size*frames["Normalized_intensity"],dot_type=self.dot_type,edge=self.edge,cmap=self.color_map)                  
                     
-                    #-----------------------------------#
-                    #  Color by intensity               #
-                    #-----------------------------------#
-                    if widgets.K_intensity_univ_comp.isChecked():    
-                        third_dimension = frames["Normalized_intensity"]
-                    #-----------------------------------#
-                    #  Color by oxygen                  #
-                    #-----------------------------------#
-                    if widgets.K_oxygen_univ_comp.isChecked() :    
-                        third_dimension = frames["O"]
-                    #-----------------------------------#
-                    #  Color by nitrogen                #
-                    #-----------------------------------#
-                    if widgets.K_nitrogen_univ_comp.isChecked() :   
-                        third_dimension = frames["N"]
-                    #-----------------------------------#
-                    #  Color by sulfur                  #
-                    #-----------------------------------#
-                    if widgets.K_sulfur_univ_comp.isChecked() :   
-                        third_dimension = frames["S"]
-                
-                
-                plot_fun("scatter",x = x_data,y = y_data,d_color = third_dimension ,size = 1.5*dot_size*frames["Normalized_intensity"],dot_type=self.dot_type,edge=self.edge,cmap=self.color_map)                  
-                
-                if widgets.KNM_min.text():
-                    KNM_min = float(widgets.KNM_min.text())
-                    plt.gca().set_xlim(left=KNM_min)
-                if widgets.KNM_max.text():
-                    KNM_max = float(widgets.KNM_max.text())
-                    plt.gca().set_xlim(right=KNM_max)
-                if widgets.KMD_min.text():
-                    KMD_min = float(widgets.KMD_min.text())
-                    plt.gca().set_ylim(bottom=KMD_min)
-                if widgets.KMD_max.text():
-                    KMD_max = float(widgets.KMD_max.text())
-                    plt.gca().set_ylim(top=KMD_max)
-                cbar = plt.colorbar()
-                if widgets.K_intensity_univ.isChecked():
-                    cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
-                if widgets.K_nitrogen_univ.isChecked():
-                    cbar.set_label('Nitrogen number', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
-                if widgets.K_oxygen_univ.isChecked():
-                    cbar.set_label('Oxygen number', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
-                if widgets.K_sulfur_univ.isChecked():
-                    cbar.set_label('Sulfur number', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
-                cbar.ax.tick_params(labelsize=font_size-2)
-                plt.suptitle(f'{y_label} vs {x_label}',fontsize=font_size+4,y=0.96,x=0.45)
-                plt.xlabel(x_label, fontsize=font_size+4)
-                plt.ylabel(y_label, fontsize=font_size+4)
-                if 'molecular_formula' in frames:
-                    mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(frames['molecular_formula'].iloc[sel.target.index]))
-                else:
-                    mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(frames['m/z'].iloc[sel.target.index]))
-                plt.xticks(fontsize=font_size)
-                plt.yticks(fontsize=font_size)
-                name = frames.sample_name
-                name = name.replace("Rel_intens_","")
-                name = name.replace(".csv","")
-                name = name.replace(".xlsx","")
-                plt.text(0.12,0.9,name,horizontalalignment='left',
-                              verticalalignment='center',fontsize=font_size-1, transform = transf)
-                
-                plt.text(0.68,0.9,f'{frames.classe_selected}',horizontalalignment='right',
-                         verticalalignment='center', transform = transf,fontsize=font_size+2)
-                if gif == False:
-                    mngr = plt.get_current_fig_manager()
-                    mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,640, 545)
+                    if widgets.KNM_min.text():
+                        KNM_min = float(widgets.KNM_min.text())
+                        plt.gca().set_xlim(left=KNM_min)
+                    if widgets.KNM_max.text():
+                        KNM_max = float(widgets.KNM_max.text())
+                        plt.gca().set_xlim(right=KNM_max)
+                    if widgets.KMD_min.text():
+                        KMD_min = float(widgets.KMD_min.text())
+                        plt.gca().set_ylim(bottom=KMD_min)
+                    if widgets.KMD_max.text():
+                        KMD_max = float(widgets.KMD_max.text())
+                        plt.gca().set_ylim(top=KMD_max)
+                    cbar = plt.colorbar()
+                    if widgets.K_intensity_univ.isChecked():
+                        cbar.set_label('Normalized Intensity', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
+                    if widgets.K_nitrogen_univ.isChecked():
+                        cbar.set_label('Nitrogen number', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
+                    if widgets.K_oxygen_univ.isChecked():
+                        cbar.set_label('Oxygen number', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
+                    if widgets.K_sulfur_univ.isChecked():
+                        cbar.set_label('Sulfur number', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
+                    cbar.ax.tick_params(labelsize=font_size-2)
+                    plt.suptitle(f'{y_label} vs {x_label}',fontsize=font_size+4,y=0.96,x=0.45)
+                    plt.xlabel(x_label, fontsize=font_size+4)
+                    plt.ylabel(y_label, fontsize=font_size+4)
+                    if 'molecular_formula' in frames:
+                        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(frames['molecular_formula'].iloc[sel.target.index]))
+                    else:
+                        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(frames['m/z'].iloc[sel.target.index]))
+                    plt.xticks(fontsize=font_size)
+                    plt.yticks(fontsize=font_size)
+                    name = frames.sample_name
+                    name = name.replace("Rel_intens_","")
+                    name = name.replace(".csv","")
+                    name = name.replace(".xlsx","")
+                    plt.text(0.12,0.9,name,horizontalalignment='left',
+                                  verticalalignment='center',fontsize=font_size-1, transform = transf)
+                    
+                    plt.text(0.68,0.9,f'{frames.classe_selected}',horizontalalignment='right',
+                             verticalalignment='center', transform = transf,fontsize=font_size+2)
+                    if gif == False:
+                        mngr = plt.get_current_fig_manager()
+                        mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,640, 545)
+                except:
+                    QMessageBox.about(self, "Error", "This heteroatom is not in datasets")
+                    pass
             
         if gif == False:
             for i in frames:
