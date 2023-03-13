@@ -1919,88 +1919,69 @@ class MainWindow(QtWidgets.QMainWindow):
         ##############
         
         if widgets.radio_composition.isChecked():
-            if widgets.checkBox_old_figures.isChecked():
-                if plt.get_fignums():
-                    plt.close("all")
-            data_selected = item.data(self.USERDATA_ROLE)
-            data = data_selected.classes
+            if widgets.checkBox_old_figures.isChecked() and plt.get_fignums():
+                plt.close("all")
+        
             item_classes = widgets.list_loaded_file.selectedItems()
             if not item_classes:
                 return
+        
             fig, ax = plt.subplots()
-
-            for i in range(len(item_classes)):
-                data_selected = item_classes[i].data(self.USERDATA_ROLE)
+        
+            for item_class in item_classes:
+                data_selected = item_class.data(self.USERDATA_ROLE)
+                data = data_selected.classes
+        
                 if 'count' in data_selected.df:
-                    capsize=5
+                    capsize = 5
                     if widgets.radio_classes.isChecked():
-                        if widgets.edit_min_intensity_classes.text():
-                            min_intens_classes = float(widgets.edit_min_intensity_classes.text())
-                            data = data_selected.classes[~data_selected.classes['variable'].str.contains("x")]
+                        data = data[~data['variable'].str.contains("x")]
+        
+                    if widgets.edit_min_intensity_classes.text():
+                        min_intens_classes = float(widgets.edit_min_intensity_classes.text())
+                        if widgets.radio_classes.isChecked():
                             data = data[data['value'] > min_intens_classes]
                         else:
-                            data = data_selected.classes[~data_selected.classes['variable'].str.contains("x")]
-                    else:
-                        if widgets.edit_min_intensity_classes.text():
-                            min_intens_classes = float(widgets.edit_min_intensity_classes.text())
-                            data = data_selected.classes[data_selected.classes['variable'].str.contains("x")]
+                            data = data[data['variable'].str.contains("x")]
                             if 'CH' in data_selected.classes['variable'].values:
                                 data = data.append(data_selected.classes[data_selected.classes['variable'].str.contains("CH")])
                             data = data[data['value'] > min_intens_classes]
-                        else:
-                            data = data_selected.classes[data_selected.classes['variable'].str.contains("x")]
-                    data = data.sort_values('value',ascending = False)
-                    data = data.reset_index(drop = True)
+        
+                    data = data.sort_values('value', ascending=False).reset_index(drop=True)
                     if widgets.radio_comp_int.isChecked():
-                        ax.bar(data['variable'], data['value'],yerr=data['std_dev_rel'], align='center', ecolor='black', capsize=capsize)
-                        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(str(data['variable'].iloc[sel.target.index]) 
-                        + ': Rel. Intensity  = ' + str(round(data['value'].iloc[sel.target.index],2)) + '%, std deviation = ' 
-                        + str(round(data['std_dev_rel'].iloc[sel.target.index],2)) + '%'))
+                        ax.bar(data['variable'], data['value'], yerr=data['std_dev_rel'], align='center', ecolor='black', capsize=capsize)
+                        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Rel. Intensity  = {round(data['value'].iloc[sel.target.index],2)}%, std deviation = {round(data['std_dev_rel'].iloc[sel.target.index],2)}%"))
                     elif widgets.radio_comp_nb.isChecked():
                         ax.bar(data['variable'], data['number'])
-                        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(str(data['variable'].iloc[sel.target.index]) 
-                        + ': Count  = ' + str(int(data['number'].iloc[sel.target.index]))))
-
+                        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Count  = {int(data['number'].iloc[sel.target.index])}"))
                 else:
                     if widgets.radio_classes.isChecked():
-                        if widgets.edit_min_intensity_classes.text():
-                            min_intens_classes = float(widgets.edit_min_intensity_classes.text())
-                            data = data[~data['variable'].str.contains("x")]
-                            data = data[data['value'] > min_intens_classes]
-                        else:
-                            data = data[~data['variable'].str.contains("x")]
-                    else:
-                        if widgets.edit_min_intensity_classes.text():
-                            min_intens_classes = float(widgets.edit_min_intensity_classes.text())
+                        data = data[~data['variable'].str.contains("x")]
+        
+                    if widgets.edit_min_intensity_classes.text():
+                        min_intens_classes = float(widgets.edit_min_intensity_classes.text())
+                        if not widgets.radio_classes.isChecked():
                             data_temp = data[data['variable'].str.contains("x")]
-                            data  = data_temp.append(data[data['variable'].str.contains("CH")])
-                            data = data[data['value'] > min_intens_classes]
-                        else:
-                            data_temp = data[data['variable'].str.contains("x")]
-                            data  = data_temp.append(data[data['variable'].str.contains("CH")])
-                    data = data.sort_values('value',ascending = False)
-                    data = data.reset_index(drop = True)
+                            data = data_temp.append(data[data['variable'].str.contains("CH")])
+        
+                        data = data[data['value'] > min_intens_classes]
+        
+                    data = data.sort_values('value', ascending=False).reset_index(drop=True)
                     if widgets.radio_comp_int.isChecked():
                         ax.bar(data['variable'], data['value'])
-                        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(str(data['variable'].iloc[sel.target.index]) 
-                        + ': Rel. Intensity  = ' + str(round(data['value'].iloc[sel.target.index],2)) + '%'))
+                        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Rel. Intensity  = {round(data['value'].iloc[sel.target.index],2)}%"))
                     elif widgets.radio_comp_nb.isChecked():
                         ax.bar(data['variable'], data['number'])
-                        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(str(data['variable'].iloc[sel.target.index])
-                        + ': Count  = ' + str(int(data['number'].iloc[sel.target.index]))))
-            
+                        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Count  = {int(data['number'].iloc[sel.target.index])}"))
+        
             plt.suptitle('Heteroatom class distribution', fontsize=font_size+2)
             if widgets.radio_comp_int.isChecked():
                 plt.ylabel("Relative intensity (%)", fontsize=font_size+2)
-            elif widgets.radio_comp_nb.isChecked():
-                plt.ylabel("Number", fontsize=font_size+2)
-
-            plt.xticks(fontsize=font_size,rotation=45)
-            plt.yticks(fontsize=font_size)
-            plt.gca().set_ylim(bottom=(0))
             mngr = plt.get_current_fig_manager()
-            mngr.window.setGeometry(self.pos().x()+640,self.pos().y()+200,640, 545)
-            plt.show()
+            mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,640, 545)
+            plt.xticks(fontsize=font_size)
+            plt.yticks(fontsize=font_size)
+
 
         ##############
         #Error
@@ -2794,56 +2775,23 @@ class MainWindow(QtWidgets.QMainWindow):
                 if widgets.checkBox_vk_area.isChecked() and widgets.list_VK_x.currentRow() == 0 and widgets.list_VK_y.currentRow() == 0:
                     border_width = 4
                     alpha = 1
-                    left, bottom, width, height = (0.51, 1.52, 0.19, 0.5)
-                    amino_sugars=mpatches.Rectangle((left,bottom),width,height,
-                                fill=False,
-                                color="orange",
-                               linewidth = border_width,alpha = alpha)
-                    left, bottom, width, height = (0.71, 1.52, 0.3, 0.8)
-                    carbohydrates=mpatches.Rectangle((left,bottom),width,height,
-                                fill=False,
-                                color="green",
-                               linewidth= border_width,alpha = alpha)
-                    left, bottom, width, height = (0.31, 0.51, 0.5, 0.99)
-                    lignin=mpatches.Rectangle((left,bottom),width,height,
-                                fill=False,
-                                color="purple",
-                               linewidth= border_width,alpha = alpha)
-                    left, bottom, width, height = (0, 1.72, 0.29, 0.6)
-                    lipid=mpatches.Rectangle((left,bottom),width,height,
-                                fill=False,
-                                color="blue",
-                               linewidth= border_width,alpha = alpha)
-                    left, bottom, width, height = (0, 0, 0.8, 0.49)
-                    condensed_hyd=mpatches.Rectangle((left,bottom),width,height,
-                                fill=False,
-                                color="black",
-                               linewidth= border_width,alpha = alpha)
-                    left, bottom, width, height = (0, 0.51, 0.29, 1.19)
-                    unsat_hyd=mpatches.Rectangle((left,bottom),width,height,
-                                fill=False,
-                                color="red",
-                               linewidth= border_width,alpha = alpha)
-                    left, bottom, width, height = (0.31, 1.52, 0.19, 0.49)
-                    proteins=mpatches.Rectangle((left,bottom),width,height,
-                                fill=False,
-                                color="brown",
-                               linewidth=border_width,alpha=alpha)
-                    orange_patch = mpatches.Patch(color='orange', label='Amino sugars')
-                    green_patch = mpatches.Patch(color='green', label='Carbohydrates')
-                    purple_patch = mpatches.Patch(color='purple', label='Lignin')
-                    blue_patch = mpatches.Patch(color='blue', label='Lipids')
-                    black_patch = mpatches.Patch(color='black', label='Condensed Hydrocarbons')
-                    red_patch = mpatches.Patch(color='red', label='Unsaturated Hydrocarbons')
-                    brown_patch = mpatches.Patch(color='brown', label='Proteins')
-                    plt.legend(handles=[orange_patch,green_patch,purple_patch,blue_patch ,black_patch ,red_patch,brown_patch])
-                    plt.gca().add_patch(amino_sugars)
-                    plt.gca().add_patch(carbohydrates)
-                    plt.gca().add_patch(lignin)
-                    plt.gca().add_patch(lipid)
-                    plt.gca().add_patch(condensed_hyd)
-                    plt.gca().add_patch(unsat_hyd)
-                    plt.gca().add_patch(proteins)
+                    patches = [
+                        {"left": 0.51, "bottom": 1.52, "width": 0.19, "height": 0.5, "color": "orange", "label": "Amino sugars"},
+                        {"left": 0.71, "bottom": 1.52, "width": 0.3, "height": 0.8, "color": "green", "label": "Carbohydrates"},
+                        {"left": 0.31, "bottom": 0.51, "width": 0.5, "height": 0.99, "color": "purple", "label": "Lignin"},
+                        {"left": 0, "bottom": 1.72, "width": 0.29, "height": 0.6, "color": "blue", "label": "Lipids"},
+                        {"left": 0, "bottom": 0, "width": 0.8, "height": 0.49, "color": "black", "label": "Condensed Hydrocarbons"},
+                        {"left": 0, "bottom": 0.51, "width": 0.29, "height": 1.19, "color": "red", "label": "Unsaturated Hydrocarbons"},
+                        {"left": 0.31, "bottom": 1.52, "width": 0.19, "height": 0.49, "color": "brown", "label": "Proteins"}
+                    ]
+                    patches_rects = []
+                    for patch in patches:
+                        rect = mpatches.Rectangle((patch["left"], patch["bottom"]), patch["width"], patch["height"], fill=False, color=patch["color"], linewidth=border_width, alpha=alpha)
+                        patches_rects.append(rect)
+                        plt.gca().add_patch(rect)
+                    patches_labels = [mpatches.Patch(color=patch["color"], label=patch["label"]) for patch in patches]
+                    plt.legend(handles=patches_labels)
+
                     
         if gif == False:
             for i in frames:
@@ -5356,60 +5304,25 @@ class MainWindow(QtWidgets.QMainWindow):
                     mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,640, 545)
                 if "m/z" in frames:
                     mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(frames['molecular_formula'].iloc[sel.target.index] + ', ' + str(x_label) +' : '+ str(round(x_axes.iloc[sel.target.index],4)) + ', ' + str(y_label) +' = '+ str(round(y_axes.iloc[sel.target.index],4))))
-
                 if widgets.checkBox_vk_area_comp.isChecked() and widgets.list_VK_x_comp.currentRow() == 0 and widgets.list_VK_y_comp.currentRow() == 0:
                     border_width = 4
                     alpha = 1
-                    left, bottom, width, height = (0.51, 1.52, 0.19, 0.5)
-                    amino_sugars=mpatches.Rectangle((left,bottom),width,height,
-                                fill=False,
-                                color="orange",
-                               linewidth = border_width,alpha = alpha)
-                    left, bottom, width, height = (0.71, 1.52, 0.3, 0.8)
-                    carbohydrates=mpatches.Rectangle((left,bottom),width,height,
-                                fill=False,
-                                color="green",
-                               linewidth= border_width,alpha = alpha)
-                    left, bottom, width, height = (0.31, 0.51, 0.5, 0.99)
-                    lignin=mpatches.Rectangle((left,bottom),width,height,
-                                fill=False,
-                                color="purple",
-                               linewidth= border_width,alpha = alpha)
-                    left, bottom, width, height = (0, 1.72, 0.29, 0.6)
-                    lipid=mpatches.Rectangle((left,bottom),width,height,
-                                fill=False,
-                                color="blue",
-                               linewidth= border_width,alpha = alpha)
-                    left, bottom, width, height = (0, 0, 0.8, 0.49)
-                    condensed_hyd=mpatches.Rectangle((left,bottom),width,height,
-                                fill=False,
-                                color="black",
-                               linewidth= border_width,alpha = alpha)
-                    left, bottom, width, height = (0, 0.51, 0.29, 1.19)
-                    unsat_hyd=mpatches.Rectangle((left,bottom),width,height,
-                                fill=False,
-                                color="red",
-                               linewidth= border_width,alpha = alpha)
-                    left, bottom, width, height = (0.31, 1.52, 0.19, 0.49)
-                    proteins=mpatches.Rectangle((left,bottom),width,height,
-                                fill=False,
-                                color="brown",
-                               linewidth=border_width,alpha=alpha)
-                    orange_patch = mpatches.Patch(color='orange', label='Amino sugars')
-                    green_patch = mpatches.Patch(color='green', label='Carbohydrates')
-                    purple_patch = mpatches.Patch(color='purple', label='Lignin')
-                    blue_patch = mpatches.Patch(color='blue', label='Lipids')
-                    black_patch = mpatches.Patch(color='black', label='Condensed Hydrocarbons')
-                    red_patch = mpatches.Patch(color='red', label='Unsaturated Hydrocarbons')
-                    brown_patch = mpatches.Patch(color='brown', label='Proteins')
-                    plt.legend(handles=[orange_patch,green_patch,purple_patch,blue_patch ,black_patch ,red_patch,brown_patch])
-                    plt.gca().add_patch(amino_sugars)
-                    plt.gca().add_patch(carbohydrates)
-                    plt.gca().add_patch(lignin)
-                    plt.gca().add_patch(lipid)
-                    plt.gca().add_patch(condensed_hyd)
-                    plt.gca().add_patch(unsat_hyd)
-                    plt.gca().add_patch(proteins)
+                    patches = [
+                        {"left": 0.51, "bottom": 1.52, "width": 0.19, "height": 0.5, "color": "orange", "label": "Amino sugars"},
+                        {"left": 0.71, "bottom": 1.52, "width": 0.3, "height": 0.8, "color": "green", "label": "Carbohydrates"},
+                        {"left": 0.31, "bottom": 0.51, "width": 0.5, "height": 0.99, "color": "purple", "label": "Lignin"},
+                        {"left": 0, "bottom": 1.72, "width": 0.29, "height": 0.6, "color": "blue", "label": "Lipids"},
+                        {"left": 0, "bottom": 0, "width": 0.8, "height": 0.49, "color": "black", "label": "Condensed Hydrocarbons"},
+                        {"left": 0, "bottom": 0.51, "width": 0.29, "height": 1.19, "color": "red", "label": "Unsaturated Hydrocarbons"},
+                        {"left": 0.31, "bottom": 1.52, "width": 0.19, "height": 0.49, "color": "brown", "label": "Proteins"}
+                    ]
+                    patches_rects = []
+                    for patch in patches:
+                        rect = mpatches.Rectangle((patch["left"], patch["bottom"]), patch["width"], patch["height"], fill=False, color=patch["color"], linewidth=border_width, alpha=alpha)
+                        patches_rects.append(rect)
+                        plt.gca().add_patch(rect)
+                    patches_labels = [mpatches.Patch(color=patch["color"], label=patch["label"]) for patch in patches]
+                    plt.legend(handles=patches_labels)
                     
         if gif == False:
             for i in frames:
