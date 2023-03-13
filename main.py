@@ -2489,8 +2489,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 widgets.radio_color_pc1.show()
                 widgets.radio_color_pc2.show()
     
-            data_extract = data_selected.df.copy()
-    
+            data = data_selected.df.copy()
+            data_extract = Select_classe(classe_selected,data,data_selected.heteroatoms,data_selected.classes)
         #-----------------------------#
         #  3rd dimension selection    #
         #-----------------------------#
@@ -2505,7 +2505,7 @@ class MainWindow(QtWidgets.QMainWindow):
             min_max_scaler = preprocessing.MinMaxScaler()
             Intens_scaled = min_max_scaler.fit_transform(Intens)
             data_extract["Normalized_intensity"] = Intens_scaled
-            data_extract = Select_classe(classe_selected,data_selected.df,data_selected.heteroatoms,data_selected.classes)
+
     
         #-----------------------------------#
         #  Normalization on selected class  #
@@ -2652,7 +2652,8 @@ class MainWindow(QtWidgets.QMainWindow):
         
         for item in item_classes:
             classe_selected = item.data(self.USERDATA_ROLE)
-            data_filtered = Select_classe(classe_selected,data_selected.df,data_selected.heteroatoms,data_selected.classes)
+            data = data_selected.df.copy()
+            data_filtered = Select_classe(classe_selected,data,data_selected.heteroatoms,data_selected.classes)
             Intens = data_filtered["Normalized_intensity"].values.reshape(-1,1)
             if widgets.check_classic_vk.isChecked():
                 Intens= Intens
@@ -3284,7 +3285,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 #  Normalization on selected class  #
                 #-----------------------------------#
                 if widgets.radioButton_norm_d.isChecked():
-                    data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
+                    data_filtered["Normalized_intensity"], error = Normalize(data_filtered["Normalized_intensity"])
                     if error == 1:
                         QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
                         continue
