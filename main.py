@@ -2000,26 +2000,14 @@ class MainWindow(QtWidgets.QMainWindow):
             for item in item_classes:
                 classe_selected = item.data(self.USERDATA_ROLE)
                 data_extract = Select_classe(classe_selected,data_selected.df,data_selected.heteroatoms,data_selected.classes)
-                    
-            #-----------------------------------#
-            #  Normalization on selected class  #
-            #-----------------------------------#
-        
-                if widgets.radioButton_norm_c.isChecked():
-                    data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
-                    if error == 1:
-                        QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
-                        continue
-        
-            #-----------------------------------------#
-            #  Normalization on selected class (end)  #
-            #-----------------------------------------#
+                   
+            
         
             #-----------------------------------#
             #  Normalization on displayed data  #
             #-----------------------------------#
         
-                if widgets.radioButton_norm_d.isChecked():
+                if widgets.radioButton_norm_d.isChecked() or widgets.radioButton_norm_c.isChecked():
                     data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
                     if error == 1:
                         QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
@@ -2028,10 +2016,11 @@ class MainWindow(QtWidgets.QMainWindow):
             #-----------------------------------------#
             #  Normalization on displayed data (end)  #
             #-----------------------------------------#   
-                    self.read_param()
-                    data_extract.classe_selected = classe_selected
-                    data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
-                    frames.append(data_extract)
+                self.read_param()
+                
+                data_extract = data_extract.sort_values(by=["Normalized_intensity"], ascending=True)
+                data_extract.classe_selected = classe_selected
+                frames.append(data_extract)
                 def Anim(frames):
                     if gif == False:
                         fig = plt.figure()
@@ -2138,7 +2127,6 @@ class MainWindow(QtWidgets.QMainWindow):
                         mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text('Intensity = ' + str(format(df['col2'].iloc[sel.target.index],'.1E'))))
                     
                           
-                        
             if gif == False:
                 for i in frames:
                     Anim(i)   
@@ -3248,8 +3236,12 @@ class MainWindow(QtWidgets.QMainWindow):
                     Intens = np.log10(data_filtered["normalized_intensity"].copy()+1e-10)
                     Intens=(Intens - Intens.min()) / (Intens.max() - Intens.min())
                 data_filtered["normalized_intensity"] = Intens
-                data_filtered = data_filtered.sort_values(by=["normalized_intensity"], ascending=True)
-    
+                if widgets.radioButton_norm_d.isChecked() or widgets.radioButton_norm_c.isChecked():
+                    data_filtered = data_filtered.sort_values(by=["normalized_intensity"], ascending=True)
+                    data_filtered["normalized_intensity"], error = Normalize(data_filtered["normalized_intensity"])
+                    if error == 1:
+                       QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
+                       continue
                 nominal_mass = round(data_filtered['m/z'])
                 mass_defect = data_filtered['m/z'] - nominal_mass
                 data_filtered['nominal_mass'] = nominal_mass
@@ -3654,7 +3646,6 @@ class MainWindow(QtWidgets.QMainWindow):
             if widgets.MAI_box.isChecked():
                 data_extract['AI']=(1+data_extract['C']-0.5*data_extract['O']-data_extract['S']-0.5*(data_extract['N']+data_extract['P']+data_extract['H']))/(data_extract['C']-0.5*data_extract['O']-data_extract['S']-data_extract['N']-data_extract['P'])
             else:
-                print(data_extract)
                 data_extract['AI']=(1+data_extract['C']-data_extract['O']-data_extract['S']-0.5*(data_extract['N']+data_extract['P']+data_extract['H']))/(data_extract['C']-data_extract['O']-data_extract['S']-data_extract['N']-data_extract['P'])
             data_extract['AI'][data_extract['AI']<0]=0
             data_extract['AI'][data_extract['AI']>1]=1
