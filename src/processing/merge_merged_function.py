@@ -11,7 +11,7 @@ from ..loading.loading_function import load_MS_file
 #################################################
 ###Définition de la fonction d'import des CSV####
 #################################################
-def merge_merged_file(names):
+def merge_merged_file(names,isotopes_dict):
         """
         This function is used to concatenate fusionned of merged files together in one unique file "merged".
         The merge is working using the molecular formula
@@ -35,7 +35,7 @@ def merge_merged_file(names):
             m = 0 #Counter for merged files
             while n < len(names[0]):
                 _, filename["%s" %n] = os.path.split(names[0][n])
-                temp = load_MS_file(names[0][n])
+                temp = load_MS_file(names[0][n],isotopes_dict)
                 if temp.df_type == 'PyC2MC_fusion':
                     temp_data_fused["%s" %f] = temp.df
                     f = f + 1
@@ -66,8 +66,6 @@ def merge_merged_file(names):
             ##################################################
             
             
-            dict_data={'C': 12,'H':1.007825,'N':14.003074,'O':15.994915,'S':31.972072,'Cl':34.968853,'Si':27.976928,'P':30.9737634\
-            ,'V':50.943963,'K':39.0983,'Na':22.989769,'Li':7.016005,'Cu':62.929599,'Ni':57.935347,'F':18.998403,'B':11.009305, 'Zn':63.92915}
             mz = pandas.DataFrame(index=range(len(sumformula)))
             mz['m/z']=0.0
             v=0
@@ -76,7 +74,7 @@ def merge_merged_file(names):
                 form=sumformula_splitted.iloc[v]
                 mass = 0
                 for atom in form.items():  
-                    mass = mass + atom[1]*dict_data[atom[0]]
+                    mass = mass + atom[1]*isotopes_dict[atom[0]]
                 ratio_mz.append(mass)
                 v=v+1
             mz['m/z'] = ratio_mz

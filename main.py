@@ -153,6 +153,7 @@ color_list=[(0.83921568627451,0.145098039215686,0.254901960784314) #Red
             ,(0.0392156862745098,0.63921568627451,0.8) #Cyan
             ,(1,0.92156862745098,0.00392156862745098)] #Yellow
 
+
 # MAIN CLASS
 # ///////////////////////////////////////////////////////////////
 
@@ -180,6 +181,11 @@ class MainWindow(QtWidgets.QMainWindow):
         #GET PARAMETERS
         UIFunctions.uiDefinitions(self)
         
+        #Dict of most abundant isotopes and corresponding exact masses
+
+        df = pandas.read_csv("Isotopes.csv", sep=';')
+        df.fillna(1,inplace = True)
+        self.isotopes_dict = dict(zip(df['Atom'],df['Mass']))
         
         
         
@@ -1192,7 +1198,7 @@ class MainWindow(QtWidgets.QMainWindow):
             # read data and create data frame
             os.chdir(path_to_file)
             try :
-                dataframe = load_MS_file(filename)
+                dataframe = load_MS_file(filename,self.isotopes_dict)
             except Exception as err:  
                 QMessageBox.about(self, "FYI box", f"A problem has occured with the following file: '{filename}', error is : {err}")
                 n = n +1
@@ -1203,7 +1209,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     filename = str(os.path.basename(filepath[n]))
                     os.chdir(path_to_file)
                     try :
-                        dataframe = load_MS_file(filename)
+                        dataframe = load_MS_file(filename,self.isotopes_dict)
                     except Exception as err:  
                         MessageBox.about(self, "FYI box", f"A problem has occured with the following file: '{filename}', error is : {err}")
             pass
@@ -1349,7 +1355,7 @@ class MainWindow(QtWidgets.QMainWindow):
         save_name, okPressed = QInputDialog.getText(self, "Save Name","Your name:", QLineEdit.Normal, "")
         if okPressed and save_name != '':
             try :
-                self.merged_data = merge_file(names)
+                self.merged_data = merge_file(names,self.isotopes_dict)
             except:
                 widgets.pbar.hide()
                 QMessageBox.about(self, "FYI box", "Impossible to merge selected files")
@@ -1363,7 +1369,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.merged_data.to_csv(save_name +".csv",index = False)
         self.write_csv_df(path_to_file, save_name +".csv", self.merged_data)
         filename = save_name +".csv"
-        dataframe = load_MS_file(filename)
+        dataframe = load_MS_file(filename,self.isotopes_dict)
         os.chdir(path_old)
         
         widgets.pbar.hide()
@@ -1431,7 +1437,7 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.pbar.setValue(i)
         if okPressed and save_name != '':
             try :
-                self.merged_data = merge_merged_file(names)
+                self.merged_data = merge_merged_file(names,self.isotopes_dict)
             except:
                 widgets.pbar.hide()
                 QMessageBox.about(self, "FYI box", "You can only merge the same type of file")
@@ -1524,7 +1530,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.write_csv_df(path_to_file, save_name +".csv", self.merged_data)
 
             filename = save_name +".csv"
-            dataframe = load_MS_file(filename)
+            dataframe = load_MS_file(filename,self.isotopes_dict)
             os.chdir(path_old)
             widgets.pbar.hide()
             
@@ -3017,12 +3023,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
         form=cp.parse_formula(formula) #Creates a dict with symbols and mass
 
-        dict_data={'C': 12,'H':1.007825,'N':14.003074,'O':15.994915,'S':31.972072,'Cl':34.968853,'Si':27.976928,'P':30.9737634\
-                   ,'V':50.943963,'Li':7.016005,'Cu':62.929599,'Ni':57.935347,'F':18.998403,'B':11.009305} #Dictionnaire avec les masses molaires
         try:
             mass = 0 #Initialisation
             for atom in form:   #Loop
-                mass = mass + form[atom]*dict_data[atom]
+                mass = mass + form[atom]*self.isotopes_dict[atom]
         except:
             QMessageBox.about(self, "FYI box", "Upper case only.")
 
@@ -4466,9 +4470,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 data[i] = pandas.DataFrame(item.df)
                 v = 50*(i+1)/len(compare_items)
                 widgets.pbar.setValue(int(v))   
-            compared_datas = merge_for_compare(data,self.name)
+            compared_datas = merge_for_compare(data,self.name,self.isotopes_dict)
             widgets.pbar.setValue(int(75))   
-            self.compared_datas = load_MS_file(compared_datas)
+            self.compared_datas = load_MS_file(compared_datas,self.isotopes_dict)
             widgets.pbar.setValue(int(90))  
         widgets.status_compare.setStyleSheet("background-color: rgb(50, 150, 0); border-radius: 12px; color: white")
         widgets.status_compare.setText("Ready")
@@ -4616,9 +4620,8 @@ class MainWindow(QtWidgets.QMainWindow):
         frames = []
         self.read_param()
         font_size = self.fontsize
-        if widgets.checkBox_old_figures.isChecked():
-            if plt.get_fignums():
-                plt.close("all")
+        if widgets.checkBox_old_figures.isChecked() and plt.get_fignums():
+            plt.close("all")
         sample_1 = widgets.list_compare_sample_1.currentRow()
         sample_2 = widgets.list_compare_sample_2.currentRow()
         n_sample = max(self.compared_datas.df['count'])
@@ -4648,7 +4651,6 @@ class MainWindow(QtWidgets.QMainWindow):
             leg_2 = leg_2.replace(".xlsx","")
             leg_1 = leg_1.replace("Abs_intens_","")
             leg_2 = leg_2.replace("Abs_intens_","")
-
         self.compared_datas.df["fc"] = np.log2(fold_intens_2/fold_intens_1)
         ####
         #Excluding infinite and NaN values (attribution in neither of the sample)
@@ -4658,6 +4660,7 @@ class MainWindow(QtWidgets.QMainWindow):
         data_inf_pos = self.compared_datas.df[:][p_inf].copy()
         data_inf_neg = self.compared_datas.df[:][n_inf].copy()
         inf_index=[i or j for i, j in zip(n_inf,p_inf)]
+        ###
         
         
         item_classes = widgets.list_classes_DBE_compare.selectedItems()
@@ -4725,7 +4728,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 if widgets.CheckBox_size_fc.isChecked() :
                     size = self.d_size*frames.data_extract.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-(n_sample)+sample_1].astype(float)
                     size_inf_neg = self.d_size*frames.data_inf_neg.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-(n_sample)+sample_1].astype(float)
-                    size_inf_pos = self.d_size*frames.data_inf_pos.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-(n_sample)+sample_1].astype(float)
+                    size_inf_pos = self.d_size*frames.data_inf_pos.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-(n_sample)+sample_2].astype(float)
                 else:
                     size = self.d_size
                     size_inf_neg = self.d_size
@@ -4804,6 +4807,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 plt.close("all")
         sample_1 = widgets.list_compare_sample_1.currentRow()
         sample_2 = widgets.list_compare_sample_2.currentRow()
+        n_sample = max(self.compared_datas.df['count'])
+        
         if widgets.radio_fold_rel.isChecked():
             fold_intens_1 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_1].astype(float)
             fold_intens_2 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_2].astype(float)
@@ -4877,6 +4882,8 @@ class MainWindow(QtWidgets.QMainWindow):
             data.x_axes_p = x_axes_p 
             data.y_axes_p = y_axes_p
             data.classe_selected = classe_selected
+            data.data_inf_n = data_inf_n
+            data.data_inf_p = data_inf_p
             frames.append(data)
             def Anim(frames,x_label,y_label):
                 if gif == False:
@@ -4886,12 +4893,22 @@ class MainWindow(QtWidgets.QMainWindow):
                     Figure.clear()
                     transf = Figure.transFigure
                 self.read_param()
+                self.read_param()
+                if widgets.CheckBox_size_fc_vk.isChecked() :
+                    size = self.d_size*frames.data_extract.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-(n_sample)+sample_1].astype(float)
+                    size_inf_neg = self.d_size*frames.data_inf_n.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-(n_sample)+sample_1].astype(float)
+                    size_inf_pos = self.d_size*frames.data_inf_p.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-(n_sample)+sample_2].astype(float)
+                else:
+                    size = self.d_size
+                    size_inf_neg = self.d_size
+                    size_inf_pos = self.d_size
+                    
                 if widgets.fc_all_vk.isChecked():
-                    plot_fun("scatter",x=frames.x_axes_n,y=frames.y_axes_n,d_color="purple",dot_type=self.dot_type,edge=self.edge,size = self.d_size)
-                    plot_fun("scatter",x=frames.x_axes_p,y=frames.y_axes_p,d_color="blue",dot_type=self.dot_type,edge=self.edge,size = self.d_size)
+                    plot_fun("scatter",x=frames.x_axes_n,y=frames.y_axes_n,d_color="purple",dot_type=self.dot_type,edge=self.edge,size = size_inf_neg)
+                    plot_fun("scatter",x=frames.x_axes_p,y=frames.y_axes_p,d_color="blue",dot_type=self.dot_type,edge=self.edge,size = size_inf_pos)
             
              
-                plot_fun("scatter",x=frames.x_axes,y=frames.y_axes,d_color=frames.data_extract["Normalized_intensity"],dot_type=self.dot_type,edge=self.edge,cmap="RdYlGn",size = self.d_size)
+                plot_fun("scatter",x=frames.x_axes,y=frames.y_axes,d_color=frames.data_extract["Normalized_intensity"],dot_type=self.dot_type,edge=self.edge,cmap="RdYlGn",size = size)
         
         
                 if widgets.x_min_VK_compare.text():

@@ -3,7 +3,7 @@ from src.pre_processing_function import pre_processing
 import chemparse
 from src.pre_treatment_petroOrg import Pre_treatment_petroOrg
 
-def load_MS_file(filename):
+def load_MS_file(filename,isotopes_dict):
     """
     Global loading data method. Recognize file type and calls the appropriate function(s)
     
@@ -13,6 +13,9 @@ def load_MS_file(filename):
     Returns data (Peak_list): A Peak_list class object containing raw or
     preprocessed MS data.
     """
+    
+    
+    
     if type(filename) != str :
         data=Peak_list.from_inline_merged(filename)
         data = pre_processing(data)
@@ -397,7 +400,7 @@ class Peak_list:
         df = df.loc[:, ~df.columns.str.contains('Flags')]
         df = df.loc[:, ~df.columns.str.contains('RDB equiv')]
         dict_data={'C': 12,'H':1.007825,'N':14.003074,'O':15.994915,'S':31.972072,'Cl':34.968853,'Si':27.976928,'P':30.9737634\
-        ,'V':50.943963,'K':39.0983,'Na':22.989769,'Li':7.016005,'Cu':62.929599,'Ni':57.935347,'F':18.998403,'B':11.009305, 'Zn':63.92915, 'Br':78.91834}
+        ,'V':50.943963,'K':39.0983,'Na':22.989769,'Li':7.016005,'Cu':62.929599,'Ni':57.935347,'F':18.998403,'Ca':39.962590863,'B':11.009305, 'Zn':63.92915, 'Br':78.91834}
         df['Composition'] = df['Composition'].replace(['³²S','₀','₁','₂','₃','₄','₅','₆','₇','₈','₉',' '],
                                                       ['S','0','1','2','3','4','5','6','7','8','9',''],regex=True)
         heteroatoms = pd.DataFrame(list([chemparse.parse_formula(formula) for formula in df['Composition']]))
@@ -457,7 +460,6 @@ class Peak_list:
         df = df.rename(columns=names_dict)
         pca_data = pd.DataFrame(df[['count','m/z']]).join(df.filter(like='Rel'))
         df_type = 'PyC2MC_merged'
-        
 
         return cls(df,df_type,heteroatoms,pca_data)
     
@@ -527,7 +529,7 @@ class Peak_list:
         Returns an object of the class RawData.
         """
         Atoms_mass = {'C': 12,'H':1.007825,'N':14.003074,'O':15.994915,'S':31.972072,'Cl':34.968853,'Si':27.976928,'P':30.9737634\
-        ,'V':50.943963,'K':39.0983,'Na':22.989769,'Li':7.016005,'Cu':62.929599,'Ni':57.935347,'F':18.998403,'B':11.009305, 'Zn':63.92915, 'Br':78.91834}
+        ,'V':50.943963,'K':39.0983,'Na':22.989769,'Li':7.016005,'Cu':62.929599,'Ni':57.935347,'F':18.998403,'B':11.009305,'Ca':39.962590863, 'Zn':63.92915, 'Br':78.91834}
         
         mol_form =''
         mass = 0
@@ -618,30 +620,29 @@ class Peak_list:
         """
         mol_form = ""
         names_dict = {3:'m/z',5:'absolute_intensity', 4: 'err_ppm'}
-        start = df_initial.columns.get_loc(9)
-        i = 10
-        list_to_drop = []
-        while i < len(df_initial.columns)-1:
-            temp_header = df_initial.iloc[0,i]
-            df_initial.rename(columns={df_initial.columns[i+1]:temp_header},inplace=True)
-            list_to_drop.append(i)
-            i = i+2
-        df_initial.drop(df_initial.columns[list_to_drop],axis=1,inplace=True)
+        
         if df_initial.iloc[:,len(df_initial.columns)-1].isnull().values.any():
             df_initial.drop(df_initial.columns[len(df_initial.columns)-1],axis=1,inplace=True)
-        if '13C' in df_initial.columns:
-            df_initial = df_initial[df_initial['13C'] == 0]
-            df_initial = df_initial.drop('13C',axis = 1)
-        het_for_formula = df_initial.iloc[:,start+1:]
-        for atom in het_for_formula:
-            mol_form = mol_form + ' ' + atom + het_for_formula[atom].astype(str) 
-            mol_form = mol_form.replace(atom +'0','',regex = True)
-        df_initial['molecular_formula'] = mol_form    
+        if "13C" in df_initial.iloc[0].to_list():
+            u = df_initial.iloc[0].to_list().index("13C")
+            df_initial.drop(columns=df_initial.columns[[u,u+1]],inplace = True)
+        mol_form = df_initial.loc[:,10:len(df_initial.columns)+1]
+        df_initial.drop(mol_form.columns,axis = 1, inplace = True)
+        last_col = len(mol_form.columns)-1
+        mol_form.iloc[:,last_col] = mol_form.iloc[:,last_col].fillna(0).astype(int) #convert last column to int
+        mol_form.iloc[:,last_col-1] = mol_form.iloc[:,last_col-1].fillna("") #Erase NaN
+        mol_form.iloc[:,-2] = mol_form.iloc[:,-2].replace({'56Fe':"Fe","24Mg":"Mg"})
+        mol_form = mol_form.apply(lambda row: ''.join(map(str, row)), axis=1)
+        heteroatoms = pd.DataFrame(list([chemparse.parse_formula(formula) for formula in mol_form]))
+        if heteroatoms.iloc[:,len(heteroatoms.columns)-1].isnull().values.any():
+            heteroatoms.drop(heteroatoms.columns[len(heteroatoms.columns)-1],axis=1,inplace=True)
+        heteroatoms.fillna(0,inplace=True)
+        df_initial['molecular_formula'] = mol_form
         df_initial = df_initial.rename(columns=names_dict)
         df = pd.DataFrame().astype('Float')
-        df = pd.concat([df_initial['m/z'],df_initial['absolute_intensity'],df_initial['err_ppm'],df_initial['molecular_formula'],df_initial[het_for_formula.columns]],axis=1)
+        df = pd.concat([df_initial['m/z'],df_initial['absolute_intensity'],df_initial['err_ppm'],df_initial['molecular_formula'],heteroatoms],axis=1)
         df['normalized_intensity'] = df["absolute_intensity"].values/ \
             df["absolute_intensity"].values.max()*100
-        heteroatoms = het_for_formula
+        df.fillna(0,inplace=True)
         df_type = 'Attributed'
         return cls(df,df_type,heteroatoms)
