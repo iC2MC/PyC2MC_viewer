@@ -3532,7 +3532,7 @@ QCheckBox::indicator:checked {
                                         <string notr="true">background-color: rgba(0,0,0,0)</string>
                                        </property>
                                        <property name="text">
-                                        <string>Number</string>
+                                        <string>% Attribution</string>
                                        </property>
                                       </widget>
                                      </item>
@@ -3958,7 +3958,7 @@ QCheckBox::indicator:checked {
                                      <string notr="true">background-color: rgba(0,0,0,0)</string>
                                     </property>
                                     <property name="text">
-                                     <string>Number</string>
+                                     <string>% Attribution</string>
                                     </property>
                                    </widget>
                                   </item>
@@ -10815,6 +10815,169 @@ QCheckBox::indicator:checked {
                          </property>
                          <widget class="QWidget" name="page_compare_overview">
                           <layout class="QGridLayout" name="gridLayout_54">
+                           <item row="0" column="0" colspan="2">
+                            <widget class="QLabel" name="label_62">
+                             <property name="font">
+                              <font>
+                               <family>Segoe UI</family>
+                               <pointsize>11</pointsize>
+                               <weight>75</weight>
+                               <italic>false</italic>
+                               <bold>true</bold>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Overview plots</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="0" colspan="2">
+                            <widget class="QGroupBox" name="groupBox_43">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>30</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>160000</width>
+                               <height>600</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <family>Segoe UI</family>
+                               <pointsize>10</pointsize>
+                               <weight>75</weight>
+                               <italic>false</italic>
+                               <bold>true</bold>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="title">
+                              <string>Selected plot</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                             </property>
+                             <property name="flat">
+                              <bool>false</bool>
+                             </property>
+                             <property name="checkable">
+                              <bool>false</bool>
+                             </property>
+                             <layout class="QHBoxLayout" name="horizontalLayout_10">
+                              <property name="topMargin">
+                               <number>20</number>
+                              </property>
+                              <item>
+                               <widget class="QRadioButton" name="radio_composition_compare">
+                                <property name="enabled">
+                                 <bool>true</bool>
+                                </property>
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>0</width>
+                                  <height>24</height>
+                                 </size>
+                                </property>
+                                <property name="font">
+                                 <font>
+                                  <family>Segoe UI</family>
+                                  <pointsize>10</pointsize>
+                                  <weight>50</weight>
+                                  <bold>false</bold>
+                                 </font>
+                                </property>
+                                <property name="toolTip">
+                                 <string/>
+                                </property>
+                                <property name="statusTip">
+                                 <string/>
+                                </property>
+                                <property name="whatsThis">
+                                 <string/>
+                                </property>
+                                <property name="styleSheet">
+                                 <string notr="true"/>
+                                </property>
+                                <property name="text">
+                                 <string>Composition</string>
+                                </property>
+                                <property name="checked">
+                                 <bool>true</bool>
+                                </property>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QRadioButton" name="radio_distribution_compare">
+                                <property name="enabled">
+                                 <bool>true</bool>
+                                </property>
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>0</width>
+                                  <height>24</height>
+                                 </size>
+                                </property>
+                                <property name="font">
+                                 <font>
+                                  <family>Segoe UI</family>
+                                  <pointsize>10</pointsize>
+                                  <weight>50</weight>
+                                  <bold>false</bold>
+                                 </font>
+                                </property>
+                                <property name="styleSheet">
+                                 <string notr="true"/>
+                                </property>
+                                <property name="text">
+                                 <string>Distribution</string>
+                                </property>
+                                <property name="checked">
+                                 <bool>false</bool>
+                                </property>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QRadioButton" name="radio_mass_spectrum_compare">
+                                <property name="enabled">
+                                 <bool>true</bool>
+                                </property>
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>0</width>
+                                  <height>24</height>
+                                 </size>
+                                </property>
+                                <property name="font">
+                                 <font>
+                                  <family>Segoe UI</family>
+                                  <pointsize>10</pointsize>
+                                  <weight>50</weight>
+                                  <bold>false</bold>
+                                 </font>
+                                </property>
+                                <property name="styleSheet">
+                                 <string notr="true"/>
+                                </property>
+                                <property name="text">
+                                 <string>Mass spectrum</string>
+                                </property>
+                                <property name="checked">
+                                 <bool>false</bool>
+                                </property>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
                            <item row="3" column="0" colspan="2">
                             <widget class="QStackedWidget" name="stackedWidget_overview_compare">
                              <property name="minimumSize">
@@ -11340,7 +11503,7 @@ QCheckBox::indicator:checked {
                                    <string notr="true"/>
                                   </property>
                                   <property name="text">
-                                   <string>Number</string>
+                                   <string>% Attribution</string>
                                   </property>
                                  </widget>
                                 </widget>
@@ -11372,8 +11535,32 @@ QCheckBox::indicator:checked {
                               </layout>
                              </widget>
                              <widget class="QWidget" name="page_distribution_compare">
-                              <layout class="QGridLayout" name="gridLayout_71">
-                               <item row="1" column="0" rowspan="3">
+                              <layout class="QGridLayout" name="gridLayout_160">
+                               <item row="0" column="0">
+                                <widget class="QLabel" name="label_125">
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16777215</width>
+                                   <height>17</height>
+                                  </size>
+                                 </property>
+                                 <property name="font">
+                                  <font>
+                                   <family>Segoe UI</family>
+                                   <pointsize>10</pointsize>
+                                   <weight>75</weight>
+                                   <bold>true</bold>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>Distribution:</string>
+                                 </property>
+                                 <property name="alignment">
+                                  <set>Qt::AlignCenter</set>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="0" rowspan="2">
                                 <widget class="QGroupBox" name="groupBox_53">
                                  <property name="sizePolicy">
                                   <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
@@ -11520,9 +11707,93 @@ QCheckBox::indicator:checked {
                                 </widget>
                                </item>
                                <item row="1" column="2">
+                                <widget class="QGroupBox" name="groupBox_120">
+                                 <property name="sizePolicy">
+                                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                                   <horstretch>0</horstretch>
+                                   <verstretch>0</verstretch>
+                                  </sizepolicy>
+                                 </property>
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>30</height>
+                                  </size>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>999999</width>
+                                   <height>92</height>
+                                  </size>
+                                 </property>
+                                 <property name="font">
+                                  <font>
+                                   <family>Segoe UI</family>
+                                   <pointsize>10</pointsize>
+                                   <weight>75</weight>
+                                   <italic>false</italic>
+                                   <bold>true</bold>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true"/>
+                                 </property>
+                                 <property name="title">
+                                  <string>Data displayed:</string>
+                                 </property>
+                                 <layout class="QGridLayout" name="gridLayout_71">
+                                  <property name="topMargin">
+                                   <number>20</number>
+                                  </property>
+                                  <item row="0" column="0">
+                                   <widget class="QRadioButton" name="radio_dist_int_comp">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                    </property>
+                                    <property name="text">
+                                     <string>% Intensity</string>
+                                    </property>
+                                    <property name="checked">
+                                     <bool>true</bool>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="0" column="1">
+                                   <widget class="QRadioButton" name="radio_dist_nb_comp">
+                                    <property name="enabled">
+                                     <bool>true</bool>
+                                    </property>
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                    </property>
+                                    <property name="text">
+                                     <string>% Attribution</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                 </layout>
+                                </widget>
+                               </item>
+                               <item row="2" column="1">
                                 <widget class="QGroupBox" name="groupBox_54">
                                  <property name="sizePolicy">
-                                  <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                                  <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                                    <horstretch>0</horstretch>
                                    <verstretch>0</verstretch>
                                   </sizepolicy>
@@ -11536,7 +11807,7 @@ QCheckBox::indicator:checked {
                                  <property name="maximumSize">
                                   <size>
                                    <width>1600000</width>
-                                   <height>1600000</height>
+                                   <height>150</height>
                                   </size>
                                  </property>
                                  <property name="font">
@@ -11645,7 +11916,7 @@ QCheckBox::indicator:checked {
                                  </layout>
                                 </widget>
                                </item>
-                               <item row="2" column="1" colspan="2">
+                               <item row="2" column="2">
                                 <widget class="QGroupBox" name="groupBox_36">
                                  <property name="minimumSize">
                                   <size>
@@ -11910,30 +12181,6 @@ QCheckBox::indicator:checked {
                                    </widget>
                                   </item>
                                  </layout>
-                                </widget>
-                               </item>
-                               <item row="0" column="0" colspan="3">
-                                <widget class="QLabel" name="label_125">
-                                 <property name="maximumSize">
-                                  <size>
-                                   <width>16777215</width>
-                                   <height>17</height>
-                                  </size>
-                                 </property>
-                                 <property name="font">
-                                  <font>
-                                   <family>Segoe UI</family>
-                                   <pointsize>10</pointsize>
-                                   <weight>75</weight>
-                                   <bold>true</bold>
-                                  </font>
-                                 </property>
-                                 <property name="text">
-                                  <string>Distribution:</string>
-                                 </property>
-                                 <property name="alignment">
-                                  <set>Qt::AlignCenter</set>
-                                 </property>
                                 </widget>
                                </item>
                               </layout>
@@ -12345,169 +12592,6 @@ QCheckBox::indicator:checked {
                                </item>
                               </layout>
                              </widget>
-                            </widget>
-                           </item>
-                           <item row="0" column="0" colspan="2">
-                            <widget class="QLabel" name="label_62">
-                             <property name="font">
-                              <font>
-                               <family>Segoe UI</family>
-                               <pointsize>11</pointsize>
-                               <weight>75</weight>
-                               <italic>false</italic>
-                               <bold>true</bold>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string>Overview plots</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="1" column="0" colspan="2">
-                            <widget class="QGroupBox" name="groupBox_43">
-                             <property name="minimumSize">
-                              <size>
-                               <width>0</width>
-                               <height>30</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>160000</width>
-                               <height>600</height>
-                              </size>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <family>Segoe UI</family>
-                               <pointsize>10</pointsize>
-                               <weight>75</weight>
-                               <italic>false</italic>
-                               <bold>true</bold>
-                              </font>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true"/>
-                             </property>
-                             <property name="title">
-                              <string>Selected plot</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-                             </property>
-                             <property name="flat">
-                              <bool>false</bool>
-                             </property>
-                             <property name="checkable">
-                              <bool>false</bool>
-                             </property>
-                             <layout class="QHBoxLayout" name="horizontalLayout_10">
-                              <property name="topMargin">
-                               <number>20</number>
-                              </property>
-                              <item>
-                               <widget class="QRadioButton" name="radio_composition_compare">
-                                <property name="enabled">
-                                 <bool>true</bool>
-                                </property>
-                                <property name="minimumSize">
-                                 <size>
-                                  <width>0</width>
-                                  <height>24</height>
-                                 </size>
-                                </property>
-                                <property name="font">
-                                 <font>
-                                  <family>Segoe UI</family>
-                                  <pointsize>10</pointsize>
-                                  <weight>50</weight>
-                                  <bold>false</bold>
-                                 </font>
-                                </property>
-                                <property name="toolTip">
-                                 <string/>
-                                </property>
-                                <property name="statusTip">
-                                 <string/>
-                                </property>
-                                <property name="whatsThis">
-                                 <string/>
-                                </property>
-                                <property name="styleSheet">
-                                 <string notr="true"/>
-                                </property>
-                                <property name="text">
-                                 <string>Composition</string>
-                                </property>
-                                <property name="checked">
-                                 <bool>true</bool>
-                                </property>
-                               </widget>
-                              </item>
-                              <item>
-                               <widget class="QRadioButton" name="radio_distribution_compare">
-                                <property name="enabled">
-                                 <bool>true</bool>
-                                </property>
-                                <property name="minimumSize">
-                                 <size>
-                                  <width>0</width>
-                                  <height>24</height>
-                                 </size>
-                                </property>
-                                <property name="font">
-                                 <font>
-                                  <family>Segoe UI</family>
-                                  <pointsize>10</pointsize>
-                                  <weight>50</weight>
-                                  <bold>false</bold>
-                                 </font>
-                                </property>
-                                <property name="styleSheet">
-                                 <string notr="true"/>
-                                </property>
-                                <property name="text">
-                                 <string>Distribution</string>
-                                </property>
-                                <property name="checked">
-                                 <bool>false</bool>
-                                </property>
-                               </widget>
-                              </item>
-                              <item>
-                               <widget class="QRadioButton" name="radio_mass_spectrum_compare">
-                                <property name="enabled">
-                                 <bool>true</bool>
-                                </property>
-                                <property name="minimumSize">
-                                 <size>
-                                  <width>0</width>
-                                  <height>24</height>
-                                 </size>
-                                </property>
-                                <property name="font">
-                                 <font>
-                                  <family>Segoe UI</family>
-                                  <pointsize>10</pointsize>
-                                  <weight>50</weight>
-                                  <bold>false</bold>
-                                 </font>
-                                </property>
-                                <property name="styleSheet">
-                                 <string notr="true"/>
-                                </property>
-                                <property name="text">
-                                 <string>Mass spectrum</string>
-                                </property>
-                                <property name="checked">
-                                 <bool>false</bool>
-                                </property>
-                               </widget>
-                              </item>
-                             </layout>
                             </widget>
                            </item>
                           </layout>

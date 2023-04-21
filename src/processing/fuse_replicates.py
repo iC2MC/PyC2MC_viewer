@@ -6,7 +6,7 @@ import chemparse
 from ..loading.loading_function import load_MS_file
 
 
-def fuse_replicates(names,replicates):
+def fuse_replicates(names,replicates,isotopes_dict):
     """
     Special merging process only keeping the species found in at least a defined number of analysis
 
@@ -31,8 +31,8 @@ def fuse_replicates(names,replicates):
         n = 0
         while n < len(names[0]):
             _, filename["%s" %n] = os.path.split(names[0][n])
-            try : temp_data["%s" %n] =  load_MS_file(names[0][n]).df
-            except : temp_data["%s" %n] =  load_MS_file(names[0][n]).df
+            try : temp_data["%s" %n] =  load_MS_file(names[0][n],isotopes_dict).df
+            except : temp_data["%s" %n] =  load_MS_file(names[0][n],isotopes_dict).df
             
             temp_data["%s" %n] = temp_data["%s" %n].sort_values(by=["normalized_intensity"], ascending=True)
             temp_data["%s" %n]['relative_intens'] = (temp_data["%s" %n]['normalized_intensity']/sum(temp_data["%s" %n]['normalized_intensity']))*100

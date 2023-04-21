@@ -537,8 +537,9 @@ class Peak_list:
         het_for_formula = heteroatoms.copy()
 
         for atom in het_for_formula:
-            mol_form = mol_form + ' ' + atom + het_for_formula[atom].astype(str) 
+            mol_form = mol_form + ' ' + atom + het_for_formula[atom].astype(str) +' '
             mol_form = mol_form.replace(atom +'0','',regex = True)
+            mol_form = mol_form.replace(atom +'1 ',atom,regex = True)
         df_initial['molecular_formula'] = mol_form
         names_dict = {'mz':'m/z','summed_intensity':'absolute_intensity', 'error_ppm': 'err_ppm'}
         df_initial = df_initial.rename(columns=names_dict)

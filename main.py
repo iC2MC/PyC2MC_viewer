@@ -1413,7 +1413,7 @@ class MainWindow(QtWidgets.QMainWindow):
         replicats = replicats_tuple[0]
         if okPressed and save_name != '':
             try :
-                self.merged_data = fuse_replicates(names,replicats)
+                self.merged_data = fuse_replicates(names,replicats,self.isotopes_dict)
             except:
                 widgets.pbar.hide()
                 QMessageBox.about(self, "FYI box", "Error, no files merged")
@@ -1972,17 +1972,20 @@ class MainWindow(QtWidgets.QMainWindow):
         
                         data = data[data['value'] > min_intens_classes]
         
-                    data = data.sort_values('value', ascending=False).reset_index(drop=True)
                     if widgets.radio_comp_int.isChecked():
+                        data = data.sort_values('value', ascending=False).reset_index(drop=True)
                         ax.bar(data['variable'], data['value'])
+                        y_label = "Relative intensity (%)"
                         mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Rel. Intensity  = {round(data['value'].iloc[sel.target.index],2)}%"))
                     elif widgets.radio_comp_nb.isChecked():
+                        data['number'] = data['number'].div(data['number'].sum(axis = 0))*100
+                        data = data.sort_values('number', ascending=False).reset_index(drop=True)
                         ax.bar(data['variable'], data['number'])
-                        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Count  = {int(data['number'].iloc[sel.target.index])}"))
+                        y_label = "Number of attribution (%)"
+                        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Nb. Attrib.  = {int(data['number'].iloc[sel.target.index])}%"))
         
             plt.suptitle('Heteroatom class distribution', fontsize=font_size+2)
-            if widgets.radio_comp_int.isChecked():
-                plt.ylabel("Relative intensity (%)", fontsize=font_size+2)
+            plt.ylabel(f"{y_label}", fontsize=font_size+2)
             mngr = plt.get_current_fig_manager()
             mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,640, 545)
             plt.xticks(fontsize=font_size)
@@ -2254,7 +2257,13 @@ class MainWindow(QtWidgets.QMainWindow):
             if widgets.checkBox_old_figures.isChecked():
                 if plt.get_fignums():
                     plt.close("all")
-            
+            if widgets.radio_dist_int.isChecked() :
+                y_label = "Relative intensity (%)"
+                y_title = "Relative intensity"
+            else:
+                y_label = "Number of attribution (%)"
+                y_title = "Number of attribution"
+                
             for item in item_classes:
                 classe_selected = item.data(self.USERDATA_ROLE)
                 data_extract = Select_classe(classe_selected,data_selected.df,data_selected.heteroatoms,data_selected.classes)
@@ -2309,11 +2318,9 @@ class MainWindow(QtWidgets.QMainWindow):
                         x = dbe.columns
                         if widgets.radio_dist_int.isChecked() :
                             y =dbe.values.tolist()[0]
-                            y_label = "Relative Intensity (%)"
                         elif widgets.radio_dist_nb.isChecked() :
                             y = dbe.values.tolist()[1]
-                            y_label = "Number of attribution"
-                        title = f'{y_label} vs {x_label}'
+                        
         
                     elif x_axes == 1: #C
                         x_label = "#C"
@@ -2334,11 +2341,8 @@ class MainWindow(QtWidgets.QMainWindow):
                         x = C_both.columns
                         if widgets.radio_dist_int.isChecked() :
                             y =C_both.values.tolist()[0]
-                            y_label = "Relative Intensity (%)"
                         elif widgets.radio_dist_nb.isChecked() :
                             y = C_both.values.tolist()[1]
-                            y_label = "Number of attribution"
-                        title = f'{y_label} vs {x_label}'
                         
                     elif x_axes == 2:
                         x_label = "#N"
@@ -2359,11 +2363,8 @@ class MainWindow(QtWidgets.QMainWindow):
                         x = N_both.columns
                         if widgets.radio_dist_int.isChecked() :
                             y =N_both.values.tolist()[0]
-                            y_label = "Relative Intensity (%)"
                         elif widgets.radio_dist_nb.isChecked() :
                             y = N_both.values.tolist()[1]
-                            y_label = "Number of attribution"
-                        title = f'{y_label} vs {x_label}'
                         
                         
                     elif x_axes == 3:
@@ -2385,11 +2386,8 @@ class MainWindow(QtWidgets.QMainWindow):
                         x = O_both.columns
                         if widgets.radio_dist_int.isChecked() :
                             y =O_both.values.tolist()[0]
-                            y_label = "Relative Intensity (%)"
                         elif widgets.radio_dist_nb.isChecked() :
                             y = O_both.values.tolist()[1]
-                            y_label = "Number of attribution"
-                        title = f'{y_label} vs {x_label}'
                         
                     elif x_axes == 4:
                         x_label = "#S"
@@ -2410,14 +2408,12 @@ class MainWindow(QtWidgets.QMainWindow):
                         x = S_both.columns
                         if widgets.radio_dist_int.isChecked() :
                             y =S_both.values.tolist()[0]
-                            y_label = "Relative Intensity (%)"
                         elif widgets.radio_dist_nb.isChecked() :
                             y = S_both.values.tolist()[1]
-                            y_label = "Number of attribution"
-                        title = f'{y_label} vs {x_label}'   
-                        
-                        
+                    if widgets.radio_dist_nb.isChecked() :    
+                        y = (np.array(y)*100/sum(y)).tolist()
                     plt.bar(x,y,width=w,color = bar_color, edgecolor='black', linewidth=2)
+                    title = f'{y_title} vs {x_label}'
                     plt.suptitle(f'{title}',fontsize=font_size+4,y=0.98,x=0.45)
                     plt.xlabel(x_label, fontsize=font_size+2)
                     plt.ylabel(y_label, fontsize=font_size+2)
@@ -2425,7 +2421,11 @@ class MainWindow(QtWidgets.QMainWindow):
                     @cursor.connect("add")
                     def on_add(sel):
                         x, y, width, height = sel.artist[sel.target.index].get_bbox().bounds
-                        sel.annotation.set(text=f"#S: {round(x+width/2,0)}; Rel.Int.: {round(height,4)}%",
+                        if widgets.radio_dist_nb.isChecked() : 
+                            txt = "Nb. Attrib."
+                        else:
+                            txt = 'Rel. Intens.'
+                        sel.annotation.set(text=f"#S: {round(x+width/2,0)}; {txt}: {round(height,4)}%",
                                            position=(0, 20), anncoords="offset points")
                         sel.annotation.xy = (x + width / 2, y + height)
                     
@@ -4078,7 +4078,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 plt.ylabel("Relative intensity (%)", fontsize=font_size+2)
             elif widgets.radio_comp_nb_compare.isChecked():
                 ax.bar(classes['variable'], classes['number'])
-                plt.ylabel("Number", fontsize=font_size+2)
+                plt.ylabel("Number of attribution", fontsize=font_size+2)
             plt.suptitle('Heteroatom class distribution', fontsize=font_size+2)
             plt.xticks(fontsize=font_size,rotation=45)
             plt.yticks(fontsize=font_size)
@@ -4107,11 +4107,12 @@ class MainWindow(QtWidgets.QMainWindow):
                         data_comp.iloc[y,i]=classes.per_datas[i][y]
                 plt.ylabel("Relative intensity (%)", fontsize=font_size+2)
 
-            elif widgets.radio_comp_nb_compare.isChecked():
+            elif widgets.radio_comp_nb_compare.isChecked():                
                 for y in range(y_max):
                     for i in range(len(leg)):
                         data_comp.iloc[y,i]=classes.per_datas_nb[i][y]
-                plt.ylabel("Number", fontsize=font_size+2)
+                data_comp = data_comp.div(data_comp.sum(axis = 1),axis = 0)*100
+                plt.ylabel("Number of attribution (%)", fontsize=font_size+2)
 
             for y in range(y_max):
                 ab=np.array( data_comp.columns)-gap*(0.5-((y+1)/(y_max+1)))/(y_max+1)
@@ -4124,7 +4125,11 @@ class MainWindow(QtWidgets.QMainWindow):
             @cursor.connect("add")
             def on_add(sel):
                 x, y, width, height = sel.artist[sel.target.index].get_bbox().bounds
-                sel.annotation.set(text=f"Rel.Int.: {round(height,4)}%",
+                if widgets.radio_comp_int_compare.isChecked():
+                    txt = "Rel.Int."
+                else:
+                    txt = "Number of attributions"
+                sel.annotation.set(text=f"{txt} : {round(height,4)}%",
                                    position=(0, 20), anncoords="offset points")
                 sel.annotation.xy = (x + width / 2, y + height)
             plt.gca().legend(leg_2,fontsize=font_size-4)
@@ -4139,6 +4144,9 @@ class MainWindow(QtWidgets.QMainWindow):
         """
         Distribution plots for the compare menu
         """
+        
+    
+        
         self.read_param()
         font_size = self.fontsize
         frames = []
@@ -4148,6 +4156,12 @@ class MainWindow(QtWidgets.QMainWindow):
         if widgets.checkBox_old_figures.isChecked():
             if plt.get_fignums():
                 plt.close("all")
+        if widgets.radio_dist_int_comp.isChecked():
+            y_label = "Relative Intensity %"
+            y_legend = "Rel. Intens"
+        else:
+            y_label = "Number of attributions %"
+            y_legend = "Number of attributions"
         for classe_selected in item_classes:
             classe_selected = classe_selected.data(self.USERDATA_ROLE)
             data = Select_classe(classe_selected,self.compared_datas.df,self.compared_datas.heteroatoms,self.compared_datas.classes)
@@ -4164,11 +4178,11 @@ class MainWindow(QtWidgets.QMainWindow):
                 else:
                     Figure.clear()
                     transf = Figure.transFigure
-    
+                
                 x_axes = widgets.list_distribution_compare.currentRow()
                 plt.xticks(fontsize=font_size)
                 plt.yticks(fontsize=font_size)
-                plt.ylabel('Relative Intensity (%)', fontsize=font_size+2)
+                plt.ylabel(f'{y_label}', fontsize=font_size+2)
                 x_axes = widgets.list_distribution_compare.currentRow()
                 
                 ###
@@ -4191,9 +4205,11 @@ class MainWindow(QtWidgets.QMainWindow):
                         dbe_sum_m=pandas.DataFrame()
                         for i in range(max(frames['count'])):
                             intensity_DBE_m = sum(data_DBE_m.iloc[:,1+i])
-                            dbe_sum_m[i] = [intensity_DBE_m]
+                            count_DBE_m = np.count_nonzero(data_DBE_m.iloc[:,1+i])
+                            if widgets.radio_dist_int_comp.isChecked():
+                                dbe_sum_m[i] = [intensity_DBE_m]
+                            else: dbe_sum_m[i] = [count_DBE_m]
                         dbe_both_m[y]=list(dbe_sum_m.values[0])
-        
                         if y.is_integer():
                             dbe_odd_m[y]=list(dbe_sum_m.values[0])
                         else :
@@ -4218,6 +4234,9 @@ class MainWindow(QtWidgets.QMainWindow):
                         name = name.replace(".csv","")
                         name = name.replace(".xlsx","")
                         leg.append(name)
+                        
+                    
+                        
                     x_label = 'DBE'
                     y_max = len(data_DBE_m)
                     to_plt = data_DBE_m
@@ -4236,7 +4255,11 @@ class MainWindow(QtWidgets.QMainWindow):
                             C_sum_m=pandas.DataFrame()
                             for i in range(max(frames['count'])):
                                 intensity_C_m = sum(data_C_m.iloc[:,1+i])
-                                C_sum_m[i] = [intensity_C_m]
+                                count_C_m = np.count_nonzero(data_C_m.iloc[:,1+i])
+                                if widgets.radio_dist_int_comp.isChecked():
+                                    C_sum_m[i] = [intensity_C_m]
+                                else: 
+                                    C_sum_m[i] = [count_C_m]
                             C_both[y]=list(C_sum_m.values[0])
         
                         C_both.index=list(data_C_m.columns[1:])
@@ -4265,7 +4288,12 @@ class MainWindow(QtWidgets.QMainWindow):
                             N_sum_m=pandas.DataFrame()
                             for i in range(max(frames['count'])):
                                 intensity_N_m = sum(data_N_m.iloc[:,1+i])
-                                N_sum_m[i] = [intensity_N_m]
+                                count_N_m = np.count_nonzero(data_N_m.iloc[:,1+i])
+                                if widgets.radio_dist_int_comp.isChecked():
+                                    N_sum_m[i] = [intensity_N_m]
+                                else: 
+                                    N_sum_m[i] = [count_N_m]
+                                
                             N_both[y]=list(N_sum_m.values[0])
         
                         N_both.index=list(data_N_m.columns[1:])
@@ -4294,7 +4322,11 @@ class MainWindow(QtWidgets.QMainWindow):
                             O_sum_m=pandas.DataFrame()
                             for i in range(max(frames['count'])):
                                 intensity_O_m = sum(data_O_m.iloc[:,1+i])
-                                O_sum_m[i] = [intensity_O_m]
+                                count_O_m = np.count_nonzero(data_O_m.iloc[:,1+i])
+                                if widgets.radio_dist_int_comp.isChecked():
+                                    O_sum_m[i] = [intensity_O_m]
+                                else: 
+                                    O_sum_m[i] = [count_O_m]
                             O_both[y]=list(O_sum_m.values[0])
         
                         O_both.index=list(data_O_m.columns[1:])
@@ -4323,7 +4355,11 @@ class MainWindow(QtWidgets.QMainWindow):
                             S_sum_m=pandas.DataFrame()
                             for i in range(max(frames['count'])):
                                 intensity_S_m = sum(data_S_m.iloc[:,1+i])
-                                S_sum_m[i] = [intensity_S_m]
+                                count_S_m = np.count_nonzero(data_S_m.iloc[:,1+i])
+                                if widgets.radio_dist_int_comp.isChecked():
+                                    S_sum_m[i] = [intensity_S_m]
+                                else: 
+                                    S_sum_m[i] = [count_S_m]
                             S_both[y]=list(S_sum_m.values[0])
         
                         S_both.index=list(data_S_m.columns[1:])
@@ -4340,6 +4376,10 @@ class MainWindow(QtWidgets.QMainWindow):
                 
                 wid = float(widgets.Distrib_compare_width.text())
                 gap = float(widgets.Distrib_compare_gap.text())
+                
+                if widgets.radio_dist_nb_comp.isChecked(): #Normalize number of attribution
+                    to_plt = to_plt.div(to_plt.sum(axis = 1),axis = 0)*100
+                    
                 for y in range(y_max):  #y_max = number of samples
                     ab=np.array(to_plt.columns)-gap*(0.5-((y+1)/(y_max+1)))/(y_max+1)
                     plt.bar(ab,to_plt.iloc[y,:],width=(0.14*wid)/(y_max+1),color=color_list[y%9])
@@ -4352,7 +4392,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     x_max = float(widgets.x_compare_max.text())
                     plt.gca().set_xlim(right=x_max)
                 plt.xlabel(x_label, fontsize=font_size+2)
-                plt.suptitle(f"Rel Intens. vs {x_label}",fontsize=font_size+4,y=0.98,x=0.45)
+                plt.suptitle(f"{y_legend} vs {x_label}",fontsize=font_size+4,y=0.98,x=0.45)
                 plt.text(0.88,0.9,dbe_text,horizontalalignment='right',
                          verticalalignment='center', transform = transf,fontsize=font_size)
                 plt.text(0.12,0.9,frames.classe_selected,horizontalalignment='left',
@@ -4364,7 +4404,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 @cursor.connect("add")
                 def on_add(sel):
                     x, y, width, height = sel.artist[sel.target.index].get_bbox().bounds
-                    sel.annotation.set(text=f"Rel.Int.: {round(height,4)}%",
+                    sel.annotation.set(text=f"{y_legend}: {round(height,4)}%",
                                        position=(0, 20), anncoords="offset points")
                     sel.annotation.xy = (x + width / 2, y + height)
                     
@@ -4632,8 +4672,8 @@ class MainWindow(QtWidgets.QMainWindow):
             fold_intens_1 = min_max_scaler.fit_transform(fold_intens_1)
             fold_intens_2 = min_max_scaler.fit_transform(fold_intens_2)
             
-            leg_1 = str(self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+1+sample_1].name)
-            leg_2 = str(self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+1+sample_2].name)
+            leg_1 = str(self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_1].name)
+            leg_2 = str(self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_2].name)
             leg_1 = leg_1.replace(".csv","")
             leg_2 = leg_2.replace(".csv","")
             leg_1 = leg_1.replace(".xlsx","")
@@ -4641,16 +4681,16 @@ class MainWindow(QtWidgets.QMainWindow):
             leg_1 = leg_1.replace("Rel_intens_","")
             leg_2 = leg_2.replace("Rel_intens_","")
         else:
-            fold_intens_1 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+1+sample_1].astype(float)
-            fold_intens_2 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+1+sample_2].astype(float)
-            leg_1 = str(fold_intens_1.name)
-            leg_2 = str(fold_intens_2.name)
+            fold_intens_1 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_1].values.astype(float).copy().reshape(-1, 1)
+            fold_intens_2 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_2].values.astype(float).copy().reshape(-1, 1)
+            leg_1 = str(self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_1].name)
+            leg_2 = str(self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_2].name)
             leg_1 = leg_1.replace(".csv","")
             leg_2 = leg_2.replace(".csv","")
             leg_1 = leg_1.replace(".xlsx","")
             leg_2 = leg_2.replace(".xlsx","")
-            leg_1 = leg_1.replace("Abs_intens_","")
-            leg_2 = leg_2.replace("Abs_intens_","")
+            leg_1 = leg_1.replace("Rel_intens_","")
+            leg_2 = leg_2.replace("Rel_intens_","")
         self.compared_datas.df["fc"] = np.log2(fold_intens_2/fold_intens_1)
         ####
         #Excluding infinite and NaN values (attribution in neither of the sample)
@@ -4660,6 +4700,7 @@ class MainWindow(QtWidgets.QMainWindow):
         data_inf_pos = self.compared_datas.df[:][p_inf].copy()
         data_inf_neg = self.compared_datas.df[:][n_inf].copy()
         inf_index=[i or j for i, j in zip(n_inf,p_inf)]
+        self.compared_datas.df.to_csv('test_ext.csv')
         ###
         
         
@@ -4669,6 +4710,7 @@ class MainWindow(QtWidgets.QMainWindow):
         
         for item in item_classes:
             data_extract = self.compared_datas.df.drop(index=self.compared_datas.df.index[inf_index],axis=0).copy()
+            
             classe_selected = item.data(self.USERDATA_ROLE)
             
             
@@ -4677,7 +4719,7 @@ class MainWindow(QtWidgets.QMainWindow):
             min_max_scaler = preprocessing.MinMaxScaler()
             Intens_scaled = min_max_scaler.fit_transform(Intens)
             data_extract.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-2] = Intens_scaled
-            
+            print('DATA EXTRACT',data_extract)
             if classe_selected == 'All':
                 pass 
             else:
@@ -4689,6 +4731,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 data_extract = data_extract[index_classes]
                 data_inf_neg = data_inf_neg[index_classes]
                 data_inf_pos = data_inf_pos[index_classes]
+                print('DATA EXTRACT1',data_extract)
+                
     
             dbe_text="Even and odd ions"
             if widgets.radio_even_DBE_compare_2.isChecked():
@@ -4702,15 +4746,16 @@ class MainWindow(QtWidgets.QMainWindow):
                 data_inf_pos = data_inf_pos.loc[np.where(data_inf_pos['DBE'].apply(lambda x: x.is_integer()), 0, 1) ==0]
                 dbe_text="Odd ions"
             
+            
             Intens = data_extract["Normalized_intensity"].values.reshape(-1,1)
-            min_max_scaler = preprocessing.MinMaxScaler()
-            Intens_scaled = min_max_scaler.fit_transform(Intens)
+            if Intens != []:
+                min_max_scaler = preprocessing.MinMaxScaler()
+                Intens_scaled = min_max_scaler.fit_transform(Intens)
+            else : Intens_scaled = Intens
             data_extract["Normalized_intensity"] = Intens_scaled
             data_extract = data_extract.sort_values(by=['fc',"Normalized_intensity"], ascending=[False,True])  
             
-            if len(data_extract) == 0:
-                QMessageBox.about(self, "FYI box", f"Something went wrong trying to display {classe_selected}'s data \nNo common attributions")
-                continue
+            
             data = pandas.DataFrame()
             data.data_extract = data_extract 
             data.data_inf_neg = data_inf_neg 
@@ -4757,9 +4802,10 @@ class MainWindow(QtWidgets.QMainWindow):
                     plt.axline((13, 9), (19, 14), color="red", linestyle=(0, (5, 5)))
                 plt.suptitle('DBE vs #C (fold change)',fontsize=font_size+4,y=0.97,x=0.45)
                 
-                cbar = plt.colorbar(ticks=[min(frames.data_extract["fc"]),max(frames.data_extract["fc"])])
-                cbar.ax.set_yticklabels([leg_1,leg_2],fontsize=font_size-2,weight='bold',rotation = 90, va = 'center')  # vertically oriented colorbar
-                cbar.set_label('log2(FC)', labelpad=-2.625*(font_size), rotation=90,fontsize=16)
+                if len(data.data_extract) != 0:
+                    cbar = plt.colorbar(ticks=[min(frames.data_extract["fc"]),max(frames.data_extract["fc"])])
+                    cbar.ax.set_yticklabels([leg_1,leg_2],fontsize=font_size-2,weight='bold',rotation = 90, va = 'center')  # vertically oriented colorbar
+                    cbar.set_label('log2(FC)', labelpad=-2.625*(font_size), rotation=90,fontsize=16)
                 
                 plt.xlabel('#C', fontsize=self.fontsize+4)
                 plt.ylabel('DBE', fontsize=self.fontsize+4)
@@ -4870,9 +4916,9 @@ class MainWindow(QtWidgets.QMainWindow):
             if widgets.checkBox_old_figures.isChecked():
                 if plt.get_fignums():
                     plt.close("all")
-            if len(data_extract) == 0:
-                QMessageBox.about(self, "FYI box", f"Something went wrong trying to display {classe_selected}'s data \nNo common attributions")
-                continue     
+            # if len(data_extract) == 0:
+            #     QMessageBox.about(self, "FYI box", f"Something went wrong trying to display {classe_selected}'s data \nNo common attributions")
+            #     continue     
             data = pandas.DataFrame()
             data.data_extract = data_extract
             data.x_axes = x_axes 
@@ -4924,9 +4970,10 @@ class MainWindow(QtWidgets.QMainWindow):
                     y_max = float(widgets.y_max_VK_compare.text())
                     plt.gca().set_ylim(top=y_max)
                 plt.suptitle('Van Krevelen (fold change)',fontsize=20,y=0.97,x=0.45)
-                cbar = plt.colorbar(ticks=[min(frames.data_extract["Normalized_intensity"]),max(frames.data_extract["Normalized_intensity"])])
-                cbar.ax.set_yticklabels([leg_1,leg_2],fontsize=font_size-2,weight='bold',rotation = -45)  # vertically oriented colorbar
-                cbar.set_label('log2(FC)', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
+                if len(data.data_extract) != 0:
+                    cbar = plt.colorbar(ticks=[min(frames.data_extract["Normalized_intensity"]),max(frames.data_extract["Normalized_intensity"])])
+                    cbar.ax.set_yticklabels([leg_1,leg_2],fontsize=font_size-2,weight='bold',rotation = -45)  # vertically oriented colorbar
+                    cbar.set_label('log2(FC)', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size)
                 plt.xlabel(x_label, fontsize=font_size+4)
                 plt.ylabel(y_label, fontsize=font_size+4)
                 plt.xticks(fontsize=font_size)
@@ -5509,12 +5556,15 @@ class MainWindow(QtWidgets.QMainWindow):
         Selects the appropriate environmental variable to plot
         """
         self.read_param()
-        if widgets.radio_ACOS_comp.isChecked():
-            self.plot_ACOS_compare(gif)
-        elif widgets.radio_MAI_comp.isChecked():
-            self.plot_MAI_compare(gif)
-        elif widgets.radio_MCR_comp.isChecked():
-            self.plot_MCR_compare(gif)
+        try:
+            if widgets.radio_ACOS_comp.isChecked():
+                self.plot_ACOS_compare(gif)
+            elif widgets.radio_MAI_comp.isChecked():
+                self.plot_MAI_compare(gif)
+            elif widgets.radio_MCR_comp.isChecked():
+                self.plot_MCR_compare(gif)
+        except:
+            pass
             
     def plot_ACOS_compare(self,gif = False):
         """
