@@ -1899,10 +1899,26 @@ class MainWindow(QtWidgets.QMainWindow):
         data_selected = item.data(self.USERDATA_ROLE)
         
         save_path = QtWidgets.QFileDialog.getExistingDirectory()
-        save_name, okPressed = QInputDialog.getText(self, "Save Name","Your name:", QLineEdit.Normal, "")
-        os.chdir(save_path)
-        # data_selected.df.to_csv(save_name +".csv",index = False)
-        self.write_csv_df(save_path, save_name +".csv", data_selected.df)
+        msgBox = QMessageBox()
+        msgBox.setText("Save datasets or save classes ?")
+        msgBox.setWindowTitle("Boîte de dialogue")
+        msgBox.setIcon(QMessageBox.Question)
+        msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)      
+        buttonYes = msgBox.button(QMessageBox.Yes)
+        buttonYes.setText('Datasets')  
+        buttonNo = msgBox.button(QMessageBox.No)
+        buttonNo.setText('Classes')
+        choice = msgBox.exec_() 
+        if choice == QMessageBox.Yes:
+            save_name, okPressed = QInputDialog.getText(self, "Save Name","Your name:", QLineEdit.Normal, "")
+            os.chdir(save_path)
+            # data_selected.df.to_csv(save_name +".csv",index = False)
+            self.write_csv_df(save_path, save_name +".csv", data_selected.df)
+        elif choice == QMessageBox.No:
+            save_name, okPressed = QInputDialog.getText(self, "Save Name","Your name:", QLineEdit.Normal, "")
+            os.chdir(save_path)
+            # data_selected.df.to_csv(save_name +".csv",index = False)
+            self.write_csv_df(save_path, save_name +".csv", data_selected.classes)
         
 
 #---------------------------------------
