@@ -1918,7 +1918,20 @@ class MainWindow(QtWidgets.QMainWindow):
             save_name, okPressed = QInputDialog.getText(self, "Save Name","Your name:", QLineEdit.Normal, "")
             os.chdir(save_path)
             # data_selected.df.to_csv(save_name +".csv",index = False)
-            self.write_csv_df(save_path, save_name +".csv", data_selected.classes)
+            if data_selected.df_type == "Attributed":
+                def weighted_average_m1(to_mean, norm_I):
+                    numerator = sum([x * y for x, y in zip(to_mean, norm_I)])
+                    denominator = sum(norm_I)
+                    return round(numerator / denominator, 2)
+                classes = data_selected.classes.copy()
+                classes["Mean DBE"] = 0
+                for classe in classes.variable:
+                    temp = Select_classe(classe,data_selected.df,data_selected.heteroatoms,data_selected.classes)
+                    mean_DBE = weighted_average_m1(temp['DBE'],temp['normalized_intensity'])
+                    classes['Mean DBE'][classes.variable == classe] = mean_DBE
+                self.write_csv_df(save_path, save_name +".csv", classes)
+            else:
+                self.write_csv_df(save_path, save_name +".csv", data_selected.classes)
         
 
 #---------------------------------------
