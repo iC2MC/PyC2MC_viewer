@@ -28,6 +28,7 @@ from src.stats.HCA_function import plot_dendrogram
 from src.stats.PCA_function import plot_pca
 from src.stats.volcano_function import Make_Volcano
 from src.processing.merge_unattributed import merge_non_attributed
+from src.graphics.sankey import Create_Sankey
 from PyQt5 import QtCore, QtGui, QtWidgets, QtSvg, uic
 from src.pyc2mc_ui import Ui_PyC2MC
 from PyQt5.QtWidgets import  QMessageBox, QLineEdit, QInputDialog, QTableWidgetItem
@@ -1960,65 +1961,71 @@ class MainWindow(QtWidgets.QMainWindow):
             item_classes = widgets.list_loaded_file.selectedItems()
             if not item_classes:
                 return
-        
-            fig, ax = plt.subplots()
-        
-            for item_class in item_classes:
-                data_selected = item_class.data(self.USERDATA_ROLE)
-                data = data_selected.classes
-        
-                if 'count' in data_selected.df:
-                    capsize = 5
-                    if widgets.radio_classes.isChecked():
-                        data = data[~data['variable'].str.contains("x")]
-        
-                    if widgets.edit_min_intensity_classes.text():
-                        min_intens_classes = float(widgets.edit_min_intensity_classes.text())
+            
+            if widgets.radio_stacked_sankey.isChecked():
+                for item_class in item_classes:
+                    min_intens_classes = float(widgets.edit_min_intensity_classes.text())
+                    data_classes = item_class.data(self.USERDATA_ROLE).classes
+                    data_classes = data_classes[data_classes['value'] > min_intens_classes]
+                    sankey_plot = Create_Sankey(data_classes)     
+            else:   
+                fig, ax = plt.subplots()
+                for item_class in item_classes:
+                    data_selected = item_class.data(self.USERDATA_ROLE)
+                    data = data_selected.classes
+            
+                    if 'count' in data_selected.df:
+                        capsize = 5
                         if widgets.radio_classes.isChecked():
-                            data = data[data['value'] > min_intens_classes]
-                        else:
-                            data = data[data['variable'].str.contains("x")]
-                            if 'CH' in data_selected.classes['variable'].values:
-                                data = data.append(data_selected.classes[data_selected.classes['variable'].str.contains("CH")])
-                            data = data[data['value'] > min_intens_classes]
-        
-                    data = data.sort_values('value', ascending=False).reset_index(drop=True)
-                    if widgets.radio_comp_int.isChecked():
-                        ax.bar(data['variable'], data['value'], yerr=data['std_dev_rel'], align='center', ecolor='black', capsize=capsize)
-                        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Rel. Intensity  = {round(data['value'].iloc[sel.target.index],2)}%, std deviation = {round(data['std_dev_rel'].iloc[sel.target.index],2)}%"))
-                    elif widgets.radio_comp_nb.isChecked():
-                        ax.bar(data['variable'], data['number'])
-                        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Count  = {int(data['number'].iloc[sel.target.index])}"))
-                else:
-                    if widgets.radio_classes.isChecked():
-                        data = data[~data['variable'].str.contains("x")]
-        
-                    if widgets.edit_min_intensity_classes.text():
-                        min_intens_classes = float(widgets.edit_min_intensity_classes.text())
-                        if not widgets.radio_classes.isChecked():
-                            data_temp = data[data['variable'].str.contains("x")]
-                            data = data_temp.append(data[data['variable'].str.contains("CH")])
-        
-                        data = data[data['value'] > min_intens_classes]
-        
-                    if widgets.radio_comp_int.isChecked():
+                            data = data[~data['variable'].str.contains("x")]
+            
+                        if widgets.edit_min_intensity_classes.text():
+                            min_intens_classes = float(widgets.edit_min_intensity_classes.text())
+                            if widgets.radio_classes.isChecked():
+                                data = data[data['value'] > min_intens_classes]
+                            else:
+                                data = data[data['variable'].str.contains("x")]
+                                if 'CH' in data_selected.classes['variable'].values:
+                                    data = data.append(data_selected.classes[data_selected.classes['variable'].str.contains("CH")])
+                                data = data[data['value'] > min_intens_classes]
+            
                         data = data.sort_values('value', ascending=False).reset_index(drop=True)
-                        ax.bar(data['variable'], data['value'])
-                        y_label = "Relative intensity (%)"
-                        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Rel. Intensity  = {round(data['value'].iloc[sel.target.index],2)}%"))
-                    elif widgets.radio_comp_nb.isChecked():
-                        data['number'] = data['number'].div(data['number'].sum(axis = 0))*100
-                        data = data.sort_values('number', ascending=False).reset_index(drop=True)
-                        ax.bar(data['variable'], data['number'])
-                        y_label = "Number of attribution (%)"
-                        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Nb. Attrib.  = {int(data['number'].iloc[sel.target.index])}%"))
-        
-            plt.suptitle('Heteroatom class distribution', fontsize=font_size+2)
-            plt.ylabel(f"{y_label}", fontsize=font_size+2)
-            mngr = plt.get_current_fig_manager()
-            mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,640, 545)
-            plt.xticks(fontsize=font_size)
-            plt.yticks(fontsize=font_size)
+                        if widgets.radio_comp_int.isChecked():
+                            ax.bar(data['variable'], data['value'], yerr=data['std_dev_rel'], align='center', ecolor='black', capsize=capsize)
+                            mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Rel. Intensity  = {round(data['value'].iloc[sel.target.index],2)}%, std deviation = {round(data['std_dev_rel'].iloc[sel.target.index],2)}%"))
+                        elif widgets.radio_comp_nb.isChecked():
+                            ax.bar(data['variable'], data['number'])
+                            mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Count  = {int(data['number'].iloc[sel.target.index])}"))
+                    else:
+                        if widgets.radio_classes.isChecked():
+                            data = data[~data['variable'].str.contains("x")]
+            
+                        if widgets.edit_min_intensity_classes.text():
+                            min_intens_classes = float(widgets.edit_min_intensity_classes.text())
+                            if not widgets.radio_classes.isChecked():
+                                data_temp = data[data['variable'].str.contains("x")]
+                                data = data_temp.append(data[data['variable'].str.contains("CH")])
+            
+                            data = data[data['value'] > min_intens_classes]
+            
+                        if widgets.radio_comp_int.isChecked():
+                            data = data.sort_values('value', ascending=False).reset_index(drop=True)
+                            ax.bar(data['variable'], data['value'])
+                            y_label = "Relative intensity (%)"
+                            mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Rel. Intensity  = {round(data['value'].iloc[sel.target.index],2)}%"))
+                        elif widgets.radio_comp_nb.isChecked():
+                            data['number'] = data['number'].div(data['number'].sum(axis = 0))*100
+                            data = data.sort_values('number', ascending=False).reset_index(drop=True)
+                            ax.bar(data['variable'], data['number'])
+                            y_label = "Number of attribution (%)"
+                            mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Nb. Attrib.  = {int(data['number'].iloc[sel.target.index])}%"))
+            
+                plt.suptitle('Heteroatom class distribution', fontsize=font_size+2)
+                plt.ylabel(f"{y_label}", fontsize=font_size+2)
+                mngr = plt.get_current_fig_manager()
+                mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,640, 545)
+                plt.xticks(fontsize=font_size)
+                plt.yticks(fontsize=font_size)
 
 
         ##############
