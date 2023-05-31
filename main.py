@@ -3310,49 +3310,67 @@ class MainWindow(QtWidgets.QMainWindow):
                 return
 
             for j in list_series_index :
-                try:
-                    m = float(list_series[j].text())
-                except:
-                    QMessageBox.about(self, "FYI box", "Only use digits and dots for m/z values (no comma !)")
-                    return
-                rep_pattern=repetive_unit_mass
-                nominal_pattern=round(rep_pattern)
-                km= m * (nominal_pattern/rep_pattern)
-                if widgets.roundUp.isChecked():
-                    nkm= math.ceil(km)
-                elif widgets.roundClosest.isChecked():
-                    nkm= round(km)
-                kmd= nkm - km
-                tol=kmd*0.05/100 #tolerance attribution
-                n=0
-                l=0
-                i = 0
-                lst = [round(m)]
-                m_plus=m
-                while m_plus <= max(data_filtered['m/z']) :
-                    m_plus = m_plus + rep_pattern
+                
+                if widgets.mz_extraction.isChecked():
+                    try:
+                        m = float(list_series[j].text())
+                    except:
+                        QMessageBox.about(self, "FYI box", "Only use digits and dots for m/z values (no comma !)")
+                        return
+                    rep_pattern=repetive_unit_mass
+                    nominal_pattern=round(rep_pattern)
+                    km= m * (nominal_pattern/rep_pattern)
                     if widgets.roundUp.isChecked():
-                        i = math.ceil(m_plus * (nominal_pattern/rep_pattern))
+                        nkm= math.ceil(km)
                     elif widgets.roundClosest.isChecked():
-                        i = round(m_plus * (nominal_pattern/rep_pattern))
-                    lst.append(i)
-                m_moins=m
-                while m_moins >= min(data_filtered['m/z']) :
-                    m_moins = m_moins - rep_pattern
-                    if widgets.roundUp.isChecked():
-                        i = math.ceil(m_moins * (nominal_pattern/rep_pattern))
-                    elif widgets.roundClosest.isChecked():
-                        i = round(m_moins * (nominal_pattern/rep_pattern))
-                    lst.append(i)
-                lst.sort()
-                data_filtered.sort_values('m/z', ascending=True, inplace= True)
-                data_filtered = data_filtered.reset_index(drop=True)
-                for kmd_exp in data_filtered['Kendrick mass defect'] :
-                    if kmd_exp >= kmd-tol and kmd_exp <= kmd+tol :
-                        for o in lst:
-                            if  o ==  data_filtered['Kendrick nominal mass'][l]:
-                                data_filtered.at[l,'id'] = j+1
-                    l=l+1
+                        nkm= round(km)
+                    kmd= nkm - km
+                    if widgets.Edit_KMD_Tolerance.text():
+                        tol=float(widgets.Edit_KMD_Tolerance.text()) #tolerance attribution
+                    n=0
+                    l=0
+                    i = 0
+                    lst = [round(m)]
+                    m_plus=m
+                    while m_plus <= max(data_filtered['m/z']) :
+                        m_plus = m_plus + rep_pattern
+                        if widgets.roundUp.isChecked():
+                            i = math.ceil(m_plus * (nominal_pattern/rep_pattern))
+                        elif widgets.roundClosest.isChecked():
+                            i = round(m_plus * (nominal_pattern/rep_pattern))
+                        lst.append(i)
+                    m_moins=m
+                    while m_moins >= min(data_filtered['m/z']) :
+                        m_moins = m_moins - rep_pattern
+                        if widgets.roundUp.isChecked():
+                            i = math.ceil(m_moins * (nominal_pattern/rep_pattern))
+                        elif widgets.roundClosest.isChecked():
+                            i = round(m_moins * (nominal_pattern/rep_pattern))
+                        lst.append(i)
+                    lst.sort()
+                    data_filtered.sort_values('m/z', ascending=True, inplace= True)
+                    data_filtered = data_filtered.reset_index(drop=True)
+                    for kmd_exp in data_filtered['Kendrick mass defect'] :
+                        if kmd_exp >= kmd-tol and kmd_exp <= kmd+tol :
+                            for o in lst:
+                                if  o ==  data_filtered['Kendrick nominal mass'][l]:
+                                    data_filtered.at[l,'id'] = j+1
+                        l=l+1
+                if widgets.KMD_Extraction.isChecked():
+                    try:
+                        kmde = float(list_series[j].text())
+                    except:
+                        QMessageBox.about(self, "FYI box", "Only use digits and dots for m/z values (no comma !)")
+                        return
+                    if widgets.Edit_KMD_Tolerance.text():
+                        tol=float(widgets.Edit_KMD_Tolerance.text()) #tolerance attribution
+                    n=0
+                    for o in data_filtered['Kendrick mass defect'] :
+                        if kmde <= data_filtered['Kendrick mass defect'][n]+tol and kmde >= data_filtered['Kendrick mass defect'][n]-tol :
+                            data_filtered.at[n,'id'] = j+1
+                        n=n+1
+                        
+                        
             d = {'col1': data_filtered['Kendrick nominal mass'], 'col2': data_filtered['Kendrick mass defect'], 'normalized_intensity': data_filtered['normalized_intensity'], 'id':data_filtered['id'],'m/z': data_filtered['m/z']}
             df = pandas.DataFrame(data=d)
             df = df.sort_values('normalized_intensity', ascending=True)
@@ -3367,6 +3385,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 plt.scatter(d_series['Kendrick nominal mass'], d_series['Kendrick mass defect'], color=list_color[k],s=(d_series['normalized_intensity'])*dot_size/100, edgecolors='black')
 
             plt.clim(0,n_series)
+            
             if widgets.KNM_min.text():
                 KNM_min = float(widgets.KNM_min.text())
                 plt.gca().set_xlim(left=KNM_min)
