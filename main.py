@@ -3471,6 +3471,9 @@ class MainWindow(QtWidgets.QMainWindow):
                     Intens=(Intens - Intens.min()) / (Intens.max() - Intens.min())
                 data_filtered["normalized_intensity"] = Intens
                 data_filtered = data_filtered.sort_values(by=["normalized_intensity"], ascending=True)
+                if widgets.set_intensity_KMD.text():
+                    intens_KMD = float(widgets.set_intensity_KMD.text())
+                    data_filtered = data_filtered[data_filtered.normalized_intensity > intens_KMD]
     
                 nominal_mass = round(data_filtered['m/z'])
                 mass_defect = data_filtered['m/z'] - nominal_mass
@@ -3481,7 +3484,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 #  Normalization on selected class  #
                 #-----------------------------------#
                 if widgets.radioButton_norm_d.isChecked():
-                    data_extract["Normalized_intensity"], error = Normalize(data_extract["Normalized_intensity"])
+                    data_filtered["normalized_intensity"], error = Normalize(data_filtered["normalized_intensity"])
                     if error == 1:
                         QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
                         continue
