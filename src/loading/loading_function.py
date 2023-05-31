@@ -391,15 +391,15 @@ class Peak_list:
         """
         names_dict = {'Relative':'normalized_intensity','Intensity':'absolute_intensity'
                       ,'Delta (ppm)':'err_ppm','Composition':'molecular_formula'}
-        df.dropna(subset=['Delta (ppm)'], inplace = True)
+        df.dropna(subset=['Composition'], inplace = True)
         df.reset_index(drop = True, inplace = True)
         df = df.loc[:, ~df.columns.str.contains('Segment Number')]
         df = df.loc[:, ~df.columns.str.contains('Flags')]
         df = df.loc[:, ~df.columns.str.contains('RDB equiv')]
         dict_data={'C': 12,'H':1.007825,'N':14.003074,'O':15.994915,'S':31.972072,'Cl':34.968853,'Si':27.976928,'P':30.9737634\
         ,'V':50.943963,'K':39.0983,'Na':22.989769,'Li':7.016005,'Cu':62.929599,'Ni':57.935347,'F':18.998403,'B':11.009305, 'Zn':63.92915, 'Br':78.91834}
-        df['Composition'] = df['Composition'].replace(['³²S','₀','₁','₂','₃','₄','₅','₆','₇','₈','₉',' '],
-                                                      ['S','0','1','2','3','4','5','6','7','8','9',''],regex=True)
+        df['Composition'] = df['Composition'].replace(['³²S','¹¹B','⁶⁴Zn','²³Na','₀','₁','₂','₃','₄','₅','₆','₇','₈','₉',' '],
+                                                      ['S','B','Zn','Na','0','1','2','3','4','5','6','7','8','9',''],regex=True)
         heteroatoms = pd.DataFrame(list([chemparse.parse_formula(formula) for formula in df['Composition']]))
         heteroatoms.fillna(0,inplace = True)
         heteroatoms = heteroatoms.astype(int)
@@ -424,6 +424,7 @@ class Peak_list:
         df = df.reindex(['m/z','absolute_intensity','normalized_intensity','err_ppm','molecular_formula'],axis = 1)
         df=df.join(heteroatoms)
         df_type='Attributed'
+        print(df.columns)
         return cls(df,df_type,heteroatoms)
 
 
