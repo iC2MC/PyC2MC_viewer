@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1370</width>
+    <width>1058</width>
     <height>1308</height>
    </rect>
   </property>
@@ -1799,7 +1799,7 @@ QPushButton:pressed { background-color: rgb(195,221,240); border-style: solid; b
                       <string notr="true"/>
                      </property>
                      <property name="currentIndex">
-                      <number>2</number>
+                      <number>0</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <layout class="QGridLayout" name="gridLayout_105">
@@ -6682,7 +6682,7 @@ border-radius: 4px;</string>
                               <number>0</number>
                              </property>
                              <property name="currentIndex">
-                              <number>0</number>
+                              <number>1</number>
                              </property>
                              <widget class="QWidget" name="page_std">
                               <layout class="QGridLayout" name="gridLayout_14">
