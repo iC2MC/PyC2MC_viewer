@@ -63,7 +63,6 @@ except:
     pass
 matplotlib.use('qt5agg')
 
-# matplotlib.rcParams['savefig.dpi'] = 300 #High res figures
 os.environ["QT_FONT_DPI"] = "96" # FIX Problem for High DPI and Scale above 100%
 
 
@@ -1984,9 +1983,11 @@ class MainWindow(QtWidgets.QMainWindow):
         
                     data = data.sort_values('value', ascending=False).reset_index(drop=True)
                     if widgets.radio_comp_int.isChecked():
+                        y_label = "Relative intensity (%)"
                         ax.bar(data['variable'], data['value'], yerr=data['std_dev_rel'], align='center', ecolor='black', capsize=capsize)
                         mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Rel. Intensity  = {round(data['value'].iloc[sel.target.index],2)}%, std deviation = {round(data['std_dev_rel'].iloc[sel.target.index],2)}%"))
                     elif widgets.radio_comp_nb.isChecked():
+                        y_label = "Number of attribution (%)"
                         ax.bar(data['variable'], data['number'])
                         mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(f"{data['variable'].iloc[sel.target.index]}: Count  = {int(data['number'].iloc[sel.target.index])}"))
                 else:
