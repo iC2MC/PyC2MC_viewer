@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1058, 1308)
+        MainWindow.resize(1043, 921)
         MainWindow.setMinimumSize(QtCore.QSize(0, 903))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/images/images/images/Py2CMC_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -10788,7 +10788,7 @@ class Ui_MainWindow(object):
         self.list_distribution.setCurrentRow(0)
         self.list_VK_x.setCurrentRow(0)
         self.list_VK_y.setCurrentRow(0)
-        self.stackedWidget_Kendrick.setCurrentIndex(1)
+        self.stackedWidget_Kendrick.setCurrentIndex(0)
         self.comboBox_6.setCurrentIndex(5)
         self.comboBox_2.setCurrentIndex(1)
         self.comboBox_7.setCurrentIndex(6)
