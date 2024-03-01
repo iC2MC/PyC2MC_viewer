@@ -87,6 +87,8 @@ def load_csv_file(filename):
             data = Peak_list.from_csv_raw_orbitrap(data_df)
         elif "H/C" in data_df:
             data = Peak_list.from_csv_saved(data_df)
+        elif "isotopic" in data_df:
+            data = Peak_list.from_csv_PyC2MC(data_df)
         else: # other file
             data = Peak_list.from_csv_other(data_df)
 
@@ -333,6 +335,43 @@ class Peak_list:
             df["absolute_intensity"].values.max()
         df = df.reindex(['m/z','absolute_intensity','normalized_intensity','err_ppm'],axis = 1)
         df = pd.concat([df,temp],axis=1)
+        df['molecular_formula'] = df['molecular_formula'].replace(' ','',regex = True)
+        heteroatoms = pd.DataFrame(list([chemparse.parse_formula(formula) for formula in df['molecular_formula']]))
+        heteroatoms.fillna(0,inplace = True)
+        heteroatoms = heteroatoms.astype(int)
+        
+        if "N" not in heteroatoms.columns:
+            heteroatoms.insert(heteroatoms.columns.get_loc('H')+1,"N",0)
+        if "O" not in heteroatoms.columns:
+            heteroatoms.insert(heteroatoms.columns.get_loc('N')+1,"O",0)
+        if "S" not in heteroatoms.columns:
+            heteroatoms.insert(heteroatoms.columns.get_loc('O')+1,"S",0)
+        df=df.join(heteroatoms)
+        df_type = 'Attributed'
+        return cls(df,df_type,heteroatoms)
+    
+    @classmethod
+    def from_csv_PyC2MC(cls, df_initial):
+        """
+        Initialize the Peak_list class for an attributed csv file not coming from a compatible software.
+
+        Args:
+            df (pandas.DataFrame): A pandas DataFrame containing the csv file
+                information.
+
+        Returns an object of the class RawData.
+        """
+        columns = df_initial.columns
+        names_list = ('m/z','absolute_intensity','molecular_formula','polarity','err_ppm')
+        names_dict = dict(zip(columns,names_list))
+        df_initial = df_initial[df_initial['isotopic'] == False].reset_index(drop=True)
+        df_initial = df_initial.rename(columns=names_dict)
+        df_initial = df_initial.loc[:, ~df_initial.columns.str.contains('^Unnamed')]
+        df = pd.DataFrame().astype('Float')
+        df = pd.concat([df,df_initial['m/z'],df_initial['absolute_intensity'],df_initial['err_ppm'],df_initial['molecular_formula']],axis=1)
+        df['normalized_intensity'] = df["absolute_intensity"].values*100/ \
+            df["absolute_intensity"].values.max()
+        df = df.reindex(['m/z','absolute_intensity','normalized_intensity','err_ppm','molecular_formula'],axis = 1)
         df['molecular_formula'] = df['molecular_formula'].replace(' ','',regex = True)
         heteroatoms = pd.DataFrame(list([chemparse.parse_formula(formula) for formula in df['molecular_formula']]))
         heteroatoms.fillna(0,inplace = True)
