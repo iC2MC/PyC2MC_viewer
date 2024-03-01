@@ -66,7 +66,6 @@ matplotlib.use('qt5agg')
 os.environ["QT_FONT_DPI"] = "96" # FIX Problem for High DPI and Scale above 100%
 
 
-
 if splash:  #Closing splash
     pyi_splash.close()
     
@@ -142,15 +141,16 @@ def plot_fun(kind,x,y,d_color='blue',dot_type="sc",cmap="jet",edge=True
         return(plt)
 
 #Set of 9 colors for plots
-color_list=[(0.83921568627451,0.145098039215686,0.254901960784314) #Red
-            ,(0.0666666666666667,0.380392156862745,0.666666666666667) #Blue
-            ,(0.423529411764706,0.701960784313725,0.294117647058824) #Light green
-            ,(0.4,0.0980392156862745,0.537254901960784) #Purple
-            ,(0.0235294117647059,0.662745098039216,0.415686274509804) #Forest green
-            ,(0.925490196078431,0.364705882352941,0.2) #Orange
-            ,(0.627450980392157,0.0470588235294118,0.352941176470588)#Crimson
-            ,(0.0392156862745098,0.63921568627451,0.8) #Cyan
-            ,(1,0.92156862745098,0.00392156862745098)] #Yellow
+color_list=['#000000' #Black
+            ,'#FF0000' #Red
+            ,'#0000FF' #Blue
+            ,'#15B01A' #Light green
+            ,'#800080' #Purple
+            ,'#008000' #Forest green
+            ,'#FFA500' #Orange
+            ,'#DC143C' #Crimson
+            ,'#00FFFF' #Cyan
+            ,'#FFFF00'] #Yellow
 
 
 # MAIN CLASS
@@ -2020,6 +2020,7 @@ class MainWindow(QtWidgets.QMainWindow):
             mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,640, 545)
             plt.xticks(fontsize=font_size)
             plt.yticks(fontsize=font_size)
+            plt.show()
 
 
         ##############
@@ -2226,21 +2227,10 @@ class MainWindow(QtWidgets.QMainWindow):
                     Intens_scaled = min_max_scaler.fit_transform(Intens)
                     data_filtered["Normalized_intensity"] = Intens_scaled
                     data_filtered = data_filtered.sort_values(by=["Normalized_intensity"], ascending=True)
-                    if i == 0:
-                        c = 'k'
-                    elif i == 1:
-                        c = 'b'
-                    elif i == 2:
-                        c = 'r'
-                    elif i == 3:
-                        c = 'g'
-                    elif i == 4:
-                        c = 'm'
-                    elif i == 5:
-                        c = 'c'
+                    c=color_list[(i+1)%10-1]
                     patch=mpatches.Patch(color=c, label = item_classes[i].text())
                     leg.append(patch)
-                    plt.stem(data_filtered["m/z"], data_filtered["absolute_intensity"],c,markerfmt=" ", basefmt="k")
+                    plt.stem(data_filtered["m/z"], data_filtered["absolute_intensity"],linefmt=c,markerfmt=" ", basefmt="k")
             if widgets.mz_min_2.text():
                 mz_min_2 = float(widgets.mz_min_2.text())
                 plt.gca().set_xlim(left=mz_min_2)
@@ -2293,15 +2283,16 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 y_label = "Number of attribution (%)"
                 y_title = "Number of attribution"
-                
+                 
             for item in item_classes:
                 classe_selected = item.data(self.USERDATA_ROLE)
                 data_extract = Select_classe(classe_selected,data_selected.df,data_selected.heteroatoms,data_selected.classes)
                 data_extract.classe_selected = classe_selected
                 frames.append(data_extract)   
-                
+               
         
                 def Anim(frames, data_selected):
+                    pr1=0 
                     if gif == False:
                         fig = plt.figure()
                         transf = fig.transFigure
@@ -2309,7 +2300,7 @@ class MainWindow(QtWidgets.QMainWindow):
                         Figure.clear()
                         transf = Figure.transFigure
                     x_axes = widgets.list_distribution.currentRow()
-                
+                    
                     if x_axes == 0: #DBE
                         
                         x_label = 'DBE'
@@ -2344,6 +2335,8 @@ class MainWindow(QtWidgets.QMainWindow):
                             dbe=dbe_both
                             dbe_text="Even and odd ions"
                             w = 0.5
+                            pr1=1
+                                                    
                         dbe=pandas.DataFrame.from_dict(dbe)
                         x = dbe.columns
                         if widgets.radio_dist_int.isChecked() :
@@ -2440,9 +2433,44 @@ class MainWindow(QtWidgets.QMainWindow):
                             y =S_both.values.tolist()[0]
                         elif widgets.radio_dist_nb.isChecked() :
                             y = S_both.values.tolist()[1]
+                            
+                    total_attrib=""        
                     if widgets.radio_dist_nb.isChecked() :    
+                        if pr1==0:
+                            total_attrib = f". Tot.nb. = {int(sum(y))}"
                         y = (np.array(y)*100/sum(y)).tolist()
-                    plt.bar(x,y,width=w,color = bar_color, edgecolor='black', linewidth=2)
+                        
+                        
+                    
+                        
+                        
+                    if pr1==1:
+                        dbe_odd=pandas.DataFrame.from_dict(dbe_odd)
+                        dbe_even=pandas.DataFrame.from_dict(dbe_even)
+                        
+                        x_odd = dbe_odd.columns
+                        x_even = dbe_even.columns
+                        if widgets.radio_dist_int.isChecked() :
+                            y_odd =dbe_odd.values.tolist()[0]
+                            y_even =dbe_even.values.tolist()[0]
+                            tot_odd=""
+                            tot_even=""
+                        elif widgets.radio_dist_nb.isChecked() :
+                            y_odd =dbe_odd.values.tolist()[1]
+                            tot_odd = f"(Nb={int(sum(y_odd))})"
+                            y_odd = (np.array(y_odd)*100/sum(y_odd)).tolist()
+                            y_even =dbe_even.values.tolist()[1]
+                            tot_even = f"(Nb={int(sum(y_even))})"
+                            y_even = (np.array(y_even)*100/sum(y_even)).tolist()
+                        
+                        plt.bar(x_odd,y_odd,width=0.5,color = "dodgerblue", edgecolor='black', linewidth=2)
+                        plt.bar(x_even,y_even,width=0.5,color = "orangered", edgecolor='black', linewidth=2)
+                        legend_elements = [Patch(facecolor='dodgerblue', edgecolor='k',label="Odd"+tot_odd),
+                                            Patch(facecolor='orangered', edgecolor='k',label="Even"+tot_even)]
+                        plt.legend(handles=legend_elements,fontsize=font_size-4)
+                    else:
+                        plt.bar(x,y,width=w,color = bar_color, edgecolor='black', linewidth=2)
+                    
                     title = f'{y_title} vs {x_label}'
                     plt.suptitle(f'{title}',fontsize=font_size+4,y=0.98,x=0.45)
                     plt.xlabel(x_label, fontsize=font_size+2)
@@ -2455,7 +2483,7 @@ class MainWindow(QtWidgets.QMainWindow):
                             txt = "Nb. Attrib."
                         else:
                             txt = 'Rel. Intens.'
-                        sel.annotation.set(text=f"#S: {round(x+width/2,0)}; {txt}: {round(height,4)}%",
+                        sel.annotation.set(text=f"DBE: {x+width/2,0}; {txt}: {round(height,4)}%",
                                            position=(0, 20), anncoords="offset points")
                         sel.annotation.xy = (x + width / 2, y + height)
                     
@@ -2470,7 +2498,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     if gif == False:
                         mngr = plt.get_current_fig_manager()
                         mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,640, 545)
-                    plt.text(0.68,0.9,dbe_text,horizontalalignment='center',
+                    plt.text(0.68,0.9,dbe_text+total_attrib,horizontalalignment='center',
                              verticalalignment='center', transform = transf,fontsize=font_size+2)
                     plt.text(0.12,0.9,f'{frames.classe_selected}',horizontalalignment='left',
                              verticalalignment='center', transform = transf,fontsize=font_size+2)
@@ -3285,7 +3313,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 #  Normalization on selected class  #
                 #-----------------------------------#
                 if widgets.radioButton_norm_d.isChecked():
-                    data_filtered["Normalized_intensity"], error = Normalize(data_filtered["Normalized_intensity"])
+                    data_filtered["normalized_intensity"], error = Normalize(data_filtered["normalized_intensity"])
                     if error == 1:
                         QMessageBox.about(self, "Error", f"No species to be displayed for the class : {classe_selected}.")
                         continue
@@ -3582,6 +3610,7 @@ class MainWindow(QtWidgets.QMainWindow):
             data_extract.classe_selected = classe_selected
             frames.append(data_extract)
             self.read_param()
+            
             def Anim(frames):
                 if gif == False:
                     fig = plt.figure()
@@ -3618,22 +3647,26 @@ class MainWindow(QtWidgets.QMainWindow):
                     plt.clim(0,1)
                 if gif == False:
                     mngr = plt.get_current_fig_manager()
-                    mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,640, 545)
+                    mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,1000,437)
                 if "m/z" in frames:
                     mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(frames['molecular_formula'].iloc[sel.target.index] +', #C = '+ str(frames['C'].iloc[sel.target.index]) +', OCs = ' + str(round(frames['OSc'].iloc[sel.target.index],2))))
+                
         if gif == False:
-            for i in frames:
-                Anim(i)   
+            for i in frames:               
+                Anim(i) 
+                plt.tight_layout()
             plt.show()
         else:
             Figure = plt.figure()
             plt.show()
+            
             anim_created = FuncAnimation(Figure, Anim, frames, interval=1000/self.fps)  
             mngr = plt.get_current_fig_manager()
-            mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,640, 545)
+            mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,1000,437)
             writergif = PillowWriter(fps=self.fps) 
             anim_created.save("animation.gif", writer=writergif)
             plt.ion()
+            plt.tight_layout()
 
     def plot_MAI(self, gif):
         """
@@ -4473,21 +4506,10 @@ class MainWindow(QtWidgets.QMainWindow):
             classe_selected = item_classes[i].data(self.USERDATA_ROLE)
             data_filtered = Select_classe(classe_selected,data_selected.df,data_selected.heteroatoms,data_selected.classes)
             data_filtered = data_filtered.sort_values(by=["summed_intensity"], ascending=True)
-            if i == 0:
-                c = 'k'
-            elif i == 1:
-                c = 'b'
-            elif i == 2:
-                c = 'r'
-            elif i == 3:
-                c = 'g'
-            elif i == 4:
-                c = 'm'
-            elif i == 5:
-                c = 'c'
+            c=color_list[(i+1)%10-1]
             patch=mpatches.Patch(color=c, label = item_classes[i].text())
             leg.append(patch)
-            plt.stem(data_filtered["m/z"], data_filtered["summed_intensity"],c,markerfmt=" ", basefmt="k")
+            plt.stem(data_filtered["m/z"], data_filtered["summed_intensity"],linefmt=c,markerfmt=" ", basefmt="k")
         if widgets.mz_min_2.text():
             mz_min_2 = float(widgets.mz_min_2.text())
             plt.gca().set_xlim(left=mz_min_2)
@@ -4539,7 +4561,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.name[i] = compare_items[i].text()
                 data[i] = pandas.DataFrame(item.df)
                 v = 50*(i+1)/len(compare_items)
-                widgets.pbar.setValue(int(v))   
+                widgets.pbar.setValue(int(v)) 
+            
             compared_datas = merge_for_compare(data,self.name,self.isotopes_dict)
             widgets.pbar.setValue(int(75))   
             self.compared_datas = load_MS_file(compared_datas,self.isotopes_dict)
@@ -4749,7 +4772,6 @@ class MainWindow(QtWidgets.QMainWindow):
             min_max_scaler = preprocessing.MinMaxScaler()
             Intens_scaled = min_max_scaler.fit_transform(Intens)
             data_extract.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-2] = Intens_scaled
-            print('DATA EXTRACT',data_extract)
             if classe_selected == 'All':
                 pass 
             else:
@@ -4761,7 +4783,6 @@ class MainWindow(QtWidgets.QMainWindow):
                 data_extract = data_extract[index_classes]
                 data_inf_neg = data_inf_neg[index_classes]
                 data_inf_pos = data_inf_pos[index_classes]
-                print('DATA EXTRACT1',data_extract)
                 
     
             dbe_text="Even and odd ions"
@@ -4811,8 +4832,8 @@ class MainWindow(QtWidgets.QMainWindow):
                     
                     
                 if widgets.fc_all_dbe.isChecked() :
-                    plot_fun("scatter",x=frames.data_inf_neg["C"],y=frames.data_inf_neg["DBE"],d_color='purple',dot_type=self.dot_type,edge=self.edge,size = size_inf_neg)
-                    plot_fun("scatter",x=frames.data_inf_pos["C"],y=frames.data_inf_pos["DBE"],d_color='blue',dot_type=self.dot_type,edge=self.edge,size = size_inf_pos)
+                    plot_fun("scatter",x=frames.data_inf_neg["C"],y=frames.data_inf_neg["DBE"],d_color='#a84ca4',dot_type=self.dot_type,edge=self.edge,size = size_inf_neg)
+                    plot_fun("scatter",x=frames.data_inf_pos["C"],y=frames.data_inf_pos["DBE"],d_color='#0070c0',dot_type=self.dot_type,edge=self.edge,size = size_inf_pos)
                 plot_fun("scatter",x=frames.data_extract["C"],y=frames.data_extract["DBE"],d_color=frames.data_extract["fc"],dot_type=self.dot_type,edge=self.edge,cmap="RdYlGn",size = size)
                 
                 if widgets.C_min_DBE_compare.text():
@@ -4848,8 +4869,8 @@ class MainWindow(QtWidgets.QMainWindow):
                               verticalalignment='center', transform = transf,fontsize=self.fontsize-1)
                 
                 if widgets.fc_all_dbe.isChecked() :
-                    legend_elements = [Patch(facecolor='purple', edgecolor='k',label=leg_1+ ' exclusive'),
-                                        Patch(facecolor='blue', edgecolor='k',label=leg_2+ ' exclusive')]
+                    legend_elements = [Patch(facecolor='#a84ca4', edgecolor='k',label=leg_1+ ' exclusive'),
+                                        Patch(facecolor='#0070c0', edgecolor='k',label=leg_2+ ' exclusive')]
                     plt.legend(handles=legend_elements,fontsize=font_size-4)
                 if gif == False:
                     mngr = plt.get_current_fig_manager()
@@ -6112,5 +6133,6 @@ class MainWindow(QtWidgets.QMainWindow):
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     main = MainWindow()
+    main.move(0, 50)
     main.show()
     app.exec()

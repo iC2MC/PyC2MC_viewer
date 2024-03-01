@@ -145,13 +145,15 @@ def merge_for_compare(data,name,isotopes_dict):
         sumformula = pandas.Series()
         for i in range(len(data)):
             sumformula = sumformula.append(data[i]['molecular_formula'])
-                
+        
         sumformula.name = 'sum formula'
         sumformula = sumformula.str
         sumformula = sumformula.replace(" ", "")        
         sumformula = sumformula.drop_duplicates()
-        sumformula_splitted = [chemparse.parse_formula(formula) for formula in sumformula]                
-        sumformula_splitted = pandas.DataFrame(list(sumformula_splitted))    
+        sumformula = sumformula.dropna()
+        sumformula_splitted = [chemparse.parse_formula(formula) for formula in sumformula]     
+                 
+        sumformula_splitted = pandas.DataFrame(list(sumformula_splitted))   
         sumformula_splitted.fillna(0, inplace = True)
         sumformula = sumformula.reset_index(drop=True)
 
