@@ -4834,7 +4834,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 if widgets.fc_all_dbe.isChecked() :
                     plot_fun("scatter",x=frames.data_inf_neg["C"],y=frames.data_inf_neg["DBE"],d_color='#a84ca4',dot_type=self.dot_type,edge=self.edge,size = size_inf_neg)
                     plot_fun("scatter",x=frames.data_inf_pos["C"],y=frames.data_inf_pos["DBE"],d_color='#0070c0',dot_type=self.dot_type,edge=self.edge,size = size_inf_pos)
-                plot_fun("scatter",x=frames.data_extract["C"],y=frames.data_extract["DBE"],d_color=frames.data_extract["fc"],dot_type=self.dot_type,edge=self.edge,cmap="RdYlGn",size = size)
+                # plot_fun("scatter",x=frames.data_extract["C"],y=frames.data_extract["DBE"],d_color=frames.data_extract["fc"],dot_type=self.dot_type,edge=self.edge,cmap="RdYlGn",size = size)
+                plt.scatter(frames.data_extract["C"],frames.data_extract["DBE"],s=size,c=frames.data_extract["fc"],vmin = -8, vmax = 8,cmap="RdYlGn",edgecolor='black',linewidths=0.7)
                 
                 if widgets.C_min_DBE_compare.text():
                     C_min = float(widgets.C_min_DBE_compare.text())
@@ -4854,7 +4855,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 plt.suptitle('DBE vs #C (fold change)',fontsize=font_size+4,y=0.97,x=0.45)
                 
                 if len(data.data_extract) != 0:
-                    cbar = plt.colorbar(ticks=[min(frames.data_extract["fc"]),max(frames.data_extract["fc"])])
+                    cbar = plt.colorbar(ticks=[-8,8])
                     cbar.ax.set_yticklabels([leg_1,leg_2],fontsize=font_size-2,weight='bold',rotation = 90, va = 'center')  # vertically oriented colorbar
                     cbar.set_label('log2(FC)', labelpad=-2.625*(font_size), rotation=90,fontsize=16)
                 
