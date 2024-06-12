@@ -29,11 +29,11 @@ This software is distributed under the GPL licence.
 
 # Bug report :
 
-For bug report, please contact Maxime SUEUR at maxime.sueur1@univ-rouen.fr. Furthermore, you can also send an example dataset if relevant, it helps a lot to reproduce and identify the problem.
+For bug report, please contact Maxime SUEUR at maxime.sueur05@gmail.com. Furthermore, you can also send an example dataset if relevant, it helps a lot to reproduce and identify the problem.
 
 # Contributors :
 
--Maxime Sueur: maxime.sueur1@univ-rouen.fr
+-Maxime Sueur: maxime.sueur05@gmail.com
 
 -Julien Maillard: julien.maillard@totalenergies.com
 
