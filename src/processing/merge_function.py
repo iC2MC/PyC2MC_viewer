@@ -89,6 +89,7 @@ def merge_file(names,isotopes_dict):
             intens_rel_merged = reduce(lambda  left,right: pandas.merge(left,right,on=['molecular_formula'], how='outer'), data_frames_rel_intens).fillna(0)
             intens_abs_merged = intens_abs_merged.drop_duplicates(subset='molecular_formula')
             intens_rel_merged = intens_rel_merged.drop_duplicates(subset='molecular_formula')
+            
             #################################
             ### Renommage des colonnes ######
             #################################
