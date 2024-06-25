@@ -3125,8 +3125,11 @@ class MainWindow(QtWidgets.QMainWindow):
         elif widgets.stackedWidget_Kendrick.currentIndex()==2: #MD 
             item_classes = widgets.list_classes_Kendrick_univ.selectedItems()
        #### KMD extract ####
-        elif  widgets.stackedWidget_Kendrick.currentIndex()==1:
+        if  widgets.stackedWidget_Kendrick.currentIndex()==1:
             tol_per = float(widgets.Extract_tol.text())
+            if widgets.set_intensity_KMD.text():
+                intens_KMD = float(widgets.set_intensity_KMD.text())
+                data_filtered = data_filtered[data_filtered.normalized_intensity > intens_KMD]
             if "mz" in data_filtered:
                 data_filtered['Kendrick mass']= data_filtered['mz']*(nominal_unit/repetive_unit_mass)
                 data_filtered['Kendrick nominal mass']=round(data_filtered['m/z'])
@@ -3151,14 +3154,13 @@ class MainWindow(QtWidgets.QMainWindow):
             self.kendrickSeries=pandas.DataFrame()
             list_series=[widgets.series_1,widgets.series_2,widgets.series_3,\
                          widgets.series_4,widgets.series_5,widgets.series_6,\
-                             widgets.series_7,widgets.series_8,widgets.series_9,widgets.series_10]
+                             widgets.series_7]
             list_series_index=[]
             list_color=[widgets.comboBox_1.currentText(),widgets.comboBox_2.currentText(),\
                         widgets.comboBox_3.currentText(),widgets.comboBox_4.currentText(),\
                         widgets.comboBox_5.currentText(),widgets.comboBox_6.currentText(),\
-                        widgets.comboBox_7.currentText(),widgets.comboBox_8.currentText(),\
-                        widgets.comboBox_9.currentText(),widgets.comboBox_10.currentText(),]
-            for n in range(10):
+                        widgets.comboBox_7.currentText()]
+            for n in range(7):
                 if list_series[n].text():
                     n_series=n_series+1
                     list_mass.append(list_series[n].text())
@@ -3205,8 +3207,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     elif widgets.roundClosest.isChecked():
                         nkm= round(km)
                     kmd= nkm - km
-                    if widgets.Edit_KMD_Tolerance.text():
-                        tol=float(widgets.Edit_KMD_Tolerance.text()) #tolerance attribution
+                    
                     n=0
                     l=0
                     i = 0
@@ -3242,11 +3243,9 @@ class MainWindow(QtWidgets.QMainWindow):
                     except:
                         QMessageBox.about(self, "FYI box", "Only use digits and dots for m/z values (no comma !)")
                         return
-                    if widgets.Edit_KMD_Tolerance.text():
-                        tol=float(widgets.Edit_KMD_Tolerance.text()) #tolerance attribution
                     n=0
                     for o in data_filtered['Kendrick mass defect'] :
-                        if kmde <= data_filtered['Kendrick mass defect'][n]+tol and kmde >= data_filtered['Kendrick mass defect'][n]-tol :
+                        if kmde <= o+tol and kmde >= o-tol :
                             data_filtered.at[n,'id'] = j+1
                         n=n+1
                         
@@ -3292,8 +3291,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                     
         #### KMD & MD vs m/z ####
-        else:          
-        
+        else:   
             if not item_classes:
                 item_classes = ['Unatributed']
             
@@ -3555,6 +3553,9 @@ class MainWindow(QtWidgets.QMainWindow):
         if data_selected.df_type == 'PyC2MC_merged':
             data_filtered = data_filtered.rename(columns={'summed_intensity':'normalized_intensity'})
         data_filtered = data_filtered.sort_values(by=["normalized_intensity"], ascending=True)
+        if widgets.checkBox_int_filter_extract.isChecked():
+            intens_KMD = float(widgets.set_intensity_KMD.text())
+            data_filtered = data_filtered[data_filtered.normalized_intensity > intens_KMD]
         self.read_param()
         dot_size = self.d_size
         font_size = self.fontsize
@@ -3645,6 +3646,10 @@ class MainWindow(QtWidgets.QMainWindow):
             plt.gca().set_ylim(top=KMD_max)
         plt.xlabel('Kendrick nominal mass')
         plt.ylabel("Kendrick mass defect")
+        leg=list_cmpd
+        leg.insert(0,"Background")
+        plt.gca().legend(leg,fontsize=font_size-4)
+        
         mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(d_series['m/z'].iloc[sel.target.index]))
         mngr = plt.get_current_fig_manager()
         mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,640, 545)
