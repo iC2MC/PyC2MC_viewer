@@ -7011,54 +7011,6 @@ border-radius: 4px;</string>
                                  <layout class="QGridLayout" name="gridLayout_8">
                                   <item row="0" column="4">
                                    <widget class="QRadioButton" name="radioButtonSelected">
-                                  <item row="0" column="0">
-                                   <widget class="QLabel" name="label_89">
-                                    <property name="minimumSize">
-                                     <size>
-                                      <width>60</width>
-                                      <height>0</height>
-                                     </size>
-                                    </property>
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>16777215</width>
-                                      <height>21</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                      <weight>50</weight>
-                                      <italic>false</italic>
-                                      <bold>false</bold>
-                                     </font>
-                                    </property>
-                                    <property name="text">
-                                     <string>Tolerance (%):</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="0" column="1">
-                                   <widget class="QLineEdit" name="Extract_tol">
-                                    <property name="sizePolicy">
-                                     <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-                                      <horstretch>0</horstretch>
-                                      <verstretch>0</verstretch>
-                                     </sizepolicy>
-                                    </property>
-                                    <property name="minimumSize">
-                                     <size>
-                                      <width>50</width>
-                                      <height>0</height>
-                                     </size>
-                                    </property>
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>100</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
                                     <property name="font">
                                      <font>
                                       <family>Segoe UI</family>
@@ -7074,14 +7026,6 @@ border-radius: 4px;</string>
                                    </widget>
                                   </item>
                                   <item row="1" column="1">
-                                     <string>0.05</string>
-                                    </property>
-                                    <property name="alignment">
-                                     <set>Qt::AlignCenter</set>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="0" column="2">
                                    <widget class="QLabel" name="label_3">
                                     <property name="maximumSize">
                                      <size>
@@ -7173,7 +7117,6 @@ QPushButton:pressed {
                                    </widget>
                                   </item>
                                   <item row="1" column="2">
-                                  <item row="0" column="3">
                                    <widget class="QLabel" name="label_55">
                                     <property name="maximumSize">
                                      <size>
@@ -7201,12 +7144,6 @@ QPushButton:pressed {
                                      <size>
                                       <width>91</width>
                                       <height>16777215</height>
-                                  <item row="0" column="5">
-                                   <widget class="QLabel" name="label_56">
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>16777215</width>
-                                      <height>15</height>
                                      </size>
                                     </property>
                                     <property name="font">
@@ -7234,15 +7171,6 @@ QPushButton:pressed {
                                    </widget>
                                   </item>
                                   <item row="1" column="5">
-                                    <property name="text">
-                                     <string>m/z</string>
-                                    </property>
-                                    <property name="alignment">
-                                     <set>Qt::AlignCenter</set>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="0" column="6">
                                    <widget class="QLabel" name="label_57">
                                     <property name="maximumSize">
                                      <size>
@@ -7285,8 +7213,6 @@ QPushButton:pressed {
                                   </item>
                                   <item row="0" column="2">
                                    <widget class="QPushButton" name="plot_button_saveKendrick">
-                                  <item row="1" column="0">
-                                   <widget class="QPushButton" name="pushButton_deformulation">
                                     <property name="minimumSize">
                                      <size>
                                       <width>77</width>
@@ -7340,12 +7266,6 @@ QPushButton:pressed {
                                   </item>
                                   <item row="3" column="3">
                                    <widget class="QLabel" name="label_40">
-                                     <string>Deformulation</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="1" column="1">
-                                   <widget class="QLabel" name="label_36">
                                     <property name="maximumSize">
                                      <size>
                                       <width>20</width>
@@ -7359,109 +7279,12 @@ QPushButton:pressed {
                                      </font>
                                     </property>
                                     <property name="text">
-                                     <string>1)</string>
+                                     <string>7)</string>
                                     </property>
                                    </widget>
                                   </item>
-                                  <item row="1" column="2">
-                                   <widget class="QLineEdit" name="series_1">
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>91</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="1" column="3">
-                                   <widget class="QComboBox" name="comboBox_1">
-                                    <property name="minimumSize">
-                                     <size>
-                                      <width>71</width>
-                                      <height>0</height>
-                                     </size>
-                                    </property>
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>100</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
-                                    </property>
-                                    <property name="styleSheet">
-                                     <string notr="true">background-color: rgba(240,240,240,1);
-border-style: ouset;
-border-width: 1px;
-border-radius: 10px;</string>
-                                    </property>
-                                    <property name="maxVisibleItems">
-                                     <number>10</number>
-                                    </property>
-                                    <item>
-                                     <property name="text">
-                                      <string>Red</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Green</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Blue</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Orange</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Purple</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Cyan</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Yellow</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Sienna</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Lime</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Pink</string>
-                                     </property>
-                                    </item>
-                                   </widget>
-                                  </item>
-                                  <item row="1" column="4">
-                                   <widget class="QLabel" name="label_39">
+                                  <item row="3" column="0">
+                                   <widget class="QLabel" name="label_37">
                                     <property name="maximumSize">
                                      <size>
                                       <width>20</width>
@@ -7475,27 +7298,11 @@ border-radius: 10px;</string>
                                      </font>
                                     </property>
                                     <property name="text">
-                                     <string>6)</string>
+                                     <string>2)</string>
                                     </property>
                                    </widget>
                                   </item>
-                                  <item row="1" column="5">
-                                   <widget class="QLineEdit" name="series_6">
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>91</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="1" column="6">
+                                  <item row="2" column="5">
                                    <widget class="QComboBox" name="comboBox_6">
                                     <property name="minimumSize">
                                      <size>
@@ -7588,67 +7395,6 @@ border-radius: 10px;</string>
                                   </item>
                                   <item row="0" column="5">
                                    <widget class="QRadioButton" name="radioButtonWhole">
-                                  <item row="2" column="0">
-                                   <widget class="QPushButton" name="pushButton_save_defo">
-                                    <property name="minimumSize">
-                                     <size>
-                                      <width>77</width>
-                                      <height>20</height>
-                                     </size>
-                                    </property>
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>100</width>
-                                      <height>20</height>
-                                     </size>
-                                    </property>
-                                    <property name="sizeIncrement">
-                                     <size>
-                                      <width>338</width>
-                                      <height>0</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                      <weight>75</weight>
-                                      <italic>false</italic>
-                                      <bold>true</bold>
-                                     </font>
-                                    </property>
-                                    <property name="styleSheet">
-                                     <string notr="true">QPushButton {	
-	background-color:rgb(66,148,208);
-	text-align:center;
-	color: white;
-	border-radius:10px;
-}
-QPushButton:hover {
-	background-color: rgb(52,119,168);
-}
-QPushButton:pressed {	
-	background-color: rgb(195,221,240);
-	color: black;
-}
-
-
-
-</string>
-                                    </property>
-                                    <property name="text">
-                                     <string>Save defo</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="2" column="1">
-                                   <widget class="QLabel" name="label_37">
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>20</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
                                     <property name="font">
                                      <font>
                                       <family>Segoe UI</family>
@@ -7662,12 +7408,6 @@ QPushButton:pressed {
                                   </item>
                                   <item row="3" column="4">
                                    <widget class="QLineEdit" name="series_7">
-                                     <string>2)</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="2" column="2">
-                                   <widget class="QLineEdit" name="series_2">
                                     <property name="maximumSize">
                                      <size>
                                       <width>91</width>
@@ -7683,7 +7423,6 @@ QPushButton:pressed {
                                    </widget>
                                   </item>
                                   <item row="3" column="2">
-                                  <item row="2" column="3">
                                    <widget class="QComboBox" name="comboBox_2">
                                     <property name="minimumSize">
                                      <size>
@@ -7769,8 +7508,6 @@ border-radius: 10px;</string>
                                   </item>
                                   <item row="4" column="0">
                                    <widget class="QLabel" name="label_38">
-                                  <item row="2" column="4">
-                                   <widget class="QLabel" name="label_40">
                                     <property name="maximumSize">
                                      <size>
                                       <width>20</width>
@@ -7789,27 +7526,6 @@ border-radius: 10px;</string>
                                    </widget>
                                   </item>
                                   <item row="3" column="5">
-                                     <string>7)</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="2" column="5">
-                                   <widget class="QLineEdit" name="series_7">
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>91</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="2" column="6">
                                    <widget class="QComboBox" name="comboBox_7">
                                     <property name="minimumSize">
                                      <size>
@@ -7893,79 +7609,7 @@ border-radius: 10px;</string>
                                     </item>
                                    </widget>
                                   </item>
-                                  <item row="3" column="0">
-                                   <widget class="QPushButton" name="pushButton_clearSeries">
-                                    <property name="minimumSize">
-                                     <size>
-                                      <width>77</width>
-                                      <height>20</height>
-                                     </size>
-                                    </property>
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>100</width>
-                                      <height>20</height>
-                                     </size>
-                                    </property>
-                                    <property name="sizeIncrement">
-                                     <size>
-                                      <width>338</width>
-                                      <height>0</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                      <weight>75</weight>
-                                      <italic>false</italic>
-                                      <bold>true</bold>
-                                     </font>
-                                    </property>
-                                    <property name="styleSheet">
-                                     <string notr="true">QPushButton {	
-	background-color:rgb(66,148,208);
-	text-align:center;
-	color: white;
-	border-radius:10px;
-}
-QPushButton:hover {
-	background-color: rgb(52,119,168);
-}
-QPushButton:pressed {	
-	background-color: rgb(195,221,240);
-	color: black;
-}
-
-
-
-</string>
-                                    </property>
-                                    <property name="text">
-                                     <string>Clear series</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="3" column="1">
-                                   <widget class="QLabel" name="label_38">
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>20</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
-                                    </property>
-                                    <property name="text">
-                                     <string>3)</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="3" column="2">
+                                  <item row="4" column="1">
                                    <widget class="QLineEdit" name="series_3">
                                     <property name="maximumSize">
                                      <size>
@@ -7981,7 +7625,7 @@ QPushButton:pressed {
                                     </property>
                                    </widget>
                                   </item>
-                                  <item row="3" column="3">
+                                  <item row="4" column="2">
                                    <widget class="QComboBox" name="comboBox_3">
                                     <property name="minimumSize">
                                      <size>
@@ -8065,7 +7709,7 @@ border-radius: 10px;</string>
                                     </item>
                                    </widget>
                                   </item>
-                                  <item row="3" column="4">
+                                  <item row="4" column="3">
                                    <widget class="QLabel" name="label_41">
                                     <property name="maximumSize">
                                      <size>
@@ -8084,7 +7728,7 @@ border-radius: 10px;</string>
                                     </property>
                                    </widget>
                                   </item>
-                                  <item row="3" column="5">
+                                  <item row="4" column="4">
                                    <widget class="QLineEdit" name="series_8">
                                     <property name="maximumSize">
                                      <size>
@@ -8531,7 +8175,6 @@ border-radius: 10px;</string>
                                    </widget>
                                   </item>
                                   <item row="4" column="5">
-                                  <item row="3" column="6">
                                    <widget class="QComboBox" name="comboBox_8">
                                     <property name="minimumSize">
                                      <size>
@@ -8615,262 +8258,7 @@ border-radius: 10px;</string>
                                     </item>
                                    </widget>
                                   </item>
-                                  <item row="4" column="0">
-                                   <widget class="QPushButton" name="plot_button_saveKendrick">
-                                    <property name="minimumSize">
-                                     <size>
-                                      <width>77</width>
-                                      <height>20</height>
-                                     </size>
-                                    </property>
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>100</width>
-                                      <height>20</height>
-                                     </size>
-                                    </property>
-                                    <property name="sizeIncrement">
-                                     <size>
-                                      <width>338</width>
-                                      <height>0</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                      <weight>75</weight>
-                                      <italic>false</italic>
-                                      <bold>true</bold>
-                                     </font>
-                                    </property>
-                                    <property name="styleSheet">
-                                     <string notr="true">QPushButton {	
-	background-color:rgb(66,148,208);
-	text-align:center;
-	color: white;
-	border-radius:10px;
-}
-QPushButton:hover {
-	background-color: rgb(52,119,168);
-}
-QPushButton:pressed {	
-	background-color: rgb(195,221,240);
-	color: black;
-}
-
-
-
-</string>
-                                    </property>
-                                    <property name="text">
-                                     <string>Save series</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="4" column="1">
-                                   <widget class="QLabel" name="label_42">
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>20</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
-                                    </property>
-                                    <property name="text">
-                                     <string>4)</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="4" column="2">
-                                   <widget class="QLineEdit" name="series_4">
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>91</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="4" column="3">
-                                   <widget class="QComboBox" name="comboBox_4">
-                                    <property name="minimumSize">
-                                     <size>
-                                      <width>71</width>
-                                      <height>0</height>
-                                     </size>
-                                    </property>
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>100</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
-                                    </property>
-                                    <property name="styleSheet">
-                                     <string notr="true">background-color: rgba(240,240,240,1);
-border-style: ouset;
-border-width: 1px;
-border-radius: 10px;</string>
-                                    </property>
-                                    <property name="currentIndex">
-                                     <number>3</number>
-                                    </property>
-                                    <property name="maxVisibleItems">
-                                     <number>10</number>
-                                    </property>
-                                    <item>
-                                     <property name="text">
-                                      <string>Red</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Green</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Blue</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Orange</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Purple</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Cyan</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Yellow</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Sienna</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Lime</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Pink</string>
-                                     </property>
-                                    </item>
-                                   </widget>
-                                  </item>
-                                  <item row="4" column="4">
-                                   <widget class="QLabel" name="label_44">
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>20</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
-                                    </property>
-                                    <property name="text">
-                                     <string>9)</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="2" column="6">
-                                   <widget class="QLabel" name="label_168">
-                                    <property name="text">
-                                     <string>KMD Tolerance :</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="2" column="7">
-                                   <widget class="QLineEdit" name="Edit_KMD_Tolerance">
-                                    <property name="text">
-                                     <string>0.0015</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="3" column="7" rowspan="2">
-                                   <widget class="QGroupBox" name="groupBox_119">
-                                    <property name="title">
-                                     <string/>
-                                    </property>
-                                    <widget class="QRadioButton" name="mz_extraction">
-                                     <property name="geometry">
-                                      <rect>
-                                       <x>20</x>
-                                       <y>10</y>
-                                       <width>95</width>
-                                       <height>20</height>
-                                      </rect>
-                                     </property>
-                                     <property name="text">
-                                      <string>m/z value</string>
-                                     </property>
-                                     <property name="checked">
-                                      <bool>true</bool>
-                                     </property>
-                                    </widget>
-                                    <widget class="QRadioButton" name="KMD_Extraction">
-                                     <property name="geometry">
-                                      <rect>
-                                       <x>20</x>
-                                       <y>40</y>
-                                       <width>95</width>
-                                       <height>20</height>
-                                      </rect>
-                                     </property>
-                                     <property name="text">
-                                      <string>KMD value</string>
-                                     </property>
-                                    </widget>
-                                  <item row="4" column="5">
-                                   <widget class="QLineEdit" name="series_9">
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>91</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="4" column="6">
+                                  <item row="5" column="5">
                                    <widget class="QComboBox" name="comboBox_9">
                                     <property name="minimumSize">
                                      <size>
@@ -8954,50 +8342,8 @@ border-radius: 10px;</string>
                                     </item>
                                    </widget>
                                   </item>
-                                  <item row="5" column="0">
-                                   <widget class="QCheckBox" name="checkBox_extract_only">
-                                    <property name="text">
-                                     <string>Plot extracted only</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="5" column="1">
-                                   <widget class="QLabel" name="label_43">
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>20</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
-                                    </property>
-                                    <property name="text">
-                                     <string>5)</string>
-                                    </property>
-                                   </widget>
-                                  </item>
                                   <item row="5" column="2">
-                                   <widget class="QLineEdit" name="series_5">
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>91</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="5" column="3">
-                                   <widget class="QComboBox" name="comboBox_5">
+                                   <widget class="QComboBox" name="comboBox_4">
                                     <property name="minimumSize">
                                      <size>
                                       <width>71</width>
@@ -9023,7 +8369,7 @@ border-width: 1px;
 border-radius: 10px;</string>
                                     </property>
                                     <property name="currentIndex">
-                                     <number>4</number>
+                                     <number>3</number>
                                     </property>
                                     <property name="maxVisibleItems">
                                      <number>10</number>
@@ -9080,123 +8426,69 @@ border-radius: 10px;</string>
                                     </item>
                                    </widget>
                                   </item>
-                                  <item row="5" column="4">
-                                   <widget class="QLabel" name="label_45">
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>20</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
+                                  <item row="0" column="3">
+                                   <widget class="QLabel" name="label_89">
                                     <property name="font">
                                      <font>
                                       <family>Segoe UI</family>
                                       <pointsize>10</pointsize>
+                                      <weight>75</weight>
+                                      <bold>true</bold>
                                      </font>
                                     </property>
                                     <property name="text">
-                                     <string>10)</string>
+                                     <string>Display:</string>
                                     </property>
                                    </widget>
                                   </item>
-                                  <item row="5" column="5">
-                                   <widget class="QLineEdit" name="series_10">
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>91</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
+                                  <item row="2" column="6">
+                                   <widget class="QLabel" name="label_168">
+                                    <property name="text">
+                                     <string>KMD Tolerance :</string>
                                     </property>
                                    </widget>
                                   </item>
-                                  <item row="5" column="6">
-                                   <widget class="QComboBox" name="comboBox_10">
-                                    <property name="minimumSize">
-                                     <size>
-                                      <width>71</width>
-                                      <height>0</height>
-                                     </size>
+                                  <item row="2" column="7">
+                                   <widget class="QLineEdit" name="Edit_KMD_Tolerance">
+                                    <property name="text">
+                                     <string>0.0015</string>
                                     </property>
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>100</width>
-                                      <height>16777215</height>
-                                     </size>
+                                   </widget>
+                                  </item>
+                                  <item row="3" column="7" rowspan="2">
+                                   <widget class="QGroupBox" name="groupBox_119">
+                                    <property name="title">
+                                     <string/>
                                     </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
-                                    </property>
-                                    <property name="styleSheet">
-                                     <string notr="true">background-color: rgba(240,240,240,1);
-border-style: ouset;
-border-width: 1px;
-border-radius: 10px;</string>
-                                    </property>
-                                    <property name="currentIndex">
-                                     <number>9</number>
-                                    </property>
-                                    <property name="maxVisibleItems">
-                                     <number>10</number>
-                                    </property>
-                                    <item>
-                                     <property name="text">
-                                      <string>Red</string>
+                                    <widget class="QRadioButton" name="mz_extraction">
+                                     <property name="geometry">
+                                      <rect>
+                                       <x>20</x>
+                                       <y>10</y>
+                                       <width>95</width>
+                                       <height>20</height>
+                                      </rect>
                                      </property>
-                                    </item>
-                                    <item>
                                      <property name="text">
-                                      <string>Green</string>
+                                      <string>m/z value</string>
                                      </property>
-                                    </item>
-                                    <item>
+                                     <property name="checked">
+                                      <bool>true</bool>
+                                     </property>
+                                    </widget>
+                                    <widget class="QRadioButton" name="KMD_Extraction">
+                                     <property name="geometry">
+                                      <rect>
+                                       <x>20</x>
+                                       <y>40</y>
+                                       <width>95</width>
+                                       <height>20</height>
+                                      </rect>
+                                     </property>
                                      <property name="text">
-                                      <string>Blue</string>
+                                      <string>KMD value</string>
                                      </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Orange</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Purple</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Cyan</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Yellow</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Sienna</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Lime</string>
-                                     </property>
-                                    </item>
-                                    <item>
-                                     <property name="text">
-                                      <string>Pink</string>
-                                     </property>
-                                    </item>
+                                    </widget>
                                    </widget>
                                   </item>
                                  </layout>
@@ -9508,6 +8800,25 @@ border-radius: 10px;</string>
                                 </property>
                                </widget>
                               </item>
+                              <item row="0" column="1">
+                               <widget class="QLineEdit" name="KNM_min">
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>100</width>
+                                  <height>16777215</height>
+                                 </size>
+                                </property>
+                                <property name="font">
+                                 <font>
+                                  <family>Segoe UI</family>
+                                  <pointsize>10</pointsize>
+                                 </font>
+                                </property>
+                                <property name="text">
+                                 <string>100</string>
+                                </property>
+                               </widget>
+                              </item>
                               <item row="0" column="0">
                                <widget class="QLabel" name="label_32">
                                 <property name="minimumSize">
@@ -9580,25 +8891,6 @@ border-radius: 10px;</string>
                                 </property>
                                 <property name="text">
                                  <string>KMD max</string>
-                                </property>
-                               </widget>
-                              </item>
-                              <item row="0" column="1">
-                               <widget class="QLineEdit" name="KNM_min">
-                                <property name="maximumSize">
-                                 <size>
-                                  <width>100</width>
-                                  <height>16777215</height>
-                                 </size>
-                                </property>
-                                <property name="font">
-                                 <font>
-                                  <family>Segoe UI</family>
-                                  <pointsize>10</pointsize>
-                                 </font>
-                                </property>
-                                <property name="text">
-                                 <string>100</string>
                                 </property>
                                </widget>
                               </item>
