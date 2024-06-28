@@ -755,7 +755,8 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.edit_motif.textChanged.connect(self.kendrick_motif_calculation)
         widgets.pushButton_deformulation.clicked.connect(self.deformulation)
         widgets.pushButton_save_defo.clicked.connect(self.save_deformulation)
-    
+        widgets.mz_extraction.clicked.connect(self.KMD_ext_label_update)
+        widgets.KMD_Extraction.clicked.connect(self.KMD_ext_label_update)
     
     #Graphic parameters
      
@@ -906,7 +907,7 @@ class MainWindow(QtWidgets.QMainWindow):
             Version modified on %s <br><br> \
             GUI based on PyDracula by Wanderson M. Pimenta." % (link_git,link_preprint,self.last_modified)
         reply = QMessageBox.information(self, 'Message', msg, QMessageBox.Ok, QMessageBox.Ok)
-    # RECOLOR EVENTS
+    # RECOLOR/UI UPDATE EVENTS
     # ///////////////////////////////////////////////////////////////
     def colorTab(self,tab):
         """
@@ -946,6 +947,11 @@ class MainWindow(QtWidgets.QMainWindow):
             btn.setStyleSheet("QPushButton {background-color:  rgb(208,208,208);\n" + self.style_backup + "}")
         self.btn_bak = btn
 
+    def KMD_ext_label_update(self):
+        if widgets.mz_extraction.isChecked() == True:
+            widgets.label_3.setText("m/z")
+        else:
+            widgets.label_3.setText("KMD")
         
     # RESIZE EVENTS
     # ///////////////////////////////////////////////////////////////
@@ -3129,22 +3135,22 @@ class MainWindow(QtWidgets.QMainWindow):
             tol_per = float(widgets.Extract_tol.text())
             if widgets.set_intensity_KMD.text():
                 intens_KMD = float(widgets.set_intensity_KMD.text())
-                data_filtered = data_filtered[data_filtered.normalized_intensity > intens_KMD]
+                data_filtered = data_filtered[data_filtered.normalized_intensity >= intens_KMD]
+            
             if "mz" in data_filtered:
                 data_filtered['Kendrick mass']= data_filtered['mz']*(nominal_unit/repetive_unit_mass)
-                data_filtered['Kendrick nominal mass']=round(data_filtered['m/z'])
             elif "count" in data_filtered:
                 data_filtered['Kendrick mass']= data_filtered['m/z']*(nominal_unit/repetive_unit_mass)
-                data_filtered['Kendrick nominal mass']=round(data_filtered['m/z'])
             elif "m/z" in data_filtered:
                 data_filtered['Kendrick mass']= data_filtered['m/z']*(nominal_unit/repetive_unit_mass)
-                data_filtered['Kendrick nominal mass']=round(data_filtered['m/z'])
 
             if widgets.roundUp.isChecked():
                 data_filtered['Kendrick nominal mass']=data_filtered['Kendrick mass'].apply(np.ceil)
             elif widgets.roundClosest.isChecked():
                 data_filtered['Kendrick nominal mass']=round(data_filtered['Kendrick mass'])
+            
             data_filtered['Kendrick mass defect']=data_filtered['Kendrick nominal mass']-data_filtered['Kendrick mass']
+            
             if data_selected.df_type == 'PyC2MC_merged':
                 data_filtered = data_filtered.rename(columns={'summed_intensity':'normalized_intensity'})
             #Determination of the number of series (1 to 6):
@@ -3175,7 +3181,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     try:
                         m = float(list_series[j].text())
                     except:
-                        QMessageBox.about(self, "FYI box", "Only use digits and dots for m/z values (no comma !)")
+                        QMessageBox.about(self, "FYI box", "Only use digits and dots for m/z or KMD values (no comma !)")
                         return
                     rep_pattern=repetive_unit_mass
                     nominal_pattern=round(rep_pattern)
@@ -3186,27 +3192,17 @@ class MainWindow(QtWidgets.QMainWindow):
                 except:
                     QMessageBox.about(self, "FYI box", "Only use digits and dots for m/z values (no comma !)")
                     return
-                rep_pattern=repetive_unit_mass
-                nominal_pattern=round(rep_pattern)
-                km= m * (nominal_pattern/rep_pattern)
-                if widgets.roundUp.isChecked():
-                    nkm= math.ceil(km)
-                elif widgets.roundClosest.isChecked():
-                    nkm= round(km)
-                kmd= nkm - km
-                tol=kmd*tol_per/100 #tolerance attribution
-                n=0
-                l=0
-                i = 0
-                lst = [round(m)]
-                m_plus=m
-                while m_plus <= max(data_filtered['m/z']) :
-                    m_plus = m_plus + rep_pattern
+                
+                if widgets.mz_extraction.isChecked() ==True:
+                    rep_pattern=repetive_unit_mass
+                    nominal_pattern=round(rep_pattern)
+                    km= m * (nominal_pattern/rep_pattern)
                     if widgets.roundUp.isChecked():
                         nkm= math.ceil(km)
                     elif widgets.roundClosest.isChecked():
                         nkm= round(km)
                     kmd= nkm - km
+                    tol=abs(kmd)*tol_per/100 #tolerance attribution
                     
                     n=0
                     l=0
@@ -3216,39 +3212,61 @@ class MainWindow(QtWidgets.QMainWindow):
                     while m_plus <= max(data_filtered['m/z']) :
                         m_plus = m_plus + rep_pattern
                         if widgets.roundUp.isChecked():
-                            i = math.ceil(m_plus * (nominal_pattern/rep_pattern))
+                            nkm= math.ceil(km)
                         elif widgets.roundClosest.isChecked():
-                            i = round(m_plus * (nominal_pattern/rep_pattern))
-                        lst.append(i)
-                    m_moins=m
-                    while m_moins >= min(data_filtered['m/z']) :
-                        m_moins = m_moins - rep_pattern
-                        if widgets.roundUp.isChecked():
-                            i = math.ceil(m_moins * (nominal_pattern/rep_pattern))
-                        elif widgets.roundClosest.isChecked():
-                            i = round(m_moins * (nominal_pattern/rep_pattern))
-                        lst.append(i)
-                    lst.sort()
-                    data_filtered.sort_values('m/z', ascending=True, inplace= True)
-                    data_filtered = data_filtered.reset_index(drop=True)
-                    for kmd_exp in data_filtered['Kendrick mass defect'] :
-                        if kmd_exp >= kmd-tol and kmd_exp <= kmd+tol :
-                            for o in lst:
-                                if  o ==  data_filtered['Kendrick nominal mass'][l]:
-                                    data_filtered.at[l,'id'] = j+1
-                        l=l+1
+                            nkm= round(km)
+                        kmd= nkm - km
+                        
+                        
+                        l=0
+                        i = 0
+                        lst = [round(m)]
+                        m_plus=m
+                        while m_plus <= max(data_filtered['m/z']) :
+                            m_plus = m_plus + rep_pattern
+                            if widgets.roundUp.isChecked():
+                                i = math.ceil(m_plus * (nominal_pattern/rep_pattern))
+                            elif widgets.roundClosest.isChecked():
+                                i = round(m_plus * (nominal_pattern/rep_pattern))
+                            lst.append(i)
+                        m_moins=m
+                        while m_moins >= min(data_filtered['m/z']) :
+                            m_moins = m_moins - rep_pattern
+                            if widgets.roundUp.isChecked():
+                                i = math.ceil(m_moins * (nominal_pattern/rep_pattern))
+                            elif widgets.roundClosest.isChecked():
+                                i = round(m_moins * (nominal_pattern/rep_pattern))
+                            lst.append(i)
+                        lst.sort()
+                        data_filtered.sort_values('m/z', ascending=True, inplace= True)
+                        data_filtered = data_filtered.reset_index(drop=True)
+                        for kmd_exp in data_filtered['Kendrick mass defect'] :
+                            if kmd_exp >= kmd-tol and kmd_exp <= kmd+tol :
+                                for o in lst:
+                                    if  o ==  data_filtered['Kendrick nominal mass'][l]:
+                                        data_filtered.at[l,'id'] = j+1
+                            l=l+1
+                
                 if widgets.KMD_Extraction.isChecked():
                     try:
-                        kmde = float(list_series[j].text())
+                        kmd = float(list_series[j].text())
                     except:
-                        QMessageBox.about(self, "FYI box", "Only use digits and dots for m/z values (no comma !)")
+                        QMessageBox.about(self, "FYI box", "Only use digits and dots for KMD values (no comma !)")
                         return
+                    print('KMD to look =',kmd)
+                    
+                    tol=abs(kmd)*tol_per/100 #tolerance attribution
+                    print("min = ",kmd-tol)
+                    print("max = ", kmd+tol)
                     n=0
+                    data_filtered.sort_values('m/z', ascending=True, inplace= True)
+                    data_filtered = data_filtered.reset_index(drop=True)
                     for o in data_filtered['Kendrick mass defect'] :
-                        if kmde <= o+tol and kmde >= o-tol :
+                        if o >= kmd-tol and o <= kmd+tol :
                             data_filtered.at[n,'id'] = j+1
-                        n=n+1
-                        
+                            print('found one')
+                            print(o)
+                        n=n+1   
                         
             d = {'col1': data_filtered['Kendrick nominal mass'], 'col2': data_filtered['Kendrick mass defect'], 'normalized_intensity': data_filtered['normalized_intensity'], 'id':data_filtered['id'],'m/z': data_filtered['m/z']}
             df = pandas.DataFrame(data=d)
@@ -3350,7 +3368,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 data_filtered = data_filtered.sort_values(by=["normalized_intensity"], ascending=True)
                 if widgets.set_intensity_KMD.text():
                     intens_KMD = float(widgets.set_intensity_KMD.text())
-                    data_filtered = data_filtered[data_filtered.normalized_intensity > intens_KMD]
+                    data_filtered = data_filtered[data_filtered.normalized_intensity >= intens_KMD]
     
                 nominal_mass = round(data_filtered['m/z'])
                 mass_defect = data_filtered['m/z'] - nominal_mass
@@ -3566,25 +3584,22 @@ class MainWindow(QtWidgets.QMainWindow):
         
         if "mz" in data_filtered:
             data_filtered['Kendrick mass']= data_filtered['mz']*(nominal_unit/repetive_unit_mass)
-            data_filtered['Kendrick nominal mass']=round(data_filtered['m/z'])
         elif "count" in data_filtered:
             data_filtered['Kendrick mass']= data_filtered['m/z']*(nominal_unit/repetive_unit_mass)
-            data_filtered['Kendrick nominal mass']=round(data_filtered['m/z'])
         elif "m/z" in data_filtered:
             data_filtered['Kendrick mass']= data_filtered['m/z']*(nominal_unit/repetive_unit_mass)
-            data_filtered['Kendrick nominal mass']=round(data_filtered['m/z'])
 
         if widgets.roundUp.isChecked():
             data_filtered['Kendrick nominal mass']=data_filtered['Kendrick mass'].apply(np.ceil)
         elif widgets.roundClosest.isChecked():
             data_filtered['Kendrick nominal mass']=round(data_filtered['Kendrick mass'])
+        
         data_filtered['Kendrick mass defect']=data_filtered['Kendrick nominal mass']-data_filtered['Kendrick mass']
         ###
         
         ###Attribution
         data_filtered['id'] = 0 # Colors for species of interest
         
-        list_mass=[]
         self.kendrickSeries=pandas.DataFrame()
         list_kmd=def_info.iloc[:,1].to_list()
         list_cmpd=def_info.iloc[:,0].to_list()
@@ -3599,17 +3614,15 @@ class MainWindow(QtWidgets.QMainWindow):
         list_color=list_color[:n_series]
         
         
-        nominal_pattern=round(repetive_unit_mass)
 
         for j in list_series_index :
             
             kmd_defo = list_kmd[j]
-            tol=kmd_defo*tol_per/100 #tolerance attribution
+            tol=abs(kmd_defo)*tol_per/100 #tolerance attribution
             l=0 #row number of matching specie
             lst = []
             data_filtered.sort_values('m/z', ascending=True, inplace= True)
             data_filtered = data_filtered.reset_index(drop=True)
-            
             for kmd_exp in data_filtered['Kendrick mass defect'] :
                 if kmd_exp >= kmd_defo-tol and kmd_exp <= kmd_defo+tol :
                     lst.append(data_filtered['m/z'][l])
@@ -3646,11 +3659,11 @@ class MainWindow(QtWidgets.QMainWindow):
             plt.gca().set_ylim(top=KMD_max)
         plt.xlabel('Kendrick nominal mass')
         plt.ylabel("Kendrick mass defect")
-        leg=list_cmpd
+        leg=list_cmpd.copy()
         leg.insert(0,"Background")
         plt.gca().legend(leg,fontsize=font_size-4)
         
-        mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(d_series['m/z'].iloc[sel.target.index]))
+        mplcursors.cursor(multiple=True)#.connect("add", lambda sel: sel.annotation.set_text(target))
         mngr = plt.get_current_fig_manager()
         mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,640, 545)
         plt.show()
