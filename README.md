@@ -37,7 +37,7 @@ For bug report, please contact Maxime SUEUR at maxime.sueur05@gmail.com. Further
 
 -Julien Maillard: julien.maillard@totalenergies.com
 
--Oscar Lacroix-Andrivet: oscar.lacroix-andrivet@external.totalenergies.com
+-Oscar Lacroix-Andrivet: oscar.lacroix-andrivet@totalenergies.com
 
 
 
