@@ -46,14 +46,12 @@ def plot_pca(pca_data_raw,axes,n_comp,pca_on,para_dict):
         
     loadings = pca_out.components_
     n_comp = pca_out.n_components_
-    num_pc = pca_out.n_features_
     first_comps= np.sum(pca_out.explained_variance_ratio_[0:3])*100
     loadings_df = pandas.DataFrame(
         {f"PC{i + 1}": loadings[i, :] for i in range(n_comp)}
     )
     loadings_df.index.name = "variable"
     
-    labels_value = pca_data.index.values #Meilleure lisibilité des étiquettes
     scores = pca_out.explained_variance_ratio_ / pca_out.explained_variance_ratio_.sum() * 100
     if axes ==0: 
         x =0
