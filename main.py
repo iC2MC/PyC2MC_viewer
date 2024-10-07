@@ -1336,14 +1336,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
         widgets.pbar.show()
         i=0
-        widgets.pbar.setValue(i)
+        widgets.pbar.setValue(int(i))
         try:
             filepath,_ = QtWidgets.QFileDialog.getOpenFileNames(filter="Results files (*.csv;*.asc;*.xlsx;*.xls)")
             names = []
             n = 0
             while n<len(filepath):
                 i = (n+1)/len(filepath)*100
-                widgets.pbar.setValue(i)
+                widgets.pbar.setValue(int(i))
                 
                 filename = str(os.path.basename(filepath[n]))
                 names.append(filename)
