@@ -1314,13 +1314,13 @@ class MainWindow(QtWidgets.QMainWindow):
                 qcolor.setAlphaF(0.3)
                 widgets.list_loaded_file_compare.item(j).setBackground(QColor(qcolor))
                 widgets.list_loaded_file.item(i).setBackground(QColor(qcolor))
-            widgets.pbar.setValue(p)
+            widgets.pbar.setValue(int(p))
             n=n+1
 
         
         self.latest_path=os.path.dirname(filepath[n-1])
         
-        widgets.pbar.setValue(p)
+        widgets.pbar.setValue(int(p))
         widgets.pbar.hide()
 
 #---------------------------------------
