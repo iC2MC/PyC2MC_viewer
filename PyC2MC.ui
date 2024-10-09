@@ -5310,6 +5310,27 @@ border-radius: 10px;</string>
                                </widget>
                               </item>
                               <item row="2" column="0">
+                               <widget class="QRadioButton" name="radio_color_N">
+                                <property name="font">
+                                 <font>
+                                  <family>Segoe UI</family>
+                                  <pointsize>10</pointsize>
+                                  <weight>50</weight>
+                                  <bold>false</bold>
+                                 </font>
+                                </property>
+                                <property name="styleSheet">
+                                 <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                </property>
+                                <property name="text">
+                                 <string>#N</string>
+                                </property>
+                                <property name="checked">
+                                 <bool>false</bool>
+                                </property>
+                               </widget>
+                              </item>
+                              <item row="3" column="0">
                                <widget class="QRadioButton" name="radio_color_pc1">
                                 <property name="enabled">
                                  <bool>true</bool>
@@ -5336,7 +5357,7 @@ border-radius: 10px;</string>
                                 </property>
                                </widget>
                               </item>
-                              <item row="3" column="0">
+                              <item row="4" column="0">
                                <widget class="QRadioButton" name="radio_color_pc2">
                                 <property name="enabled">
                                  <bool>true</bool>
@@ -6220,9 +6241,9 @@ border-radius: 4px;</string>
                              </property>
                              <layout class="QGridLayout" name="gridLayout_23">
                               <property name="topMargin">
-                               <number>20</number>
+                               <number>21</number>
                               </property>
-                              <item row="0" column="0">
+                              <item row="0" column="0" colspan="2">
                                <widget class="QRadioButton" name="radio_color_intensity_3">
                                 <property name="font">
                                  <font>
@@ -6243,7 +6264,7 @@ border-radius: 4px;</string>
                                 </property>
                                </widget>
                               </item>
-                              <item row="1" column="0">
+                              <item row="1" column="0" rowspan="2" colspan="2">
                                <widget class="QRadioButton" name="radio_color_O_vk">
                                 <property name="font">
                                  <font>
@@ -6264,7 +6285,28 @@ border-radius: 4px;</string>
                                 </property>
                                </widget>
                               </item>
-                              <item row="2" column="0">
+                              <item row="5" column="0" colspan="2">
+                               <widget class="QRadioButton" name="radio_color_pc2_VK">
+                                <property name="enabled">
+                                 <bool>true</bool>
+                                </property>
+                                <property name="font">
+                                 <font>
+                                  <family>Segoe UI</family>
+                                  <pointsize>10</pointsize>
+                                  <weight>50</weight>
+                                  <bold>false</bold>
+                                 </font>
+                                </property>
+                                <property name="styleSheet">
+                                 <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                </property>
+                                <property name="text">
+                                 <string>PC2</string>
+                                </property>
+                               </widget>
+                              </item>
+                              <item row="4" column="0" colspan="2">
                                <widget class="QRadioButton" name="radio_color_pc1_VK">
                                 <property name="enabled">
                                  <bool>true</bool>
@@ -6292,10 +6334,7 @@ border-radius: 4px;</string>
                                </widget>
                               </item>
                               <item row="3" column="0">
-                               <widget class="QRadioButton" name="radio_color_pc2_VK">
-                                <property name="enabled">
-                                 <bool>true</bool>
-                                </property>
+                               <widget class="QRadioButton" name="radio_color_N_vk">
                                 <property name="font">
                                  <font>
                                   <family>Segoe UI</family>
@@ -6308,7 +6347,10 @@ border-radius: 4px;</string>
                                  <string notr="true">background-color: rgba(0,0,0,0)</string>
                                 </property>
                                 <property name="text">
-                                 <string>PC2</string>
+                                 <string>#N</string>
+                                </property>
+                                <property name="checked">
+                                 <bool>false</bool>
                                 </property>
                                </widget>
                               </item>

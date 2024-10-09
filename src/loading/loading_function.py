@@ -683,14 +683,17 @@ class Peak_list:
                 compo_d = {vals[i]: int(vals[i + 1]) for i in range(10, len(vals) - 1, 2)}
                 compositions.append(compo_d)
                 species.update(compo_d.keys())
-    
+        
         # set up a dataframe with the data and get formulas
         df_initial = pd.DataFrame(data, columns=cols[:-1])
+        
         isotopes = list()
         for specie in species:
-            if specie != '13C':
-                df_initial[specie] = [compo[specie] if specie in compo else 0 for compo in compositions]
+            df_initial[specie] = [compo[specie] if specie in compo else 0 for compo in compositions]
     
+        if "13C" in df_initial.columns:
+            df_initial = df_initial[df_initial["13C"] == 0]
+            df_initial.drop(columns=["13C"], inplace = True)   
         mol_form = df_initial.iloc[:,10:len(df_initial.columns)+1]
         df_initial.drop(mol_form.columns,axis = 1, inplace = True)
         last_col = len(mol_form.columns)-1
@@ -723,5 +726,7 @@ class Peak_list:
         df['normalized_intensity'] = df_initial["absolute_intensity"].values/ \
             df_initial["absolute_intensity"].values.max()*100
         df.fillna(0,inplace=True)
+        df.sort_values(by="m/z", inplace=True, ascending=True)
+        df.reset_index(inplace=True)
         df_type = 'Attributed'
         return cls(df,df_type,heteroatoms)

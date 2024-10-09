@@ -2618,6 +2618,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 third_dimension = data_extract["PC2"]
             elif widgets.radio_color_O.isChecked():
                 third_dimension = data_extract["O"]
+            elif widgets.radio_color_N.isChecked():
+                third_dimension = data_extract["N"]
             data_extract["third_dimension"] = third_dimension
             data_extract.classe_selected = classe_selected
             self.read_param()
@@ -2749,6 +2751,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 third_dimension = data_filtered["PC2"]
             elif widgets.radio_color_O_vk.isChecked():
                 third_dimension = data_filtered["O"]
+            elif widgets.radio_color_N_vk.isChecked():
+                third_dimension = data_filtered["N"]
             else : 
                 third_dimension = data_filtered["Normalized_intensity"]
             data_filtered["third_dimension"] = third_dimension
@@ -2792,6 +2796,8 @@ class MainWindow(QtWidgets.QMainWindow):
                     cbar.set_label('PC2', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 elif widgets.radio_color_O_vk.isChecked():
                     cbar.set_label('#O', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
+                elif widgets.radio_color_N_vk.isChecked():
+                    cbar.set_label('#N', labelpad=-2.625*(font_size), rotation=90,fontsize=font_size, color = self.cm_text_color)
                 cbar.ax.tick_params(labelsize=font_size-2)
                 if widgets.radio_color_pc1_VK.isChecked():
                     plt.clim(np.min(data_selected.df['PC1']), np.max(data_selected.df['PC1']))
