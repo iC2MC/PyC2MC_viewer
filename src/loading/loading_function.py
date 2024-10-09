@@ -1,4 +1,5 @@
 import pandas as pd
+from pathlib import Path
 from src.pre_processing_function import pre_processing
 import chemparse
 from src.pre_treatment_petroOrg import Pre_treatment_petroOrg
@@ -60,8 +61,8 @@ def load_csv_file(filename):
     """
     header = get_header_csv(filename)
     if header == 2: # Particular attributed csv file from PetroOrg
-        data_df = pd.read_csv(filename, skiprows = 2,header=None,sep=',|;',encoding="utf-8", engine='python')
-        data = Peak_list.from_csv_petroOrg(data_df)
+        # data_df = pd.read_csv(filename, skiprows = 2,header=None,sep=',|;',encoding="utf-8", engine='python')
+        data = Peak_list.from_csv_petroOrg(filename)
     else:    
         data_df = pd.read_csv(filename, header = header,sep=',|;',encoding="utf-8", engine='python')
         if "#" in data_df: # non-attributed csv file from DA
@@ -648,7 +649,7 @@ class Peak_list:
         return cls(df,df_type,heteroatoms)
     
     @classmethod
-    def from_csv_petroOrg(cls, df_initial):
+    def from_csv_petroOrg(cls, input_path):
         """
         Initialize the Peak_list class for a attributed csv file from petroOrg.
 
@@ -658,31 +659,69 @@ class Peak_list:
 
         Returns an object of the class RawData.
         """
-        mol_form = ""
-        names_dict = {3:'m/z',5:'absolute_intensity', 4: 'err_ppm'}
         
-        if df_initial.iloc[:,len(df_initial.columns)-1].isnull().values.any():
-            df_initial.drop(df_initial.columns[len(df_initial.columns)-1],axis=1,inplace=True)
-        if "13C" in df_initial.iloc[0].to_list():
-            u = df_initial.iloc[0].to_list().index("13C")
-            df_initial.drop(columns=df_initial.columns[[u,u+1]],inplace = True)
-        mol_form = df_initial.loc[:,10:len(df_initial.columns)+1]
+        mol_form = ""
+        element_order = ['C', 'H']
+        names_dict = {'Theor. Mass':'m/z','Rel. Abundance':'absolute_intensity', 'Error': 'err_ppm'}
+        path = Path(input_path)
+
+        with path.open("r") as fcsv:
+            _ = fcsv.readline()  # head line
+    
+            # manage columns
+            cols = fcsv.readline().split(",")
+            cols = [c.strip() for c in cols]
+            cols[0] = "pid"
+            
+            # read csv lines
+            data = list()
+            compositions = list()
+            species = set()
+            for line in fcsv:
+                vals = line.split(",")
+                data.append([float(v) for v in vals[:10]])
+                compo_d = {vals[i]: int(vals[i + 1]) for i in range(10, len(vals) - 1, 2)}
+                compositions.append(compo_d)
+                species.update(compo_d.keys())
+    
+        # set up a dataframe with the data and get formulas
+        df_initial = pd.DataFrame(data, columns=cols[:-1])
+        isotopes = list()
+        for specie in species:
+            if specie != '13C':
+                df_initial[specie] = [compo[specie] if specie in compo else 0 for compo in compositions]
+    
+        mol_form = df_initial.iloc[:,10:len(df_initial.columns)+1]
         df_initial.drop(mol_form.columns,axis = 1, inplace = True)
         last_col = len(mol_form.columns)-1
         mol_form.iloc[:,last_col] = mol_form.iloc[:,last_col].fillna(0).astype(int) #convert last column to int
         mol_form.iloc[:,last_col-1] = mol_form.iloc[:,last_col-1].fillna("") #Erase NaN
         mol_form.iloc[:,-2] = mol_form.iloc[:,-2].replace({'56Fe':"Fe","24Mg":"Mg"})
-        mol_form = mol_form.apply(lambda row: ''.join(map(str, row)), axis=1)
+                
+        def row_to_formula(row):
+            # Create a dictionary to store elements and their counts
+            elements = {element: int(count) for element, count in row.items() if count > 0}
+            
+            # Sort elements according to the specified order, then alphabetically
+            sorted_elements = sorted(elements.items(), key=lambda x: (element_order.index(x) if x in element_order else float('inf'), x))
+            
+            # Construct the formula string
+            formula = ''.join(f'{element}{count}' for element, count in sorted_elements)
+            return formula
+        
+        mol_form = mol_form.apply(row_to_formula, axis=1)
+        
         heteroatoms = pd.DataFrame(list([chemparse.parse_formula(formula) for formula in mol_form]))
         if heteroatoms.iloc[:,len(heteroatoms.columns)-1].isnull().values.any():
             heteroatoms.drop(heteroatoms.columns[len(heteroatoms.columns)-1],axis=1,inplace=True)
         heteroatoms.fillna(0,inplace=True)
         df_initial['molecular_formula'] = mol_form
+    
         df_initial = df_initial.rename(columns=names_dict)
         df = pd.DataFrame().astype('Float')
         df = pd.concat([df_initial['m/z'],df_initial['absolute_intensity'],df_initial['err_ppm'],df_initial['molecular_formula'],heteroatoms],axis=1)
-        df['normalized_intensity'] = df["absolute_intensity"].values/ \
-            df["absolute_intensity"].values.max()*100
+        df['normalized_intensity'] = df_initial["absolute_intensity"].values/ \
+            df_initial["absolute_intensity"].values.max()*100
         df.fillna(0,inplace=True)
         df_type = 'Attributed'
         return cls(df,df_type,heteroatoms)
