@@ -12,7 +12,6 @@
 from modules import *
 from widgets import *
 import os
-import win32com.client
 import numpy as np
 import chemparse as cp
 import math
@@ -810,17 +809,8 @@ class MainWindow(QtWidgets.QMainWindow):
     #About
         widgets.btn_about.clicked.connect(self.about)
     
-        sh = win32com.client.gencache.EnsureDispatch('Shell.Application', 0)
-        ns = sh.NameSpace(os.getcwd())
-    
-        # Enumeration is necessary because ns.GetDetailsOf only accepts an integer as 2nd argument
         
-        item = ns.ParseName('PyC2MC_Viewer.exe')
-        ind = 3
-        if item == None:
-            item = ns.ParseName('main.py')
-            ind = 4
-        self.last_modified = ns.GetDetailsOf(item, ind)
+        self.last_modified = "23/10/2024"
         
     #Easter
         widgets.Easter_egg.clicked.connect(self.easter_egg)
