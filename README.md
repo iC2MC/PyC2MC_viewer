@@ -7,7 +7,7 @@ the molecular formulae attributed by either constructor or third-party software.
 
 To use this software, there are two options:
 
-=> Download and start the executable version at the following link : https://doi.org/10.5281/zenodo.7602288
+=> Download and start the executable version at the following link : https://doi.org/10.5281/zenodo.12806688
  .
 
 => Run "Main.py" in the Python interpreter of your choice after having installed the required packages found in "Requirements.txt" or importing "environment.yaml" via Anaconda3.
