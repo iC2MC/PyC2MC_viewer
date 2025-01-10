@@ -1504,21 +1504,21 @@ class MainWindow(QtWidgets.QMainWindow):
             path_old = os.getcwd()
             path_to_file = os.path.dirname(names[0][0])
             os.chdir(path_to_file)
-            tol = QInputDialog.getDouble(self,"Choose of the Tolerance for merging","I want to use a tolerance of (Da, min = 0.00001 max : 0.0005): ",value  = 0.00010,min=0.00001,max=0.00050,decimals = 5)
+            tol = QInputDialog.getDouble(self,"Choose of the Tolerance for merging","Tolerance in ppm (min = 0.01 max : 5): ",value  = 1,min=0.001,max=5,decimals = 2)[0]
             save_name, okPressed = QInputDialog.getText(self, "Save Name","Your name:", QLineEdit.Normal, "")
 
         except:
             path_old = os.getcwd()
             return
-        i = 50     
-        widgets.pbar.setValue(i)
+        # i = 50     
+        # widgets.pbar.setValue(i)
         if okPressed and save_name != '':
-            try :
-                self.merged_data = merge_non_attributed(names,tol)
-            except:
-                widgets.pbar.hide()
-                QMessageBox.about(self, "FYI box", "Impossible to merge selected files")
-                return
+            # try :
+                self.merged_data = merge_non_attributed(names,tol, callback = widgets.pbar.setValue)
+            # except:
+            #     widgets.pbar.hide()
+            #     QMessageBox.about(self, "FYI box", "Impossible to merge selected files")
+            #     return
         else:
             widgets.pbar.hide()
             QMessageBox.about(self, "FYI box", "No or wrong saving name")
