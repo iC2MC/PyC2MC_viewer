@@ -5,6 +5,11 @@ import statistics
 import chemparse
 import itertools
 
+import warnings
+
+# Disable all warnings
+warnings.filterwarnings("ignore")
+
 colors=['black','red','yellow','green','blue','purple','pink','silver','saddlebrown','orange','lawngreen','turquoise','fuschia','white','cyan','olive','teal']
 
 def pre_processing(self):
@@ -120,30 +125,31 @@ def split_classes(df,heteroatoms):
         value=[percent_value,nb_peaks]
         classes[classe_name] = value
         n = n+1
-
+    families = pd.DataFrame()
     heteroatoms=list(heteroatoms.columns.values)
     n=len(heteroatoms)
     for i in range(1, len(heteroatoms)+1):
         for het_selected in itertools.combinations(heteroatoms, i):
             het_to_del=heteroatoms.copy()
-            classe_name = ''
+            family_name = ''
             for k in het_selected:
                 het_to_del.remove(k)
-                classe_name = classe_name + k + 'x'
+                family_name = family_name + k + 'x'
             extract=df
             for h in het_to_del:
                 extract=extract[extract[h]==0]
             for i in het_selected:
                 extract=extract[extract[i]!=0]
-            df_classe=extract
-            nb_peaks=len(df_classe)
-            intensity_classes = sum(df_classe["absolute_intensity"])
-            percent_value = intensity_classes/total_intensity*100 #% intensité de la classe
+            df_family=extract
+            nb_peaks=len(df_family)
+            intensity_family = sum(df_family["absolute_intensity"])
+            percent_value = intensity_family/total_intensity*100 #% intensité de la famille
             if  percent_value > 0  :
                 value=[percent_value,nb_peaks]
-                classes[classe_name] = value
-                df[classe_name]=False
-                df[classe_name].loc[df_classe.index]=True
+                families[family_name] = value
+                df[family_name]=False
+                df[family_name].loc[df_family.index]=True
+    classes = pd.concat([classes, families], axis = 1)
     classes = classes.transpose()
     classes = classes.reset_index()
     names = ['variable','value','number']
@@ -173,6 +179,13 @@ def split_classes_merged(df,heteroatoms,pca_data):
     """
     df['Normalized_intensity'] = df["summed_intensity"] / max(df['summed_intensity'])*100
     total_intensity = sum(df["summed_intensity"])
+    
+    if "N" not in heteroatoms.columns:
+        df.insert(df.columns.get_loc('H')+1,"N",0)
+    if "O" not in heteroatoms.columns:
+        df.insert(df.columns.get_loc('N')+1,"O",0)
+    if "S" not in heteroatoms.columns:
+        df.insert(df.columns.get_loc('O')+1,"S",0)
     if 'C' in  heteroatoms.columns:
         heteroatoms =  heteroatoms.drop('C', axis=1)
     if 'H' in  heteroatoms.columns:
