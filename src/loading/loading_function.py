@@ -363,7 +363,7 @@ class Peak_list:
         Returns an object of the class RawData.
         """
         columns = df_initial.columns
-        names_list = ('m/z','absolute_intensity','molecular_formula','polarity','err_ppm')
+        names_list = ('m/z','absolute_intensity','molecular_formula','polarity','SN','err_ppm')
         names_dict = dict(zip(columns,names_list))
         df_initial = df_initial[df_initial['isotopic'] == False].reset_index(drop=True)
         df_initial = df_initial.rename(columns=names_dict)
