@@ -2,7 +2,7 @@
 #
 #----------------------------------------------------------------
 # Written by Julien Maillard, Maxime Sueur, Oscar Lacroix-Andrivet
-# Github : https://github.com/MaximeS5/PyC2MC
+# Github : https://github.com/iC2MC/PyC2MC_viewer
 #-----------------------------------------------------------------------------
 #
 # //////////////////////////////////////////////////////////////
@@ -800,7 +800,7 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.btn_fuse.clicked.connect(self.fusion_replicats)
         widgets.btn_merge_mer.clicked.connect(self.merge_merged_files)
         widgets.btn_merge_xcalibur.clicked.connect(self.merge_Multicsv)
-        widgets.btn_merge_una.clicked.connect(self.merge_asc)
+        widgets.btn_merge_una.clicked.connect(self.merge_unattributed_files)
 
 
 #///////////////////////////////////////////////     
@@ -1208,7 +1208,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     try :
                         dataframe = load_MS_file(filename,self.isotopes_dict)
                     except Exception as err:  
-                        MessageBox.about(self, "FYI box", f"A problem has occured with the following file: '{filename}', error is : {err}")
+                        QMessageBox.about(self, "FYI box", f"A problem has occured with the following file: '{filename}', error is : {err}")
             pass
             
             try :
@@ -1492,7 +1492,7 @@ class MainWindow(QtWidgets.QMainWindow):
         os.chdir(path_old)
         widgets.pbar.hide()
 
-    def merge_asc(self):
+    def merge_unattributed_files(self):
         """
         Calls the Merge Function for unnatributed data and load the newly created .csv in the GUI
         """
@@ -1500,7 +1500,7 @@ class MainWindow(QtWidgets.QMainWindow):
         i=0
         widgets.pbar.setValue(i)
         try:
-            names = QtWidgets.QFileDialog.getOpenFileNames(filter="Ascii files from DA (*.asc)")
+            names = QtWidgets.QFileDialog.getOpenFileNames(filter="Raw files (*.asc; *.csv)")
             path_old = os.getcwd()
             path_to_file = os.path.dirname(names[0][0])
             os.chdir(path_to_file)
@@ -2290,7 +2290,7 @@ class MainWindow(QtWidgets.QMainWindow):
                
         
                 def Anim(frames, data_selected):
-                    pr1=0 
+                    pr1=False
                     if gif == False:
                         fig = plt.figure()
                         transf = fig.transFigure
@@ -2333,7 +2333,7 @@ class MainWindow(QtWidgets.QMainWindow):
                             dbe=dbe_both
                             dbe_text="Even and odd ions"
                             w = 0.5
-                            pr1=1
+                            pr1=True
                                                     
                         dbe=pandas.DataFrame.from_dict(dbe)
                         x = dbe.columns
@@ -2434,7 +2434,7 @@ class MainWindow(QtWidgets.QMainWindow):
                             
                     total_attrib=""        
                     if widgets.radio_dist_nb.isChecked() :    
-                        if pr1==0:
+                        if pr1==False:
                             total_attrib = f". Tot.nb. = {int(sum(y))}"
                         y = (np.array(y)*100/sum(y)).tolist()
                         
@@ -2442,7 +2442,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     
                         
                         
-                    if pr1==1:
+                    if pr1:
                         dbe_odd=pandas.DataFrame.from_dict(dbe_odd)
                         dbe_even=pandas.DataFrame.from_dict(dbe_even)
                         

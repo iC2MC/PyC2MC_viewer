@@ -3,6 +3,7 @@ from functools import reduce
 import numpy as np
 import os
 from time import time
+from src.loading.loading_function import load_MS_file
 
 
  
@@ -23,17 +24,16 @@ def merge_non_attributed(names,tol, callback = None):
     for i in names[0]:
         filename = str(os.path.basename(i))
         data_name.append(filename) #isole le nom du fichier et l'ajoute à une liste
-        temp_data = pandas.read_csv(filename, delim_whitespace=True,
-                         names=["mz", "I"],
-                         usecols=(0, 1), dtype=np.float64)
+        temp_data: pandas.DataFrame = load_MS_file(filename).df[["m/z","absolute_intensity"]]
+        temp_data.rename(columns={"m/z":"mz", "absolute_intensity":"I"},inplace=True)
         temp_data['Rel_intens'] = (temp_data['I']/sum(temp_data['I']))*100
+        
         temp_data.sort_values("mz",inplace = True,ignore_index= True)
         data.append(temp_data)   
         
     # merged = reduce(lambda  left,right: pandas.merge_asof(left,right,on=['mz'],tolerance=tol[0]), data).fillna('0') 
     temp_merged = data[0]
     for i in range(len(names[0])-1):
-        print("ITERATION N° \n",i)
         left = temp_merged.copy()
         right = data[i+1]
         right = right.assign(idx=np.arange(right.shape[0]))
@@ -54,10 +54,7 @@ def merge_non_attributed(names,tol, callback = None):
             temp_merged = pandas.concat([temp_merged, temp], ignore_index=True)
             
             if callback != None:
-                print("Step progress: ",i/(len(names[0])-1))
-                print("Row progress : ",(n+1)/(len(left)))
                 progress = 100 *((i)/(len(names[0])-1) + n/(len(left)*(len(names[0])-1)))
-                print(round(progress,2))
                 callback(progress)
             
         temp_merged.drop("tolerance", inplace= True, axis = 1)

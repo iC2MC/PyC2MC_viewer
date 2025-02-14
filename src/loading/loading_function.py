@@ -4,7 +4,7 @@ from src.pre_processing_function import pre_processing
 import chemparse
 from src.pre_treatment_petroOrg import Pre_treatment_petroOrg
 
-def load_MS_file(filename,isotopes_dict):
+def load_MS_file(filename,isotopes_dict = None):
     """
     Global loading data method. Recognize file type and calls the appropriate function(s)
     
