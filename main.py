@@ -1672,10 +1672,9 @@ class MainWindow(QtWidgets.QMainWindow):
             widgets.btn_kendricks.setEnabled(True)
 
         elif self.data.df_type == "Peaklist":
-            widgets.choose_plot_stacked.setCurrentWidget(widgets.page_Kendrick)
             widgets.stackedWidget_overview.setCurrentWidget(widgets.page_mass_spectrum)
             widgets.btn_stats.setEnabled(False)
-            widgets.btn_overview.setEnabled(False)
+            widgets.btn_overview.setEnabled(True)
             widgets.btn_EV.setEnabled(False)
             widgets.radio_composition.setEnabled(False)
             widgets.radio_mass_spectrum.setChecked(True)
@@ -2181,10 +2180,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
              
-
-
-            
-
         ##############
         #Spectra
         ##############
@@ -2200,16 +2195,11 @@ class MainWindow(QtWidgets.QMainWindow):
             item = item_file[0]
             data_selected = item.data(self.USERDATA_ROLE)
             leg=list()
-            
             if data_selected.df_type == 'Peaklist':
                 item_classes = []
                 classe_selected = 'All'
                 data_filtered = data_selected.df
-                third_dimension = data_filtered["normalized_intensity"]
-                Intens = third_dimension.values.reshape(-1,1)
-                min_max_scaler = preprocessing.MinMaxScaler()
-                Intens_scaled = min_max_scaler.fit_transform(Intens)
-                data_filtered["normalized_intensity"] = Intens_scaled
+                plt.stem(data_filtered["m/z"], data_filtered["absolute_intensity"],linefmt="black",markerfmt=" ", basefmt="k")
            
             else:
                 item_classes = widgets.list_classes_mass_spec.selectedItems()
@@ -2246,6 +2236,10 @@ class MainWindow(QtWidgets.QMainWindow):
             plt.gca().legend(handles=leg,fontsize=font_size-2)
             plt.xlabel('m/z', fontsize=font_size+2,style='italic')
             plt.ylabel('Intensity', fontsize=font_size+2)
+            cursor = mplcursors.cursor(multiple=True)   
+            @cursor.connect("add")
+            def on_add(sel):
+                sel.annotation.set(position=(0, 20), anncoords="offset points")
             plt.xticks(fontsize=font_size)
             plt.yticks(fontsize=font_size)
             yaxes = plt.gca().yaxis
