@@ -12566,7 +12566,7 @@ QCheckBox::indicator:checked {
                               <string>Representation type:</string>
                              </property>
                              <layout class="QGridLayout" name="gridLayout_111">
-                              <item row="0" column="0">
+                              <item row="0" column="1">
                                <spacer name="verticalSpacer_7">
                                 <property name="orientation">
                                  <enum>Qt::Vertical</enum>
@@ -12579,7 +12579,7 @@ QCheckBox::indicator:checked {
                                 </property>
                                </spacer>
                               </item>
-                              <item row="2" column="0">
+                              <item row="2" column="0" colspan="3">
                                <widget class="QPushButton" name="btn_VK_compare">
                                 <property name="enabled">
                                  <bool>true</bool>
@@ -12607,7 +12607,76 @@ QCheckBox::indicator:checked {
                                 </property>
                                </widget>
                               </item>
-                              <item row="1" column="0">
+                              <item row="5" column="1">
+                               <spacer name="verticalSpacer_8">
+                                <property name="orientation">
+                                 <enum>Qt::Vertical</enum>
+                                </property>
+                                <property name="sizeHint" stdset="0">
+                                 <size>
+                                  <width>20</width>
+                                  <height>40</height>
+                                 </size>
+                                </property>
+                               </spacer>
+                              </item>
+                              <item row="3" column="0" colspan="3">
+                               <widget class="QPushButton" name="btn_KMD_compare">
+                                <property name="enabled">
+                                 <bool>true</bool>
+                                </property>
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>88</width>
+                                  <height>20</height>
+                                 </size>
+                                </property>
+                                <property name="font">
+                                 <font>
+                                  <family>Segoe UI</family>
+                                  <pointsize>10</pointsize>
+                                  <weight>75</weight>
+                                  <italic>false</italic>
+                                  <bold>true</bold>
+                                 </font>
+                                </property>
+                                <property name="styleSheet">
+                                 <string notr="true">border-radius: 10px</string>
+                                </property>
+                                <property name="text">
+                                 <string>KMD</string>
+                                </property>
+                               </widget>
+                              </item>
+                              <item row="4" column="0" colspan="3">
+                               <widget class="QPushButton" name="btn_MD_compare">
+                                <property name="enabled">
+                                 <bool>true</bool>
+                                </property>
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>88</width>
+                                  <height>20</height>
+                                 </size>
+                                </property>
+                                <property name="font">
+                                 <font>
+                                  <family>Segoe UI</family>
+                                  <pointsize>10</pointsize>
+                                  <weight>75</weight>
+                                  <italic>false</italic>
+                                  <bold>true</bold>
+                                 </font>
+                                </property>
+                                <property name="styleSheet">
+                                 <string notr="true">border-radius: 10px</string>
+                                </property>
+                                <property name="text">
+                                 <string>Mass defect</string>
+                                </property>
+                               </widget>
+                              </item>
+                              <item row="1" column="0" colspan="3">
                                <widget class="QPushButton" name="btn_DBE_compare">
                                 <property name="enabled">
                                  <bool>true</bool>
@@ -12634,19 +12703,6 @@ QCheckBox::indicator:checked {
                                  <string>DBE</string>
                                 </property>
                                </widget>
-                              </item>
-                              <item row="3" column="0">
-                               <spacer name="verticalSpacer_8">
-                                <property name="orientation">
-                                 <enum>Qt::Vertical</enum>
-                                </property>
-                                <property name="sizeHint" stdset="0">
-                                 <size>
-                                  <width>20</width>
-                                  <height>40</height>
-                                 </size>
-                                </property>
-                               </spacer>
                               </item>
                              </layout>
                             </widget>
@@ -13953,6 +14009,1092 @@ species</string>
                                       <set>AlignCenter</set>
                                      </property>
                                     </item>
+                                   </widget>
+                                  </item>
+                                 </layout>
+                                </widget>
+                               </item>
+                              </layout>
+                             </widget>
+                             <widget class="QWidget" name="page_KMD_compare">
+                              <layout class="QGridLayout" name="gridLayout_167">
+                               <item row="0" column="0">
+                                <widget class="QLabel" name="label_168">
+                                 <property name="font">
+                                  <font>
+                                   <family>Segoe UI</family>
+                                   <pointsize>10</pointsize>
+                                   <weight>75</weight>
+                                   <bold>true</bold>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>Kendrick Mass Defect</string>
+                                 </property>
+                                 <property name="alignment">
+                                  <set>Qt::AlignCenter</set>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="0" rowspan="3">
+                                <widget class="QGroupBox" name="groupBox_123">
+                                 <property name="sizePolicy">
+                                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                                   <horstretch>0</horstretch>
+                                   <verstretch>0</verstretch>
+                                  </sizepolicy>
+                                 </property>
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>287</width>
+                                   <height>0</height>
+                                  </size>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>287</width>
+                                   <height>16000</height>
+                                  </size>
+                                 </property>
+                                 <property name="font">
+                                  <font>
+                                   <family>Segoe UI</family>
+                                   <pointsize>10</pointsize>
+                                   <weight>75</weight>
+                                   <bold>true</bold>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true"/>
+                                 </property>
+                                 <property name="title">
+                                  <string>Classes (nb, int, std dev):</string>
+                                 </property>
+                                 <layout class="QGridLayout" name="gridLayout_163">
+                                  <property name="topMargin">
+                                   <number>20</number>
+                                  </property>
+                                  <item row="0" column="0">
+                                   <widget class="QListWidget" name="list_classes_KMD_compare">
+                                    <property name="minimumSize">
+                                     <size>
+                                      <width>0</width>
+                                      <height>0</height>
+                                     </size>
+                                    </property>
+                                    <property name="maximumSize">
+                                     <size>
+                                      <width>16000</width>
+                                      <height>16000</height>
+                                     </size>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true"/>
+                                    </property>
+                                    <property name="selectionMode">
+                                     <enum>QAbstractItemView::ExtendedSelection</enum>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="1" column="0">
+                                   <widget class="QCheckBox" name="check_alphabetic_KMD_compare">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="text">
+                                     <string>Alphabetic sorting</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                 </layout>
+                                </widget>
+                               </item>
+                               <item row="1" column="1">
+                                <widget class="QGroupBox" name="groupBox_124">
+                                 <property name="sizePolicy">
+                                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                                   <horstretch>0</horstretch>
+                                   <verstretch>0</verstretch>
+                                  </sizepolicy>
+                                 </property>
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>0</height>
+                                  </size>
+                                 </property>
+                                 <property name="font">
+                                  <font>
+                                   <family>Segoe UI</family>
+                                   <pointsize>10</pointsize>
+                                   <weight>75</weight>
+                                   <bold>true</bold>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true"/>
+                                 </property>
+                                 <property name="title">
+                                  <string>Repetition Unit</string>
+                                 </property>
+                                 <layout class="QGridLayout" name="gridLayout_165">
+                                  <property name="topMargin">
+                                   <number>20</number>
+                                  </property>
+                                  <item row="0" column="0">
+                                   <widget class="QLabel" name="label_56">
+                                    <property name="maximumSize">
+                                     <size>
+                                      <width>16777215</width>
+                                      <height>15</height>
+                                     </size>
+                                    </property>
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                     </font>
+                                    </property>
+                                    <property name="text">
+                                     <string>Unit :</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="0" column="1">
+                                   <widget class="QLineEdit" name="edit_motif_compare">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                     </font>
+                                    </property>
+                                    <property name="text">
+                                     <string>CH2</string>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="1" column="0">
+                                   <widget class="QLabel" name="label_44">
+                                    <property name="maximumSize">
+                                     <size>
+                                      <width>16777215</width>
+                                      <height>15</height>
+                                     </size>
+                                    </property>
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                     </font>
+                                    </property>
+                                    <property name="text">
+                                     <string>Mass :</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="1" column="1">
+                                   <widget class="QLineEdit" name="edit_mass_motif_compare">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                     </font>
+                                    </property>
+                                    <property name="text">
+                                     <string>14.01565</string>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                 </layout>
+                                </widget>
+                               </item>
+                               <item row="1" column="2">
+                                <widget class="QGroupBox" name="groupBox_122">
+                                 <property name="sizePolicy">
+                                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                                   <horstretch>0</horstretch>
+                                   <verstretch>0</verstretch>
+                                  </sizepolicy>
+                                 </property>
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>0</height>
+                                  </size>
+                                 </property>
+                                 <property name="font">
+                                  <font>
+                                   <family>Segoe UI</family>
+                                   <pointsize>10</pointsize>
+                                   <weight>75</weight>
+                                   <bold>true</bold>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true"/>
+                                 </property>
+                                 <property name="title">
+                                  <string>Display:</string>
+                                 </property>
+                                 <layout class="QGridLayout" name="gridLayout_162">
+                                  <property name="topMargin">
+                                   <number>20</number>
+                                  </property>
+                                  <item row="0" column="0">
+                                   <widget class="QRadioButton" name="fc_all_kmd">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                    </property>
+                                    <property name="text">
+                                     <string>All species</string>
+                                    </property>
+                                    <property name="checked">
+                                     <bool>true</bool>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="0" column="1">
+                                   <widget class="QRadioButton" name="fc_common_kmd">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                    </property>
+                                    <property name="text">
+                                     <string>Common 
+species</string>
+                                    </property>
+                                    <property name="checked">
+                                     <bool>false</bool>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="2" column="0" colspan="2">
+                                   <widget class="QCheckBox" name="CheckBox_size_fc_kmd">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                     </font>
+                                    </property>
+                                    <property name="text">
+                                     <string>Size = f(sample 1 intensity )</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                 </layout>
+                                </widget>
+                               </item>
+                               <item row="2" column="1" colspan="2">
+                                <widget class="QGroupBox" name="groupBox_126">
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16000</width>
+                                   <height>80</height>
+                                  </size>
+                                 </property>
+                                 <property name="font">
+                                  <font>
+                                   <family>Segoe UI</family>
+                                   <pointsize>10</pointsize>
+                                   <weight>75</weight>
+                                   <bold>true</bold>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true"/>
+                                 </property>
+                                 <property name="title">
+                                  <string>Fold change calculation:</string>
+                                 </property>
+                                 <layout class="QGridLayout" name="gridLayout_166">
+                                  <property name="topMargin">
+                                   <number>20</number>
+                                  </property>
+                                  <item row="0" column="0">
+                                   <widget class="QRadioButton" name="radio_fold_rel_KMD">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                     </font>
+                                    </property>
+                                    <property name="text">
+                                     <string>By relative intensity</string>
+                                    </property>
+                                    <property name="checked">
+                                     <bool>true</bool>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="0" column="1">
+                                   <widget class="QRadioButton" name="radio_fold_abs_KMD">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                     </font>
+                                    </property>
+                                    <property name="text">
+                                     <string>By absolute intensity</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                 </layout>
+                                </widget>
+                               </item>
+                               <item row="3" column="1" colspan="2">
+                                <widget class="QGroupBox" name="groupBox_125">
+                                 <property name="sizePolicy">
+                                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                                   <horstretch>0</horstretch>
+                                   <verstretch>0</verstretch>
+                                  </sizepolicy>
+                                 </property>
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>100</height>
+                                  </size>
+                                 </property>
+                                 <property name="font">
+                                  <font>
+                                   <family>Segoe UI</family>
+                                   <pointsize>10</pointsize>
+                                   <weight>75</weight>
+                                   <bold>true</bold>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true"/>
+                                 </property>
+                                 <property name="title">
+                                  <string>Range:</string>
+                                 </property>
+                                 <layout class="QGridLayout" name="gridLayout_164">
+                                  <property name="topMargin">
+                                   <number>20</number>
+                                  </property>
+                                  <item row="0" column="0">
+                                   <widget class="QLabel" name="label_172">
+                                    <property name="maximumSize">
+                                     <size>
+                                      <width>16777215</width>
+                                      <height>15</height>
+                                     </size>
+                                    </property>
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                    </property>
+                                    <property name="text">
+                                     <string>NM min</string>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="0" column="1">
+                                   <widget class="QLineEdit" name="x_min_KMD_compare">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true"/>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="0" column="2" colspan="2">
+                                   <widget class="QLabel" name="label_171">
+                                    <property name="maximumSize">
+                                     <size>
+                                      <width>16777215</width>
+                                      <height>15</height>
+                                     </size>
+                                    </property>
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                    </property>
+                                    <property name="text">
+                                     <string>NM max</string>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="0" column="4">
+                                   <widget class="QLineEdit" name="x_max_KMD_compare">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true"/>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="1" column="0">
+                                   <widget class="QLabel" name="label_173">
+                                    <property name="maximumSize">
+                                     <size>
+                                      <width>16777215</width>
+                                      <height>15</height>
+                                     </size>
+                                    </property>
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                    </property>
+                                    <property name="text">
+                                     <string>KMD min</string>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="1" column="1">
+                                   <widget class="QLineEdit" name="y_min_KMD_compare">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true"/>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="1" column="2" colspan="2">
+                                   <widget class="QLabel" name="label_174">
+                                    <property name="maximumSize">
+                                     <size>
+                                      <width>16777215</width>
+                                      <height>15</height>
+                                     </size>
+                                    </property>
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                    </property>
+                                    <property name="text">
+                                     <string>KMD max</string>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="1" column="4">
+                                   <widget class="QLineEdit" name="y_max_KMD_compare">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true"/>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="2" column="0">
+                                   <widget class="QLabel" name="label_57">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                     </font>
+                                    </property>
+                                    <property name="text">
+                                     <string>Round:</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="2" column="1">
+                                   <widget class="QRadioButton" name="round_closest_compare">
+                                    <property name="text">
+                                     <string>Closest</string>
+                                    </property>
+                                    <property name="checked">
+                                     <bool>true</bool>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="2" column="2" colspan="3">
+                                   <widget class="QRadioButton" name="round_up_compare">
+                                    <property name="text">
+                                     <string>Up</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                 </layout>
+                                </widget>
+                               </item>
+                              </layout>
+                             </widget>
+                             <widget class="QWidget" name="page_MD_compare">
+                              <layout class="QGridLayout" name="gridLayout_168">
+                               <item row="0" column="0">
+                                <widget class="QLabel" name="label_180">
+                                 <property name="font">
+                                  <font>
+                                   <family>Segoe UI</family>
+                                   <pointsize>10</pointsize>
+                                   <weight>75</weight>
+                                   <bold>true</bold>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>Mass Defect</string>
+                                 </property>
+                                 <property name="alignment">
+                                  <set>Qt::AlignCenter</set>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="0" rowspan="3">
+                                <widget class="QGroupBox" name="groupBox_128">
+                                 <property name="sizePolicy">
+                                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                                   <horstretch>0</horstretch>
+                                   <verstretch>0</verstretch>
+                                  </sizepolicy>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>287</width>
+                                   <height>16000</height>
+                                  </size>
+                                 </property>
+                                 <property name="font">
+                                  <font>
+                                   <family>Segoe UI</family>
+                                   <pointsize>10</pointsize>
+                                   <weight>75</weight>
+                                   <bold>true</bold>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true"/>
+                                 </property>
+                                 <property name="title">
+                                  <string>Classes (nb, int, std dev):</string>
+                                 </property>
+                                 <layout class="QGridLayout" name="gridLayout_169">
+                                  <property name="topMargin">
+                                   <number>20</number>
+                                  </property>
+                                  <item row="0" column="0">
+                                   <widget class="QListWidget" name="list_classes_MD_compare">
+                                    <property name="minimumSize">
+                                     <size>
+                                      <width>0</width>
+                                      <height>0</height>
+                                     </size>
+                                    </property>
+                                    <property name="maximumSize">
+                                     <size>
+                                      <width>16000</width>
+                                      <height>16000</height>
+                                     </size>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true"/>
+                                    </property>
+                                    <property name="selectionMode">
+                                     <enum>QAbstractItemView::ExtendedSelection</enum>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="1" column="0">
+                                   <widget class="QCheckBox" name="check_alphabetic_MD_compare">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="text">
+                                     <string>Alphabetic sorting</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                 </layout>
+                                </widget>
+                               </item>
+                               <item row="1" column="1">
+                                <widget class="QGroupBox" name="groupBox_129">
+                                 <property name="sizePolicy">
+                                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                                   <horstretch>0</horstretch>
+                                   <verstretch>0</verstretch>
+                                  </sizepolicy>
+                                 </property>
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>0</height>
+                                  </size>
+                                 </property>
+                                 <property name="font">
+                                  <font>
+                                   <family>Segoe UI</family>
+                                   <pointsize>10</pointsize>
+                                   <weight>75</weight>
+                                   <bold>true</bold>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true"/>
+                                 </property>
+                                 <property name="title">
+                                  <string>Display:</string>
+                                 </property>
+                                 <layout class="QGridLayout" name="gridLayout_170">
+                                  <property name="topMargin">
+                                   <number>20</number>
+                                  </property>
+                                  <item row="0" column="0">
+                                   <widget class="QRadioButton" name="fc_all_md">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                    </property>
+                                    <property name="text">
+                                     <string>All species</string>
+                                    </property>
+                                    <property name="checked">
+                                     <bool>true</bool>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="0" column="1">
+                                   <widget class="QRadioButton" name="fc_common_md">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                    </property>
+                                    <property name="text">
+                                     <string>Common species</string>
+                                    </property>
+                                    <property name="checked">
+                                     <bool>false</bool>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="0" column="2">
+                                   <widget class="QCheckBox" name="CheckBox_size_fc_md">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                     </font>
+                                    </property>
+                                    <property name="text">
+                                     <string>Size = f(sample 1 intensity )</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                 </layout>
+                                </widget>
+                               </item>
+                               <item row="2" column="1">
+                                <widget class="QGroupBox" name="groupBox_130">
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16000</width>
+                                   <height>80</height>
+                                  </size>
+                                 </property>
+                                 <property name="font">
+                                  <font>
+                                   <family>Segoe UI</family>
+                                   <pointsize>10</pointsize>
+                                   <weight>75</weight>
+                                   <bold>true</bold>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true"/>
+                                 </property>
+                                 <property name="title">
+                                  <string>Fold change calculation:</string>
+                                 </property>
+                                 <layout class="QGridLayout" name="gridLayout_171">
+                                  <property name="topMargin">
+                                   <number>20</number>
+                                  </property>
+                                  <item row="0" column="0">
+                                   <widget class="QRadioButton" name="radio_fold_rel_md">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                     </font>
+                                    </property>
+                                    <property name="text">
+                                     <string>By relative intensity</string>
+                                    </property>
+                                    <property name="checked">
+                                     <bool>true</bool>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="0" column="1">
+                                   <widget class="QRadioButton" name="radio_fold_abs_md">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                     </font>
+                                    </property>
+                                    <property name="text">
+                                     <string>By absolute intensity</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                 </layout>
+                                </widget>
+                               </item>
+                               <item row="3" column="1">
+                                <widget class="QGroupBox" name="groupBox_131">
+                                 <property name="sizePolicy">
+                                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                                   <horstretch>0</horstretch>
+                                   <verstretch>0</verstretch>
+                                  </sizepolicy>
+                                 </property>
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>100</height>
+                                  </size>
+                                 </property>
+                                 <property name="font">
+                                  <font>
+                                   <family>Segoe UI</family>
+                                   <pointsize>10</pointsize>
+                                   <weight>75</weight>
+                                   <bold>true</bold>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true"/>
+                                 </property>
+                                 <property name="title">
+                                  <string>Range:</string>
+                                 </property>
+                                 <layout class="QGridLayout" name="gridLayout_172">
+                                  <property name="topMargin">
+                                   <number>20</number>
+                                  </property>
+                                  <item row="0" column="0">
+                                   <widget class="QLabel" name="label_175">
+                                    <property name="maximumSize">
+                                     <size>
+                                      <width>16777215</width>
+                                      <height>15</height>
+                                     </size>
+                                    </property>
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                    </property>
+                                    <property name="text">
+                                     <string>NM min</string>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="0" column="1">
+                                   <widget class="QLineEdit" name="x_min_MD_compare">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true"/>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="0" column="2" colspan="2">
+                                   <widget class="QLabel" name="label_176">
+                                    <property name="maximumSize">
+                                     <size>
+                                      <width>16777215</width>
+                                      <height>15</height>
+                                     </size>
+                                    </property>
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                    </property>
+                                    <property name="text">
+                                     <string>NM max</string>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="0" column="4">
+                                   <widget class="QLineEdit" name="x_max_MD_compare">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true"/>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="1" column="0">
+                                   <widget class="QLabel" name="label_177">
+                                    <property name="maximumSize">
+                                     <size>
+                                      <width>16777215</width>
+                                      <height>15</height>
+                                     </size>
+                                    </property>
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                    </property>
+                                    <property name="text">
+                                     <string>MD min</string>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="1" column="1">
+                                   <widget class="QLineEdit" name="y_min_MD_compare">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true"/>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="1" column="2" colspan="2">
+                                   <widget class="QLabel" name="label_178">
+                                    <property name="maximumSize">
+                                     <size>
+                                      <width>16777215</width>
+                                      <height>15</height>
+                                     </size>
+                                    </property>
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                    </property>
+                                    <property name="text">
+                                     <string>MD max</string>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="1" column="4">
+                                   <widget class="QLineEdit" name="y_max_MD_compare">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true"/>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="2" column="0">
+                                   <widget class="QLabel" name="label_179">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                     </font>
+                                    </property>
+                                    <property name="text">
+                                     <string>Round:</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="2" column="1">
+                                   <widget class="QRadioButton" name="round_closest_compare_md">
+                                    <property name="text">
+                                     <string>Closest</string>
+                                    </property>
+                                    <property name="checked">
+                                     <bool>true</bool>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="2" column="2" colspan="3">
+                                   <widget class="QRadioButton" name="round_up_compare_md">
+                                    <property name="text">
+                                     <string>Up</string>
+                                    </property>
                                    </widget>
                                   </item>
                                  </layout>

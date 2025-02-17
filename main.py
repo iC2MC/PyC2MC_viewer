@@ -407,7 +407,10 @@ class MainWindow(QtWidgets.QMainWindow):
                 widgets.list_classes_MCR_comp.sortItems()
             if widgets.check_alphabetic_distrib_compare.isChecked():
                 widgets.list_classes_distrib_compare.sortItems()    
-                
+            if widgets.check_alphabetic_KMD_compare.isChecked():
+                widgets.list_classes_KMD_compare.sortItems()
+            if widgets.check_alphabetic_MD_compare.isChecked():
+                widgets.list_classes_MD_compare.sortItems()
 
         # INITIALIZATIONS
         self.start_counter=False
@@ -519,6 +522,9 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.check_alphabetic_Kroll_comp.clicked.connect(list_sorting)
         widgets.check_alphabetic_MAI_comp.clicked.connect(list_sorting)
         widgets.check_alphabetic_MCR_comp.clicked.connect(list_sorting)
+        widgets.check_alphabetic_KMD_compare.clicked.connect(list_sorting)
+        widgets.check_alphabetic_MD_compare.clicked.connect(list_sorting)
+
         
 #///////////////////////////////////////////////     
 #VIEW BUTTONS CONNECTIONS
@@ -646,7 +652,6 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.radio_mass_spectrum_compare.clicked.connect(lambda : widgets.stackedWidget_overview_compare.setCurrentWidget(widgets.page_mass_spectrum_compare))
             #Displays distribution widget
         widgets.radio_distribution_compare.clicked.connect(lambda : widgets.stackedWidget_overview_compare.setCurrentWidget(widgets.page_distribution_compare))
-
             #Displays Composition widget
         widgets.radio_composition_compare.clicked.connect(lambda : widgets.stackedWidget_overview_compare.setCurrentWidget(widgets.page_composition_compare))
         
@@ -658,6 +663,10 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.btn_DBE_compare.clicked.connect(lambda : widgets.stackedWidget_FC.setCurrentWidget(widgets.page_DBE_compare))
             #Displays Van Krevelen widget
         widgets.btn_VK_compare.clicked.connect(lambda : widgets.stackedWidget_FC.setCurrentWidget(widgets.page_VK_compare))
+            #Displays KMD widget
+        widgets.btn_KMD_compare.clicked.connect(lambda : widgets.stackedWidget_FC.setCurrentWidget(widgets.page_KMD_compare))
+            #Displays MD widget
+        widgets.btn_MD_compare.clicked.connect(lambda : widgets.stackedWidget_FC.setCurrentWidget(widgets.page_MD_compare))
 
 #/////////////////////////////////    
 #   COMPARE\KENDRICK BUTTONS CONNECTIONS
@@ -767,6 +776,10 @@ class MainWindow(QtWidgets.QMainWindow):
     ##Overview    
         widgets.plot_compare.clicked.connect(self.comparePlot)
         widgets.plot_compare_GIF.clicked.connect(self.comparePlotGIF)
+
+    ##FC maps
+    ### KMD
+        widgets.edit_motif_compare.textChanged.connect(self.kendrick_motif_compare_calculation)
 
         
     #Stat buttons
@@ -1019,6 +1032,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.plot_distrib_compare()
             elif ind_bis == 2:
                 self.plot_spectrum_compare()
+            
         
         elif ind == 1: #FC
             ind_bis = widgets.stackedWidget_FC.currentIndex()
@@ -1026,6 +1040,10 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.plot_molecular_carto_DBE()
             elif ind_bis == 1:
                 self.plot_molecular_carto_VK()
+            elif ind_bis == 2:
+                self.plot_molecular_carto_KMD()
+            elif ind_bis == 3:
+                self.plot_molecular_carto_MD()
         
         elif ind == 2:  #DBE
             self.plot_DBE_compare()
@@ -3088,6 +3106,24 @@ class MainWindow(QtWidgets.QMainWindow):
 
         widgets.edit_mass_motif.setText(str(mass)) # Modify text in "mass_motif"
 
+    def kendrick_motif_compare_calculation(self):
+        """
+        Returns the mass of the selected repetitive unit
+        """
+
+        formula = widgets.edit_motif_compare.text() #Retrieves text from "edit_motif"
+
+        form=cp.parse_formula(formula) #Creates a dict with symbols and mass
+
+        try:
+            mass = 0 #Initialisation
+            for atom in form:   #Loop
+                mass = mass + form[atom]*self.isotopes_dict[atom]
+        except:
+            QMessageBox.about(self, "FYI box", "Upper case only.")
+
+        widgets.edit_mass_motif_compare.setText(str(mass)) # Modify text in "mass_motif"
+
     def plot_Kendrick(self, gif = False):
         """
         Classic Kendrick plots and extracting series
@@ -4795,6 +4831,8 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.list_classes_VK_comp.clear()
         widgets.list_classes_Kendrick_comp.clear()
         widgets.list_classes_Kendrick_univ_comp.clear()
+        widgets.list_classes_KMD_compare.clear()
+        widgets.list_classes_MD_compare.clear()
         
         item_classes = QtWidgets.QListWidgetItem('All')
         item_classes.setData(self.USERDATA_ROLE, 'All')
@@ -4829,6 +4867,12 @@ class MainWindow(QtWidgets.QMainWindow):
         item_classes = QtWidgets.QListWidgetItem('All')
         item_classes.setData(self.USERDATA_ROLE, 'All')
         widgets.list_classes_MCR_comp.addItem(item_classes)
+        item_classes = QtWidgets.QListWidgetItem('All')
+        item_classes.setData(self.USERDATA_ROLE, 'All')
+        widgets.list_classes_KMD_compare.addItem(item_classes)
+        item_classes = QtWidgets.QListWidgetItem('All')
+        item_classes.setData(self.USERDATA_ROLE, 'All')
+        widgets.list_classes_MD_compare.addItem(item_classes)
         n=0
         while n < len(self.compared_datas.classes):
             item_classes = QtWidgets.QListWidgetItem(self.compared_datas.classes_concat.iloc[n,0])
@@ -4864,6 +4908,12 @@ class MainWindow(QtWidgets.QMainWindow):
             item_classes = QtWidgets.QListWidgetItem(self.compared_datas.classes_concat.iloc[n,0])
             item_classes.setData(self.USERDATA_ROLE, self.compared_datas.classes.iloc[n,0])
             widgets.list_classes_MCR_comp.addItem(item_classes)
+            item_classes = QtWidgets.QListWidgetItem(self.compared_datas.classes_concat.iloc[n,0])
+            item_classes.setData(self.USERDATA_ROLE, self.compared_datas.classes.iloc[n,0])
+            widgets.list_classes_KMD_compare.addItem(item_classes)
+            item_classes = QtWidgets.QListWidgetItem(self.compared_datas.classes_concat.iloc[n,0])
+            item_classes.setData(self.USERDATA_ROLE, self.compared_datas.classes.iloc[n,0])
+            widgets.list_classes_MD_compare.addItem(item_classes)
             n=n+1
         widgets.plot_compare.setEnabled(True)
         widgets.plot_compare_GIF.setEnabled(True)
@@ -4915,6 +4965,8 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.list_classes_VK_comp.setCurrentRow(0)
         widgets.list_classes_Kendrick_comp.setCurrentRow(0)
         widgets.list_classes_Kendrick_univ_comp.setCurrentRow(0)
+        widgets.list_classes_KMD_compare.setCurrentRow(0)
+        widgets.list_classes_MD_compare.setCurrentRow(0)
 
     def plot_molecular_carto_DBE(self,gif = False):
         """
@@ -5266,6 +5318,186 @@ class MainWindow(QtWidgets.QMainWindow):
             plt.ion() 
         
 
+    def plot_molecular_carto_KMD(self, gif = False):
+        """
+        KMD plot for the compare menu
+        """
+        frames = []
+        self.read_param()
+        font_size = self.fontsize
+        if widgets.checkBox_old_figures.isChecked() and plt.get_fignums():
+            plt.close("all")
+        sample_1 = widgets.list_compare_sample_1.currentRow()
+        sample_2 = widgets.list_compare_sample_2.currentRow()
+        n_sample = max(self.compared_datas.df['count'])
+        if widgets.radio_fold_rel_KMD.isChecked():
+            fold_intens_1 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_1].values.astype(float).copy().reshape(-1, 1)
+            fold_intens_2 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_2].values.astype(float).copy().reshape(-1, 1)
+            min_max_scaler = preprocessing.MinMaxScaler()
+            fold_intens_1 = min_max_scaler.fit_transform(fold_intens_1)
+            fold_intens_2 = min_max_scaler.fit_transform(fold_intens_2)
+            
+            leg_1 = str(self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_1].name)
+            leg_2 = str(self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_2].name)
+            leg_1 = leg_1.replace(".csv","")
+            leg_2 = leg_2.replace(".csv","")
+            leg_1 = leg_1.replace(".xlsx","")
+            leg_2 = leg_2.replace(".xlsx","")
+            leg_1 = leg_1.replace("Rel_intens_","")
+            leg_2 = leg_2.replace("Rel_intens_","")
+        else:
+            fold_intens_1 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_1].values.astype(float).copy().reshape(-1, 1)
+            fold_intens_2 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_2].values.astype(float).copy().reshape(-1, 1)
+            leg_1 = str(self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_1].name)
+            leg_2 = str(self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_2].name)
+            leg_1 = leg_1.replace(".csv","")
+            leg_2 = leg_2.replace(".csv","")
+            leg_1 = leg_1.replace(".xlsx","")
+            leg_2 = leg_2.replace(".xlsx","")
+            leg_1 = leg_1.replace("Rel_intens_","")
+            leg_2 = leg_2.replace("Rel_intens_","")
+        self.compared_datas.df["fc"] = np.log2(fold_intens_2/fold_intens_1)
+
+        #KMD calculation
+        if widgets.edit_mass_motif_compare.text():
+            repetive_unit_mass = float(widgets.edit_mass_motif_compare.text())
+            nominal_unit = round(repetive_unit_mass)
+        self.compared_datas.df['Kendrick mass']= self.compared_datas.df['m/z']*(nominal_unit/repetive_unit_mass)
+        self.compared_datas.df['Kendrick nominal mass']=round(self.compared_datas.df['m/z'])
+
+        if widgets.round_up_compare.isChecked():
+            self.compared_datas.df['Kendrick nominal mass']=self.compared_datas.df['Kendrick mass'].apply(np.ceil)
+        elif widgets.round_closest_compare.isChecked():
+            self.compared_datas.df['Kendrick nominal mass']=round(self.compared_datas.df['Kendrick mass'])
+        self.compared_datas.df['Kendrick mass defect']=self.compared_datas.df['Kendrick nominal mass']-self.compared_datas.df['Kendrick mass']
+        
+
+        ####
+        #Excluding infinite and NaN values (attribution in neither of the sample)
+        self.compared_datas.df['fc'].fillna(2e20,inplace=True)
+        p_inf=(self.compared_datas.df['fc'] >1e20).tolist()
+        n_inf=(self.compared_datas.df['fc'] <-1e20).tolist()
+        data_inf_pos = self.compared_datas.df[:][p_inf].copy()
+        data_inf_neg = self.compared_datas.df[:][n_inf].copy()
+        inf_index=[i or j for i, j in zip(n_inf,p_inf)]
+        ###
+        
+        
+        item_classes = widgets.list_classes_KMD_compare.selectedItems()
+        if not item_classes:
+            return
+        
+        for item in item_classes:
+            data_extract = self.compared_datas.df.drop(index=self.compared_datas.df.index[inf_index],axis=0).copy()
+            
+            classe_selected = item.data(self.USERDATA_ROLE)
+            
+            data_extract = data_extract.sort_values(by=["fc"], ascending=False)
+            Intens = data_extract.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-2].values.reshape(-1,1)
+            min_max_scaler = preprocessing.MinMaxScaler()
+            Intens_scaled = min_max_scaler.fit_transform(Intens)
+            data_extract.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-2] = Intens_scaled
+            if classe_selected == 'All':
+                pass 
+            else:
+                classes_index = self.compared_datas.classes[self.compared_datas.classes['variable'] == classe_selected]
+                if 'x' in classe_selected:
+                    index_classes = (self.compared_datas.df[classe_selected] == True)
+                else:
+                    index_classes = (self.compared_datas.df[self.compared_datas.heteroatoms.columns] == self.compared_datas.heteroatoms.iloc[classes_index.index[0]]).all(1)
+                data_extract = data_extract[index_classes]
+                data_inf_neg = data_inf_neg[index_classes]
+                data_inf_pos = data_inf_pos[index_classes]
+                
+            Intens = data_extract["Normalized_intensity"].values.reshape(-1,1)
+            if Intens != []:
+                min_max_scaler = preprocessing.MinMaxScaler()
+                Intens_scaled = min_max_scaler.fit_transform(Intens)
+            else : Intens_scaled = Intens
+            data_extract["Normalized_intensity"] = Intens_scaled
+            data_extract = data_extract.sort_values(by=['fc',"Normalized_intensity"], ascending=[False,True])  
+            
+            data = pandas.DataFrame()
+            data.data_extract = data_extract
+            data.data_inf_neg = data_inf_neg 
+            data.data_inf_pos = data_inf_pos
+            data.classe_selected = classe_selected
+            frames.append(data)
+            def Anim(frames):   
+                if gif == False:
+                    fig = plt.figure()
+                    transf = fig.transFigure
+                else:
+                    Figure.clear()
+                    transf = Figure.transFigure
+                self.read_param()
+                if widgets.CheckBox_size_fc_kmd.isChecked() :
+                    size = self.d_size*frames.data_extract.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-(n_sample)+sample_1].astype(float)
+                    size_inf_neg = self.d_size*frames.data_inf_neg.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-(n_sample)+sample_1].astype(float)
+                    size_inf_pos = self.d_size*frames.data_inf_pos.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-(n_sample)+sample_2].astype(float)
+                else:
+                    size = self.d_size
+                    size_inf_neg = self.d_size
+                    size_inf_pos = self.d_size
+
+
+                if widgets.fc_all_kmd.isChecked() :
+                    plot_fun("scatter",x=frames.data_inf_neg['Kendrick nominal mass'],y=frames.data_inf_neg['Kendrick mass defect'],d_color='#a84ca4',dot_type=self.dot_type,edge=self.edge,size = size_inf_neg)
+                    plot_fun("scatter",x=frames.data_inf_pos['Kendrick nominal mass'],y=frames.data_inf_pos['Kendrick mass defect'],d_color='#0070c0',dot_type=self.dot_type,edge=self.edge,size = size_inf_pos)
+                # plot_fun("scatter",x=frames.data_extract["C"],y=frames.data_extract["DBE"],d_color=frames.data_extract["fc"],dot_type=self.dot_type,edge=self.edge,cmap="RdYlGn",size = size)
+                plt.scatter(frames.data_extract['Kendrick nominal mass'],frames.data_extract['Kendrick mass defect'],s=size,c=frames.data_extract["fc"],vmin = -8, vmax = 8,cmap="RdYlGn",edgecolor='black',linewidths=0.7)
+                
+                if widgets.x_min_KMD_compare.text():
+                    x_min = float(widgets.x_min_KMD_compare.text())
+                    plt.gca().set_xlim(left=x_min)
+                if widgets.x_max_KMD_compare.text():
+                    x_max = float(widgets.x_max_KMD_compare.text())
+                    plt.gca().set_xlim(right=x_max)
+        
+                if widgets.y_min_KMD_compare.text():
+                    y_min = float(widgets.y_min_KMD_compare.text())
+                    plt.gca().set_ylim(bottom=y_min)
+                if widgets.y_max_KMD_compare.text():
+                    y_max = float(widgets.y_max_KMD_compare.text())
+                    plt.gca().set_ylim(top=y_max)
+                
+                if len(data.data_extract) != 0:
+                    cbar = plt.colorbar(ticks=[-8,8])
+                    cbar.ax.set_yticklabels([leg_1,leg_2],fontsize=font_size-2,weight='bold',rotation = 90, va = 'center')  # vertically oriented colorbar
+                    cbar.set_label('log2(FC)', labelpad=-2.625*(font_size), rotation=90,fontsize=16)
+                
+                plt.xlabel('Nominal mass', fontsize=self.fontsize+4)
+                plt.ylabel('KMD', fontsize=self.fontsize+4)
+                plt.xticks(fontsize=self.fontsize)
+                plt.yticks(fontsize=self.fontsize)
+                plt.text(0.13,0.9,frames.classe_selected,horizontalalignment='left',
+                              verticalalignment='center', transform = transf,fontsize=self.fontsize-1)
+                                
+                if widgets.fc_all_kmd.isChecked() :
+                    legend_elements = [Patch(facecolor='#a84ca4', edgecolor='k',label=leg_1+ ' exclusive'),
+                                        Patch(facecolor='#0070c0', edgecolor='k',label=leg_2+ ' exclusive')]
+                    plt.legend(handles=legend_elements,fontsize=font_size-4)
+                if gif == False:
+                    mngr = plt.get_current_fig_manager()
+                    mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,800, 680)
+                if "m/z" in frames.data_extract:
+                    mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(frames.data_extract['molecular_formula'].iloc[sel.target.index] +', m/z = '+ str(frames.data_extract['m/z'].iloc[sel.target.index])))
+            
+        if gif == False:
+            for i in frames:
+                Anim(i)   
+            plt.show()
+        else:
+            Figure = plt.figure()
+            plt.show()
+            anim_created = FuncAnimation(Figure, Anim, frames, interval=1000/self.fps)  
+            mngr = plt.get_current_fig_manager()
+            mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,800, 680)
+            writergif = PillowWriter(fps=self.fps) 
+            anim_created.save("animation.gif", writer=writergif)
+            plt.ion()
+
+    
     def plot_DBE_compare(self,gif = False):
         
         """
