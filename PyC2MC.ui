@@ -14887,6 +14887,24 @@ species</string>
                                   <property name="topMargin">
                                    <number>20</number>
                                   </property>
+                                  <item row="1" column="4">
+                                   <widget class="QLineEdit" name="y_max_MD_compare">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true"/>
+                                    </property>
+                                    <property name="alignment">
+                                     <set>Qt::AlignCenter</set>
+                                    </property>
+                                   </widget>
+                                  </item>
                                   <item row="0" column="0">
                                    <widget class="QLabel" name="label_175">
                                     <property name="maximumSize">
@@ -15004,24 +15022,6 @@ species</string>
                                     </property>
                                    </widget>
                                   </item>
-                                  <item row="1" column="1">
-                                   <widget class="QLineEdit" name="y_min_MD_compare">
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                      <weight>50</weight>
-                                      <bold>false</bold>
-                                     </font>
-                                    </property>
-                                    <property name="styleSheet">
-                                     <string notr="true"/>
-                                    </property>
-                                    <property name="alignment">
-                                     <set>Qt::AlignCenter</set>
-                                    </property>
-                                   </widget>
-                                  </item>
                                   <item row="1" column="2" colspan="2">
                                    <widget class="QLabel" name="label_178">
                                     <property name="maximumSize">
@@ -15049,8 +15049,8 @@ species</string>
                                     </property>
                                    </widget>
                                   </item>
-                                  <item row="1" column="4">
-                                   <widget class="QLineEdit" name="y_max_MD_compare">
+                                  <item row="1" column="1">
+                                   <widget class="QLineEdit" name="y_min_MD_compare">
                                     <property name="font">
                                      <font>
                                       <family>Segoe UI</family>
@@ -15064,36 +15064,6 @@ species</string>
                                     </property>
                                     <property name="alignment">
                                      <set>Qt::AlignCenter</set>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="2" column="0">
-                                   <widget class="QLabel" name="label_179">
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
-                                    </property>
-                                    <property name="text">
-                                     <string>Round:</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="2" column="1">
-                                   <widget class="QRadioButton" name="round_closest_compare_md">
-                                    <property name="text">
-                                     <string>Closest</string>
-                                    </property>
-                                    <property name="checked">
-                                     <bool>true</bool>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="2" column="2" colspan="3">
-                                   <widget class="QRadioButton" name="round_up_compare_md">
-                                    <property name="text">
-                                     <string>Up</string>
                                     </property>
                                    </widget>
                                   </item>

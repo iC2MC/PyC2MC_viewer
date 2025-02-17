@@ -3279,19 +3279,14 @@ class MainWindow(QtWidgets.QMainWindow):
                     except:
                         QMessageBox.about(self, "FYI box", "Only use digits and dots for KMD values (no comma !)")
                         return
-                    print('KMD to look =',kmd)
                     
                     tol=abs(kmd)*tol_per/100 #tolerance attribution
-                    print("min = ",kmd-tol)
-                    print("max = ", kmd+tol)
                     n=0
                     data_filtered.sort_values('m/z', ascending=True, inplace= True)
                     data_filtered = data_filtered.reset_index(drop=True)
                     for o in data_filtered['Kendrick mass defect'] :
                         if o >= kmd-tol and o <= kmd+tol :
                             data_filtered.at[n,'id'] = j+1
-                            print('found one')
-                            print(o)
                         n=n+1   
                         
             d = {'col1': data_filtered['Kendrick nominal mass'], 'col2': data_filtered['Kendrick mass defect'], 'normalized_intensity': data_filtered['normalized_intensity'], 'id':data_filtered['id'],'m/z': data_filtered['m/z']}
@@ -5015,7 +5010,6 @@ class MainWindow(QtWidgets.QMainWindow):
         data_inf_pos = self.compared_datas.df[:][p_inf].copy()
         data_inf_neg = self.compared_datas.df[:][n_inf].copy()
         inf_index=[i or j for i, j in zip(n_inf,p_inf)]
-        self.compared_datas.df.to_csv('test_ext.csv')
         ###
         
         
@@ -5496,6 +5490,178 @@ class MainWindow(QtWidgets.QMainWindow):
             writergif = PillowWriter(fps=self.fps) 
             anim_created.save("animation.gif", writer=writergif)
             plt.ion()
+
+    def plot_molecular_carto_MD(self, gif = False):
+        """
+        KMD plot for the compare menu
+        """
+        frames = []
+        self.read_param()
+        font_size = self.fontsize
+        if widgets.checkBox_old_figures.isChecked() and plt.get_fignums():
+            plt.close("all")
+        sample_1 = widgets.list_compare_sample_1.currentRow()
+        sample_2 = widgets.list_compare_sample_2.currentRow()
+        n_sample = max(self.compared_datas.df['count'])
+        if widgets.radio_fold_rel_md.isChecked():
+            fold_intens_1 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_1].values.astype(float).copy().reshape(-1, 1)
+            fold_intens_2 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_2].values.astype(float).copy().reshape(-1, 1)
+            min_max_scaler = preprocessing.MinMaxScaler()
+            fold_intens_1 = min_max_scaler.fit_transform(fold_intens_1)
+            fold_intens_2 = min_max_scaler.fit_transform(fold_intens_2)
+            
+            leg_1 = str(self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_1].name)
+            leg_2 = str(self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_2].name)
+            leg_1 = leg_1.replace(".csv","")
+            leg_2 = leg_2.replace(".csv","")
+            leg_1 = leg_1.replace(".xlsx","")
+            leg_2 = leg_2.replace(".xlsx","")
+            leg_1 = leg_1.replace("Rel_intens_","")
+            leg_2 = leg_2.replace("Rel_intens_","")
+        else:
+            fold_intens_1 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_1].values.astype(float).copy().reshape(-1, 1)
+            fold_intens_2 = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_2].values.astype(float).copy().reshape(-1, 1)
+            leg_1 = str(self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_1].name)
+            leg_2 = str(self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1+sample_2].name)
+            leg_1 = leg_1.replace(".csv","")
+            leg_2 = leg_2.replace(".csv","")
+            leg_1 = leg_1.replace(".xlsx","")
+            leg_2 = leg_2.replace(".xlsx","")
+            leg_1 = leg_1.replace("Rel_intens_","")
+            leg_2 = leg_2.replace("Rel_intens_","")
+        self.compared_datas.df["fc"] = np.log2(fold_intens_2/fold_intens_1)
+
+        #MD calculation
+        nominal_mass = round(self.compared_datas.df['m/z'])
+        mass_defect = self.compared_datas.df['m/z'] - nominal_mass
+        self.compared_datas.df['nominal_mass'] = nominal_mass
+        self.compared_datas.df['mass_defect'] = mass_defect
+
+        ####
+        #Excluding infinite and NaN values (attribution in neither of the sample)
+        self.compared_datas.df['fc'].fillna(2e20,inplace=True)
+        p_inf=(self.compared_datas.df['fc'] >1e20).tolist()
+        n_inf=(self.compared_datas.df['fc'] <-1e20).tolist()
+        data_inf_pos = self.compared_datas.df[:][p_inf].copy()
+        data_inf_neg = self.compared_datas.df[:][n_inf].copy()
+        inf_index=[i or j for i, j in zip(n_inf,p_inf)]
+        ###
+        
+        
+        item_classes = widgets.list_classes_MD_compare.selectedItems()
+        if not item_classes:
+            return
+        
+        for item in item_classes:
+            data_extract = self.compared_datas.df.drop(index=self.compared_datas.df.index[inf_index],axis=0).copy()
+            
+            classe_selected = item.data(self.USERDATA_ROLE)
+            
+            data_extract = data_extract.sort_values(by=["fc"], ascending=False)
+            Intens = data_extract.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-2].values.reshape(-1,1)
+            min_max_scaler = preprocessing.MinMaxScaler()
+            Intens_scaled = min_max_scaler.fit_transform(Intens)
+            data_extract.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-2] = Intens_scaled
+            if classe_selected == 'All':
+                pass 
+            else:
+                classes_index = self.compared_datas.classes[self.compared_datas.classes['variable'] == classe_selected]
+                if 'x' in classe_selected:
+                    index_classes = (self.compared_datas.df[classe_selected] == True)
+                else:
+                    index_classes = (self.compared_datas.df[self.compared_datas.heteroatoms.columns] == self.compared_datas.heteroatoms.iloc[classes_index.index[0]]).all(1)
+                data_extract = data_extract[index_classes]
+                data_inf_neg = data_inf_neg[index_classes]
+                data_inf_pos = data_inf_pos[index_classes]
+                
+            Intens = data_extract["Normalized_intensity"].values.reshape(-1,1)
+            if Intens != []:
+                min_max_scaler = preprocessing.MinMaxScaler()
+                Intens_scaled = min_max_scaler.fit_transform(Intens)
+            else : Intens_scaled = Intens
+            data_extract["Normalized_intensity"] = Intens_scaled
+            data_extract = data_extract.sort_values(by=['fc',"Normalized_intensity"], ascending=[False,True])  
+            
+            data = pandas.DataFrame()
+            data.data_extract = data_extract
+            data.data_inf_neg = data_inf_neg 
+            data.data_inf_pos = data_inf_pos
+            data.classe_selected = classe_selected
+            frames.append(data)
+            def Anim(frames):   
+                if gif == False:
+                    fig = plt.figure()
+                    transf = fig.transFigure
+                else:
+                    Figure.clear()
+                    transf = Figure.transFigure
+                self.read_param()
+                if widgets.CheckBox_size_fc_md.isChecked() :
+                    size = self.d_size*frames.data_extract.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-(n_sample)+sample_1].astype(float)
+                    size_inf_neg = self.d_size*frames.data_inf_neg.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-(n_sample)+sample_1].astype(float)
+                    size_inf_pos = self.d_size*frames.data_inf_pos.iloc[:,self.compared_datas.df.columns.get_loc('summed_intensity')-(n_sample)+sample_2].astype(float)
+                else:
+                    size = self.d_size
+                    size_inf_neg = self.d_size
+                    size_inf_pos = self.d_size
+
+
+                if widgets.fc_all_md.isChecked() :
+                    plot_fun("scatter",x=frames.data_inf_neg['nominal_mass'],y=frames.data_inf_neg['mass_defect'],d_color='#a84ca4',dot_type=self.dot_type,edge=self.edge,size = size_inf_neg)
+                    plot_fun("scatter",x=frames.data_inf_pos['nominal_mass'],y=frames.data_inf_pos['mass_defect'],d_color='#0070c0',dot_type=self.dot_type,edge=self.edge,size = size_inf_pos)
+                # plot_fun("scatter",x=frames.data_extract["C"],y=frames.data_extract["DBE"],d_color=frames.data_extract["fc"],dot_type=self.dot_type,edge=self.edge,cmap="RdYlGn",size = size)
+                plt.scatter(frames.data_extract['nominal_mass'],frames.data_extract['mass_defect'],s=size,c=frames.data_extract["fc"],vmin = -8, vmax = 8,cmap="RdYlGn",edgecolor='black',linewidths=0.7)
+                
+                if widgets.x_min_MD_compare.text():
+                    x_min = float(widgets.x_min_MD_compare.text())
+                    plt.gca().set_xlim(left=x_min)
+                if widgets.x_max_MD_compare.text():
+                    x_max = float(widgets.x_max_MD_compare.text())
+                    plt.gca().set_xlim(right=x_max)
+        
+                if widgets.y_min_MD_compare.text():
+                    y_min = float(widgets.y_min_MD_compare.text())
+                    plt.gca().set_ylim(bottom=y_min)
+                if widgets.y_max_MD_compare.text():
+                    y_max = float(widgets.y_max_MD_compare.text())
+                    plt.gca().set_ylim(top=y_max)
+                
+                if len(data.data_extract) != 0:
+                    cbar = plt.colorbar(ticks=[-8,8])
+                    cbar.ax.set_yticklabels([leg_1,leg_2],fontsize=font_size-2,weight='bold',rotation = 90, va = 'center')  # vertically oriented colorbar
+                    cbar.set_label('log2(FC)', labelpad=-2.625*(font_size), rotation=90,fontsize=16)
+                
+                plt.xlabel('Nominal mass', fontsize=self.fontsize+4)
+                plt.ylabel('Mass defect', fontsize=self.fontsize+4)
+                plt.xticks(fontsize=self.fontsize)
+                plt.yticks(fontsize=self.fontsize)
+                plt.text(0.13,0.9,frames.classe_selected,horizontalalignment='left',
+                              verticalalignment='center', transform = transf,fontsize=self.fontsize-1)
+                                
+                if widgets.fc_all_md.isChecked() :
+                    legend_elements = [Patch(facecolor='#a84ca4', edgecolor='k',label=leg_1+ ' exclusive'),
+                                        Patch(facecolor='#0070c0', edgecolor='k',label=leg_2+ ' exclusive')]
+                    plt.legend(handles=legend_elements,fontsize=font_size-4)
+                if gif == False:
+                    mngr = plt.get_current_fig_manager()
+                    mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,800, 680)
+                if "m/z" in frames.data_extract:
+                    mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text(frames.data_extract['molecular_formula'].iloc[sel.target.index] +', m/z = '+ str(frames.data_extract['m/z'].iloc[sel.target.index])))
+            
+        if gif == False:
+            for i in frames:
+                Anim(i)   
+            plt.show()
+        else:
+            Figure = plt.figure()
+            plt.show()
+            anim_created = FuncAnimation(Figure, Anim, frames, interval=1000/self.fps)  
+            mngr = plt.get_current_fig_manager()
+            mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,800, 680)
+            writergif = PillowWriter(fps=self.fps) 
+            anim_created.save("animation.gif", writer=writergif)
+            plt.ion()
+
 
     
     def plot_DBE_compare(self,gif = False):
