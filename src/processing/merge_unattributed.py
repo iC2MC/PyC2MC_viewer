@@ -7,7 +7,7 @@ from src.loading.loading_function import load_MS_file
 
 
  
-def merge_non_attributed(names,tol, callback = None):
+def merge_non_attributed(names:str, tol:float, min_rel_intens:float = None, callback: callable = None):
     """
     This function is used to concatenate non attributed .asc files from DataAnalysis.
     The merge is working using the mass-to-charge ratio with a given tolerance in Dalton
@@ -15,6 +15,7 @@ def merge_non_attributed(names,tol, callback = None):
     Args: 
         names(list): Dictionnary of name of datasets to import
         tol(float): value of the tolerance in ppm (1e-6)
+        min_rel_intens(float): Lower limit for relative intensity, allows to roughly filter noise 
         callback (callable): callback function 
     Return a pandas.DataFrame. 
     """
@@ -27,6 +28,8 @@ def merge_non_attributed(names,tol, callback = None):
         temp_data: pandas.DataFrame = load_MS_file(filename).df[["m/z","absolute_intensity"]]
         temp_data.rename(columns={"m/z":"mz", "absolute_intensity":"I"},inplace=True)
         temp_data['Rel_intens'] = (temp_data['I']/sum(temp_data['I']))*100
+        if min_rel_intens is not None:
+            temp_data = temp_data[temp_data['Rel_intens'] >= min_rel_intens]
         
         temp_data.sort_values("mz",inplace = True,ignore_index= True)
         data.append(temp_data)   
