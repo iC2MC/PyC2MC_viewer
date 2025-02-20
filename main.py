@@ -717,6 +717,18 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.btn_Volcano.clicked.connect(self.buttonColor)
         widgets.btn_Volcano.clicked.connect(openCloseStatsBox) 
         widgets.btn_Volcano.clicked.connect(lambda :self.colorTab('Stats'))
+
+        #Displays pl comparison page
+        widgets.btn_pl_comp.clicked.connect(lambda : widgets.stackedWidget.setCurrentWidget(widgets.stats))
+        widgets.btn_pl_comp.clicked.connect(lambda : widgets.stats_stacked_widget.setCurrentWidget(widgets.page_pl_comp))
+        widgets.btn_pl_comp.clicked.connect(self.buttonColor)
+        widgets.btn_pl_comp.clicked.connect(openCloseStatsBox) 
+        widgets.btn_pl_comp.clicked.connect(lambda :self.colorTab('Stats'))
+
+            #Displays KMD widget
+        widgets.btn_KMD_stats.clicked.connect(lambda : widgets.stackedWidget_FC_stats.setCurrentWidget(widgets.page_KMD_compare_2))
+            #Displays MD widget
+        widgets.btn_MD_stats.clicked.connect(lambda : widgets.stackedWidget_FC_stats.setCurrentWidget(widgets.page_MD_compare_2))
  
         
 #------------------------------------------------------------------------------   
@@ -737,6 +749,8 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.list_classes_distrib.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         widgets.list_compare_sample_1.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         widgets.list_compare_sample_2.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        widgets.list_sample_1_stats.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        widgets.list_sample_2_stats.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
     
     
     #Plot View
@@ -800,6 +814,9 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.list_sets.itemSelectionChanged.connect(self.select_set_venn)
         widgets.Save_Sets_Button.clicked.connect(self.save_sets_venn)
     
+
+        # KMD
+        widgets.edit_motif_stats.textChanged.connect(self.kendrick_motif_stats_calculation)
         
     
     #File
@@ -1113,6 +1130,12 @@ class MainWindow(QtWidgets.QMainWindow):
             self.plot_HCA()
         elif ind == 3:
             self.volcano()
+        elif ind == 4:
+            sub_ind = widgets.stackedWidget_FC_stats.currentIndex()
+            if sub_ind == 0:
+                self.pl_comp_KMD()
+            elif sub_ind == 1:
+                self.pl_comp_MD()
             
             
     #---------------------------------------
@@ -1166,6 +1189,8 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.list_loaded_file_compare.clear()
         widgets.list_compare_sample_1.clear()
         widgets.list_compare_sample_2.clear()
+        widgets.list_sample_1_stats.clear()
+        widgets.list_sample_2_stats.clear()
         widgets.list_classes_mass_spec_comp.clear()
         widgets.list_classes_distrib_compare.clear()
         widgets.list_classes_DBE_compare.clear()
@@ -1867,6 +1892,8 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.volc_color_classes.setEnabled(True)
         widgets.volc_color_dbe.setEnabled(True)
         widgets.volc_color_oc.setEnabled(True)
+        widgets.list_sample_1_stats.clear()
+        widgets.list_sample_2_stats.clear()
         item_file = widgets.list_loaded_file_2.selectedItems()
         if not item_file:
             return
@@ -1899,6 +1926,26 @@ class MainWindow(QtWidgets.QMainWindow):
                 item_sample = QtWidgets.QListWidgetItem(volc_data.columns[n])
                 widgets.list_sample_2.addItem(item_sample)
                 n=n+1
+
+        # Add samples in FC calc samples list
+        # Remove useless info in names
+        name_data = data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1:data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])*2+1]
+        name_data.columns=name_data.columns.str.replace(".csv","")
+        name_data.columns=name_data.columns.str.replace(".xlsx","")
+        name_data.columns=name_data.columns.str.replace('Rel_intens_','')
+        
+        
+        # add items in lists
+        n=0
+        while n < len(name_data.columns):
+            item_sample = QtWidgets.QListWidgetItem(name_data.columns[n])
+            widgets.list_sample_1_stats.addItem(item_sample)
+            item_sample = QtWidgets.QListWidgetItem(name_data.columns[n])
+            widgets.list_sample_2_stats.addItem(item_sample)
+            n=n+1
+        
+        
+
                             
     def save_file(self):
         """
@@ -3088,6 +3135,315 @@ class MainWindow(QtWidgets.QMainWindow):
         plt.show()
 
 
+    def pl_comp_KMD(self, gif = False):
+        """
+        KMD plot for the stats menu
+        """
+
+        item_file = widgets.list_loaded_file_2.selectedItems()
+        if not item_file:
+            return
+        item = item_file[0]
+        data_selected = item.data(self.USERDATA_ROLE)
+
+        frames = []
+        self.read_param()
+        font_size = self.fontsize
+        if widgets.checkBox_old_figures.isChecked() and plt.get_fignums():
+            plt.close("all")
+        sample_1 = widgets.list_sample_1_stats.currentRow()
+        sample_2 = widgets.list_sample_2_stats.currentRow()
+        n_sample = max(data_selected.df['count'])
+        if widgets.radio_fold_rel_KMD_stats.isChecked():
+            fold_intens_1 = data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1+sample_1].values.astype(float).copy().reshape(-1, 1)
+            fold_intens_2 = data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1+sample_2].values.astype(float).copy().reshape(-1, 1)
+            min_max_scaler = preprocessing.MinMaxScaler()
+            fold_intens_1 = min_max_scaler.fit_transform(fold_intens_1)
+            fold_intens_2 = min_max_scaler.fit_transform(fold_intens_2)
+            
+            leg_1 = str(data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1+sample_1].name)
+            leg_2 = str(data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1+sample_2].name)
+            leg_1 = leg_1.replace(".csv","")
+            leg_2 = leg_2.replace(".csv","")
+            leg_1 = leg_1.replace(".xlsx","")
+            leg_2 = leg_2.replace(".xlsx","")
+            leg_1 = leg_1.replace("Rel_intens_","")
+            leg_2 = leg_2.replace("Rel_intens_","")
+        else:
+            fold_intens_1 = data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1+sample_1].values.astype(float).copy().reshape(-1, 1)
+            fold_intens_2 = data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1+sample_2].values.astype(float).copy().reshape(-1, 1)
+            leg_1 = str(data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1+sample_1].name)
+            leg_2 = str(data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1+sample_2].name)
+            leg_1 = leg_1.replace(".csv","")
+            leg_2 = leg_2.replace(".csv","")
+            leg_1 = leg_1.replace(".xlsx","")
+            leg_2 = leg_2.replace(".xlsx","")
+            leg_1 = leg_1.replace("Rel_intens_","")
+            leg_2 = leg_2.replace("Rel_intens_","")
+        data_selected.df["fc"] = np.log2(fold_intens_2/fold_intens_1)
+        data_selected.df['summed_intensity'] = fold_intens_1 + fold_intens_2
+        print(data_selected.df)
+        #KMD calculation
+        if widgets.edit_mass_motif_stats.text():
+            repetive_unit_mass = float(widgets.edit_mass_motif_stats.text())
+            nominal_unit = round(repetive_unit_mass)
+        data_selected.df['Kendrick mass']= data_selected.df['m/z']*(nominal_unit/repetive_unit_mass)
+        data_selected.df['Kendrick nominal mass']=round(data_selected.df['m/z'])
+
+        if widgets.round_up_stats.isChecked():
+            data_selected.df['Kendrick nominal mass']=data_selected.df['Kendrick mass'].apply(np.ceil)
+        elif widgets.round_closest_stats.isChecked():
+            data_selected.df['Kendrick nominal mass']=round(data_selected.df['Kendrick mass'])
+        data_selected.df['Kendrick mass defect']=data_selected.df['Kendrick nominal mass']-data_selected.df['Kendrick mass']
+        
+
+        ####
+        #Excluding infinite and NaN values (attribution in neither of the sample)
+        data_selected.df['fc'].fillna(2e20,inplace=True)
+        p_inf=(data_selected.df['fc'] >1e20).tolist()
+        n_inf=(data_selected.df['fc'] <-1e20).tolist()
+        data_inf_pos = data_selected.df[:][p_inf].copy()
+        data_inf_neg = data_selected.df[:][n_inf].copy()
+        inf_index=[i or j for i, j in zip(n_inf,p_inf)]
+        ###
+        
+        
+        data_extract = data_selected.df.drop(index=data_selected.df.index[inf_index],axis=0).copy()
+        data_extract = data_extract.sort_values(by=["fc"], ascending=False)
+        print(data_selected.df.columns)
+        Intens = data_extract.iloc[:,data_selected.df.columns.get_loc('summed_intensity')-2].values.reshape(-1,1)
+        min_max_scaler = preprocessing.MinMaxScaler()
+        Intens_scaled = min_max_scaler.fit_transform(Intens)
+        data_extract.iloc[:,data_selected.df.columns.get_loc('summed_intensity')-2] = Intens_scaled
+        data_extract = data_extract.sort_values(by=['fc',"summed_intensity"], ascending=[False,True])  
+        
+        data = pandas.DataFrame()
+        data.data_extract = data_extract
+        data.data_inf_neg = data_inf_neg 
+        data.data_inf_pos = data_inf_pos
+        frames.append(data)
+        def Anim(frames):   
+            if gif == False:
+                fig = plt.figure()
+                transf = fig.transFigure
+            else:
+                Figure.clear()
+                transf = Figure.transFigure
+            self.read_param()
+            if widgets.CheckBox_size_fc_kmd_stats.isChecked() :
+                size = self.d_size*frames.data_extract.iloc[:,data_selected.df.columns.get_loc('summed_intensity')-(n_sample)+sample_1].astype(float)
+                size_inf_neg = self.d_size*frames.data_inf_neg.iloc[:,data_selected.df.columns.get_loc('summed_intensity')-(n_sample)+sample_1].astype(float)
+                size_inf_pos = self.d_size*frames.data_inf_pos.iloc[:,data_selected.df.columns.get_loc('summed_intensity')-(n_sample)+sample_2].astype(float)
+            else:
+                size = self.d_size
+                size_inf_neg = self.d_size
+                size_inf_pos = self.d_size
+
+
+            if widgets.fc_all_kmd_stats.isChecked() :
+                plot_fun("scatter",x=frames.data_inf_neg['Kendrick nominal mass'],y=frames.data_inf_neg['Kendrick mass defect'],d_color='#a84ca4',dot_type=self.dot_type,edge=self.edge,size = size_inf_neg)
+                plot_fun("scatter",x=frames.data_inf_pos['Kendrick nominal mass'],y=frames.data_inf_pos['Kendrick mass defect'],d_color='#0070c0',dot_type=self.dot_type,edge=self.edge,size = size_inf_pos)
+            # plot_fun("scatter",x=frames.data_extract["C"],y=frames.data_extract["DBE"],d_color=frames.data_extract["fc"],dot_type=self.dot_type,edge=self.edge,cmap="RdYlGn",size = size)
+            plt.scatter(frames.data_extract['Kendrick nominal mass'],frames.data_extract['Kendrick mass defect'],s=size,c=frames.data_extract["fc"],vmin = -8, vmax = 8,cmap="RdYlGn",edgecolor='black',linewidths=0.7)
+            
+            if widgets.x_min_KMD_stats.text():
+                x_min = float(widgets.x_min_KMD_stats.text())
+                plt.gca().set_xlim(left=x_min)
+            if widgets.x_max_KMD_stats.text():
+                x_max = float(widgets.x_max_KMD_stats.text())
+                plt.gca().set_xlim(right=x_max)
+    
+            if widgets.y_min_KMD_stats.text():
+                y_min = float(widgets.y_min_KMD_stats.text())
+                plt.gca().set_ylim(bottom=y_min)
+            if widgets.y_max_KMD_stats.text():
+                y_max = float(widgets.y_max_KMD_stats.text())
+                plt.gca().set_ylim(top=y_max)
+            
+            if len(data.data_extract) != 0:
+                cbar = plt.colorbar(ticks=[-8,8])
+                cbar.ax.set_yticklabels([leg_1,leg_2],fontsize=font_size-2,weight='bold',rotation = 90, va = 'center')  # vertically oriented colorbar
+                cbar.set_label('log2(FC)', labelpad=-2.625*(font_size), rotation=90,fontsize=16)
+            
+            plt.xlabel('Nominal mass', fontsize=self.fontsize+4)
+            plt.ylabel('KMD', fontsize=self.fontsize+4)
+            plt.xticks(fontsize=self.fontsize)
+            plt.yticks(fontsize=self.fontsize)
+                            
+            if widgets.fc_all_kmd_stats.isChecked() :
+                legend_elements = [Patch(facecolor='#a84ca4', edgecolor='k',label=leg_1+ ' exclusive'),
+                                    Patch(facecolor='#0070c0', edgecolor='k',label=leg_2+ ' exclusive')]
+                plt.legend(handles=legend_elements,fontsize=font_size-4)
+            if gif == False:
+                mngr = plt.get_current_fig_manager()
+                mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,800, 680)
+            if "m/z" in frames.data_extract:
+                mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text('m/z = '+ str(frames.data_extract['m/z'].iloc[sel.target.index])))
+        
+        if gif == False:
+            for i in frames:
+                Anim(i)   
+            plt.show()
+        else:
+            Figure = plt.figure()
+            plt.show()
+            anim_created = FuncAnimation(Figure, Anim, frames, interval=1000/self.fps)  
+            mngr = plt.get_current_fig_manager()
+            mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,800, 680)
+            writergif = PillowWriter(fps=self.fps) 
+            anim_created.save("animation.gif", writer=writergif)
+            plt.ion()
+
+    def pl_comp_MD(self, gif = False):
+        """
+        KMD plot for the stats menu
+        """
+
+        item_file = widgets.list_loaded_file_2.selectedItems()
+        if not item_file:
+            return
+        item = item_file[0]
+        data_selected = item.data(self.USERDATA_ROLE)
+
+        frames = []
+        self.read_param()
+        font_size = self.fontsize
+        if widgets.checkBox_old_figures.isChecked() and plt.get_fignums():
+            plt.close("all")
+        sample_1 = widgets.list_sample_1_stats.currentRow()
+        sample_2 = widgets.list_sample_2_stats.currentRow()
+        n_sample = max(data_selected.df['count'])
+        if widgets.radio_fold_rel_md_stats.isChecked():
+            fold_intens_1 = data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1+sample_1].values.astype(float).copy().reshape(-1, 1)
+            fold_intens_2 = data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1+sample_2].values.astype(float).copy().reshape(-1, 1)
+            min_max_scaler = preprocessing.MinMaxScaler()
+            fold_intens_1 = min_max_scaler.fit_transform(fold_intens_1)
+            fold_intens_2 = min_max_scaler.fit_transform(fold_intens_2)
+            
+            leg_1 = str(data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1+sample_1].name)
+            leg_2 = str(data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1+sample_2].name)
+            leg_1 = leg_1.replace(".csv","")
+            leg_2 = leg_2.replace(".csv","")
+            leg_1 = leg_1.replace(".xlsx","")
+            leg_2 = leg_2.replace(".xlsx","")
+            leg_1 = leg_1.replace("Rel_intens_","")
+            leg_2 = leg_2.replace("Rel_intens_","")
+        else:
+            fold_intens_1 = data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1+sample_1].values.astype(float).copy().reshape(-1, 1)
+            fold_intens_2 = data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1+sample_2].values.astype(float).copy().reshape(-1, 1)
+            leg_1 = str(data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1+sample_1].name)
+            leg_2 = str(data_selected.df.iloc[:,data_selected.df.columns.get_loc('count')+max(data_selected.df['count'])+1+sample_2].name)
+            leg_1 = leg_1.replace(".csv","")
+            leg_2 = leg_2.replace(".csv","")
+            leg_1 = leg_1.replace(".xlsx","")
+            leg_2 = leg_2.replace(".xlsx","")
+            leg_1 = leg_1.replace("Rel_intens_","")
+            leg_2 = leg_2.replace("Rel_intens_","")
+        data_selected.df["fc"] = np.log2(fold_intens_2/fold_intens_1)
+        data_selected.df['summed_intensity'] = fold_intens_1 + fold_intens_2
+        #MD calculation
+        nominal_mass = round(data_selected.df['m/z'])
+        mass_defect = data_selected.df['m/z'] - nominal_mass
+        data_selected.df['nominal_mass'] = nominal_mass
+        data_selected.df['mass_defect'] = mass_defect
+
+        ####
+        #Excluding infinite and NaN values (attribution in neither of the sample)
+        data_selected.df['fc'].fillna(2e20,inplace=True)
+        p_inf=(data_selected.df['fc'] >1e20).tolist()
+        n_inf=(data_selected.df['fc'] <-1e20).tolist()
+        data_inf_pos = data_selected.df[:][p_inf].copy()
+        data_inf_neg = data_selected.df[:][n_inf].copy()
+        inf_index=[i or j for i, j in zip(n_inf,p_inf)]
+        ###
+        
+        
+        data_extract = data_selected.df.drop(index=data_selected.df.index[inf_index],axis=0).copy()
+        data_extract = data_extract.sort_values(by=["fc"], ascending=False)
+        print(data_selected.df.columns)
+        Intens = data_extract.iloc[:,data_selected.df.columns.get_loc('summed_intensity')-2].values.reshape(-1,1)
+        min_max_scaler = preprocessing.MinMaxScaler()
+        Intens_scaled = min_max_scaler.fit_transform(Intens)
+        data_extract.iloc[:,data_selected.df.columns.get_loc('summed_intensity')-2] = Intens_scaled
+        data_extract = data_extract.sort_values(by=['fc',"summed_intensity"], ascending=[False,True])  
+        
+        data = pandas.DataFrame()
+        data.data_extract = data_extract
+        data.data_inf_neg = data_inf_neg 
+        data.data_inf_pos = data_inf_pos
+        frames.append(data)
+        def Anim(frames):   
+            if gif == False:
+                fig = plt.figure()
+                transf = fig.transFigure
+            else:
+                Figure.clear()
+                transf = Figure.transFigure
+            self.read_param()
+            if widgets.CheckBox_size_fc_md_stats.isChecked() :
+                size = self.d_size*frames.data_extract.iloc[:,data_selected.df.columns.get_loc('summed_intensity')-(n_sample)+sample_1].astype(float)
+                size_inf_neg = self.d_size*frames.data_inf_neg.iloc[:,data_selected.df.columns.get_loc('summed_intensity')-(n_sample)+sample_1].astype(float)
+                size_inf_pos = self.d_size*frames.data_inf_pos.iloc[:,data_selected.df.columns.get_loc('summed_intensity')-(n_sample)+sample_2].astype(float)
+            else:
+                size = self.d_size
+                size_inf_neg = self.d_size
+                size_inf_pos = self.d_size
+
+
+            if widgets.fc_all_md_stats.isChecked() :
+                plot_fun("scatter",x=frames.data_inf_neg['Kendrick nominal mass'],y=frames.data_inf_neg['Kendrick mass defect'],d_color='#a84ca4',dot_type=self.dot_type,edge=self.edge,size = size_inf_neg)
+                plot_fun("scatter",x=frames.data_inf_pos['Kendrick nominal mass'],y=frames.data_inf_pos['Kendrick mass defect'],d_color='#0070c0',dot_type=self.dot_type,edge=self.edge,size = size_inf_pos)
+            # plot_fun("scatter",x=frames.data_extract["C"],y=frames.data_extract["DBE"],d_color=frames.data_extract["fc"],dot_type=self.dot_type,edge=self.edge,cmap="RdYlGn",size = size)
+            plt.scatter(frames.data_extract['Kendrick nominal mass'],frames.data_extract['Kendrick mass defect'],s=size,c=frames.data_extract["fc"],vmin = -8, vmax = 8,cmap="RdYlGn",edgecolor='black',linewidths=0.7)
+            
+            if widgets.x_min_MD_stats.text():
+                x_min = float(widgets.x_min_MD_stats.text())
+                plt.gca().set_xlim(left=x_min)
+            if widgets.x_max_MD_stats.text():
+                x_max = float(widgets.x_max_MD_stats.text())
+                plt.gca().set_xlim(right=x_max)
+    
+            if widgets.y_min_MD_stats.text():
+                y_min = float(widgets.y_min_MD_stats.text())
+                plt.gca().set_ylim(bottom=y_min)
+            if widgets.y_max_MD_stats.text():
+                y_max = float(widgets.y_max_MD_stats.text())
+                plt.gca().set_ylim(top=y_max)
+            
+            if len(data.data_extract) != 0:
+                cbar = plt.colorbar(ticks=[-8,8])
+                cbar.ax.set_yticklabels([leg_1,leg_2],fontsize=font_size-2,weight='bold',rotation = 90, va = 'center')  # vertically oriented colorbar
+                cbar.set_label('log2(FC)', labelpad=-2.625*(font_size), rotation=90,fontsize=16)
+            
+            plt.xlabel('Nominal mass', fontsize=self.fontsize+4)
+            plt.ylabel('Mass defect', fontsize=self.fontsize+4)
+            plt.xticks(fontsize=self.fontsize)
+            plt.yticks(fontsize=self.fontsize)
+                            
+            if widgets.fc_all_kmd_stats.isChecked() :
+                legend_elements = [Patch(facecolor='#a84ca4', edgecolor='k',label=leg_1+ ' exclusive'),
+                                    Patch(facecolor='#0070c0', edgecolor='k',label=leg_2+ ' exclusive')]
+                plt.legend(handles=legend_elements,fontsize=font_size-4)
+            if gif == False:
+                mngr = plt.get_current_fig_manager()
+                mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,800, 680)
+            if "m/z" in frames.data_extract:
+                mplcursors.cursor(multiple=True).connect("add", lambda sel: sel.annotation.set_text('m/z = '+ str(frames.data_extract['m/z'].iloc[sel.target.index])))
+        
+        if gif == False:
+            for i in frames:
+                Anim(i)   
+            plt.show()
+        else:
+            Figure = plt.figure()
+            plt.show()
+            anim_created = FuncAnimation(Figure, Anim, frames, interval=1000/self.fps)  
+            mngr = plt.get_current_fig_manager()
+            mngr.window.setGeometry(self.pos().x()+940,self.pos().y()+200,800, 680)
+            writergif = PillowWriter(fps=self.fps) 
+            anim_created.save("animation.gif", writer=writergif)
+            plt.ion()
+
     def kendrick_motif_calculation(self):
         """
         Returns the mass of the selected repetitive unit
@@ -3123,6 +3479,24 @@ class MainWindow(QtWidgets.QMainWindow):
             QMessageBox.about(self, "FYI box", "Upper case only.")
 
         widgets.edit_mass_motif_compare.setText(str(mass)) # Modify text in "mass_motif"
+
+    def kendrick_motif_stats_calculation(self):
+        """
+        Returns the mass of the selected repetitive unit
+        """
+
+        formula = widgets.edit_motif_stats.text() #Retrieves text from "edit_motif"
+
+        form=cp.parse_formula(formula) #Creates a dict with symbols and mass
+
+        try:
+            mass = 0 #Initialisation
+            for atom in form:   #Loop
+                mass = mass + form[atom]*self.isotopes_dict[atom]
+        except:
+            QMessageBox.about(self, "FYI box", "Upper case only.")
+
+        widgets.edit_mass_motif_stats.setText(str(mass)) # Modify text in "mass_motif"
 
     def plot_Kendrick(self, gif = False):
         """
@@ -4915,6 +5289,8 @@ class MainWindow(QtWidgets.QMainWindow):
         widgets.list_classes_distrib_compare.setCurrentRow(0)
         widgets.list_compare_sample_1.clear()
         widgets.list_compare_sample_2.clear()
+        widgets.list_sample_1_stats.clear()
+        widgets.list_sample_2_stats.clear()
         name_data = self.compared_datas.df.iloc[:,self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])+1:self.compared_datas.df.columns.get_loc('count')+max(self.compared_datas.df['count'])*2+1]
         name_data.columns=name_data.columns.str.replace(".csv","")
         name_data.columns=name_data.columns.str.replace(".xlsx","")
