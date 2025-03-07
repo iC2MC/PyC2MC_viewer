@@ -1548,7 +1548,7 @@ class MainWindow(QtWidgets.QMainWindow):
             path_to_file = os.path.dirname(names[0][0])
             os.chdir(path_to_file)
             tol = QInputDialog.getDouble(self,"Choose the Tolerance for merging","Tolerance in ppm (min = 0.01 max : 5): ",value  = 1,min=0.001,max=5,decimals = 2)[0]
-            min_rel_int, ok = QInputDialog.getDouble(self,"Choose Minimum Rel. Int. value","Do you want to set a lower limit for the relative intensity ? \nCancel if you don't.",value  = 0.1,min=0,max=50,decimals = 1)
+            min_rel_int, ok = QInputDialog.getDouble(self,"Choose Minimum Rel. Int. value","Do you want to set a lower limit for the relative intensity ? \nCancel if you don't.",value  = 0.1,min=0,max=50,decimals = 3)
             if not ok:
                 min_rel_int = None
             save_name, okPressed = QInputDialog.getText(self, "Save Name","Your name:", QLineEdit.Normal, "")
@@ -2802,6 +2802,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 third_dimension = data_filtered["O"]
             elif widgets.radio_color_N_vk.isChecked():
                 third_dimension = data_filtered["N"]
+            elif widgets.radio_color_mz_vk.isChecked():
+                third_dimension = data_filtered["m/z"]
             else : 
                 third_dimension = data_filtered["Normalized_intensity"]
             data_filtered["third_dimension"] = third_dimension
@@ -2820,6 +2822,8 @@ class MainWindow(QtWidgets.QMainWindow):
                     Figure.clear()
                     transf = Figure.transFigure
                 frames.sort_values(by=["third_dimension","Normalized_intensity"],ascending = [True,True], inplace = True)
+                if widgets.radio_color_mz_vk.isChecked():
+                    frames.sort_values(by=["Normalized_intensity"],ascending = [True], inplace = True)
                 plot_fun("scatter",x=frames["x_axes"],y=frames["y_axes"],d_color=frames["third_dimension"],size=dot_size*frames["Normalized_intensity"],dot_type=self.dot_type,edge=self.edge,cmap=self.color_map)
 
 
@@ -3536,6 +3540,8 @@ class MainWindow(QtWidgets.QMainWindow):
             if widgets.set_intensity_KMD.text():
                 intens_KMD = float(widgets.set_intensity_KMD.text())
                 data_filtered = data_filtered[data_filtered.normalized_intensity >= intens_KMD]
+                
+            
             
             if "mz" in data_filtered:
                 data_filtered['Kendrick mass']= data_filtered['mz']*(nominal_unit/repetive_unit_mass)
@@ -3968,7 +3974,7 @@ class MainWindow(QtWidgets.QMainWindow):
         data_filtered = data_filtered.sort_values(by=["normalized_intensity"], ascending=True)
         if widgets.checkBox_int_filter_extract.isChecked():
             intens_KMD = float(widgets.set_intensity_KMD.text())
-            data_filtered = data_filtered[data_filtered.normalized_intensity > intens_KMD]
+            data_filtered = data_filtered[data_filtered.normalized_intensity >= intens_KMD]
         self.read_param()
         dot_size = self.d_size
         font_size = self.fontsize
@@ -4009,19 +4015,22 @@ class MainWindow(QtWidgets.QMainWindow):
         list_color=list_color[:n_series]
         
         
-
+        matching_series = []
         for j in list_series_index :
             
             kmd_defo = list_kmd[j]
             tol=abs(kmd_defo)*tol_per/100 #tolerance attribution
             l=0 #row number of matching specie
             lst = []
+            
             data_filtered.sort_values('m/z', ascending=True, inplace= True)
             data_filtered = data_filtered.reset_index(drop=True)
             for kmd_exp in data_filtered['Kendrick mass defect'] :
                 if kmd_exp >= kmd_defo-tol and kmd_exp <= kmd_defo+tol :
                     lst.append(data_filtered['m/z'][l])
                     data_filtered.at[l,'id'] = j+1 #increment id columns to register that this specie was found when looking for the jth KMD
+                    if j not in matching_series:
+                        matching_series.append(j) # add the serie's index to a list in case of a match
                 l=l+1
         ###
         
@@ -4054,8 +4063,10 @@ class MainWindow(QtWidgets.QMainWindow):
             plt.gca().set_ylim(top=KMD_max)
         plt.xlabel('Kendrick nominal mass')
         plt.ylabel("Kendrick mass defect")
-        leg=list_cmpd.copy()
-        leg.insert(0,"Background")
+        temp_leg = list_cmpd.copy()
+        leg = [temp_leg[i] for i in matching_series]
+        if widgets.checkBox_extract_only.isChecked() == False:
+            leg.insert(0,"Background")
         plt.gca().legend(leg,fontsize=font_size-4)
         
         mplcursors.cursor(multiple=True)#.connect("add", lambda sel: sel.annotation.set_text(target))
