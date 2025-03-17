@@ -3511,14 +3511,11 @@ class MainWindow(QtWidgets.QMainWindow):
                     Figure.clear()
                     transf = Figure.transFigure
                 frames.sort_values(
-                    by=["third_dimension", "Normalized_intensity"],
+                    by=["Normalized_intensity", "third_dimension"],
                     ascending=[True, True],
                     inplace=True,
                 )
-                if widgets.radio_color_mz_vk.isChecked():
-                    frames.sort_values(
-                        by=["Normalized_intensity"], ascending=[True], inplace=True
-                    )
+                
                 plot_fun(
                     "scatter",
                     x=frames["x_axes"],
