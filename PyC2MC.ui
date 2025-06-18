@@ -5090,9 +5090,6 @@ border-radius: 10px;</string>
                               <string>Ion Parity:</string>
                              </property>
                              <layout class="QGridLayout" name="gridLayout_22">
-                              <property name="topMargin">
-                               <number>20</number>
-                              </property>
                               <item row="0" column="0">
                                <widget class="QRadioButton" name="radio_even_DBE">
                                 <property name="font">
@@ -5153,7 +5150,23 @@ border-radius: 10px;</string>
                                 </property>
                                </widget>
                               </item>
-                              <item row="1" column="1">
+                              <item row="2" column="1">
+                               <widget class="QCheckBox" name="CheckBox_fulle">
+                                <property name="font">
+                                 <font>
+                                  <family>Segoe UI</family>
+                                  <pointsize>10</pointsize>
+                                 </font>
+                                </property>
+                                <property name="toolTip">
+                                 <string>Plots the fullerenes limit (DBE = #C)</string>
+                                </property>
+                                <property name="text">
+                                 <string>Fullerenes limit</string>
+                                </property>
+                               </widget>
+                              </item>
+                              <item row="0" column="1">
                                <widget class="QCheckBox" name="CheckBox_hap">
                                 <property name="font">
                                  <font>
@@ -13275,31 +13288,9 @@ border-radius: 10px;</string>
                                  </property>
                                  <layout class="QGridLayout" name="gridLayout_93">
                                   <property name="topMargin">
-                                   <number>20</number>
+                                   <number>21</number>
                                   </property>
-                                  <item row="1" column="0">
-                                   <widget class="QRadioButton" name="fc_common_dbe">
-                                    <property name="font">
-                                     <font>
-                                      <family>Segoe UI</family>
-                                      <pointsize>10</pointsize>
-                                      <weight>50</weight>
-                                      <bold>false</bold>
-                                     </font>
-                                    </property>
-                                    <property name="styleSheet">
-                                     <string notr="true">background-color: rgba(0,0,0,0)</string>
-                                    </property>
-                                    <property name="text">
-                                     <string>Common 
-species</string>
-                                    </property>
-                                    <property name="checked">
-                                     <bool>false</bool>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item row="0" column="0">
+                                  <item row="0" column="0" colspan="2">
                                    <widget class="QRadioButton" name="fc_all_dbe">
                                     <property name="font">
                                      <font>
@@ -13321,7 +13312,29 @@ species</string>
                                     </property>
                                    </widget>
                                   </item>
-                                  <item row="2" column="0">
+                                  <item row="0" column="2">
+                                   <widget class="QRadioButton" name="fc_common_dbe">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                      <weight>50</weight>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">background-color: rgba(0,0,0,0)</string>
+                                    </property>
+                                    <property name="text">
+                                     <string>Common 
+species</string>
+                                    </property>
+                                    <property name="checked">
+                                     <bool>false</bool>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="2" column="0" rowspan="2" colspan="3">
                                    <widget class="QCheckBox" name="CheckBox_hap_compare">
                                     <property name="font">
                                      <font>
@@ -13334,7 +13347,23 @@ species</string>
                                     </property>
                                    </widget>
                                   </item>
-                                  <item row="3" column="0">
+                                  <item row="4" column="0" colspan="3">
+                                   <widget class="QCheckBox" name="CheckBox_fulle_compare">
+                                    <property name="font">
+                                     <font>
+                                      <family>Segoe UI</family>
+                                      <pointsize>10</pointsize>
+                                     </font>
+                                    </property>
+                                    <property name="toolTip">
+                                     <string/>
+                                    </property>
+                                    <property name="text">
+                                     <string>Fullerenes line</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item row="5" column="0" colspan="3">
                                    <widget class="QCheckBox" name="CheckBox_size_fc">
                                     <property name="font">
                                      <font>
@@ -15450,9 +15479,6 @@ species</string>
                               <string>Ion Parity:</string>
                              </property>
                              <layout class="QGridLayout" name="gridLayout_75">
-                              <property name="topMargin">
-                               <number>20</number>
-                              </property>
                               <item row="0" column="0">
                                <widget class="QRadioButton" name="radio_even_DBE_comp">
                                 <property name="font">
@@ -15471,6 +15497,22 @@ species</string>
                                 </property>
                                 <property name="checked">
                                  <bool>true</bool>
+                                </property>
+                               </widget>
+                              </item>
+                              <item row="0" column="1">
+                               <widget class="QCheckBox" name="CheckBox_hap_comp">
+                                <property name="font">
+                                 <font>
+                                  <family>Segoe UI</family>
+                                  <pointsize>10</pointsize>
+                                 </font>
+                                </property>
+                                <property name="toolTip">
+                                 <string>Plots the planar aromatic limit defined by Hur et al.</string>
+                                </property>
+                                <property name="text">
+                                 <string>Planar aromatic limit</string>
                                 </property>
                                </widget>
                               </item>
@@ -15513,8 +15555,8 @@ species</string>
                                 </property>
                                </widget>
                               </item>
-                              <item row="1" column="1">
-                               <widget class="QCheckBox" name="CheckBox_hap_comp">
+                              <item row="2" column="1">
+                               <widget class="QCheckBox" name="CheckBox_fulle_comp">
                                 <property name="font">
                                  <font>
                                   <family>Segoe UI</family>
@@ -15522,10 +15564,10 @@ species</string>
                                  </font>
                                 </property>
                                 <property name="toolTip">
-                                 <string>Plots the planar aromatic limit defined by Hur et al.</string>
+                                 <string>Plots the fullerenes limit (DBE = #C)</string>
                                 </property>
                                 <property name="text">
-                                 <string>Planar aromatic limit</string>
+                                 <string>Fullerenes limit</string>
                                 </property>
                                </widget>
                               </item>

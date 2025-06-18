@@ -2281,12 +2281,22 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Add samples in FC calc samples list
         # Remove useless info in names
+        nb_sample = (
+            int(
+                (
+                    data_selected.df.columns.get_loc("Normalized_intensity")
+                    - data_selected.df.columns.get_loc("count")
+                )
+                / 2
+            )
+            - 1
+        )
         name_data = data_selected.df.iloc[
             :,
             data_selected.df.columns.get_loc("count")
-            + max(data_selected.df["count"])
+            + nb_sample
             + 1 : data_selected.df.columns.get_loc("count")
-            + max(data_selected.df["count"]) * 2
+            + nb_sample * 2
             + 1,
         ]
         name_data.columns = name_data.columns.str.replace(".csv", "")
@@ -3332,6 +3342,8 @@ class MainWindow(QtWidgets.QMainWindow):
                     plt.axline(
                         (13, 8.57), (19, 12.95), color="red", linestyle=(0, (5, 5))
                     )
+                if widgets.CheckBox_fulle.isChecked():
+                    plt.axline((0, 1), (2, 3), color="black", linestyle=(0, (5, 5)))
                 plt.suptitle(
                     f"{frames.classe_selected}", fontsize=font_size + 4, y=0.95, x=0.45
                 )
@@ -3515,7 +3527,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     ascending=[True, True],
                     inplace=True,
                 )
-                
+
                 plot_fun(
                     "scatter",
                     x=frames["x_axes"],
@@ -4097,7 +4109,16 @@ class MainWindow(QtWidgets.QMainWindow):
             plt.close("all")
         sample_1 = widgets.list_sample_1_stats.currentRow()
         sample_2 = widgets.list_sample_2_stats.currentRow()
-        n_sample = max(data_selected.df["count"])
+        n_sample = (
+            int(
+                (
+                    data_selected.df.columns.get_loc("Normalized_intensity")
+                    - data_selected.df.columns.get_loc("count")
+                )
+                / 2
+            )
+            - 1
+        )
         if widgets.radio_fold_rel_KMD_stats.isChecked():
             fold_intens_1 = (
                 data_selected.df.iloc[
@@ -6663,6 +6684,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.compared_datas.heteroatoms,
                 self.compared_datas.classes,
             )
+            print(data)
             if len(data) == 0:
                 QMessageBox.about(
                     self, "FYI box", f"Nothing to display for {classe_selected} class."
@@ -6685,6 +6707,16 @@ class MainWindow(QtWidgets.QMainWindow):
                 plt.yticks(fontsize=font_size)
                 plt.ylabel(f"{y_label}", fontsize=font_size + 2)
                 x_axes = widgets.list_distribution_compare.currentRow()
+                nb_sample = (
+                    int(
+                        (
+                            frames.columns.get_loc("Normalized_intensity")
+                            - frames.columns.get_loc("count")
+                        )
+                        / 2
+                    )
+                    - 1
+                )
 
                 ###
                 if x_axes == 0:  # DBE
@@ -6700,9 +6732,9 @@ class MainWindow(QtWidgets.QMainWindow):
                     intens = frames.iloc[
                         :,
                         frames.columns.get_loc("count")
-                        + max(frames["count"])
+                        + nb_sample
                         + 1 : frames.columns.get_loc("count")
-                        + max(frames["count"]) * 2
+                        + nb_sample * 2
                         + 1,
                     ]  # stocke les intensités relatives des échantillons
                     df = pandas.concat([dbe_exp, intens], axis=1)
@@ -6710,7 +6742,7 @@ class MainWindow(QtWidgets.QMainWindow):
                         index_DBE_m = df.DBE == y
                         data_DBE_m = df[index_DBE_m].astype(float)
                         dbe_sum_m = pandas.DataFrame()
-                        for i in range(max(frames["count"])):
+                        for i in range(nb_sample):
                             intensity_DBE_m = sum(data_DBE_m.iloc[:, 1 + i])
                             count_DBE_m = np.count_nonzero(data_DBE_m.iloc[:, 1 + i])
                             if widgets.radio_dist_int_comp.isChecked():
@@ -6755,9 +6787,9 @@ class MainWindow(QtWidgets.QMainWindow):
                     intens = frames.iloc[
                         :,
                         frames.columns.get_loc("count")
-                        + max(frames["count"])
+                        + nb_sample
                         + 1 : frames.columns.get_loc("count")
-                        + max(frames["count"]) * 2
+                        + nb_sample * 2
                         + 1,
                     ]  # stocke les intensités relatives des échantillons
                     if "C" in frames:
@@ -6767,7 +6799,7 @@ class MainWindow(QtWidgets.QMainWindow):
                             index_C_m = df.C == y
                             data_C_m = df[index_C_m].astype(float)
                             C_sum_m = pandas.DataFrame()
-                            for i in range(max(frames["count"])):
+                            for i in range(nb_sample):
                                 intensity_C_m = sum(data_C_m.iloc[:, 1 + i])
                                 count_C_m = np.count_nonzero(data_C_m.iloc[:, 1 + i])
                                 if widgets.radio_dist_int_comp.isChecked():
@@ -6794,9 +6826,9 @@ class MainWindow(QtWidgets.QMainWindow):
                     intens = frames.iloc[
                         :,
                         frames.columns.get_loc("count")
-                        + max(frames["count"])
+                        + nb_sample
                         + 1 : frames.columns.get_loc("count")
-                        + max(frames["count"]) * 2
+                        + nb_sample * 2
                         + 1,
                     ]  # stocke les intensités relatives des échantillons
                     if "N" in frames:
@@ -6806,7 +6838,7 @@ class MainWindow(QtWidgets.QMainWindow):
                             index_N_m = df.N == y
                             data_N_m = df[index_N_m].astype(float)
                             N_sum_m = pandas.DataFrame()
-                            for i in range(max(frames["count"])):
+                            for i in range(nb_sample):
                                 intensity_N_m = sum(data_N_m.iloc[:, 1 + i])
                                 count_N_m = np.count_nonzero(data_N_m.iloc[:, 1 + i])
                                 if widgets.radio_dist_int_comp.isChecked():
@@ -6834,9 +6866,9 @@ class MainWindow(QtWidgets.QMainWindow):
                     intens = frames.iloc[
                         :,
                         frames.columns.get_loc("count")
-                        + max(frames["count"])
+                        + nb_sample
                         + 1 : frames.columns.get_loc("count")
-                        + max(frames["count"]) * 2
+                        + nb_sample * 2
                         + 1,
                     ]  # stocke les intensités relatives des échantillons
                     if "O" in frames:
@@ -6846,7 +6878,7 @@ class MainWindow(QtWidgets.QMainWindow):
                             index_O_m = df.O == y
                             data_O_m = df[index_O_m].astype(float)
                             O_sum_m = pandas.DataFrame()
-                            for i in range(max(frames["count"])):
+                            for i in range(nb_sample):
                                 intensity_O_m = sum(data_O_m.iloc[:, 1 + i])
                                 count_O_m = np.count_nonzero(data_O_m.iloc[:, 1 + i])
                                 if widgets.radio_dist_int_comp.isChecked():
@@ -6873,9 +6905,9 @@ class MainWindow(QtWidgets.QMainWindow):
                     intens = frames.iloc[
                         :,
                         frames.columns.get_loc("count")
-                        + max(frames["count"])
+                        + nb_sample
                         + 1 : frames.columns.get_loc("count")
-                        + max(frames["count"]) * 2
+                        + nb_sample * 2
                         + 1,
                     ]  # stocke les intensités relatives des échantillons
                     if "S" in frames:
@@ -6885,7 +6917,7 @@ class MainWindow(QtWidgets.QMainWindow):
                             index_S_m = df.S == y
                             data_S_m = df[index_S_m].astype(float)
                             S_sum_m = pandas.DataFrame()
-                            for i in range(max(frames["count"])):
+                            for i in range(nb_sample):
                                 intensity_S_m = sum(data_S_m.iloc[:, 1 + i])
                                 count_S_m = np.count_nonzero(data_S_m.iloc[:, 1 + i])
                                 if widgets.radio_dist_int_comp.isChecked():
@@ -7593,6 +7625,8 @@ class MainWindow(QtWidgets.QMainWindow):
                     plt.gca().set_ylim(top=DBE_max)
                 if widgets.CheckBox_hap_compare.isChecked():
                     plt.axline((13, 9), (19, 14), color="red", linestyle=(0, (5, 5)))
+                if widgets.CheckBox_fulle_compare.isChecked():
+                    plt.axline((0, 1), (2, 3), color="black", linestyle=(0, (5, 5)))
                 plt.suptitle(
                     "DBE vs #C (fold change)", fontsize=font_size + 4, y=0.97, x=0.45
                 )
@@ -8844,6 +8878,8 @@ class MainWindow(QtWidgets.QMainWindow):
                     plt.axline(
                         (13, 8.57), (19, 12.95), color="red", linestyle=(0, (5, 5))
                     )
+                if widgets.CheckBox_fulle_comp.isChecked():
+                    plt.axline((0, 1), (2, 3), color="black", linestyle=(0, (5, 5)))
                 plt.suptitle(
                     f"{frames.classe_selected}", fontsize=font_size + 4, y=0.95, x=0.45
                 )
