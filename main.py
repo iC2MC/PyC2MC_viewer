@@ -1849,10 +1849,10 @@ class MainWindow(QtWidgets.QMainWindow):
             tol = QInputDialog.getDouble(
                 self,
                 "Choose the Tolerance for merging",
-                "Tolerance in ppm (min = 0.01 max : 5): ",
+                "Tolerance in ppm (min = 0.01 max : 50): ",
                 value=1,
                 min=0.001,
-                max=5,
+                max=50,
                 decimals=2,
             )[0]
             min_rel_int, ok = QInputDialog.getDouble(
@@ -2929,10 +2929,18 @@ class MainWindow(QtWidgets.QMainWindow):
 
                         dbe = pandas.DataFrame.from_dict(dbe)
                         x = dbe.columns
-                        if widgets.radio_dist_int.isChecked():
-                            y = dbe.values.tolist()[0]
-                        elif widgets.radio_dist_nb.isChecked():
-                            y = dbe.values.tolist()[1]
+                        try:
+                            if widgets.radio_dist_int.isChecked():
+                                y = dbe.values.tolist()[0]
+                            elif widgets.radio_dist_nb.isChecked():
+                                y = dbe.values.tolist()[1]
+                        except IndexError:
+                            QMessageBox.about(
+                                self,
+                                "Error",
+                                f"No species to be displayed for the selected parity",
+                            )
+                            return
 
                     elif x_axes == 1:  # C
                         x_label = "#C"
@@ -3051,15 +3059,27 @@ class MainWindow(QtWidgets.QMainWindow):
                         x_odd = dbe_odd.columns
                         x_even = dbe_even.columns
                         if widgets.radio_dist_int.isChecked():
-                            y_odd = dbe_odd.values.tolist()[0]
-                            y_even = dbe_even.values.tolist()[0]
+                            try:
+                                y_odd = dbe_odd.values.tolist()[0]
+                            except:
+                                y_odd = []
+                            try:
+                                y_even = dbe_even.values.tolist()[0]
+                            except:
+                                y_even = []
                             tot_odd = ""
                             tot_even = ""
                         elif widgets.radio_dist_nb.isChecked():
-                            y_odd = dbe_odd.values.tolist()[1]
+                            try:
+                                y_odd = dbe_odd.values.tolist()[1]
+                            except:
+                                y_odd = []
                             tot_odd = f"(Nb={int(sum(y_odd))})"
                             y_odd = (np.array(y_odd) * 100 / sum(y_odd)).tolist()
-                            y_even = dbe_even.values.tolist()[1]
+                            try:
+                                y_even = dbe_even.values.tolist()[1]
+                            except:
+                                y_even = []
                             tot_even = f"(Nb={int(sum(y_even))})"
                             y_even = (np.array(y_even) * 100 / sum(y_even)).tolist()
 
@@ -3621,11 +3641,11 @@ class MainWindow(QtWidgets.QMainWindow):
                             + ", "
                             + str(x_label)
                             + " : "
-                            + str(round(x_axes.iloc[sel.target.index], 4))
+                            + str(round(frames["x_axes"].iloc[sel.target.index], 4))
                             + ", "
                             + str(y_label)
                             + " = "
-                            + str(round(y_axes.iloc[sel.target.index], 4))
+                            + str(round(frames["y_axes"].iloc[sel.target.index], 4))
                         ),
                     )
 
@@ -4223,7 +4243,6 @@ class MainWindow(QtWidgets.QMainWindow):
             leg_2 = leg_2.replace("Rel_intens_", "")
         data_selected.df["fc"] = np.log2(fold_intens_2 / fold_intens_1)
         data_selected.df["summed_intensity"] = fold_intens_1 + fold_intens_2
-        print(data_selected.df)
         # KMD calculation
         if widgets.edit_mass_motif_stats.text():
             repetive_unit_mass = float(widgets.edit_mass_motif_stats.text())
@@ -4260,7 +4279,6 @@ class MainWindow(QtWidgets.QMainWindow):
             index=data_selected.df.index[inf_index], axis=0
         ).copy()
         data_extract = data_extract.sort_values(by=["fc"], ascending=False)
-        print(data_selected.df.columns)
         Intens = data_extract.iloc[
             :, data_selected.df.columns.get_loc("summed_intensity") - 2
         ].values.reshape(-1, 1)
@@ -4558,7 +4576,6 @@ class MainWindow(QtWidgets.QMainWindow):
             index=data_selected.df.index[inf_index], axis=0
         ).copy()
         data_extract = data_extract.sort_values(by=["fc"], ascending=False)
-        print(data_selected.df.columns)
         Intens = data_extract.iloc[
             :, data_selected.df.columns.get_loc("summed_intensity") - 2
         ].values.reshape(-1, 1)
@@ -6684,7 +6701,6 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.compared_datas.heteroatoms,
                 self.compared_datas.classes,
             )
-            print(data)
             if len(data) == 0:
                 QMessageBox.about(
                     self, "FYI box", f"Nothing to display for {classe_selected} class."
