@@ -4,7 +4,7 @@ pandas==1.4.1
 pyqt==5.9.2
 openpyxl==3.0.9
 qt==5.9.7
-scikit-learn==1.0.2
+scikit-learn==1.5.0
 scipy==1.7.3
 seaborn==0.11.2
 chemparse==0.1.1
