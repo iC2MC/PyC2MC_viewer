@@ -16,13 +16,19 @@ class Ui_splitFinder(object):
         splitFinder.setObjectName("splitFinder")
         splitFinder.resize(611, 514)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/images/images/images/Py2CMC_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(
+            QtGui.QPixmap(":/images/images/images/Py2CMC_icon.png"),
+            QtGui.QIcon.Normal,
+            QtGui.QIcon.Off,
+        )
         splitFinder.setWindowIcon(icon)
         splitFinder.setWindowOpacity(1.0)
-        splitFinder.setStyleSheet("QMainWindow{\n"
-"background-color: rgb(251,240,230);\n"
-"border : 1px solid black;\n"
-"}")
+        splitFinder.setStyleSheet(
+            "QMainWindow{\n"
+            "background-color: rgb(251,240,230);\n"
+            "border : 1px solid black;\n"
+            "}"
+        )
         self.centralwidget = QtWidgets.QWidget(splitFinder)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout_4 = QtWidgets.QGridLayout(self.centralwidget)
@@ -32,10 +38,12 @@ class Ui_splitFinder(object):
         self.contentTopBg = QtWidgets.QFrame(self.centralwidget)
         self.contentTopBg.setMinimumSize(QtCore.QSize(0, 50))
         self.contentTopBg.setMaximumSize(QtCore.QSize(16777215, 50))
-        self.contentTopBg.setStyleSheet("QFrame{\n"
-"border-bottom: 1.5px solid;\n"
-"background-color :  rgb(15,79,163);\n"
-"}")
+        self.contentTopBg.setStyleSheet(
+            "QFrame{\n"
+            "border-bottom: 1.5px solid;\n"
+            "background-color :  rgb(15,79,163);\n"
+            "}"
+        )
         self.contentTopBg.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.contentTopBg.setFrameShadow(QtWidgets.QFrame.Raised)
         self.contentTopBg.setObjectName("contentTopBg")
@@ -44,7 +52,9 @@ class Ui_splitFinder(object):
         self.horizontalLayout_4.setSpacing(0)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.leftBox = QtWidgets.QFrame(self.contentTopBg)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.leftBox.sizePolicy().hasHeightForWidth())
@@ -60,7 +70,9 @@ class Ui_splitFinder(object):
         self.topLogoInfo = QtWidgets.QFrame(self.leftBox)
         self.topLogoInfo.setMinimumSize(QtCore.QSize(0, 50))
         self.topLogoInfo.setMaximumSize(QtCore.QSize(50, 50))
-        self.topLogoInfo.setStyleSheet("border-right: 1.5px solid black; border-bottom: none")
+        self.topLogoInfo.setStyleSheet(
+            "border-right: 1.5px solid black; border-bottom: none"
+        )
         self.topLogoInfo.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.topLogoInfo.setFrameShadow(QtWidgets.QFrame.Raised)
         self.topLogoInfo.setObjectName("topLogoInfo")
@@ -71,7 +83,9 @@ class Ui_splitFinder(object):
         self.topLogo = QtWidgets.QFrame(self.topLogoInfo)
         self.topLogo.setMinimumSize(QtCore.QSize(42, 42))
         self.topLogo.setMaximumSize(QtCore.QSize(42, 42))
-        self.topLogo.setStyleSheet("QFrame{background: url(:/images/images/images/Py2CMC_icon.png) no-repeat center center; border: none}")
+        self.topLogo.setStyleSheet(
+            "QFrame{background: url(:/images/images/images/Py2CMC_icon.png) no-repeat center center; border: none}"
+        )
         self.topLogo.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.topLogo.setFrameShadow(QtWidgets.QFrame.Raised)
         self.topLogo.setObjectName("topLogo")
@@ -88,8 +102,7 @@ class Ui_splitFinder(object):
         font.setWeight(75)
         self.titleRightInfo.setFont(font)
         self.titleRightInfo.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.titleRightInfo.setStyleSheet("color: rgb(255,255,255) ;\n"
-"border: none;")
+        self.titleRightInfo.setStyleSheet("color: rgb(255,255,255) ;\n" "border: none;")
         self.titleRightInfo.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.titleRightInfo.setObjectName("titleRightInfo")
         self.horizontalLayout_5.addWidget(self.titleRightInfo)
@@ -97,14 +110,16 @@ class Ui_splitFinder(object):
         self.rightButtons = QtWidgets.QFrame(self.contentTopBg)
         self.rightButtons.setMinimumSize(QtCore.QSize(0, 28))
         self.rightButtons.setSizeIncrement(QtCore.QSize(0, 0))
-        self.rightButtons.setStyleSheet("QPushButton{}\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(0,56,94);\n"
-"}\n"
-"QPushButton:pressed {    \n"
-"    background-color: rgb(195,221,240);\n"
-"    color: black;\n"
-"}")
+        self.rightButtons.setStyleSheet(
+            "QPushButton{}\n"
+            "QPushButton:hover {\n"
+            "    background-color: rgb(0,56,94);\n"
+            "}\n"
+            "QPushButton:pressed {    \n"
+            "    background-color: rgb(195,221,240);\n"
+            "    color: black;\n"
+            "}"
+        )
         self.rightButtons.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.rightButtons.setFrameShadow(QtWidgets.QFrame.Raised)
         self.rightButtons.setObjectName("rightButtons")
@@ -116,12 +131,18 @@ class Ui_splitFinder(object):
         self.minimizeAppBtn.setMinimumSize(QtCore.QSize(28, 28))
         self.minimizeAppBtn.setMaximumSize(QtCore.QSize(28, 28))
         self.minimizeAppBtn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.minimizeAppBtn.setStyleSheet("QPushButton { background-color: rgba(255, 255, 255, 0); border: none;  border-radius: 5px; }\n"
-"QPushButton:hover { background-color:  rgb(0,56,94); border-style: solid; border-radius: 4px; }\n"
-"QPushButton:pressed { background-color: rgb(195,221,240); border-style: solid; border-radius: 4px; }")
+        self.minimizeAppBtn.setStyleSheet(
+            "QPushButton { background-color: rgba(255, 255, 255, 0); border: none;  border-radius: 5px; }\n"
+            "QPushButton:hover { background-color:  rgb(0,56,94); border-style: solid; border-radius: 4px; }\n"
+            "QPushButton:pressed { background-color: rgb(195,221,240); border-style: solid; border-radius: 4px; }"
+        )
         self.minimizeAppBtn.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(":/icons/images/icons/icon_minimize.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(
+            QtGui.QPixmap(":/icons/images/icons/icon_minimize.png"),
+            QtGui.QIcon.Normal,
+            QtGui.QIcon.Off,
+        )
         self.minimizeAppBtn.setIcon(icon1)
         self.minimizeAppBtn.setIconSize(QtCore.QSize(20, 20))
         self.minimizeAppBtn.setObjectName("minimizeAppBtn")
@@ -130,13 +151,19 @@ class Ui_splitFinder(object):
         self.closeAppBtn.setMinimumSize(QtCore.QSize(28, 28))
         self.closeAppBtn.setMaximumSize(QtCore.QSize(28, 28))
         self.closeAppBtn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.closeAppBtn.setStyleSheet("\n"
-"QPushButton { background-color: rgba(255, 255, 255, 0); border: none;  border-radius: 5px; }\n"
-"QPushButton:hover { background-color: rgb(140, 44, 52); border-style: solid; border-radius: 4px; }\n"
-"QPushButton:pressed { background-color: rgb(195,221,240); border-style: solid; border-radius: 4px; }")
+        self.closeAppBtn.setStyleSheet(
+            "\n"
+            "QPushButton { background-color: rgba(255, 255, 255, 0); border: none;  border-radius: 5px; }\n"
+            "QPushButton:hover { background-color: rgb(140, 44, 52); border-style: solid; border-radius: 4px; }\n"
+            "QPushButton:pressed { background-color: rgb(195,221,240); border-style: solid; border-radius: 4px; }"
+        )
         self.closeAppBtn.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap(":/icons/images/icons/icon_close.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(
+            QtGui.QPixmap(":/icons/images/icons/icon_close.png"),
+            QtGui.QIcon.Normal,
+            QtGui.QIcon.Off,
+        )
         self.closeAppBtn.setIcon(icon2)
         self.closeAppBtn.setIconSize(QtCore.QSize(20, 20))
         self.closeAppBtn.setObjectName("closeAppBtn")
@@ -150,18 +177,24 @@ class Ui_splitFinder(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.bottomBar)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.creditsLabel = QtWidgets.QLabel(self.bottomBar)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.creditsLabel.sizePolicy().hasHeightForWidth())
         self.creditsLabel.setSizePolicy(sizePolicy)
         self.creditsLabel.setMaximumSize(QtCore.QSize(16777215, 166600))
-        self.creditsLabel.setStyleSheet("color: rgb(113, 126, 149); padding-left: 10px; padding-right: 10px; padding-bottom: 2px;")
+        self.creditsLabel.setStyleSheet(
+            "color: rgb(113, 126, 149); padding-left: 10px; padding-right: 10px; padding-bottom: 2px;"
+        )
         self.creditsLabel.setObjectName("creditsLabel")
         self.horizontalLayout.addWidget(self.creditsLabel)
         self.gridLayout_4.addWidget(self.bottomBar, 2, 0, 1, 1)
         self.frame_2 = QtWidgets.QFrame(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
@@ -181,10 +214,12 @@ class Ui_splitFinder(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.precision.setFont(font)
-        self.precision.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.precision.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.precision.setObjectName("precision")
         self.gridLayout_2.addWidget(self.precision, 1, 1, 1, 1)
         self.label = QtWidgets.QLabel(self.frame)
@@ -209,18 +244,24 @@ class Ui_splitFinder(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.requested_split.setFont(font)
-        self.requested_split.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.requested_split.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.requested_split.setObjectName("requested_split")
         self.gridLayout_2.addWidget(self.requested_split, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.frame, 0, 0, 1, 4)
         self.list_split_name = QtWidgets.QListWidget(self.frame_2)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Expanding
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.list_split_name.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.list_split_name.sizePolicy().hasHeightForWidth()
+        )
         self.list_split_name.setSizePolicy(sizePolicy)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
@@ -269,11 +310,13 @@ class Ui_splitFinder(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.HighlightedText, brush)
         self.list_split_name.setPalette(palette)
-        self.list_split_name.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;selection-background-color: blue;\n"
-"selection-color: rgb(18, 1, 255);")
+        self.list_split_name.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;selection-background-color: blue;\n"
+            "selection-color: rgb(18, 1, 255);"
+        )
         self.list_split_name.setObjectName("list_split_name")
         self.gridLayout.addWidget(self.list_split_name, 2, 1, 1, 1)
         self.label_6 = QtWidgets.QLabel(self.frame_2)
@@ -298,21 +341,29 @@ class Ui_splitFinder(object):
         font.setBold(True)
         font.setWeight(75)
         self.pushButton_start_isotopinator.setFont(font)
-        self.pushButton_start_isotopinator.setStyleSheet("QPushButton { background-color: rgb(15,79,163); border: none;  border-radius: 5px; color: white}\n"
-"QPushButton:hover { background-color:  rgb(0,56,94); border-style: solid; border-radius: 4px; }\n"
-"QPushButton:pressed { background-color: rgb(195,221,240); border-style: solid; border-radius: 4px; }")
-        self.pushButton_start_isotopinator.setObjectName("pushButton_start_isotopinator")
+        self.pushButton_start_isotopinator.setStyleSheet(
+            "QPushButton { background-color: rgb(15,79,163); border: none;  border-radius: 5px; color: white}\n"
+            "QPushButton:hover { background-color:  rgb(0,56,94); border-style: solid; border-radius: 4px; }\n"
+            "QPushButton:pressed { background-color: rgb(195,221,240); border-style: solid; border-radius: 4px; }"
+        )
+        self.pushButton_start_isotopinator.setObjectName(
+            "pushButton_start_isotopinator"
+        )
         self.gridLayout.addWidget(self.pushButton_start_isotopinator, 2, 0, 1, 1)
         self.list_range = QtWidgets.QListWidget(self.frame_2)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Expanding
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.list_range.sizePolicy().hasHeightForWidth())
         self.list_range.setSizePolicy(sizePolicy)
-        self.list_range.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;selection-background-color: blue")
+        self.list_range.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;selection-background-color: blue"
+        )
         self.list_range.setObjectName("list_range")
         self.gridLayout.addWidget(self.list_range, 2, 2, 1, 2)
         self.label_3 = QtWidgets.QLabel(self.frame_2)
@@ -357,26 +408,62 @@ class Ui_splitFinder(object):
     def retranslateUi(self, splitFinder):
         _translate = QtCore.QCoreApplication.translate
         splitFinder.setWindowTitle(_translate("splitFinder", "Isotope Finder"))
-        self.titleRightInfo.setText(_translate("splitFinder", "<html><head/><body><p><span style=\" color:#0f4fa3;\">a</span><span style=\" color:#ffffff;\">Split Finder</span></p></body></html>"))
+        self.titleRightInfo.setText(
+            _translate(
+                "splitFinder",
+                '<html><head/><body><p><span style=" color:#0f4fa3;">a</span><span style=" color:#ffffff;">Split Finder</span></p></body></html>',
+            )
+        )
         self.minimizeAppBtn.setToolTip(_translate("splitFinder", "Minimize"))
         self.closeAppBtn.setToolTip(_translate("splitFinder", "Close"))
-        self.creditsLabel.setText(_translate("splitFinder", "SUEUR M. , MAILLARD J., LACROIX O. et al"))
+        self.creditsLabel.setText(
+            _translate("splitFinder", "SUEUR M. , MAILLARD J., LACROIX O. et al")
+        )
         self.precision.setText(_translate("splitFinder", "0.0001"))
-        self.label.setText(_translate("splitFinder", "<html><head/><body><p>Delta <span style=\" font-style:italic;\">m/z</span> of the split:</p></body></html>"))
+        self.label.setText(
+            _translate(
+                "splitFinder",
+                '<html><head/><body><p>Delta <span style=" font-style:italic;">m/z</span> of the split:</p></body></html>',
+            )
+        )
         self.label_2.setText(_translate("splitFinder", "Tolerance:"))
         self.requested_split.setText(_translate("splitFinder", "1.003355"))
-        self.label_6.setText(_translate("splitFinder", "<html><head/><body><p>Tip 3: Results are not sorted, you need to check which one is the good one</p></body></html>"))
-        self.label_7.setText(_translate("splitFinder", "(The smallest error is highlighted, however it\'s not necessary the solution)"))
-        self.pushButton_start_isotopinator.setText(_translate("splitFinder", " Find my split "))
+        self.label_6.setText(
+            _translate(
+                "splitFinder",
+                "<html><head/><body><p>Tip 3: Results are not sorted, you need to check which one is the good one</p></body></html>",
+            )
+        )
+        self.label_7.setText(
+            _translate(
+                "splitFinder",
+                "(The smallest error is highlighted, however it's not necessary the solution)",
+            )
+        )
+        self.pushButton_start_isotopinator.setText(
+            _translate("splitFinder", " Find my split ")
+        )
         self.label_3.setText(_translate("splitFinder", "Plausible split:"))
-        self.label_5.setText(_translate("splitFinder", "Tip 2 : Only the first 7 decimals of the error are displayed"))
+        self.label_5.setText(
+            _translate(
+                "splitFinder",
+                "Tip 2 : Only the first 7 decimals of the error are displayed",
+            )
+        )
         self.label_4.setText(_translate("splitFinder", "Error :"))
-        self.label_8.setText(_translate("splitFinder", "Tip 1: Currently this tool can only be used for monocharged ions"))
-import resources_rc
+        self.label_8.setText(
+            _translate(
+                "splitFinder",
+                "Tip 1: Currently this tool can only be used for monocharged ions",
+            )
+        )
 
+
+import resources_rc
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     splitFinder = QtWidgets.QMainWindow()
     ui = Ui_splitFinder()

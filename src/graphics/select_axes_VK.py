@@ -1,5 +1,4 @@
-
-def Select_Axes_VK(x,y,data):
+def Select_Axes_VK(x, y, data):
     """
     Selection of Axes for the View VK pannel
 
@@ -8,7 +7,7 @@ def Select_Axes_VK(x,y,data):
         x (int): User choice for X axes
 
         y (int): User choice for Y axes
-        
+
         data (DataFrame): Dataframe selected for the plot
 
         Return x_axes,y_axes,x_label,y_label
@@ -40,9 +39,10 @@ def Select_Axes_VK(x,y,data):
     elif y == 3:
         y_axes = data["S/C"]
         y_label = "S/C"
-    return x_axes,y_axes,x_label,y_label
+    return x_axes, y_axes, x_label, y_label
 
-def Select_Axes_VK_mol(x,y,data,data_inf_p,data_inf_n):
+
+def Select_Axes_VK_mol(x, y, data, data_inf_p, data_inf_n):
     """
     Selection of Axes for the Compare VK pannel
 
@@ -51,11 +51,11 @@ def Select_Axes_VK_mol(x,y,data,data_inf_p,data_inf_n):
         x (int): User choice for X axes
 
         y (int): User choice for Y axes
-        
+
         data (DataFrame): Dataframe selected for the plot
-        
+
         data_inf_p (DataFrame): Dataframe selected for the plot
-        
+
         data_inf_n (DataFrame): Dataframe selected for the plot
 
         Return x_axes, x_axes_p, x_axes_n, y_axes ,y_axes_p,y_axes_n, x_label, y_label
@@ -105,4 +105,4 @@ def Select_Axes_VK_mol(x,y,data,data_inf_p,data_inf_n):
         y_axes_p = data_inf_p["S/C"]
         y_axes_n = data_inf_n["S/C"]
         y_label = "S/C"
-    return x_axes, x_axes_p, x_axes_n, y_axes ,y_axes_p,y_axes_n, x_label, y_label
+    return x_axes, x_axes_p, x_axes_n, y_axes, y_axes_p, y_axes_n, x_label, y_label

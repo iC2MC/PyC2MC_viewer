@@ -8,6 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_PyC2MC(object):
     def setupUi(self, PyC2MC):
         PyC2MC.setObjectName("PyC2MC")
@@ -168,21 +169,23 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.btn_page_stats.setFont(font)
-        self.btn_page_stats.setStyleSheet("QPushButton {\n"
-"background-color: rgb(221,50,77);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}")
+        self.btn_page_stats.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(221,50,77);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.btn_page_stats.setObjectName("btn_page_stats")
         self.gridLayout_4.addWidget(self.btn_page_stats, 0, 2, 1, 1)
         self.btn_page_plot = QtWidgets.QPushButton(self.centralwidget)
@@ -193,22 +196,24 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.btn_page_plot.setFont(font)
-        self.btn_page_plot.setStyleSheet("QPushButton {\n"
-"background-color: rgb(45,107,173);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"")
+        self.btn_page_plot.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(45,107,173);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            ""
+        )
         self.btn_page_plot.setObjectName("btn_page_plot")
         self.gridLayout_4.addWidget(self.btn_page_plot, 0, 0, 1, 1)
         self.btn_page_compare = QtWidgets.QPushButton(self.centralwidget)
@@ -275,22 +280,24 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.btn_page_compare.setFont(font)
-        self.btn_page_compare.setStyleSheet("QPushButton {\n"
-"background-color: rgb(240,162,62);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"")
+        self.btn_page_compare.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(240,162,62);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            ""
+        )
         self.btn_page_compare.setObjectName("btn_page_compare")
         self.gridLayout_4.addWidget(self.btn_page_compare, 0, 1, 1, 1)
         self.stackedWidget = QtWidgets.QStackedWidget(self.centralwidget)
@@ -308,10 +315,12 @@ class Ui_PyC2MC(object):
         font.setItalic(True)
         font.setWeight(50)
         self.label_46.setFont(font)
-        self.label_46.setStyleSheet("background-color: rgba(45,107,173,0.3);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;")
+        self.label_46.setStyleSheet(
+            "background-color: rgba(45,107,173,0.3);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;"
+        )
         self.label_46.setAlignment(QtCore.Qt.AlignCenter)
         self.label_46.setObjectName("label_46")
         self.gridLayout_5.addWidget(self.label_46, 1, 5, 1, 1)
@@ -321,11 +330,15 @@ class Ui_PyC2MC(object):
         font.setPointSize(10)
         self.list_loaded_file.setFont(font)
         self.list_loaded_file.setAutoFillBackground(False)
-        self.list_loaded_file.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
-        self.list_loaded_file.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
+        self.list_loaded_file.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
+        self.list_loaded_file.setSizeAdjustPolicy(
+            QtWidgets.QAbstractScrollArea.AdjustIgnored
+        )
         self.list_loaded_file.setTextElideMode(QtCore.Qt.ElideLeft)
         self.list_loaded_file.setResizeMode(QtWidgets.QListView.Fixed)
         self.list_loaded_file.setLayoutMode(QtWidgets.QListView.SinglePass)
@@ -351,7 +364,9 @@ class Ui_PyC2MC(object):
         self.Easter_egg.setAutoFillBackground(False)
         self.Easter_egg.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("Py2MC_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(
+            QtGui.QPixmap("Py2MC_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off
+        )
         self.Easter_egg.setIcon(icon)
         self.Easter_egg.setIconSize(QtCore.QSize(100, 100))
         self.Easter_egg.setCheckable(False)
@@ -365,10 +380,12 @@ class Ui_PyC2MC(object):
         font.setItalic(True)
         font.setWeight(50)
         self.label_47.setFont(font)
-        self.label_47.setStyleSheet("background-color: rgba(250,227,197,255);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;")
+        self.label_47.setStyleSheet(
+            "background-color: rgba(250,227,197,255);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;"
+        )
         self.label_47.setAlignment(QtCore.Qt.AlignCenter)
         self.label_47.setObjectName("label_47")
         self.gridLayout_5.addWidget(self.label_47, 2, 5, 1, 1)
@@ -389,10 +406,12 @@ class Ui_PyC2MC(object):
         font.setItalic(True)
         font.setWeight(50)
         self.label_64.setFont(font)
-        self.label_64.setStyleSheet("background-color :rgba(244,193,201,255);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;")
+        self.label_64.setStyleSheet(
+            "background-color :rgba(244,193,201,255);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;"
+        )
         self.label_64.setAlignment(QtCore.Qt.AlignCenter)
         self.label_64.setObjectName("label_64")
         self.gridLayout_5.addWidget(self.label_64, 3, 5, 1, 1)
@@ -404,10 +423,12 @@ class Ui_PyC2MC(object):
         font.setItalic(True)
         font.setWeight(50)
         self.label_65.setFont(font)
-        self.label_65.setStyleSheet("background-color: rgba(198,242,210,255);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;")
+        self.label_65.setStyleSheet(
+            "background-color: rgba(198,242,210,255);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;"
+        )
         self.label_65.setAlignment(QtCore.Qt.AlignCenter)
         self.label_65.setObjectName("label_65")
         self.gridLayout_5.addWidget(self.label_65, 4, 5, 1, 1)
@@ -525,22 +546,24 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.btn_overview.setFont(font)
-        self.btn_overview.setStyleSheet("QPushButton {\n"
-"background-color: rgb(45,107,173);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"")
+        self.btn_overview.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(45,107,173);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            ""
+        )
         self.btn_overview.setObjectName("btn_overview")
         self.gridLayout_5.addWidget(self.btn_overview, 6, 0, 2, 1)
         self.btn_kendricks = QtWidgets.QPushButton(self.two_d_plot)
@@ -553,22 +576,24 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.btn_kendricks.setFont(font)
-        self.btn_kendricks.setStyleSheet("QPushButton {\n"
-"background-color: rgb(45,107,173);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"")
+        self.btn_kendricks.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(45,107,173);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            ""
+        )
         self.btn_kendricks.setObjectName("btn_kendricks")
         self.gridLayout_5.addWidget(self.btn_kendricks, 6, 3, 2, 1)
         self.btn_van_krevelen = QtWidgets.QPushButton(self.two_d_plot)
@@ -580,22 +605,24 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.btn_van_krevelen.setFont(font)
-        self.btn_van_krevelen.setStyleSheet("QPushButton {\n"
-"background-color: rgb(45,107,173);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"")
+        self.btn_van_krevelen.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(45,107,173);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            ""
+        )
         self.btn_van_krevelen.setObjectName("btn_van_krevelen")
         self.gridLayout_5.addWidget(self.btn_van_krevelen, 6, 2, 2, 1)
         self.btn_EV = QtWidgets.QPushButton(self.two_d_plot)
@@ -605,22 +632,24 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.btn_EV.setFont(font)
-        self.btn_EV.setStyleSheet("QPushButton {\n"
-"background-color: rgb(45,107,173);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"")
+        self.btn_EV.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(45,107,173);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            ""
+        )
         self.btn_EV.setObjectName("btn_EV")
         self.gridLayout_5.addWidget(self.btn_EV, 8, 0, 1, 2)
         self.btn_DBE = QtWidgets.QPushButton(self.two_d_plot)
@@ -633,22 +662,24 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.btn_DBE.setFont(font)
-        self.btn_DBE.setStyleSheet("QPushButton {\n"
-"background-color: rgb(45,107,173);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"")
+        self.btn_DBE.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(45,107,173);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            ""
+        )
         self.btn_DBE.setObjectName("btn_DBE")
         self.gridLayout_5.addWidget(self.btn_DBE, 6, 1, 2, 1)
         self.checkBox_old_figures = QtWidgets.QCheckBox(self.two_d_plot)
@@ -670,10 +701,12 @@ class Ui_PyC2MC(object):
         font.setItalic(True)
         font.setWeight(50)
         self.label_87.setFont(font)
-        self.label_87.setStyleSheet("background-color: rgba(190, 174, 182,250);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;")
+        self.label_87.setStyleSheet(
+            "background-color: rgba(190, 174, 182,250);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;"
+        )
         self.label_87.setAlignment(QtCore.Qt.AlignCenter)
         self.label_87.setObjectName("label_87")
         self.gridLayout_5.addWidget(self.label_87, 5, 5, 1, 1)
@@ -709,21 +742,23 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.plot_button_overview.setFont(font)
-        self.plot_button_overview.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.plot_button_overview.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.plot_button_overview.setAutoDefault(False)
         self.plot_button_overview.setDefault(False)
         self.plot_button_overview.setObjectName("plot_button_overview")
@@ -738,11 +773,15 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.groupBox_3.setFont(font)
-        self.groupBox_3.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
-        self.groupBox_3.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.groupBox_3.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
+        self.groupBox_3.setAlignment(
+            QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop
+        )
         self.groupBox_3.setFlat(False)
         self.groupBox_3.setCheckable(False)
         self.groupBox_3.setObjectName("groupBox_3")
@@ -778,7 +817,9 @@ class Ui_PyC2MC(object):
         self.radio_mass_spectrum.setChecked(False)
         self.radio_mass_spectrum.setObjectName("radio_mass_spectrum")
         self.gridLayout_13.addWidget(self.radio_mass_spectrum, 2, 2, 1, 1)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.gridLayout_13.addItem(spacerItem, 2, 1, 1, 1)
         self.radio_error_plots = QtWidgets.QRadioButton(self.groupBox_3)
         self.radio_error_plots.setMinimumSize(QtCore.QSize(0, 24))
@@ -792,7 +833,9 @@ class Ui_PyC2MC(object):
         self.radio_error_plots.setChecked(False)
         self.radio_error_plots.setObjectName("radio_error_plots")
         self.gridLayout_13.addWidget(self.radio_error_plots, 0, 2, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.gridLayout_13.addItem(spacerItem1, 2, 3, 1, 1)
         self.radio_distributions = QtWidgets.QRadioButton(self.groupBox_3)
         self.radio_distributions.setMinimumSize(QtCore.QSize(0, 24))
@@ -828,10 +871,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_28.setFont(font)
-        self.groupBox_28.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_28.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_28.setObjectName("groupBox_28")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.groupBox_28)
         self.gridLayout_3.setContentsMargins(-1, 20, -1, -1)
@@ -869,10 +914,12 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.groupBox_17.setFont(font)
-        self.groupBox_17.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_17.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_17.setObjectName("groupBox_17")
         self.gridLayout_18 = QtWidgets.QGridLayout(self.groupBox_17)
         self.gridLayout_18.setContentsMargins(-1, 20, -1, -1)
@@ -884,7 +931,9 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.edit_min_intensity_classes.setFont(font)
-        self.edit_min_intensity_classes.setStyleSheet("background-color: rgba(240,240,240,1)")
+        self.edit_min_intensity_classes.setStyleSheet(
+            "background-color: rgba(240,240,240,1)"
+        )
         self.edit_min_intensity_classes.setAlignment(QtCore.Qt.AlignCenter)
         self.edit_min_intensity_classes.setObjectName("edit_min_intensity_classes")
         self.gridLayout_18.addWidget(self.edit_min_intensity_classes, 0, 0, 1, 1)
@@ -896,7 +945,9 @@ class Ui_PyC2MC(object):
         font.setWeight(50)
         self.label_21.setFont(font)
         self.label_21.setStyleSheet("background-color: rgba(0,0,0,0)")
-        self.label_21.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.label_21.setAlignment(
+            QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop
+        )
         self.label_21.setObjectName("label_21")
         self.gridLayout_18.addWidget(self.label_21, 0, 1, 1, 1)
         self.gridLayout_100.addWidget(self.groupBox_17, 2, 0, 1, 1)
@@ -910,10 +961,12 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.groupBox_16.setFont(font)
-        self.groupBox_16.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_16.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_16.setObjectName("groupBox_16")
         self.gridLayout_24 = QtWidgets.QGridLayout(self.groupBox_16)
         self.gridLayout_24.setContentsMargins(-1, 20, -1, -1)
@@ -941,7 +994,9 @@ class Ui_PyC2MC(object):
         self.radio_stacked_classes.setObjectName("radio_stacked_classes")
         self.gridLayout_24.addWidget(self.radio_stacked_classes, 0, 1, 1, 1)
         self.gridLayout_100.addWidget(self.groupBox_16, 0, 0, 1, 1)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.gridLayout_100.addItem(spacerItem2, 1, 1, 1, 1)
         self.stackedWidget_overview.addWidget(self.page_composition)
         self.page_error_plots = QtWidgets.QWidget()
@@ -956,10 +1011,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_9.setFont(font)
-        self.groupBox_9.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_9.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_9.setObjectName("groupBox_9")
         self.gridLayout = QtWidgets.QGridLayout(self.groupBox_9)
         self.gridLayout.setContentsMargins(-1, 20, -1, -1)
@@ -971,10 +1028,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.error_min.setFont(font)
-        self.error_min.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.error_min.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.error_min.setAlignment(QtCore.Qt.AlignCenter)
         self.error_min.setObjectName("error_min")
         self.gridLayout.addWidget(self.error_min, 0, 0, 1, 1)
@@ -985,10 +1044,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.error_max.setFont(font)
-        self.error_max.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.error_max.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.error_max.setAlignment(QtCore.Qt.AlignCenter)
         self.error_max.setObjectName("error_max")
         self.gridLayout.addWidget(self.error_max, 0, 1, 1, 1)
@@ -1023,10 +1084,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.mz_min.setFont(font)
-        self.mz_min.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.mz_min.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.mz_min.setAlignment(QtCore.Qt.AlignCenter)
         self.mz_min.setObjectName("mz_min")
         self.gridLayout.addWidget(self.mz_min, 2, 0, 1, 1)
@@ -1037,10 +1100,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.mz_max.setFont(font)
-        self.mz_max.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.mz_max.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.mz_max.setAlignment(QtCore.Qt.AlignCenter)
         self.mz_max.setObjectName("mz_max")
         self.gridLayout.addWidget(self.mz_max, 2, 1, 1, 1)
@@ -1070,7 +1135,9 @@ class Ui_PyC2MC(object):
         self.gridLayout.addWidget(self.label_23, 3, 1, 1, 1)
         self.groupBox_4 = QtWidgets.QGroupBox(self.page_error_plots)
         self.groupBox_4.setGeometry(QtCore.QRect(0, 20, 257, 81))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred
+        )
         sizePolicy.setHorizontalStretch(108)
         sizePolicy.setVerticalStretch(103)
         sizePolicy.setHeightForWidth(self.groupBox_4.sizePolicy().hasHeightForWidth())
@@ -1083,11 +1150,15 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_4.setFont(font)
-        self.groupBox_4.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
-        self.groupBox_4.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.groupBox_4.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
+        self.groupBox_4.setAlignment(
+            QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop
+        )
         self.groupBox_4.setObjectName("groupBox_4")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.groupBox_4)
         self.gridLayout_2.setObjectName("gridLayout_2")
@@ -1155,10 +1226,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_15.setFont(font)
-        self.groupBox_15.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_15.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_15.setObjectName("groupBox_15")
         self.gridLayout_17 = QtWidgets.QGridLayout(self.groupBox_15)
         self.gridLayout_17.setContentsMargins(-1, 20, -1, -1)
@@ -1168,10 +1241,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.Int_vs_DBE_min.setFont(font)
-        self.Int_vs_DBE_min.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.Int_vs_DBE_min.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.Int_vs_DBE_min.setAlignment(QtCore.Qt.AlignCenter)
         self.Int_vs_DBE_min.setObjectName("Int_vs_DBE_min")
         self.gridLayout_17.addWidget(self.Int_vs_DBE_min, 0, 0, 1, 1)
@@ -1180,10 +1255,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.Int_vs_DBE_max.setFont(font)
-        self.Int_vs_DBE_max.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.Int_vs_DBE_max.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.Int_vs_DBE_max.setAlignment(QtCore.Qt.AlignCenter)
         self.Int_vs_DBE_max.setObjectName("Int_vs_DBE_max")
         self.gridLayout_17.addWidget(self.Int_vs_DBE_max, 0, 1, 1, 1)
@@ -1200,7 +1277,9 @@ class Ui_PyC2MC(object):
         self.label_48.setObjectName("label_48")
         self.gridLayout_17.addWidget(self.label_48, 1, 0, 1, 1)
         self.label_49 = QtWidgets.QLabel(self.groupBox_15)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_49.sizePolicy().hasHeightForWidth())
@@ -1226,10 +1305,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_18.setFont(font)
-        self.groupBox_18.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_18.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_18.setObjectName("groupBox_18")
         self.gridLayout_25 = QtWidgets.QGridLayout(self.groupBox_18)
         self.gridLayout_25.setContentsMargins(-1, 20, -1, -1)
@@ -1277,10 +1358,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_39.setFont(font)
-        self.groupBox_39.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_39.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_39.setObjectName("groupBox_39")
         self.gridLayout_49 = QtWidgets.QGridLayout(self.groupBox_39)
         self.gridLayout_49.setContentsMargins(-1, 20, -1, -1)
@@ -1291,11 +1374,15 @@ class Ui_PyC2MC(object):
         font.setPointSize(10)
         self.list_distribution.setFont(font)
         self.list_distribution.setAutoFillBackground(False)
-        self.list_distribution.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
-        self.list_distribution.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
+        self.list_distribution.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
+        self.list_distribution.setSizeAdjustPolicy(
+            QtWidgets.QAbstractScrollArea.AdjustIgnored
+        )
         self.list_distribution.setTextElideMode(QtCore.Qt.ElideLeft)
         self.list_distribution.setResizeMode(QtWidgets.QListView.Fixed)
         self.list_distribution.setLayoutMode(QtWidgets.QListView.SinglePass)
@@ -1322,10 +1409,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_40.setFont(font)
-        self.groupBox_40.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_40.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_40.setObjectName("groupBox_40")
         self.gridLayout_50 = QtWidgets.QGridLayout(self.groupBox_40)
         self.gridLayout_50.setContentsMargins(-1, 20, -1, -1)
@@ -1333,10 +1422,12 @@ class Ui_PyC2MC(object):
         self.list_classes_distrib = QtWidgets.QListWidget(self.groupBox_40)
         self.list_classes_distrib.setMinimumSize(QtCore.QSize(0, 230))
         self.list_classes_distrib.setMaximumSize(QtCore.QSize(150, 230))
-        self.list_classes_distrib.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.list_classes_distrib.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.list_classes_distrib.setObjectName("list_classes_distrib")
         self.gridLayout_50.addWidget(self.list_classes_distrib, 0, 0, 1, 1)
         self.stackedWidget_overview.addWidget(self.page_intens_vs_DBE)
@@ -1350,10 +1441,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_13.setFont(font)
-        self.groupBox_13.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_13.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_13.setObjectName("groupBox_13")
         self.intens_min = QtWidgets.QLineEdit(self.groupBox_13)
         self.intens_min.setGeometry(QtCore.QRect(10, 21, 100, 21))
@@ -1455,10 +1548,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_41.setFont(font)
-        self.groupBox_41.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_41.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_41.setObjectName("groupBox_41")
         self.gridLayout_51 = QtWidgets.QGridLayout(self.groupBox_41)
         self.gridLayout_51.setContentsMargins(-1, 20, -1, -1)
@@ -1469,14 +1564,18 @@ class Ui_PyC2MC(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.list_classes_mass_spec.setFont(font)
-        self.list_classes_mass_spec.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.list_classes_mass_spec.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.list_classes_mass_spec.setObjectName("list_classes_mass_spec")
         self.gridLayout_51.addWidget(self.list_classes_mass_spec, 0, 0, 1, 1)
         self.stackedWidget_overview.addWidget(self.page_mass_spectrum)
-        self.gridLayout_10.addWidget(self.stackedWidget_overview, 4, 0, 1, 1, QtCore.Qt.AlignLeft)
+        self.gridLayout_10.addWidget(
+            self.stackedWidget_overview, 4, 0, 1, 1, QtCore.Qt.AlignLeft
+        )
         self.choose_plot_stacked.addWidget(self.page_overview)
         self.page_DBE = QtWidgets.QWidget()
         self.page_DBE.setObjectName("page_DBE")
@@ -1501,19 +1600,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_44.setFont(font)
-        self.groupBox_44.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_44.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_44.setObjectName("groupBox_44")
         self.gridLayout_52 = QtWidgets.QGridLayout(self.groupBox_44)
         self.gridLayout_52.setContentsMargins(-1, 20, -1, -1)
         self.gridLayout_52.setObjectName("gridLayout_52")
         self.list_classes_DBE = QtWidgets.QListWidget(self.groupBox_44)
-        self.list_classes_DBE.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.list_classes_DBE.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.list_classes_DBE.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.list_classes_DBE.setTabKeyNavigation(False)
         self.list_classes_DBE.setObjectName("list_classes_DBE")
@@ -1528,10 +1631,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_5.setFont(font)
-        self.groupBox_5.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_5.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_5.setObjectName("groupBox_5")
         self.gridLayout_33 = QtWidgets.QGridLayout(self.groupBox_5)
         self.gridLayout_33.setContentsMargins(-1, 20, -1, -1)
@@ -1562,10 +1667,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_24.setFont(font)
-        self.groupBox_24.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_24.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_24.setObjectName("groupBox_24")
         self.gridLayout_20 = QtWidgets.QGridLayout(self.groupBox_24)
         self.gridLayout_20.setContentsMargins(-1, 20, -1, -1)
@@ -1614,10 +1721,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_2.setFont(font)
-        self.groupBox_2.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_2.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_2.setObjectName("groupBox_2")
         self.gridLayout_22 = QtWidgets.QGridLayout(self.groupBox_2)
         self.gridLayout_22.setContentsMargins(-1, 20, -1, -1)
@@ -1669,10 +1778,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_21.setFont(font)
-        self.groupBox_21.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;")
+        self.groupBox_21.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;"
+        )
         self.groupBox_21.setObjectName("groupBox_21")
         self.gridLayout_21 = QtWidgets.QGridLayout(self.groupBox_21)
         self.gridLayout_21.setContentsMargins(-1, 20, -1, -1)
@@ -1708,10 +1819,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.C_max_DBE.setFont(font)
-        self.C_max_DBE.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.C_max_DBE.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.C_max_DBE.setAlignment(QtCore.Qt.AlignCenter)
         self.C_max_DBE.setObjectName("C_max_DBE")
         self.gridLayout_21.addWidget(self.C_max_DBE, 0, 1, 1, 1)
@@ -1722,10 +1835,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.C_min_DBE.setFont(font)
-        self.C_min_DBE.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.C_min_DBE.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.C_min_DBE.setAlignment(QtCore.Qt.AlignCenter)
         self.C_min_DBE.setObjectName("C_min_DBE")
         self.gridLayout_21.addWidget(self.C_min_DBE, 0, 0, 1, 1)
@@ -1760,10 +1875,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.DBE_min_DBE.setFont(font)
-        self.DBE_min_DBE.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.DBE_min_DBE.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.DBE_min_DBE.setAlignment(QtCore.Qt.AlignCenter)
         self.DBE_min_DBE.setObjectName("DBE_min_DBE")
         self.gridLayout_21.addWidget(self.DBE_min_DBE, 2, 0, 1, 1)
@@ -1774,10 +1891,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.DBE_max_DBE.setFont(font)
-        self.DBE_max_DBE.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.DBE_max_DBE.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.DBE_max_DBE.setAlignment(QtCore.Qt.AlignCenter)
         self.DBE_max_DBE.setObjectName("DBE_max_DBE")
         self.gridLayout_21.addWidget(self.DBE_max_DBE, 2, 1, 1, 1)
@@ -1791,21 +1910,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.plot_button_DBE.setFont(font)
-        self.plot_button_DBE.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.plot_button_DBE.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.plot_button_DBE.setAutoDefault(False)
         self.plot_button_DBE.setDefault(False)
         self.plot_button_DBE.setObjectName("plot_button_DBE")
@@ -1834,10 +1955,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_45.setFont(font)
-        self.groupBox_45.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_45.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_45.setObjectName("groupBox_45")
         self.gridLayout_53 = QtWidgets.QGridLayout(self.groupBox_45)
         self.gridLayout_53.setContentsMargins(-1, 20, -1, -1)
@@ -1845,10 +1968,12 @@ class Ui_PyC2MC(object):
         self.list_classes_VK = QtWidgets.QListWidget(self.groupBox_45)
         self.list_classes_VK.setMinimumSize(QtCore.QSize(0, 0))
         self.list_classes_VK.setMaximumSize(QtCore.QSize(100000, 16777215))
-        self.list_classes_VK.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.list_classes_VK.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.list_classes_VK.setObjectName("list_classes_VK")
         self.gridLayout_53.addWidget(self.list_classes_VK, 0, 0, 1, 1)
         self.gridLayout_6.addWidget(self.groupBox_45, 1, 0, 3, 1)
@@ -1861,10 +1986,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_6.setFont(font)
-        self.groupBox_6.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_6.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_6.setObjectName("groupBox_6")
         self.gridLayout_28 = QtWidgets.QGridLayout(self.groupBox_6)
         self.gridLayout_28.setContentsMargins(-1, 20, -1, -1)
@@ -1895,10 +2022,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_26.setFont(font)
-        self.groupBox_26.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_26.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_26.setObjectName("groupBox_26")
         self.gridLayout_23 = QtWidgets.QGridLayout(self.groupBox_26)
         self.gridLayout_23.setContentsMargins(-1, 20, -1, -1)
@@ -1946,10 +2075,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_22.setFont(font)
-        self.groupBox_22.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_22.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_22.setObjectName("groupBox_22")
         self.gridLayout_26 = QtWidgets.QGridLayout(self.groupBox_22)
         self.gridLayout_26.setContentsMargins(-1, 20, -1, -1)
@@ -1963,10 +2094,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.list_VK_y.setFont(font)
-        self.list_VK_y.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;")
+        self.list_VK_y.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;"
+        )
         self.list_VK_y.setObjectName("list_VK_y")
         item = QtWidgets.QListWidgetItem()
         self.list_VK_y.addItem(item)
@@ -1986,10 +2119,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.list_VK_x.setFont(font)
-        self.list_VK_x.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;")
+        self.list_VK_x.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;"
+        )
         self.list_VK_x.setObjectName("list_VK_x")
         item = QtWidgets.QListWidgetItem()
         self.list_VK_x.addItem(item)
@@ -2028,10 +2163,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_20.setFont(font)
-        self.groupBox_20.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_20.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_20.setObjectName("groupBox_20")
         self.gridLayout_19 = QtWidgets.QGridLayout(self.groupBox_20)
         self.gridLayout_19.setContentsMargins(-1, 20, -1, -1)
@@ -2043,10 +2180,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.x_min_VK.setFont(font)
-        self.x_min_VK.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.x_min_VK.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.x_min_VK.setAlignment(QtCore.Qt.AlignCenter)
         self.x_min_VK.setObjectName("x_min_VK")
         self.gridLayout_19.addWidget(self.x_min_VK, 0, 0, 1, 1)
@@ -2081,10 +2220,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.x_max_VK.setFont(font)
-        self.x_max_VK.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.x_max_VK.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.x_max_VK.setAlignment(QtCore.Qt.AlignCenter)
         self.x_max_VK.setObjectName("x_max_VK")
         self.gridLayout_19.addWidget(self.x_max_VK, 0, 1, 1, 1)
@@ -2095,10 +2236,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.y_min_VK.setFont(font)
-        self.y_min_VK.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.y_min_VK.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.y_min_VK.setAlignment(QtCore.Qt.AlignCenter)
         self.y_min_VK.setObjectName("y_min_VK")
         self.gridLayout_19.addWidget(self.y_min_VK, 2, 0, 1, 1)
@@ -2109,10 +2252,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.y_max_VK.setFont(font)
-        self.y_max_VK.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.y_max_VK.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.y_max_VK.setAlignment(QtCore.Qt.AlignCenter)
         self.y_max_VK.setObjectName("y_max_VK")
         self.gridLayout_19.addWidget(self.y_max_VK, 2, 1, 1, 1)
@@ -2150,21 +2295,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.plot_button_VK.setFont(font)
-        self.plot_button_VK.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.plot_button_VK.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.plot_button_VK.setAutoDefault(False)
         self.plot_button_VK.setDefault(False)
         self.plot_button_VK.setObjectName("plot_button_VK")
@@ -2192,21 +2339,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.buttonKendrickStd.setFont(font)
-        self.buttonKendrickStd.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.buttonKendrickStd.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.buttonKendrickStd.setObjectName("buttonKendrickStd")
         self.gridLayout_16.addWidget(self.buttonKendrickStd, 0, 0, 1, 1)
         self.buttonKendrickExt = QtWidgets.QPushButton(self.page_Kendrick)
@@ -2217,21 +2366,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.buttonKendrickExt.setFont(font)
-        self.buttonKendrickExt.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.buttonKendrickExt.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.buttonKendrickExt.setObjectName("buttonKendrickExt")
         self.gridLayout_16.addWidget(self.buttonKendrickExt, 0, 1, 1, 2)
         self.groupBox_25 = QtWidgets.QGroupBox(self.page_Kendrick)
@@ -2244,8 +2395,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_25.setFont(font)
-        self.groupBox_25.setStyleSheet("background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;")
-        self.groupBox_25.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.groupBox_25.setStyleSheet(
+            "background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;"
+        )
+        self.groupBox_25.setAlignment(
+            QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop
+        )
         self.groupBox_25.setObjectName("groupBox_25")
         self.gridLayout_38 = QtWidgets.QGridLayout(self.groupBox_25)
         self.gridLayout_38.setContentsMargins(-1, 20, -1, -1)
@@ -2269,21 +2424,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.buttonKendrickUniv.setFont(font)
-        self.buttonKendrickUniv.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.buttonKendrickUniv.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.buttonKendrickUniv.setObjectName("buttonKendrickUniv")
         self.gridLayout_16.addWidget(self.buttonKendrickUniv, 1, 0, 1, 3)
         self.groupBox_30 = QtWidgets.QGroupBox(self.page_Kendrick)
@@ -2295,7 +2452,9 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_30.setFont(font)
-        self.groupBox_30.setStyleSheet("background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;")
+        self.groupBox_30.setStyleSheet(
+            "background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;"
+        )
         self.groupBox_30.setObjectName("groupBox_30")
         self.gridLayout_15 = QtWidgets.QGridLayout(self.groupBox_30)
         self.gridLayout_15.setContentsMargins(-1, 20, -1, -1)
@@ -2313,10 +2472,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.edit_motif.setFont(font)
-        self.edit_motif.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.edit_motif.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.edit_motif.setObjectName("edit_motif")
         self.gridLayout_15.addWidget(self.edit_motif, 0, 1, 1, 1)
         self.label_28 = QtWidgets.QLabel(self.groupBox_30)
@@ -2332,10 +2493,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.edit_mass_motif.setFont(font)
-        self.edit_mass_motif.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.edit_mass_motif.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.edit_mass_motif.setObjectName("edit_mass_motif")
         self.gridLayout_15.addWidget(self.edit_mass_motif, 1, 1, 1, 1)
         self.gridLayout_16.addWidget(self.groupBox_30, 2, 0, 1, 2)
@@ -2348,7 +2511,9 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_29.setFont(font)
-        self.groupBox_29.setStyleSheet("background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;")
+        self.groupBox_29.setStyleSheet(
+            "background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;"
+        )
         self.groupBox_29.setObjectName("groupBox_29")
         self.gridLayout_27 = QtWidgets.QGridLayout(self.groupBox_29)
         self.gridLayout_27.setContentsMargins(-1, 20, -1, -1)
@@ -2370,7 +2535,9 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_14.setFont(font)
-        self.groupBox_14.setStyleSheet("background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;")
+        self.groupBox_14.setStyleSheet(
+            "background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;"
+        )
         self.groupBox_14.setObjectName("groupBox_14")
         self.gridLayout_39 = QtWidgets.QGridLayout(self.groupBox_14)
         self.gridLayout_39.setContentsMargins(-1, 20, -1, -1)
@@ -2391,10 +2558,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.KNM_min.setFont(font)
-        self.KNM_min.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.KNM_min.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.KNM_min.setObjectName("KNM_min")
         self.gridLayout_39.addWidget(self.KNM_min, 0, 1, 1, 1)
         self.label_34 = QtWidgets.QLabel(self.groupBox_14)
@@ -2413,10 +2582,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.KMD_min.setFont(font)
-        self.KMD_min.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.KMD_min.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.KMD_min.setObjectName("KMD_min")
         self.gridLayout_39.addWidget(self.KMD_min, 0, 3, 1, 1)
         self.label_33 = QtWidgets.QLabel(self.groupBox_14)
@@ -2435,10 +2606,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.KNM_max.setFont(font)
-        self.KNM_max.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.KNM_max.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.KNM_max.setObjectName("KNM_max")
         self.gridLayout_39.addWidget(self.KNM_max, 1, 1, 1, 1)
         self.label_35 = QtWidgets.QLabel(self.groupBox_14)
@@ -2457,10 +2630,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.KMD_max.setFont(font)
-        self.KMD_max.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.KMD_max.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.KMD_max.setObjectName("KMD_max")
         self.gridLayout_39.addWidget(self.KMD_max, 1, 3, 1, 1)
         self.gridLayout_16.addWidget(self.groupBox_14, 2, 3, 1, 1)
@@ -2479,16 +2654,20 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_8.setFont(font)
-        self.groupBox_8.setStyleSheet("background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;")
+        self.groupBox_8.setStyleSheet(
+            "background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;"
+        )
         self.groupBox_8.setTitle("")
         self.groupBox_8.setObjectName("groupBox_8")
         self.gridLayout_14 = QtWidgets.QGridLayout(self.groupBox_8)
         self.gridLayout_14.setObjectName("gridLayout_14")
         self.Max_atoms = QtWidgets.QLineEdit(self.groupBox_8)
-        self.Max_atoms.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.Max_atoms.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.Max_atoms.setObjectName("Max_atoms")
         self.gridLayout_14.addWidget(self.Max_atoms, 7, 1, 1, 1)
         self.K_oxygen = QtWidgets.QRadioButton(self.groupBox_8)
@@ -2529,22 +2708,28 @@ class Ui_PyC2MC(object):
         self.label_83.setObjectName("label_83")
         self.gridLayout_14.addWidget(self.label_83, 0, 0, 1, 2)
         self.Min_atoms = QtWidgets.QLineEdit(self.groupBox_8)
-        self.Min_atoms.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.Min_atoms.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.Min_atoms.setObjectName("Min_atoms")
         self.gridLayout_14.addWidget(self.Min_atoms, 6, 1, 1, 1)
         self.groupBox_50 = QtWidgets.QGroupBox(self.page_std)
         self.groupBox_50.setGeometry(QtCore.QRect(230, 20, 231, 231))
-        self.groupBox_50.setStyleSheet("background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;")
+        self.groupBox_50.setStyleSheet(
+            "background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;"
+        )
         self.groupBox_50.setObjectName("groupBox_50")
         self.list_classes_Kendrick = QtWidgets.QListWidget(self.groupBox_50)
         self.list_classes_Kendrick.setGeometry(QtCore.QRect(10, 30, 211, 191))
-        self.list_classes_Kendrick.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.list_classes_Kendrick.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.list_classes_Kendrick.setObjectName("list_classes_Kendrick")
         self.label_115 = QtWidgets.QLabel(self.page_std)
         self.label_115.setGeometry(QtCore.QRect(10, 10, 221, 16))
@@ -2570,7 +2755,9 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_K.setFont(font)
-        self.groupBox_K.setStyleSheet("background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;")
+        self.groupBox_K.setStyleSheet(
+            "background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;"
+        )
         self.groupBox_K.setCheckable(False)
         self.groupBox_K.setChecked(False)
         self.groupBox_K.setObjectName("groupBox_K")
@@ -2586,21 +2773,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.pushButton_clearSeries.setFont(font)
-        self.pushButton_clearSeries.setStyleSheet("QPushButton {\n"
-"background-color: rgb(0, 0, 127);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.pushButton_clearSeries.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(0, 0, 127);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.pushButton_clearSeries.setObjectName("pushButton_clearSeries")
         self.gridLayout_8.addWidget(self.pushButton_clearSeries, 0, 1, 1, 1)
         self.plot_button_saveKendrick = QtWidgets.QPushButton(self.groupBox_K)
@@ -2613,21 +2802,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.plot_button_saveKendrick.setFont(font)
-        self.plot_button_saveKendrick.setStyleSheet("QPushButton {\n"
-"background-color: rgb(0, 0, 127);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.plot_button_saveKendrick.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(0, 0, 127);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.plot_button_saveKendrick.setObjectName("plot_button_saveKendrick")
         self.gridLayout_8.addWidget(self.plot_button_saveKendrick, 0, 2, 1, 1)
         self.radioButtonSelected = QtWidgets.QRadioButton(self.groupBox_K)
@@ -2694,10 +2885,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.series_1.setFont(font)
-        self.series_1.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.series_1.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.series_1.setObjectName("series_1")
         self.gridLayout_8.addWidget(self.series_1, 2, 1, 1, 1)
         self.comboBox_1 = QtWidgets.QComboBox(self.groupBox_K)
@@ -2706,10 +2899,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.comboBox_1.setFont(font)
-        self.comboBox_1.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.comboBox_1.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.comboBox_1.setMaxVisibleItems(10)
         self.comboBox_1.setObjectName("comboBox_1")
         self.comboBox_1.addItem("")
@@ -2736,10 +2931,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.series_6.setFont(font)
-        self.series_6.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.series_6.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.series_6.setObjectName("series_6")
         self.gridLayout_8.addWidget(self.series_6, 2, 4, 1, 1)
         self.comboBox_6 = QtWidgets.QComboBox(self.groupBox_K)
@@ -2748,10 +2945,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.comboBox_6.setFont(font)
-        self.comboBox_6.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.comboBox_6.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.comboBox_6.setMaxVisibleItems(10)
         self.comboBox_6.setObjectName("comboBox_6")
         self.comboBox_6.addItem("")
@@ -2778,10 +2977,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.series_2.setFont(font)
-        self.series_2.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.series_2.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.series_2.setObjectName("series_2")
         self.gridLayout_8.addWidget(self.series_2, 3, 1, 1, 1)
         self.comboBox_2 = QtWidgets.QComboBox(self.groupBox_K)
@@ -2790,10 +2991,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.comboBox_2.setFont(font)
-        self.comboBox_2.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.comboBox_2.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.comboBox_2.setMaxVisibleItems(10)
         self.comboBox_2.setObjectName("comboBox_2")
         self.comboBox_2.addItem("")
@@ -2820,10 +3023,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.series_7.setFont(font)
-        self.series_7.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.series_7.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.series_7.setObjectName("series_7")
         self.gridLayout_8.addWidget(self.series_7, 3, 4, 1, 1)
         self.comboBox_7 = QtWidgets.QComboBox(self.groupBox_K)
@@ -2832,10 +3037,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.comboBox_7.setFont(font)
-        self.comboBox_7.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.comboBox_7.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.comboBox_7.setMaxVisibleItems(10)
         self.comboBox_7.setObjectName("comboBox_7")
         self.comboBox_7.addItem("")
@@ -2862,10 +3069,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.series_3.setFont(font)
-        self.series_3.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.series_3.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.series_3.setObjectName("series_3")
         self.gridLayout_8.addWidget(self.series_3, 4, 1, 1, 1)
         self.comboBox_3 = QtWidgets.QComboBox(self.groupBox_K)
@@ -2874,10 +3083,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.comboBox_3.setFont(font)
-        self.comboBox_3.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.comboBox_3.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.comboBox_3.setMaxVisibleItems(10)
         self.comboBox_3.setObjectName("comboBox_3")
         self.comboBox_3.addItem("")
@@ -2904,10 +3115,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.series_8.setFont(font)
-        self.series_8.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.series_8.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.series_8.setObjectName("series_8")
         self.gridLayout_8.addWidget(self.series_8, 4, 4, 1, 1)
         self.comboBox_8 = QtWidgets.QComboBox(self.groupBox_K)
@@ -2916,10 +3129,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.comboBox_8.setFont(font)
-        self.comboBox_8.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.comboBox_8.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.comboBox_8.setMaxVisibleItems(10)
         self.comboBox_8.setObjectName("comboBox_8")
         self.comboBox_8.addItem("")
@@ -2946,10 +3161,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.series_4.setFont(font)
-        self.series_4.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.series_4.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.series_4.setObjectName("series_4")
         self.gridLayout_8.addWidget(self.series_4, 5, 1, 1, 1)
         self.comboBox_4 = QtWidgets.QComboBox(self.groupBox_K)
@@ -2958,10 +3175,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.comboBox_4.setFont(font)
-        self.comboBox_4.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.comboBox_4.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.comboBox_4.setMaxVisibleItems(10)
         self.comboBox_4.setObjectName("comboBox_4")
         self.comboBox_4.addItem("")
@@ -2988,10 +3207,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.series_9.setFont(font)
-        self.series_9.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.series_9.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.series_9.setObjectName("series_9")
         self.gridLayout_8.addWidget(self.series_9, 5, 4, 1, 1)
         self.comboBox_9 = QtWidgets.QComboBox(self.groupBox_K)
@@ -3000,10 +3221,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.comboBox_9.setFont(font)
-        self.comboBox_9.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.comboBox_9.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.comboBox_9.setMaxVisibleItems(10)
         self.comboBox_9.setObjectName("comboBox_9")
         self.comboBox_9.addItem("")
@@ -3030,10 +3253,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.series_5.setFont(font)
-        self.series_5.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.series_5.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.series_5.setObjectName("series_5")
         self.gridLayout_8.addWidget(self.series_5, 6, 1, 1, 1)
         self.comboBox_5 = QtWidgets.QComboBox(self.groupBox_K)
@@ -3042,10 +3267,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.comboBox_5.setFont(font)
-        self.comboBox_5.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.comboBox_5.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.comboBox_5.setMaxVisibleItems(10)
         self.comboBox_5.setObjectName("comboBox_5")
         self.comboBox_5.addItem("")
@@ -3072,10 +3299,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.series_10.setFont(font)
-        self.series_10.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.series_10.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.series_10.setObjectName("series_10")
         self.gridLayout_8.addWidget(self.series_10, 6, 4, 1, 1)
         self.comboBox_10 = QtWidgets.QComboBox(self.groupBox_K)
@@ -3084,10 +3313,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.comboBox_10.setFont(font)
-        self.comboBox_10.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.comboBox_10.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.comboBox_10.setMaxVisibleItems(10)
         self.comboBox_10.setObjectName("comboBox_10")
         self.comboBox_10.addItem("")
@@ -3107,14 +3338,18 @@ class Ui_PyC2MC(object):
         self.page_univ.setObjectName("page_univ")
         self.groupBox_55 = QtWidgets.QGroupBox(self.page_univ)
         self.groupBox_55.setGeometry(QtCore.QRect(230, 20, 231, 231))
-        self.groupBox_55.setStyleSheet("background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;")
+        self.groupBox_55.setStyleSheet(
+            "background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;"
+        )
         self.groupBox_55.setObjectName("groupBox_55")
         self.list_classes_Kendrick_univ = QtWidgets.QListWidget(self.groupBox_55)
         self.list_classes_Kendrick_univ.setGeometry(QtCore.QRect(10, 30, 211, 191))
-        self.list_classes_Kendrick_univ.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.list_classes_Kendrick_univ.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.list_classes_Kendrick_univ.setObjectName("list_classes_Kendrick_univ")
         self.groupBox_86 = QtWidgets.QGroupBox(self.page_univ)
         self.groupBox_86.setGeometry(QtCore.QRect(11, 41, 140, 211))
@@ -3125,16 +3360,20 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_86.setFont(font)
-        self.groupBox_86.setStyleSheet("background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;")
+        self.groupBox_86.setStyleSheet(
+            "background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;"
+        )
         self.groupBox_86.setTitle("")
         self.groupBox_86.setObjectName("groupBox_86")
         self.gridLayout_62 = QtWidgets.QGridLayout(self.groupBox_86)
         self.gridLayout_62.setObjectName("gridLayout_62")
         self.Max_atoms_univ = QtWidgets.QLineEdit(self.groupBox_86)
-        self.Max_atoms_univ.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.Max_atoms_univ.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.Max_atoms_univ.setObjectName("Max_atoms_univ")
         self.gridLayout_62.addWidget(self.Max_atoms_univ, 7, 1, 1, 1)
         self.K_oxygen_univ = QtWidgets.QRadioButton(self.groupBox_86)
@@ -3168,10 +3407,12 @@ class Ui_PyC2MC(object):
         self.label_113.setObjectName("label_113")
         self.gridLayout_62.addWidget(self.label_113, 0, 0, 1, 2)
         self.Min_atoms_univ = QtWidgets.QLineEdit(self.groupBox_86)
-        self.Min_atoms_univ.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.Min_atoms_univ.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.Min_atoms_univ.setObjectName("Min_atoms_univ")
         self.gridLayout_62.addWidget(self.Min_atoms_univ, 6, 1, 1, 1)
         self.K_intensity_univ = QtWidgets.QRadioButton(self.groupBox_86)
@@ -3201,26 +3442,30 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.plot_button_Kendrick.setFont(font)
-        self.plot_button_Kendrick.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.plot_button_Kendrick.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.plot_button_Kendrick.setAutoDefault(False)
         self.plot_button_Kendrick.setDefault(False)
         self.plot_button_Kendrick.setObjectName("plot_button_Kendrick")
         self.gridLayout_16.addWidget(self.plot_button_Kendrick, 4, 0, 1, 3)
-        spacerItem3 = QtWidgets.QSpacerItem(191, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem3 = QtWidgets.QSpacerItem(
+            191, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.gridLayout_16.addItem(spacerItem3, 4, 3, 1, 1)
         self.choose_plot_stacked.addWidget(self.page_Kendrick)
         self.page_EV = QtWidgets.QWidget()
@@ -3246,11 +3491,15 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.groupBox_19.setFont(font)
-        self.groupBox_19.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
-        self.groupBox_19.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.groupBox_19.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
+        self.groupBox_19.setAlignment(
+            QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop
+        )
         self.groupBox_19.setFlat(False)
         self.groupBox_19.setCheckable(False)
         self.groupBox_19.setObjectName("groupBox_19")
@@ -3296,9 +3545,13 @@ class Ui_PyC2MC(object):
         self.radio_MCR.setStyleSheet("background-color: rgba(0,0,0,0)")
         self.radio_MCR.setObjectName("radio_MCR")
         self.gridLayout_32.addWidget(self.radio_MCR, 1, 0, 1, 1)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem4 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.gridLayout_32.addItem(spacerItem4, 1, 1, 1, 1)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem5 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.gridLayout_32.addItem(spacerItem5, 1, 3, 1, 1)
         self.gridLayout_45.addWidget(self.groupBox_19, 1, 0, 1, 1)
         self.plot_envt_var = QtWidgets.QPushButton(self.page_EV)
@@ -3312,21 +3565,23 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.plot_envt_var.setFont(font)
-        self.plot_envt_var.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.plot_envt_var.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.plot_envt_var.setAutoDefault(False)
         self.plot_envt_var.setDefault(False)
         self.plot_envt_var.setObjectName("plot_envt_var")
@@ -3352,19 +3607,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_69.setFont(font)
-        self.groupBox_69.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_69.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_69.setObjectName("groupBox_69")
         self.gridLayout_78 = QtWidgets.QGridLayout(self.groupBox_69)
         self.gridLayout_78.setContentsMargins(-1, 20, -1, -1)
         self.gridLayout_78.setObjectName("gridLayout_78")
         self.list_classes_ACOS = QtWidgets.QListWidget(self.groupBox_69)
-        self.list_classes_ACOS.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.list_classes_ACOS.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.list_classes_ACOS.setObjectName("list_classes_ACOS")
         self.gridLayout_78.addWidget(self.list_classes_ACOS, 0, 0, 1, 1)
         self.gridLayout_81.addWidget(self.groupBox_69, 0, 0, 3, 1)
@@ -3377,10 +3636,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_70.setFont(font)
-        self.groupBox_70.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_70.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_70.setObjectName("groupBox_70")
         self.gridLayout_76 = QtWidgets.QGridLayout(self.groupBox_70)
         self.gridLayout_76.setContentsMargins(-1, 20, -1, -1)
@@ -3411,10 +3672,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_72.setFont(font)
-        self.groupBox_72.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_72.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_72.setObjectName("groupBox_72")
         self.gridLayout_79 = QtWidgets.QGridLayout(self.groupBox_72)
         self.gridLayout_79.setContentsMargins(-1, 20, -1, -1)
@@ -3462,10 +3725,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_73.setFont(font)
-        self.groupBox_73.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_73.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_73.setObjectName("groupBox_73")
         self.gridLayout_80 = QtWidgets.QGridLayout(self.groupBox_73)
         self.gridLayout_80.setContentsMargins(-1, 20, -1, -1)
@@ -3485,10 +3750,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_71.setFont(font)
-        self.groupBox_71.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_71.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_71.setObjectName("groupBox_71")
         self.gridLayout_77 = QtWidgets.QGridLayout(self.groupBox_71)
         self.gridLayout_77.setContentsMargins(-1, 20, -1, -1)
@@ -3500,10 +3767,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.x_min_ACOS.setFont(font)
-        self.x_min_ACOS.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.x_min_ACOS.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.x_min_ACOS.setAlignment(QtCore.Qt.AlignCenter)
         self.x_min_ACOS.setObjectName("x_min_ACOS")
         self.gridLayout_77.addWidget(self.x_min_ACOS, 0, 0, 1, 1)
@@ -3538,10 +3807,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.x_max_ACOS.setFont(font)
-        self.x_max_ACOS.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.x_max_ACOS.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.x_max_ACOS.setAlignment(QtCore.Qt.AlignCenter)
         self.x_max_ACOS.setObjectName("x_max_ACOS")
         self.gridLayout_77.addWidget(self.x_max_ACOS, 0, 1, 1, 1)
@@ -3552,10 +3823,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.y_min_ACOS.setFont(font)
-        self.y_min_ACOS.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.y_min_ACOS.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.y_min_ACOS.setAlignment(QtCore.Qt.AlignCenter)
         self.y_min_ACOS.setObjectName("y_min_ACOS")
         self.gridLayout_77.addWidget(self.y_min_ACOS, 2, 0, 1, 1)
@@ -3566,10 +3839,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.y_max_ACOS.setFont(font)
-        self.y_max_ACOS.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.y_max_ACOS.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.y_max_ACOS.setAlignment(QtCore.Qt.AlignCenter)
         self.y_max_ACOS.setObjectName("y_max_ACOS")
         self.gridLayout_77.addWidget(self.y_max_ACOS, 2, 1, 1, 1)
@@ -3611,19 +3886,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_79.setFont(font)
-        self.groupBox_79.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_79.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_79.setObjectName("groupBox_79")
         self.gridLayout_87 = QtWidgets.QGridLayout(self.groupBox_79)
         self.gridLayout_87.setContentsMargins(-1, 20, -1, -1)
         self.gridLayout_87.setObjectName("gridLayout_87")
         self.list_classes_MAI = QtWidgets.QListWidget(self.groupBox_79)
-        self.list_classes_MAI.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.list_classes_MAI.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.list_classes_MAI.setObjectName("list_classes_MAI")
         self.gridLayout_87.addWidget(self.list_classes_MAI, 0, 0, 1, 1)
         self.gridLayout_82.addWidget(self.groupBox_79, 0, 0, 2, 1)
@@ -3636,10 +3915,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_78.setFont(font)
-        self.groupBox_78.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_78.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_78.setObjectName("groupBox_78")
         self.gridLayout_86 = QtWidgets.QGridLayout(self.groupBox_78)
         self.gridLayout_86.setContentsMargins(-1, 20, -1, -1)
@@ -3670,10 +3951,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_76.setFont(font)
-        self.groupBox_76.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_76.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_76.setObjectName("groupBox_76")
         self.gridLayout_84 = QtWidgets.QGridLayout(self.groupBox_76)
         self.gridLayout_84.setContentsMargins(-1, 20, -1, -1)
@@ -3693,10 +3976,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_77.setFont(font)
-        self.groupBox_77.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_77.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_77.setObjectName("groupBox_77")
         self.gridLayout_85 = QtWidgets.QGridLayout(self.groupBox_77)
         self.gridLayout_85.setContentsMargins(-1, 20, -1, -1)
@@ -3708,10 +3993,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.x_min_MAI.setFont(font)
-        self.x_min_MAI.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.x_min_MAI.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.x_min_MAI.setText("")
         self.x_min_MAI.setAlignment(QtCore.Qt.AlignCenter)
         self.x_min_MAI.setObjectName("x_min_MAI")
@@ -3747,10 +4034,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.x_max_MAI.setFont(font)
-        self.x_max_MAI.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.x_max_MAI.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.x_max_MAI.setText("")
         self.x_max_MAI.setAlignment(QtCore.Qt.AlignCenter)
         self.x_max_MAI.setObjectName("x_max_MAI")
@@ -3762,10 +4051,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.y_min_MAI.setFont(font)
-        self.y_min_MAI.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.y_min_MAI.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.y_min_MAI.setText("")
         self.y_min_MAI.setAlignment(QtCore.Qt.AlignCenter)
         self.y_min_MAI.setObjectName("y_min_MAI")
@@ -3777,10 +4068,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.y_max_MAI.setFont(font)
-        self.y_max_MAI.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.y_max_MAI.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.y_max_MAI.setText("")
         self.y_max_MAI.setAlignment(QtCore.Qt.AlignCenter)
         self.y_max_MAI.setObjectName("y_max_MAI")
@@ -3823,19 +4116,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_82.setFont(font)
-        self.groupBox_82.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_82.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_82.setObjectName("groupBox_82")
         self.gridLayout_90 = QtWidgets.QGridLayout(self.groupBox_82)
         self.gridLayout_90.setContentsMargins(-1, 20, -1, -1)
         self.gridLayout_90.setObjectName("gridLayout_90")
         self.list_classes_MCR = QtWidgets.QListWidget(self.groupBox_82)
-        self.list_classes_MCR.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.list_classes_MCR.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.list_classes_MCR.setObjectName("list_classes_MCR")
         self.gridLayout_90.addWidget(self.list_classes_MCR, 0, 0, 1, 1)
         self.gridLayout_88.addWidget(self.groupBox_82, 0, 0, 2, 1)
@@ -3848,10 +4145,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_83.setFont(font)
-        self.groupBox_83.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_83.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_83.setObjectName("groupBox_83")
         self.gridLayout_91 = QtWidgets.QGridLayout(self.groupBox_83)
         self.gridLayout_91.setContentsMargins(-1, 20, -1, -1)
@@ -3883,10 +4182,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_81.setFont(font)
-        self.groupBox_81.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_81.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_81.setObjectName("groupBox_81")
         self.gridLayout_89 = QtWidgets.QGridLayout(self.groupBox_81)
         self.gridLayout_89.setContentsMargins(-1, 20, -1, -1)
@@ -3898,10 +4199,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.x_min_MCR.setFont(font)
-        self.x_min_MCR.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.x_min_MCR.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.x_min_MCR.setText("")
         self.x_min_MCR.setAlignment(QtCore.Qt.AlignCenter)
         self.x_min_MCR.setObjectName("x_min_MCR")
@@ -3937,10 +4240,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.x_max_MCR.setFont(font)
-        self.x_max_MCR.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.x_max_MCR.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.x_max_MCR.setText("")
         self.x_max_MCR.setAlignment(QtCore.Qt.AlignCenter)
         self.x_max_MCR.setObjectName("x_max_MCR")
@@ -3952,10 +4257,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.y_min_MCR.setFont(font)
-        self.y_min_MCR.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.y_min_MCR.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.y_min_MCR.setText("")
         self.y_min_MCR.setAlignment(QtCore.Qt.AlignCenter)
         self.y_min_MCR.setObjectName("y_min_MCR")
@@ -3967,10 +4274,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.y_max_MCR.setFont(font)
-        self.y_max_MCR.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.y_max_MCR.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.y_max_MCR.setText("")
         self.y_max_MCR.setAlignment(QtCore.Qt.AlignCenter)
         self.y_max_MCR.setObjectName("y_max_MCR")
@@ -4035,15 +4344,19 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.list_loaded_file_compare.setFont(font)
-        self.list_loaded_file_compare.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;\n"
-"\n"
-"\n"
-"")
+        self.list_loaded_file_compare.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;\n"
+            "\n"
+            "\n"
+            ""
+        )
         self.list_loaded_file_compare.setDragEnabled(False)
-        self.list_loaded_file_compare.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.list_loaded_file_compare.setSelectionMode(
+            QtWidgets.QAbstractItemView.SingleSelection
+        )
         self.list_loaded_file_compare.setViewMode(QtWidgets.QListView.ListMode)
         self.list_loaded_file_compare.setObjectName("list_loaded_file_compare")
         self.gridLayout_101.addWidget(self.list_loaded_file_compare, 1, 0, 4, 1)
@@ -4066,10 +4379,12 @@ class Ui_PyC2MC(object):
         font.setItalic(True)
         font.setWeight(50)
         self.label_72.setFont(font)
-        self.label_72.setStyleSheet("background-color: rgba(250,227,197,255);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;")
+        self.label_72.setStyleSheet(
+            "background-color: rgba(250,227,197,255);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;"
+        )
         self.label_72.setAlignment(QtCore.Qt.AlignCenter)
         self.label_72.setObjectName("label_72")
         self.gridLayout_101.addWidget(self.label_72, 1, 2, 1, 1)
@@ -4081,10 +4396,12 @@ class Ui_PyC2MC(object):
         font.setItalic(True)
         font.setWeight(50)
         self.label_71.setFont(font)
-        self.label_71.setStyleSheet("background-color :rgba(244,193,201,255);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;")
+        self.label_71.setStyleSheet(
+            "background-color :rgba(244,193,201,255);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;"
+        )
         self.label_71.setAlignment(QtCore.Qt.AlignCenter)
         self.label_71.setObjectName("label_71")
         self.gridLayout_101.addWidget(self.label_71, 2, 2, 1, 1)
@@ -4100,9 +4417,9 @@ class Ui_PyC2MC(object):
         self.status_compare = QtWidgets.QLabel(self.compare)
         self.status_compare.setMinimumSize(QtCore.QSize(51, 51))
         self.status_compare.setMaximumSize(QtCore.QSize(51, 51))
-        self.status_compare.setStyleSheet("background-color: rgb(255, 150, 0);\n"
-"border-radius: 25px;\n"
-"")
+        self.status_compare.setStyleSheet(
+            "background-color: rgb(255, 150, 0);\n" "border-radius: 25px;\n" ""
+        )
         self.status_compare.setText("")
         self.status_compare.setObjectName("status_compare")
         self.gridLayout_101.addWidget(self.status_compare, 4, 2, 2, 1)
@@ -4213,22 +4530,24 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.btn_overview_compare.setFont(font)
-        self.btn_overview_compare.setStyleSheet("QPushButton {\n"
-"background-color: rgb(240,162,62);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"")
+        self.btn_overview_compare.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(240,162,62);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            ""
+        )
         self.btn_overview_compare.setObjectName("btn_overview_compare")
         self.btn_molecular_cartographies = QtWidgets.QPushButton(self.splitter_2)
         self.btn_molecular_cartographies.setEnabled(True)
@@ -4332,42 +4651,46 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.btn_molecular_cartographies.setFont(font)
-        self.btn_molecular_cartographies.setStyleSheet("QPushButton {\n"
-"background-color: rgb(240,162,62);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"")
+        self.btn_molecular_cartographies.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(240,162,62);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            ""
+        )
         self.btn_molecular_cartographies.setObjectName("btn_molecular_cartographies")
         self.gridLayout_101.addWidget(self.splitter_2, 5, 0, 1, 1)
         self.Compare_stacked_widget = QtWidgets.QStackedWidget(self.compare)
         self.Compare_stacked_widget.setMaximumSize(QtCore.QSize(535, 16777215))
         self.Compare_stacked_widget.setToolTip("")
-        self.Compare_stacked_widget.setStyleSheet("QPushButton{\n"
-"background-color: rgb(13,77,164);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"color: grey;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"color: white;\n"
-"}\n"
-"\n"
-"")
+        self.Compare_stacked_widget.setStyleSheet(
+            "QPushButton{\n"
+            "background-color: rgb(13,77,164);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 15px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "color: grey;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "color: white;\n"
+            "}\n"
+            "\n"
+            ""
+        )
         self.Compare_stacked_widget.setObjectName("Compare_stacked_widget")
         self.page_compare_overview = QtWidgets.QWidget()
         self.page_compare_overview.setObjectName("page_compare_overview")
@@ -4393,11 +4716,15 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.groupBox_43.setFont(font)
-        self.groupBox_43.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
-        self.groupBox_43.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.groupBox_43.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
+        self.groupBox_43.setAlignment(
+            QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop
+        )
         self.groupBox_43.setFlat(False)
         self.groupBox_43.setCheckable(False)
         self.groupBox_43.setObjectName("groupBox_43")
@@ -4412,7 +4739,9 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.radio_mass_spectrum_compare.setFont(font)
-        self.radio_mass_spectrum_compare.setStyleSheet("background-color: rgba(0,0,0,0)")
+        self.radio_mass_spectrum_compare.setStyleSheet(
+            "background-color: rgba(0,0,0,0)"
+        )
         self.radio_mass_spectrum_compare.setChecked(False)
         self.radio_mass_spectrum_compare.setObjectName("radio_mass_spectrum_compare")
         self.gridLayout_9.addWidget(self.radio_mass_spectrum_compare, 1, 0, 1, 1)
@@ -4446,15 +4775,23 @@ class Ui_PyC2MC(object):
         self.radio_composition_compare.setObjectName("radio_composition_compare")
         self.gridLayout_9.addWidget(self.radio_composition_compare, 0, 0, 1, 1)
         self.gridLayout_54.addWidget(self.groupBox_43, 1, 0, 1, 2)
-        self.stackedWidget_overview_compare = QtWidgets.QStackedWidget(self.page_compare_overview)
+        self.stackedWidget_overview_compare = QtWidgets.QStackedWidget(
+            self.page_compare_overview
+        )
         self.stackedWidget_overview_compare.setMinimumSize(QtCore.QSize(0, 350))
-        self.stackedWidget_overview_compare.setStyleSheet("background-color: rgba(0,0,0,0)")
-        self.stackedWidget_overview_compare.setObjectName("stackedWidget_overview_compare")
+        self.stackedWidget_overview_compare.setStyleSheet(
+            "background-color: rgba(0,0,0,0)"
+        )
+        self.stackedWidget_overview_compare.setObjectName(
+            "stackedWidget_overview_compare"
+        )
         self.page_composition_compare = QtWidgets.QWidget()
         self.page_composition_compare.setObjectName("page_composition_compare")
         self.gridLayout_31 = QtWidgets.QGridLayout(self.page_composition_compare)
         self.gridLayout_31.setObjectName("gridLayout_31")
-        self.plot_button_composition_compare = QtWidgets.QPushButton(self.page_composition_compare)
+        self.plot_button_composition_compare = QtWidgets.QPushButton(
+            self.page_composition_compare
+        )
         self.plot_button_composition_compare.setMinimumSize(QtCore.QSize(220, 30))
         self.plot_button_composition_compare.setMaximumSize(QtCore.QSize(220, 16777215))
         font = QtGui.QFont()
@@ -4463,24 +4800,28 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.plot_button_composition_compare.setFont(font)
-        self.plot_button_composition_compare.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.plot_button_composition_compare.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.plot_button_composition_compare.setAutoDefault(False)
         self.plot_button_composition_compare.setDefault(False)
-        self.plot_button_composition_compare.setObjectName("plot_button_composition_compare")
+        self.plot_button_composition_compare.setObjectName(
+            "plot_button_composition_compare"
+        )
         self.gridLayout_31.addWidget(self.plot_button_composition_compare, 3, 0, 1, 1)
         self.groupBox_34 = QtWidgets.QGroupBox(self.page_composition_compare)
         self.groupBox_34.setMinimumSize(QtCore.QSize(220, 30))
@@ -4492,10 +4833,12 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.groupBox_34.setFont(font)
-        self.groupBox_34.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_34.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_34.setObjectName("groupBox_34")
         self.gridLayout_42 = QtWidgets.QGridLayout(self.groupBox_34)
         self.gridLayout_42.setContentsMargins(-1, 20, -1, -1)
@@ -4508,7 +4851,9 @@ class Ui_PyC2MC(object):
         font.setWeight(50)
         self.label_63.setFont(font)
         self.label_63.setStyleSheet("background-color: rgba(0,0,0,0)")
-        self.label_63.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.label_63.setAlignment(
+            QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop
+        )
         self.label_63.setObjectName("label_63")
         self.gridLayout_42.addWidget(self.label_63, 0, 1, 1, 1)
         self.edit_min_intensity_classes_compare = QtWidgets.QLineEdit(self.groupBox_34)
@@ -4518,10 +4863,16 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.edit_min_intensity_classes_compare.setFont(font)
-        self.edit_min_intensity_classes_compare.setStyleSheet("background-color: rgba(240,240,240,1)")
+        self.edit_min_intensity_classes_compare.setStyleSheet(
+            "background-color: rgba(240,240,240,1)"
+        )
         self.edit_min_intensity_classes_compare.setAlignment(QtCore.Qt.AlignCenter)
-        self.edit_min_intensity_classes_compare.setObjectName("edit_min_intensity_classes_compare")
-        self.gridLayout_42.addWidget(self.edit_min_intensity_classes_compare, 0, 0, 1, 1)
+        self.edit_min_intensity_classes_compare.setObjectName(
+            "edit_min_intensity_classes_compare"
+        )
+        self.gridLayout_42.addWidget(
+            self.edit_min_intensity_classes_compare, 0, 0, 1, 1
+        )
         self.gridLayout_31.addWidget(self.groupBox_34, 1, 1, 1, 1)
         self.groupBox_38 = QtWidgets.QGroupBox(self.page_composition_compare)
         self.groupBox_38.setMinimumSize(QtCore.QSize(220, 30))
@@ -4533,10 +4884,12 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.groupBox_38.setFont(font)
-        self.groupBox_38.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_38.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_38.setObjectName("groupBox_38")
         self.gridLayout_46 = QtWidgets.QGridLayout(self.groupBox_38)
         self.gridLayout_46.setContentsMargins(-1, 20, -1, -1)
@@ -4574,10 +4927,12 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.groupBox_33.setFont(font)
-        self.groupBox_33.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_33.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_33.setObjectName("groupBox_33")
         self.gridLayout_41 = QtWidgets.QGridLayout(self.groupBox_33)
         self.gridLayout_41.setContentsMargins(-1, 20, -1, -1)
@@ -4601,11 +4956,17 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.radio_stacked_classes_compare.setFont(font)
-        self.radio_stacked_classes_compare.setStyleSheet("background-color: rgba(0,0,0,0)")
-        self.radio_stacked_classes_compare.setObjectName("radio_stacked_classes_compare")
+        self.radio_stacked_classes_compare.setStyleSheet(
+            "background-color: rgba(0,0,0,0)"
+        )
+        self.radio_stacked_classes_compare.setObjectName(
+            "radio_stacked_classes_compare"
+        )
         self.gridLayout_41.addWidget(self.radio_stacked_classes_compare, 0, 1, 1, 1)
         self.gridLayout_31.addWidget(self.groupBox_33, 0, 0, 1, 1)
-        self.groupBox_display_one_by_one = QtWidgets.QGroupBox(self.page_composition_compare)
+        self.groupBox_display_one_by_one = QtWidgets.QGroupBox(
+            self.page_composition_compare
+        )
         self.groupBox_display_one_by_one.setMinimumSize(QtCore.QSize(220, 30))
         self.groupBox_display_one_by_one.setMaximumSize(QtCore.QSize(220, 90))
         font = QtGui.QFont()
@@ -4614,10 +4975,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_display_one_by_one.setFont(font)
-        self.groupBox_display_one_by_one.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_display_one_by_one.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_display_one_by_one.setCheckable(False)
         self.groupBox_display_one_by_one.setObjectName("groupBox_display_one_by_one")
         self.gridLayout_47 = QtWidgets.QGridLayout(self.groupBox_display_one_by_one)
@@ -4679,10 +5042,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_35.setFont(font)
-        self.groupBox_35.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_35.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_35.setObjectName("groupBox_35")
         self.radio_comp_int_compare = QtWidgets.QRadioButton(self.groupBox_35)
         self.radio_comp_int_compare.setGeometry(QtCore.QRect(10, 30, 91, 19))
@@ -4719,10 +5084,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_53.setFont(font)
-        self.groupBox_53.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_53.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_53.setObjectName("groupBox_53")
         self.gridLayout_64 = QtWidgets.QGridLayout(self.groupBox_53)
         self.gridLayout_64.setContentsMargins(-1, 20, -1, -1)
@@ -4730,10 +5097,12 @@ class Ui_PyC2MC(object):
         self.list_classes_distrib_compare = QtWidgets.QListWidget(self.groupBox_53)
         self.list_classes_distrib_compare.setMinimumSize(QtCore.QSize(0, 100))
         self.list_classes_distrib_compare.setMaximumSize(QtCore.QSize(205, 320))
-        self.list_classes_distrib_compare.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.list_classes_distrib_compare.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.list_classes_distrib_compare.setObjectName("list_classes_distrib_compare")
         self.gridLayout_64.addWidget(self.list_classes_distrib_compare, 0, 0, 1, 1)
         self.gridLayout_71.addWidget(self.groupBox_53, 0, 0, 3, 1)
@@ -4745,10 +5114,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_37.setFont(font)
-        self.groupBox_37.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_37.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_37.setObjectName("groupBox_37")
         self.gridLayout_44 = QtWidgets.QGridLayout(self.groupBox_37)
         self.gridLayout_44.setContentsMargins(-1, 20, -1, -1)
@@ -4786,10 +5157,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_54.setFont(font)
-        self.groupBox_54.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_54.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_54.setObjectName("groupBox_54")
         self.gridLayout_66 = QtWidgets.QGridLayout(self.groupBox_54)
         self.gridLayout_66.setContentsMargins(-1, 20, -1, -1)
@@ -4800,11 +5173,15 @@ class Ui_PyC2MC(object):
         font.setPointSize(10)
         self.list_distribution_compare.setFont(font)
         self.list_distribution_compare.setAutoFillBackground(False)
-        self.list_distribution_compare.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
-        self.list_distribution_compare.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
+        self.list_distribution_compare.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
+        self.list_distribution_compare.setSizeAdjustPolicy(
+            QtWidgets.QAbstractScrollArea.AdjustIgnored
+        )
         self.list_distribution_compare.setTextElideMode(QtCore.Qt.ElideLeft)
         self.list_distribution_compare.setResizeMode(QtWidgets.QListView.Fixed)
         self.list_distribution_compare.setLayoutMode(QtWidgets.QListView.SinglePass)
@@ -4833,10 +5210,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_36.setFont(font)
-        self.groupBox_36.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_36.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_36.setCheckable(False)
         self.groupBox_36.setObjectName("groupBox_36")
         self.gridLayout_43 = QtWidgets.QGridLayout(self.groupBox_36)
@@ -4932,7 +5311,9 @@ class Ui_PyC2MC(object):
         self.DBE_compare_gap.setObjectName("DBE_compare_gap")
         self.gridLayout_43.addWidget(self.DBE_compare_gap, 3, 1, 1, 1)
         self.gridLayout_71.addWidget(self.groupBox_36, 1, 1, 1, 2)
-        self.plot_button_distrib_compare = QtWidgets.QPushButton(self.page_distribution_compare)
+        self.plot_button_distrib_compare = QtWidgets.QPushButton(
+            self.page_distribution_compare
+        )
         self.plot_button_distrib_compare.setEnabled(False)
         self.plot_button_distrib_compare.setMinimumSize(QtCore.QSize(100, 30))
         font = QtGui.QFont()
@@ -4941,21 +5322,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.plot_button_distrib_compare.setFont(font)
-        self.plot_button_distrib_compare.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.plot_button_distrib_compare.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.plot_button_distrib_compare.setAutoDefault(False)
         self.plot_button_distrib_compare.setDefault(False)
         self.plot_button_distrib_compare.setObjectName("plot_button_distrib_compare")
@@ -4974,10 +5357,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_46.setFont(font)
-        self.groupBox_46.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_46.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_46.setObjectName("groupBox_46")
         self.gridLayout_56 = QtWidgets.QGridLayout(self.groupBox_46)
         self.gridLayout_56.setContentsMargins(-1, 20, -1, -1)
@@ -4988,10 +5373,12 @@ class Ui_PyC2MC(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.list_classes_mass_spec_comp.setFont(font)
-        self.list_classes_mass_spec_comp.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.list_classes_mass_spec_comp.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.list_classes_mass_spec_comp.setObjectName("list_classes_mass_spec_comp")
         self.gridLayout_56.addWidget(self.list_classes_mass_spec_comp, 0, 0, 1, 1)
         self.gridLayout_57.addWidget(self.groupBox_46, 0, 0, 3, 1)
@@ -5004,10 +5391,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_42.setFont(font)
-        self.groupBox_42.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_42.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_42.setObjectName("groupBox_42")
         self.intens_min_2 = QtWidgets.QLineEdit(self.groupBox_42)
         self.intens_min_2.setGeometry(QtCore.QRect(10, 21, 100, 21))
@@ -5102,7 +5491,9 @@ class Ui_PyC2MC(object):
         self.label_79.setAlignment(QtCore.Qt.AlignCenter)
         self.label_79.setObjectName("label_79")
         self.gridLayout_57.addWidget(self.groupBox_42, 0, 1, 1, 1)
-        self.plot_button_spectrum_compare = QtWidgets.QPushButton(self.page_mass_spectrum_compare)
+        self.plot_button_spectrum_compare = QtWidgets.QPushButton(
+            self.page_mass_spectrum_compare
+        )
         self.plot_button_spectrum_compare.setMinimumSize(QtCore.QSize(220, 30))
         self.plot_button_spectrum_compare.setMaximumSize(QtCore.QSize(220, 30))
         font = QtGui.QFont()
@@ -5111,26 +5502,30 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.plot_button_spectrum_compare.setFont(font)
-        self.plot_button_spectrum_compare.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.plot_button_spectrum_compare.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.plot_button_spectrum_compare.setAutoDefault(False)
         self.plot_button_spectrum_compare.setDefault(False)
         self.plot_button_spectrum_compare.setObjectName("plot_button_spectrum_compare")
         self.gridLayout_57.addWidget(self.plot_button_spectrum_compare, 1, 1, 1, 1)
-        spacerItem6 = QtWidgets.QSpacerItem(20, 201, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem6 = QtWidgets.QSpacerItem(
+            20, 201, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
+        )
         self.gridLayout_57.addItem(spacerItem6, 2, 1, 1, 1)
         self.stackedWidget_overview_compare.addWidget(self.page_mass_spectrum_compare)
         self.gridLayout_54.addWidget(self.stackedWidget_overview_compare, 2, 0, 1, 2)
@@ -5171,20 +5566,26 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_63.setFont(font)
-        self.groupBox_63.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_63.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_63.setObjectName("groupBox_63")
         self.gridLayout_72 = QtWidgets.QGridLayout(self.groupBox_63)
         self.gridLayout_72.setContentsMargins(-1, 20, -1, -1)
         self.gridLayout_72.setObjectName("gridLayout_72")
         self.list_compare_sample_2 = QtWidgets.QListWidget(self.groupBox_63)
-        self.list_compare_sample_2.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
-        self.list_compare_sample_2.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        self.list_compare_sample_2.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
+        self.list_compare_sample_2.setSelectionMode(
+            QtWidgets.QAbstractItemView.ExtendedSelection
+        )
         self.list_compare_sample_2.setObjectName("list_compare_sample_2")
         self.gridLayout_72.addWidget(self.list_compare_sample_2, 0, 0, 1, 1)
         self.groupBox_56 = QtWidgets.QGroupBox(self.groupBox_57)
@@ -5196,24 +5597,32 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_56.setFont(font)
-        self.groupBox_56.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_56.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_56.setObjectName("groupBox_56")
         self.gridLayout_55 = QtWidgets.QGridLayout(self.groupBox_56)
         self.gridLayout_55.setContentsMargins(-1, 20, -1, -1)
         self.gridLayout_55.setObjectName("gridLayout_55")
         self.list_compare_sample_1 = QtWidgets.QListWidget(self.groupBox_56)
         self.list_compare_sample_1.setEnabled(True)
-        self.list_compare_sample_1.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
-        self.list_compare_sample_1.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        self.list_compare_sample_1.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
+        self.list_compare_sample_1.setSelectionMode(
+            QtWidgets.QAbstractItemView.ExtendedSelection
+        )
         self.list_compare_sample_1.setObjectName("list_compare_sample_1")
         self.gridLayout_55.addWidget(self.list_compare_sample_1, 0, 0, 1, 1)
-        self.stackedWidget_2 = QtWidgets.QStackedWidget(self.page_molecular_cartographies)
+        self.stackedWidget_2 = QtWidgets.QStackedWidget(
+            self.page_molecular_cartographies
+        )
         self.stackedWidget_2.setGeometry(QtCore.QRect(10, 190, 471, 325))
         self.stackedWidget_2.setMaximumSize(QtCore.QSize(471, 325))
         self.stackedWidget_2.setObjectName("stackedWidget_2")
@@ -5229,20 +5638,24 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_58.setFont(font)
-        self.groupBox_58.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_58.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_58.setObjectName("groupBox_58")
         self.gridLayout_73 = QtWidgets.QGridLayout(self.groupBox_58)
         self.gridLayout_73.setObjectName("gridLayout_73")
         self.list_classes_DBE_compare = QtWidgets.QListWidget(self.groupBox_58)
         self.list_classes_DBE_compare.setMinimumSize(QtCore.QSize(157, 223))
         self.list_classes_DBE_compare.setMaximumSize(QtCore.QSize(157, 223))
-        self.list_classes_DBE_compare.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.list_classes_DBE_compare.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.list_classes_DBE_compare.setObjectName("list_classes_DBE_compare")
         self.gridLayout_73.addWidget(self.list_classes_DBE_compare, 0, 0, 1, 1)
         self.gridLayout_94.addWidget(self.groupBox_58, 0, 0, 3, 1)
@@ -5254,10 +5667,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_64.setFont(font)
-        self.groupBox_64.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;")
+        self.groupBox_64.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;"
+        )
         self.groupBox_64.setObjectName("groupBox_64")
         self.gridLayout_95 = QtWidgets.QGridLayout(self.groupBox_64)
         self.gridLayout_95.setContentsMargins(-1, 20, -1, -1)
@@ -5287,10 +5702,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_65.setFont(font)
-        self.groupBox_65.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_65.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_65.setObjectName("groupBox_65")
         self.gridLayout_61 = QtWidgets.QGridLayout(self.groupBox_65)
         self.gridLayout_61.setContentsMargins(-1, 20, -1, -1)
@@ -5336,10 +5753,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_59.setFont(font)
-        self.groupBox_59.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;")
+        self.groupBox_59.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;"
+        )
         self.groupBox_59.setObjectName("groupBox_59")
         self.gridLayout_74 = QtWidgets.QGridLayout(self.groupBox_59)
         self.gridLayout_74.setContentsMargins(-1, 20, -1, -1)
@@ -5375,10 +5794,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.C_max_DBE_compare.setFont(font)
-        self.C_max_DBE_compare.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.C_max_DBE_compare.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.C_max_DBE_compare.setAlignment(QtCore.Qt.AlignCenter)
         self.C_max_DBE_compare.setObjectName("C_max_DBE_compare")
         self.gridLayout_74.addWidget(self.C_max_DBE_compare, 0, 1, 1, 1)
@@ -5389,10 +5810,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.C_min_DBE_compare.setFont(font)
-        self.C_min_DBE_compare.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.C_min_DBE_compare.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.C_min_DBE_compare.setAlignment(QtCore.Qt.AlignCenter)
         self.C_min_DBE_compare.setObjectName("C_min_DBE_compare")
         self.gridLayout_74.addWidget(self.C_min_DBE_compare, 0, 0, 1, 1)
@@ -5427,10 +5850,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.DBE_min_DBE_compare.setFont(font)
-        self.DBE_min_DBE_compare.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.DBE_min_DBE_compare.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.DBE_min_DBE_compare.setAlignment(QtCore.Qt.AlignCenter)
         self.DBE_min_DBE_compare.setObjectName("DBE_min_DBE_compare")
         self.gridLayout_74.addWidget(self.DBE_min_DBE_compare, 2, 0, 1, 1)
@@ -5441,10 +5866,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.DBE_max_DBE_compare.setFont(font)
-        self.DBE_max_DBE_compare.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.DBE_max_DBE_compare.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.DBE_max_DBE_compare.setAlignment(QtCore.Qt.AlignCenter)
         self.DBE_max_DBE_compare.setObjectName("DBE_max_DBE_compare")
         self.gridLayout_74.addWidget(self.DBE_max_DBE_compare, 2, 1, 1, 1)
@@ -5458,10 +5885,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_80.setFont(font)
-        self.groupBox_80.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_80.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_80.setObjectName("groupBox_80")
         self.gridLayout_93 = QtWidgets.QGridLayout(self.groupBox_80)
         self.gridLayout_93.setContentsMargins(-1, 20, -1, -1)
@@ -5492,33 +5921,41 @@ class Ui_PyC2MC(object):
         self.CheckBox_hap_compare.setObjectName("CheckBox_hap_compare")
         self.gridLayout_93.addWidget(self.CheckBox_hap_compare, 2, 0, 1, 1)
         self.gridLayout_94.addWidget(self.groupBox_80, 2, 2, 1, 1)
-        self.plot_compare_molecular_carto_DBE = QtWidgets.QPushButton(self.page_DBE_compare)
+        self.plot_compare_molecular_carto_DBE = QtWidgets.QPushButton(
+            self.page_DBE_compare
+        )
         self.plot_compare_molecular_carto_DBE.setMinimumSize(QtCore.QSize(120, 30))
-        self.plot_compare_molecular_carto_DBE.setMaximumSize(QtCore.QSize(220, 16777215))
+        self.plot_compare_molecular_carto_DBE.setMaximumSize(
+            QtCore.QSize(220, 16777215)
+        )
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.plot_compare_molecular_carto_DBE.setFont(font)
-        self.plot_compare_molecular_carto_DBE.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.plot_compare_molecular_carto_DBE.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.plot_compare_molecular_carto_DBE.setAutoDefault(False)
         self.plot_compare_molecular_carto_DBE.setDefault(False)
-        self.plot_compare_molecular_carto_DBE.setObjectName("plot_compare_molecular_carto_DBE")
+        self.plot_compare_molecular_carto_DBE.setObjectName(
+            "plot_compare_molecular_carto_DBE"
+        )
         self.gridLayout_94.addWidget(self.plot_compare_molecular_carto_DBE, 3, 0, 1, 1)
         self.stackedWidget_2.addWidget(self.page_DBE_compare)
         self.page_VK_compare = QtWidgets.QWidget()
@@ -5534,21 +5971,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.plot_button_VK_compare.setFont(font)
-        self.plot_button_VK_compare.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.plot_button_VK_compare.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.plot_button_VK_compare.setAutoDefault(False)
         self.plot_button_VK_compare.setDefault(False)
         self.plot_button_VK_compare.setObjectName("plot_button_VK_compare")
@@ -5561,20 +6000,24 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_67.setFont(font)
-        self.groupBox_67.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_67.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_67.setObjectName("groupBox_67")
         self.gridLayout_65 = QtWidgets.QGridLayout(self.groupBox_67)
         self.gridLayout_65.setObjectName("gridLayout_65")
         self.list_classes_VK_compare = QtWidgets.QListWidget(self.groupBox_67)
         self.list_classes_VK_compare.setMinimumSize(QtCore.QSize(157, 223))
         self.list_classes_VK_compare.setMaximumSize(QtCore.QSize(157, 223))
-        self.list_classes_VK_compare.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.list_classes_VK_compare.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.list_classes_VK_compare.setObjectName("list_classes_VK_compare")
         self.gridLayout_65.addWidget(self.list_classes_VK_compare, 0, 0, 1, 1)
         self.gridLayout_97.addWidget(self.groupBox_67, 0, 0, 2, 1)
@@ -5585,10 +6028,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_66.setFont(font)
-        self.groupBox_66.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_66.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_66.setObjectName("groupBox_66")
         self.gridLayout_63 = QtWidgets.QGridLayout(self.groupBox_66)
         self.gridLayout_63.setContentsMargins(-1, 20, -1, -1)
@@ -5600,10 +6045,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.x_min_VK_compare.setFont(font)
-        self.x_min_VK_compare.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.x_min_VK_compare.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.x_min_VK_compare.setAlignment(QtCore.Qt.AlignCenter)
         self.x_min_VK_compare.setObjectName("x_min_VK_compare")
         self.gridLayout_63.addWidget(self.x_min_VK_compare, 0, 0, 1, 1)
@@ -5638,10 +6085,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.x_max_VK_compare.setFont(font)
-        self.x_max_VK_compare.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.x_max_VK_compare.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.x_max_VK_compare.setAlignment(QtCore.Qt.AlignCenter)
         self.x_max_VK_compare.setObjectName("x_max_VK_compare")
         self.gridLayout_63.addWidget(self.x_max_VK_compare, 0, 1, 1, 1)
@@ -5652,10 +6101,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.y_min_VK_compare.setFont(font)
-        self.y_min_VK_compare.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.y_min_VK_compare.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.y_min_VK_compare.setAlignment(QtCore.Qt.AlignCenter)
         self.y_min_VK_compare.setObjectName("y_min_VK_compare")
         self.gridLayout_63.addWidget(self.y_min_VK_compare, 2, 0, 1, 1)
@@ -5666,10 +6117,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.y_max_VK_compare.setFont(font)
-        self.y_max_VK_compare.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.y_max_VK_compare.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.y_max_VK_compare.setAlignment(QtCore.Qt.AlignCenter)
         self.y_max_VK_compare.setObjectName("y_max_VK_compare")
         self.gridLayout_63.addWidget(self.y_max_VK_compare, 2, 1, 1, 1)
@@ -5705,10 +6158,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_68.setFont(font)
-        self.groupBox_68.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_68.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_68.setObjectName("groupBox_68")
         self.gridLayout_75 = QtWidgets.QGridLayout(self.groupBox_68)
         self.gridLayout_75.setContentsMargins(-1, 20, -1, -1)
@@ -5722,10 +6177,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.list_VK_y_2.setFont(font)
-        self.list_VK_y_2.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;")
+        self.list_VK_y_2.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;"
+        )
         self.list_VK_y_2.setObjectName("list_VK_y_2")
         item = QtWidgets.QListWidgetItem()
         self.list_VK_y_2.addItem(item)
@@ -5763,10 +6220,12 @@ class Ui_PyC2MC(object):
         font.setBold(False)
         font.setWeight(50)
         self.list_VK_x_2.setFont(font)
-        self.list_VK_x_2.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;")
+        self.list_VK_x_2.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;"
+        )
         self.list_VK_x_2.setObjectName("list_VK_x_2")
         item = QtWidgets.QListWidgetItem()
         self.list_VK_x_2.addItem(item)
@@ -5788,10 +6247,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_84.setFont(font)
-        self.groupBox_84.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_84.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_84.setObjectName("groupBox_84")
         self.gridLayout_96 = QtWidgets.QGridLayout(self.groupBox_84)
         self.gridLayout_96.setContentsMargins(-1, 20, -1, -1)
@@ -5820,7 +6281,9 @@ class Ui_PyC2MC(object):
         self.gridLayout_96.addWidget(self.fc_all_vk, 0, 0, 1, 1)
         self.gridLayout_97.addWidget(self.groupBox_84, 1, 2, 1, 1)
         self.stackedWidget_2.addWidget(self.page_VK_compare)
-        self.checkBox_old_figures_compare = QtWidgets.QCheckBox(self.page_molecular_cartographies)
+        self.checkBox_old_figures_compare = QtWidgets.QCheckBox(
+            self.page_molecular_cartographies
+        )
         self.checkBox_old_figures_compare.setGeometry(QtCore.QRect(10, 520, 129, 21))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
@@ -5846,22 +6309,24 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.btn_DBE_compare.setFont(font)
-        self.btn_DBE_compare.setStyleSheet("QPushButton {\n"
-"background-color: rgb(240,162,62);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"")
+        self.btn_DBE_compare.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(240,162,62);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            ""
+        )
         self.btn_DBE_compare.setObjectName("btn_DBE_compare")
         self.btn_VK_compare = QtWidgets.QPushButton(self.splitter)
         self.btn_VK_compare.setEnabled(True)
@@ -5873,22 +6338,24 @@ class Ui_PyC2MC(object):
         font.setItalic(False)
         font.setWeight(75)
         self.btn_VK_compare.setFont(font)
-        self.btn_VK_compare.setStyleSheet("QPushButton {\n"
-"background-color: rgb(240,162,62);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(255, 85, 0);\n"
-"color: white;\n"
-"}\n"
-"")
+        self.btn_VK_compare.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(240,162,62);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(255, 85, 0);\n"
+            "color: white;\n"
+            "}\n"
+            ""
+        )
         self.btn_VK_compare.setObjectName("btn_VK_compare")
         self.Compare_stacked_widget.addWidget(self.page_molecular_cartographies)
         self.gridLayout_101.addWidget(self.Compare_stacked_widget, 6, 0, 1, 3)
@@ -5932,10 +6399,12 @@ class Ui_PyC2MC(object):
         font.setItalic(True)
         font.setWeight(50)
         self.label_74.setFont(font)
-        self.label_74.setStyleSheet("background-color: rgba(198,242,210,255);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;")
+        self.label_74.setStyleSheet(
+            "background-color: rgba(198,242,210,255);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;"
+        )
         self.label_74.setAlignment(QtCore.Qt.AlignCenter)
         self.label_74.setObjectName("label_74")
         self.label_89 = QtWidgets.QLabel(self.splitter_3)
@@ -5948,10 +6417,12 @@ class Ui_PyC2MC(object):
         font.setItalic(True)
         font.setWeight(50)
         self.label_89.setFont(font)
-        self.label_89.setStyleSheet("background-color: rgba(190, 174, 182,250);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;")
+        self.label_89.setStyleSheet(
+            "background-color: rgba(190, 174, 182,250);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;"
+        )
         self.label_89.setTextFormat(QtCore.Qt.AutoText)
         self.label_89.setScaledContents(False)
         self.label_89.setAlignment(QtCore.Qt.AlignCenter)
@@ -5966,11 +6437,15 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.list_loaded_file_2.setFont(font)
-        self.list_loaded_file_2.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
-        self.list_loaded_file_2.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.list_loaded_file_2.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
+        self.list_loaded_file_2.setSelectionMode(
+            QtWidgets.QAbstractItemView.SingleSelection
+        )
         self.list_loaded_file_2.setObjectName("list_loaded_file_2")
         self.gridLayout_12.addWidget(self.list_loaded_file_2, 1, 0, 2, 1)
         self.Easter_egg_2 = QtWidgets.QPushButton(self.stats_plots)
@@ -5984,7 +6459,9 @@ class Ui_PyC2MC(object):
         self.Easter_egg_2.setCheckable(False)
         self.Easter_egg_2.setObjectName("Easter_egg_2")
         self.gridLayout_12.addWidget(self.Easter_egg_2, 1, 1, 2, 1)
-        spacerItem7 = QtWidgets.QSpacerItem(52, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem7 = QtWidgets.QSpacerItem(
+            52, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.gridLayout_12.addItem(spacerItem7, 2, 2, 1, 1)
         self.splitter_4 = QtWidgets.QSplitter(self.stats_plots)
         self.splitter_4.setMinimumSize(QtCore.QSize(339, 0))
@@ -6057,21 +6534,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.btn_venn.setFont(font)
-        self.btn_venn.setStyleSheet("QPushButton {\n"
-"background-color: rgb(221,50,77);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(149, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(149, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.btn_venn.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(221,50,77);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(149, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(149, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.btn_venn.setObjectName("btn_venn")
         self.btn_PCA = QtWidgets.QPushButton(self.splitter_4)
         self.btn_PCA.setEnabled(True)
@@ -6083,21 +6562,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.btn_PCA.setFont(font)
-        self.btn_PCA.setStyleSheet("QPushButton {\n"
-"background-color: rgb(221,50,77);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(149, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(149, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.btn_PCA.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(221,50,77);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(149, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(149, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.btn_PCA.setObjectName("btn_PCA")
         self.btn_HCA = QtWidgets.QPushButton(self.splitter_4)
         self.btn_HCA.setMinimumSize(QtCore.QSize(80, 20))
@@ -6108,21 +6589,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.btn_HCA.setFont(font)
-        self.btn_HCA.setStyleSheet("QPushButton {\n"
-"background-color: rgb(221,50,77);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(149, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(149, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.btn_HCA.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(221,50,77);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(149, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(149, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.btn_HCA.setObjectName("btn_HCA")
         self.btn_Volcano = QtWidgets.QPushButton(self.splitter_4)
         self.btn_Volcano.setMinimumSize(QtCore.QSize(80, 20))
@@ -6133,41 +6616,45 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.btn_Volcano.setFont(font)
-        self.btn_Volcano.setStyleSheet("QPushButton {\n"
-"background-color: rgb(221,50,77);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(149, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(149, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.btn_Volcano.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(221,50,77);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(149, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(149, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.btn_Volcano.setObjectName("btn_Volcano")
         self.gridLayout_12.addWidget(self.splitter_4, 3, 0, 1, 2)
         self.stats_stacked_widget = QtWidgets.QStackedWidget(self.stats_plots)
         self.stats_stacked_widget.setMaximumSize(QtCore.QSize(16777215, 528))
         self.stats_stacked_widget.setToolTip("")
-        self.stats_stacked_widget.setStyleSheet("QPushButton{\n"
-"background-color: rgb(13,77,164);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"color: grey;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"color: white;\n"
-"}\n"
-"\n"
-"")
+        self.stats_stacked_widget.setStyleSheet(
+            "QPushButton{\n"
+            "background-color: rgb(13,77,164);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 15px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "color: grey;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "color: white;\n"
+            "}\n"
+            "\n"
+            ""
+        )
         self.stats_stacked_widget.setObjectName("stats_stacked_widget")
         self.page_venn = QtWidgets.QWidget()
         self.page_venn.setObjectName("page_venn")
@@ -6193,10 +6680,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_49.setFont(font)
-        self.groupBox_49.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_49.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_49.setObjectName("groupBox_49")
         self.gridLayout_11 = QtWidgets.QGridLayout(self.groupBox_49)
         self.gridLayout_11.setContentsMargins(-1, 20, -1, -1)
@@ -6206,10 +6695,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.color.setFont(font)
-        self.color.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.color.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.color.setObjectName("color")
         self.gridLayout_11.addWidget(self.color, 0, 0, 1, 1)
         self.gridLayout_102.addWidget(self.groupBox_49, 1, 0, 1, 1)
@@ -6222,10 +6713,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_11.setFont(font)
-        self.groupBox_11.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_11.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_11.setObjectName("groupBox_11")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.groupBox_11)
         self.verticalLayout_3.setContentsMargins(-1, 20, -1, -1)
@@ -6256,10 +6749,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_48.setFont(font)
-        self.groupBox_48.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_48.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_48.setObjectName("groupBox_48")
         self.gridLayout_59 = QtWidgets.QGridLayout(self.groupBox_48)
         self.gridLayout_59.setContentsMargins(-1, 20, -1, -1)
@@ -6270,10 +6765,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.set_content.setFont(font)
-        self.set_content.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.set_content.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.set_content.setColumnCount(1)
         self.set_content.setObjectName("set_content")
         self.set_content.setRowCount(0)
@@ -6290,10 +6787,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_47.setFont(font)
-        self.groupBox_47.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_47.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_47.setObjectName("groupBox_47")
         self.gridLayout_58 = QtWidgets.QGridLayout(self.groupBox_47)
         self.gridLayout_58.setContentsMargins(-1, 20, -1, -1)
@@ -6305,10 +6804,12 @@ class Ui_PyC2MC(object):
         font.setPointSize(10)
         self.list_sets.setFont(font)
         self.list_sets.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
-        self.list_sets.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.list_sets.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.list_sets.setObjectName("list_sets")
         self.gridLayout_58.addWidget(self.list_sets, 0, 0, 1, 1)
         self.gridLayout_102.addWidget(self.groupBox_47, 2, 0, 1, 2)
@@ -6321,21 +6822,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.Save_Sets_Button.setFont(font)
-        self.Save_Sets_Button.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.Save_Sets_Button.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.Save_Sets_Button.setAutoDefault(False)
         self.Save_Sets_Button.setDefault(False)
         self.Save_Sets_Button.setObjectName("Save_Sets_Button")
@@ -6349,21 +6852,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.plot_button_venn.setFont(font)
-        self.plot_button_venn.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.plot_button_venn.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.plot_button_venn.setAutoDefault(False)
         self.plot_button_venn.setDefault(False)
         self.plot_button_venn.setObjectName("plot_button_venn")
@@ -6398,21 +6903,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.plot_button_pca.setFont(font)
-        self.plot_button_pca.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.plot_button_pca.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.plot_button_pca.setAutoDefault(False)
         self.plot_button_pca.setDefault(False)
         self.plot_button_pca.setObjectName("plot_button_pca")
@@ -6426,21 +6933,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.save_button_pca_coef.setFont(font)
-        self.save_button_pca_coef.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.save_button_pca_coef.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.save_button_pca_coef.setAutoDefault(False)
         self.save_button_pca_coef.setDefault(False)
         self.save_button_pca_coef.setObjectName("save_button_pca_coef")
@@ -6464,10 +6973,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_27.setFont(font)
-        self.groupBox_27.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_27.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_27.setObjectName("groupBox_27")
         self.gridLayout_35 = QtWidgets.QGridLayout(self.groupBox_27)
         self.gridLayout_35.setContentsMargins(-1, 20, -1, -1)
@@ -6522,10 +7033,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_31.setFont(font)
-        self.groupBox_31.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_31.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_31.setObjectName("groupBox_31")
         self.gridLayout_36 = QtWidgets.QGridLayout(self.groupBox_31)
         self.gridLayout_36.setContentsMargins(-1, 20, -1, -1)
@@ -6584,10 +7097,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_74.setFont(font)
-        self.groupBox_74.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_74.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_74.setObjectName("groupBox_74")
         self.gridLayout_92 = QtWidgets.QGridLayout(self.groupBox_74)
         self.gridLayout_92.setContentsMargins(-1, 20, -1, -1)
@@ -6619,10 +7134,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_51.setFont(font)
-        self.groupBox_51.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_51.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_51.setObjectName("groupBox_51")
         self.gridLayout_48 = QtWidgets.QGridLayout(self.groupBox_51)
         self.gridLayout_48.setContentsMargins(-1, 20, -1, -1)
@@ -6643,10 +7160,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_52.setFont(font)
-        self.groupBox_52.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_52.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_52.setObjectName("groupBox_52")
         self.gridLayout_60 = QtWidgets.QGridLayout(self.groupBox_52)
         self.gridLayout_60.setContentsMargins(-1, 20, -1, -1)
@@ -6677,21 +7196,23 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.plot_button_hca.setFont(font)
-        self.plot_button_hca.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.plot_button_hca.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.plot_button_hca.setAutoDefault(False)
         self.plot_button_hca.setDefault(False)
         self.plot_button_hca.setObjectName("plot_button_hca")
@@ -6707,20 +7228,26 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_23.setFont(font)
-        self.groupBox_23.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_23.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_23.setObjectName("groupBox_23")
         self.gridLayout_34 = QtWidgets.QGridLayout(self.groupBox_23)
         self.gridLayout_34.setContentsMargins(-1, 20, -1, -1)
         self.gridLayout_34.setObjectName("gridLayout_34")
         self.list_sample_1 = QtWidgets.QListWidget(self.groupBox_23)
-        self.list_sample_1.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
-        self.list_sample_1.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        self.list_sample_1.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
+        self.list_sample_1.setSelectionMode(
+            QtWidgets.QAbstractItemView.ExtendedSelection
+        )
         self.list_sample_1.setObjectName("list_sample_1")
         self.gridLayout_34.addWidget(self.list_sample_1, 0, 0, 1, 1)
         self.groupBox_60 = QtWidgets.QGroupBox(self.page_Volcano)
@@ -6732,20 +7259,26 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_60.setFont(font)
-        self.groupBox_60.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_60.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_60.setObjectName("groupBox_60")
         self.gridLayout_67 = QtWidgets.QGridLayout(self.groupBox_60)
         self.gridLayout_67.setContentsMargins(-1, 20, -1, -1)
         self.gridLayout_67.setObjectName("gridLayout_67")
         self.list_sample_2 = QtWidgets.QListWidget(self.groupBox_60)
-        self.list_sample_2.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
-        self.list_sample_2.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        self.list_sample_2.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
+        self.list_sample_2.setSelectionMode(
+            QtWidgets.QAbstractItemView.ExtendedSelection
+        )
         self.list_sample_2.setObjectName("list_sample_2")
         self.gridLayout_67.addWidget(self.list_sample_2, 0, 0, 1, 1)
         self.cb_close_all_volc = QtWidgets.QCheckBox(self.page_Volcano)
@@ -6767,28 +7300,32 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.btn_plot_volc.setFont(font)
-        self.btn_plot_volc.setStyleSheet("QPushButton {\n"
-"background-color: rgb(124,154,171);\n"
-"color: white;\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: rgb(202, 0, 0);\n"
-"color: white;\n"
-"}")
+        self.btn_plot_volc.setStyleSheet(
+            "QPushButton {\n"
+            "background-color: rgb(124,154,171);\n"
+            "color: white;\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "background-color: rgb(202, 0, 0);\n"
+            "color: white;\n"
+            "}"
+        )
         self.btn_plot_volc.setObjectName("btn_plot_volc")
         self.groupBox_61 = QtWidgets.QGroupBox(self.page_Volcano)
         self.groupBox_61.setGeometry(QtCore.QRect(10, 330, 246, 64))
-        self.groupBox_61.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_61.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_61.setTitle("")
         self.groupBox_61.setObjectName("groupBox_61")
         self.gridLayout_68 = QtWidgets.QGridLayout(self.groupBox_61)
@@ -6808,10 +7345,12 @@ class Ui_PyC2MC(object):
         self.lineEdit_tot_spec_volc = QtWidgets.QLineEdit(self.groupBox_61)
         self.lineEdit_tot_spec_volc.setMinimumSize(QtCore.QSize(100, 0))
         self.lineEdit_tot_spec_volc.setMaximumSize(QtCore.QSize(100, 16777215))
-        self.lineEdit_tot_spec_volc.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.lineEdit_tot_spec_volc.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.lineEdit_tot_spec_volc.setObjectName("lineEdit_tot_spec_volc")
         self.gridLayout_68.addWidget(self.lineEdit_tot_spec_volc, 0, 1, 1, 1)
         self.label_54 = QtWidgets.QLabel(self.groupBox_61)
@@ -6829,10 +7368,12 @@ class Ui_PyC2MC(object):
         self.lineEdit_comp_spec_volc = QtWidgets.QLineEdit(self.groupBox_61)
         self.lineEdit_comp_spec_volc.setMinimumSize(QtCore.QSize(100, 0))
         self.lineEdit_comp_spec_volc.setMaximumSize(QtCore.QSize(100, 16777215))
-        self.lineEdit_comp_spec_volc.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.lineEdit_comp_spec_volc.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.lineEdit_comp_spec_volc.setObjectName("lineEdit_comp_spec_volc")
         self.gridLayout_68.addWidget(self.lineEdit_comp_spec_volc, 1, 1, 1, 1)
         self.cb_significancy_volc = QtWidgets.QGroupBox(self.page_Volcano)
@@ -6843,20 +7384,24 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.cb_significancy_volc.setFont(font)
-        self.cb_significancy_volc.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.cb_significancy_volc.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.cb_significancy_volc.setCheckable(True)
         self.cb_significancy_volc.setObjectName("cb_significancy_volc")
         self.gridLayout_69 = QtWidgets.QGridLayout(self.cb_significancy_volc)
         self.gridLayout_69.setContentsMargins(-1, 20, -1, -1)
         self.gridLayout_69.setObjectName("gridLayout_69")
         self.groupBox_62 = QtWidgets.QGroupBox(self.cb_significancy_volc)
-        self.groupBox_62.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_62.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_62.setTitle("")
         self.groupBox_62.setObjectName("groupBox_62")
         self.gridLayout_70 = QtWidgets.QGridLayout(self.groupBox_62)
@@ -6888,10 +7433,12 @@ class Ui_PyC2MC(object):
         self.gridLayout_69.addWidget(self.groupBox_62, 0, 0, 1, 1)
         self.groupBox_75 = QtWidgets.QGroupBox(self.page_Volcano)
         self.groupBox_75.setGeometry(QtCore.QRect(10, 400, 161, 41))
-        self.groupBox_75.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_75.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_75.setTitle("")
         self.groupBox_75.setObjectName("groupBox_75")
         self.gridLayout_83 = QtWidgets.QGridLayout(self.groupBox_75)
@@ -6914,20 +7461,24 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.cb_significancy_volc_2.setFont(font)
-        self.cb_significancy_volc_2.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.cb_significancy_volc_2.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.cb_significancy_volc_2.setCheckable(False)
         self.cb_significancy_volc_2.setObjectName("cb_significancy_volc_2")
         self.gridLayout_98 = QtWidgets.QGridLayout(self.cb_significancy_volc_2)
         self.gridLayout_98.setContentsMargins(-1, 20, -1, -1)
         self.gridLayout_98.setObjectName("gridLayout_98")
         self.groupBox_85 = QtWidgets.QGroupBox(self.cb_significancy_volc_2)
-        self.groupBox_85.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_85.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_85.setTitle("")
         self.groupBox_85.setObjectName("groupBox_85")
         self.gridLayout_99 = QtWidgets.QGridLayout(self.groupBox_85)
@@ -6958,7 +7509,9 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_10.setFont(font)
-        self.groupBox_10.setStyleSheet("background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;")
+        self.groupBox_10.setStyleSheet(
+            "background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;"
+        )
         self.groupBox_10.setObjectName("groupBox_10")
         self.groupBox_12 = QtWidgets.QGroupBox(self.groupBox_10)
         self.groupBox_12.setGeometry(QtCore.QRect(10, 20, 149, 100))
@@ -6970,10 +7523,12 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_12.setFont(font)
-        self.groupBox_12.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.groupBox_12.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.groupBox_12.setObjectName("groupBox_12")
         self.gridLayout_30 = QtWidgets.QGridLayout(self.groupBox_12)
         self.gridLayout_30.setContentsMargins(-1, 20, -1, -1)
@@ -7012,11 +7567,15 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox_32.setFont(font)
-        self.groupBox_32.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
-        self.groupBox_32.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.groupBox_32.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
+        self.groupBox_32.setAlignment(
+            QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter
+        )
         self.groupBox_32.setObjectName("groupBox_32")
         self.gridLayout_40 = QtWidgets.QGridLayout(self.groupBox_32)
         self.gridLayout_40.setContentsMargins(-1, 20, -1, -1)
@@ -7065,10 +7624,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.list_color_map.setFont(font)
-        self.list_color_map.setStyleSheet("background-color: rgba(255,255,255,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.list_color_map.setStyleSheet(
+            "background-color: rgba(255,255,255,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.list_color_map.setObjectName("list_color_map")
         item = QtWidgets.QListWidgetItem()
         self.list_color_map.addItem(item)
@@ -7094,7 +7655,9 @@ class Ui_PyC2MC(object):
         font.setBold(True)
         font.setWeight(75)
         self.groupBox.setFont(font)
-        self.groupBox.setStyleSheet("background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;")
+        self.groupBox.setStyleSheet(
+            "background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;"
+        )
         self.groupBox.setObjectName("groupBox")
         self.radio_color = QtWidgets.QRadioButton(self.groupBox)
         self.radio_color.setGeometry(QtCore.QRect(237, 40, 51, 17))
@@ -7137,10 +7700,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.dot_size.setFont(font)
-        self.dot_size.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.dot_size.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.dot_size.setAlignment(QtCore.Qt.AlignCenter)
         self.dot_size.setObjectName("dot_size")
         self.CheckBox_edge = QtWidgets.QCheckBox(self.groupBox)
@@ -7157,7 +7722,9 @@ class Ui_PyC2MC(object):
         font.setWeight(75)
         self.groupBox_7.setFont(font)
         self.groupBox_7.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.groupBox_7.setStyleSheet("background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;")
+        self.groupBox_7.setStyleSheet(
+            "background-color: rgba(255,255,255,1);border-radius: 10px;border-width: 1px;"
+        )
         self.groupBox_7.setObjectName("groupBox_7")
         self.gridLayout_29 = QtWidgets.QGridLayout(self.groupBox_7)
         self.gridLayout_29.setObjectName("gridLayout_29")
@@ -7167,10 +7734,12 @@ class Ui_PyC2MC(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.font_size.setFont(font)
-        self.font_size.setStyleSheet("background-color: rgba(240,240,240,1);\n"
-"border-style: ouset;\n"
-"border-width: 1px;\n"
-"border-radius: 10px;")
+        self.font_size.setStyleSheet(
+            "background-color: rgba(240,240,240,1);\n"
+            "border-style: ouset;\n"
+            "border-width: 1px;\n"
+            "border-radius: 10px;"
+        )
         self.font_size.setAlignment(QtCore.Qt.AlignCenter)
         self.font_size.setObjectName("font_size")
         self.gridLayout_29.addWidget(self.font_size, 0, 2, 1, 1)
@@ -7211,92 +7780,100 @@ class Ui_PyC2MC(object):
         font.setKerning(False)
         self.menuFile.setFont(font)
         self.menuFile.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.menuFile.setStyleSheet("QMenu::item:selected {\n"
-"     border-color: darkblue;\n"
-"     background: rgb(0, 136, 255);\n"
-"     color:white;\n"
-" }\n"
-"\n"
-"QMenu {\n"
-"background-color: rgb(251,240,230);\n"
-" }\n"
-"\n"
-"QMenu::item {\n"
-"padding: 2px 20px 2px 20px;\n"
-"border: 1px solid transparent;\n"
-"spacing: 20px;\n"
-" }\n"
-"\n"
-"QMenu::separator {\n"
-"     height: 2px;\n"
-"}")
+        self.menuFile.setStyleSheet(
+            "QMenu::item:selected {\n"
+            "     border-color: darkblue;\n"
+            "     background: rgb(0, 136, 255);\n"
+            "     color:white;\n"
+            " }\n"
+            "\n"
+            "QMenu {\n"
+            "background-color: rgb(251,240,230);\n"
+            " }\n"
+            "\n"
+            "QMenu::item {\n"
+            "padding: 2px 20px 2px 20px;\n"
+            "border: 1px solid transparent;\n"
+            "spacing: 20px;\n"
+            " }\n"
+            "\n"
+            "QMenu::separator {\n"
+            "     height: 2px;\n"
+            "}"
+        )
         self.menuFile.setToolTipsVisible(True)
         self.menuFile.setObjectName("menuFile")
         self.menuProcess = QtWidgets.QMenu(self.menubar)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.menuProcess.setFont(font)
-        self.menuProcess.setStyleSheet("QMenu::item:selected {\n"
-"     border-color: darkblue;\n"
-"     background: rgb(0, 136, 255);\n"
-"     color:white;\n"
-" }\n"
-"\n"
-"QMenu {\n"
-"background-color: rgb(251,240,230);\n"
-" }\n"
-"\n"
-"QMenu::item {\n"
-"padding: 2px 20px 2px 20px;\n"
-"border: 1px solid transparent;\n"
-"spacing: 20px;\n"
-" }\n"
-"\n"
-"QMenu::separator {\n"
-"     height: 2px;\n"
-"}")
+        self.menuProcess.setStyleSheet(
+            "QMenu::item:selected {\n"
+            "     border-color: darkblue;\n"
+            "     background: rgb(0, 136, 255);\n"
+            "     color:white;\n"
+            " }\n"
+            "\n"
+            "QMenu {\n"
+            "background-color: rgb(251,240,230);\n"
+            " }\n"
+            "\n"
+            "QMenu::item {\n"
+            "padding: 2px 20px 2px 20px;\n"
+            "border: 1px solid transparent;\n"
+            "spacing: 20px;\n"
+            " }\n"
+            "\n"
+            "QMenu::separator {\n"
+            "     height: 2px;\n"
+            "}"
+        )
         self.menuProcess.setObjectName("menuProcess")
         self.menuAdditional_tools = QtWidgets.QMenu(self.menubar)
-        self.menuAdditional_tools.setStyleSheet("QMenu::item:selected {\n"
-"     border-color: darkblue;\n"
-"     background: rgb(0, 136, 255);\n"
-"     color:white;\n"
-" }\n"
-"\n"
-"QMenu {\n"
-"background-color: rgb(251,240,230);\n"
-" }\n"
-"\n"
-"QMenu::item {\n"
-"padding: 2px 20px 2px 20px;\n"
-"border: 1px solid transparent;\n"
-"spacing: 20px;\n"
-" }\n"
-"\n"
-"QMenu::separator {\n"
-"     height: 2px;\n"
-"}")
+        self.menuAdditional_tools.setStyleSheet(
+            "QMenu::item:selected {\n"
+            "     border-color: darkblue;\n"
+            "     background: rgb(0, 136, 255);\n"
+            "     color:white;\n"
+            " }\n"
+            "\n"
+            "QMenu {\n"
+            "background-color: rgb(251,240,230);\n"
+            " }\n"
+            "\n"
+            "QMenu::item {\n"
+            "padding: 2px 20px 2px 20px;\n"
+            "border: 1px solid transparent;\n"
+            "spacing: 20px;\n"
+            " }\n"
+            "\n"
+            "QMenu::separator {\n"
+            "     height: 2px;\n"
+            "}"
+        )
         self.menuAdditional_tools.setObjectName("menuAdditional_tools")
         self.menuAbout = QtWidgets.QMenu(self.menubar)
-        self.menuAbout.setStyleSheet("QMenu::item:selected {\n"
-"     border-color: darkblue;\n"
-"     background: rgb(0, 136, 255);\n"
-"     color:white;\n"
-" }\n"
-"\n"
-"QMenu {\n"
-"background-color: rgb(251,240,230);\n"
-" }\n"
-"\n"
-"QMenu::item {\n"
-"padding: 2px 20px 2px 20px;\n"
-"border: 1px solid transparent;\n"
-"spacing: 20px;\n"
-" }\n"
-"\n"
-"QMenu::separator {\n"
-"     height: 2px;\n"
-"}")
+        self.menuAbout.setStyleSheet(
+            "QMenu::item:selected {\n"
+            "     border-color: darkblue;\n"
+            "     background: rgb(0, 136, 255);\n"
+            "     color:white;\n"
+            " }\n"
+            "\n"
+            "QMenu {\n"
+            "background-color: rgb(251,240,230);\n"
+            " }\n"
+            "\n"
+            "QMenu::item {\n"
+            "padding: 2px 20px 2px 20px;\n"
+            "border: 1px solid transparent;\n"
+            "spacing: 20px;\n"
+            " }\n"
+            "\n"
+            "QMenu::separator {\n"
+            "     height: 2px;\n"
+            "}"
+        )
         self.menuAbout.setObjectName("menuAbout")
         PyC2MC.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(PyC2MC)
@@ -7342,7 +7919,9 @@ class Ui_PyC2MC(object):
         self.actionIsotopinator = QtWidgets.QAction(PyC2MC)
         self.actionIsotopinator.setObjectName("actionIsotopinator")
         self.actionMerge_csv_from_same_spectrum = QtWidgets.QAction(PyC2MC)
-        self.actionMerge_csv_from_same_spectrum.setObjectName("actionMerge_csv_from_same_spectrum")
+        self.actionMerge_csv_from_same_spectrum.setObjectName(
+            "actionMerge_csv_from_same_spectrum"
+        )
         self.actionAbout = QtWidgets.QAction(PyC2MC)
         self.actionAbout.setObjectName("actionAbout")
         self.actionGraphic_parameters = QtWidgets.QAction(PyC2MC)
@@ -7350,7 +7929,9 @@ class Ui_PyC2MC(object):
         self.actionSave_classes = QtWidgets.QAction(PyC2MC)
         self.actionSave_classes.setObjectName("actionSave_classes")
         self.actionMerge_non_attributed_spectra_from_DA = QtWidgets.QAction(PyC2MC)
-        self.actionMerge_non_attributed_spectra_from_DA.setObjectName("actionMerge_non_attributed_spectra_from_DA")
+        self.actionMerge_non_attributed_spectra_from_DA.setObjectName(
+            "actionMerge_non_attributed_spectra_from_DA"
+        )
         self.menuFile.addAction(self.actionLoad_file)
         self.menuFile.addAction(self.actionClear_list)
         self.menuFile.addAction(self.actionGraphic_parameters)
@@ -7540,7 +8121,9 @@ class Ui_PyC2MC(object):
         self.sqrt_intens_K.setText(_translate("PyC2MC", "Sqrt"))
         self.classic_intens_K.setText(_translate("PyC2MC", "Classic"))
         self.log_intens_K.setText(_translate("PyC2MC", "Log"))
-        self.buttonKendrickUniv.setText(_translate("PyC2MC", "Mass defect vs Nominal mass"))
+        self.buttonKendrickUniv.setText(
+            _translate("PyC2MC", "Mass defect vs Nominal mass")
+        )
         self.groupBox_30.setTitle(_translate("PyC2MC", "Repetition Unit"))
         self.label_26.setText(_translate("PyC2MC", "Unit :"))
         self.edit_motif.setText(_translate("PyC2MC", "CH2"))
@@ -7566,7 +8149,9 @@ class Ui_PyC2MC(object):
         self.label_51.setText(_translate("PyC2MC", "By heteroelements"))
         self.label_82.setText(_translate("PyC2MC", "Max"))
         self.label_83.setText(_translate("PyC2MC", "Color coding"))
-        self.groupBox_50.setTitle(_translate("PyC2MC", "Select family (if molecular formula)"))
+        self.groupBox_50.setTitle(
+            _translate("PyC2MC", "Select family (if molecular formula)")
+        )
         self.label_115.setText(_translate("PyC2MC", "Kendrick mass defect plots"))
         self.groupBox_K.setTitle(_translate("PyC2MC", "Extracting series"))
         self.pushButton_clearSeries.setText(_translate("PyC2MC", "Clear series"))
@@ -7687,7 +8272,9 @@ class Ui_PyC2MC(object):
         self.comboBox_10.setItemText(7, _translate("PyC2MC", "Sienna"))
         self.comboBox_10.setItemText(8, _translate("PyC2MC", "Lime"))
         self.comboBox_10.setItemText(9, _translate("PyC2MC", "Pink"))
-        self.groupBox_55.setTitle(_translate("PyC2MC", "Select family (if molecular formula)"))
+        self.groupBox_55.setTitle(
+            _translate("PyC2MC", "Select family (if molecular formula)")
+        )
         self.K_oxygen_univ.setText(_translate("PyC2MC", "Oxygen"))
         self.K_sulfur_univ.setText(_translate("PyC2MC", "Sulfur"))
         self.label_85.setText(_translate("PyC2MC", "Min"))
@@ -7696,9 +8283,13 @@ class Ui_PyC2MC(object):
         self.label_113.setText(_translate("PyC2MC", "Color coding"))
         self.K_intensity_univ.setText(_translate("PyC2MC", "Intensity"))
         self.K_nitrogen_univ.setText(_translate("PyC2MC", "Nitrogen"))
-        self.label_114.setText(_translate("PyC2MC", "Mass defect vs nominal mass plots"))
+        self.label_114.setText(
+            _translate("PyC2MC", "Mass defect vs nominal mass plots")
+        )
         self.plot_button_Kendrick.setText(_translate("PyC2MC", "Plot"))
-        self.label_53.setText(_translate("PyC2MC", "Plotting environmental science variables"))
+        self.label_53.setText(
+            _translate("PyC2MC", "Plotting environmental science variables")
+        )
         self.groupBox_19.setTitle(_translate("PyC2MC", "Selected plot"))
         self.radio_ACOS.setText(_translate("PyC2MC", "Kroll plot"))
         self.radio_MAI.setText(_translate("PyC2MC", "Modified aromaticity index"))
@@ -7746,13 +8337,19 @@ class Ui_PyC2MC(object):
         self.label_109.setText(_translate("PyC2MC", "X-min"))
         self.label_110.setText(_translate("PyC2MC", "Y-min"))
         self.label_111.setText(_translate("PyC2MC", "Y-max"))
-        self.label_59.setText(_translate("PyC2MC", "Loaded Files (Here, at least 2 files should be selected)"))
+        self.label_59.setText(
+            _translate(
+                "PyC2MC", "Loaded Files (Here, at least 2 files should be selected)"
+            )
+        )
         self.label_80.setText(_translate("PyC2MC", "Legend:"))
         self.label_72.setText(_translate("PyC2MC", "Attributed"))
         self.label_71.setText(_translate("PyC2MC", "Fused"))
         self.status.setText(_translate("PyC2MC", "Status :"))
         self.btn_overview_compare.setText(_translate("PyC2MC", "Overview"))
-        self.btn_molecular_cartographies.setText(_translate("PyC2MC", "Fold Change Molecular Cartographies"))
+        self.btn_molecular_cartographies.setText(
+            _translate("PyC2MC", "Fold Change Molecular Cartographies")
+        )
         self.label_62.setText(_translate("PyC2MC", "Overview plots"))
         self.groupBox_43.setTitle(_translate("PyC2MC", "Selected plot"))
         self.radio_mass_spectrum_compare.setText(_translate("PyC2MC", "Mass spectrum"))
@@ -7767,8 +8364,12 @@ class Ui_PyC2MC(object):
         self.radio_one_by_one.setText(_translate("PyC2MC", "One by One"))
         self.groupBox_33.setTitle(_translate("PyC2MC", "Composition type"))
         self.radio_classes_compare.setText(_translate("PyC2MC", "Classes"))
-        self.radio_stacked_classes_compare.setText(_translate("PyC2MC", "Stacked classes"))
-        self.groupBox_display_one_by_one.setTitle(_translate("PyC2MC", "Display settings"))
+        self.radio_stacked_classes_compare.setText(
+            _translate("PyC2MC", "Stacked classes")
+        )
+        self.groupBox_display_one_by_one.setTitle(
+            _translate("PyC2MC", "Display settings")
+        )
         self.label_73.setText(_translate("PyC2MC", "Bar width"))
         self.compo_compare_width.setText(_translate("PyC2MC", "5"))
         self.compo_compare_gap.setText(_translate("PyC2MC", "4"))
@@ -7810,7 +8411,9 @@ class Ui_PyC2MC(object):
         self.label_78.setText(_translate("PyC2MC", "mz min"))
         self.label_79.setText(_translate("PyC2MC", "mz max"))
         self.plot_button_spectrum_compare.setText(_translate("PyC2MC", "Plot"))
-        self.checkBox_old_figures_comp.setText(_translate("PyC2MC", "Close old figures"))
+        self.checkBox_old_figures_comp.setText(
+            _translate("PyC2MC", "Close old figures")
+        )
         self.groupBox_57.setTitle(_translate("PyC2MC", "Sample selection"))
         self.groupBox_63.setTitle(_translate("PyC2MC", "Sample 2 :"))
         self.groupBox_56.setTitle(_translate("PyC2MC", "Sample 1 :"))
@@ -7832,10 +8435,8 @@ class Ui_PyC2MC(object):
         self.DBE_min_DBE_compare.setText(_translate("PyC2MC", "0"))
         self.DBE_max_DBE_compare.setText(_translate("PyC2MC", "45"))
         self.groupBox_80.setTitle(_translate("PyC2MC", "Display : "))
-        self.fc_common_dbe.setText(_translate("PyC2MC", "Common \n"
-"species"))
-        self.fc_all_dbe.setText(_translate("PyC2MC", "All \n"
-"species"))
+        self.fc_common_dbe.setText(_translate("PyC2MC", "Common \n" "species"))
+        self.fc_all_dbe.setText(_translate("PyC2MC", "All \n" "species"))
         self.CheckBox_hap_compare.setText(_translate("PyC2MC", "PAH line"))
         self.plot_compare_molecular_carto_DBE.setText(_translate("PyC2MC", "Plot"))
         self.plot_button_VK_compare.setText(_translate("PyC2MC", "Plot"))
@@ -7873,11 +8474,11 @@ class Ui_PyC2MC(object):
         item.setText(_translate("PyC2MC", "m/z"))
         self.list_VK_x_2.setSortingEnabled(__sortingEnabled)
         self.groupBox_84.setTitle(_translate("PyC2MC", "Display : "))
-        self.fc_common_vk.setText(_translate("PyC2MC", "Common \n"
-"species"))
-        self.fc_all_vk.setText(_translate("PyC2MC", "All \n"
-"species"))
-        self.checkBox_old_figures_compare.setText(_translate("PyC2MC", "Close old figures"))
+        self.fc_common_vk.setText(_translate("PyC2MC", "Common \n" "species"))
+        self.fc_all_vk.setText(_translate("PyC2MC", "All \n" "species"))
+        self.checkBox_old_figures_compare.setText(
+            _translate("PyC2MC", "Close old figures")
+        )
         self.btn_DBE_compare.setText(_translate("PyC2MC", "DBE"))
         self.btn_VK_compare.setText(_translate("PyC2MC", "Van Krevelen"))
         self.label_11.setText(_translate("PyC2MC", "Loaded Files"))
@@ -7913,7 +8514,11 @@ class Ui_PyC2MC(object):
         self.groupBox_31.setTitle(_translate("PyC2MC", "Last PCA results"))
         self.label_6.setText(_translate("PyC2MC", "N° components"))
         self.lineEdit_n_component.setText(_translate("PyC2MC", "5"))
-        self.label_60.setText(_translate("PyC2MC", "<html><head/><body><p>Explained variance</p></body></html>"))
+        self.label_60.setText(
+            _translate(
+                "PyC2MC", "<html><head/><body><p>Explained variance</p></body></html>"
+            )
+        )
         self.label_61.setText(_translate("PyC2MC", "(3 first components)"))
         self.groupBox_74.setTitle(_translate("PyC2MC", "PCA on :"))
         self.PCA_ALL.setText(_translate("PyC2MC", "All species"))
@@ -7932,7 +8537,9 @@ class Ui_PyC2MC(object):
         self.btn_plot_volc.setText(_translate("PyC2MC", "Plot"))
         self.label_88.setText(_translate("PyC2MC", "Total species :"))
         self.label_54.setText(_translate("PyC2MC", "Compared species :"))
-        self.cb_significancy_volc.setTitle(_translate("PyC2MC", "Plot p-value limit(s)"))
+        self.cb_significancy_volc.setTitle(
+            _translate("PyC2MC", "Plot p-value limit(s)")
+        )
         self.cb_005.setText(_translate("PyC2MC", "0.05 (*)"))
         self.cb_001.setText(_translate("PyC2MC", "0.01 (**)"))
         self.cb_0001.setText(_translate("PyC2MC", "0.001 (***)"))
@@ -7981,32 +8588,80 @@ class Ui_PyC2MC(object):
         self.menuAbout.setTitle(_translate("PyC2MC", "Other"))
         self.actionLoad_file.setText(_translate("PyC2MC", "Load file"))
         self.action2.setText(_translate("PyC2MC", "2"))
-        self.actionGenerate_all_DBE_plots.setText(_translate("PyC2MC", "Generate all DBE plots"))
+        self.actionGenerate_all_DBE_plots.setText(
+            _translate("PyC2MC", "Generate all DBE plots")
+        )
         self.actionClear_list.setText(_translate("PyC2MC", "Clear list"))
-        self.actionClear_list.setToolTip(_translate("PyC2MC", "<html><head/><body><p><span style=\" font-size:10pt;\">Clears &quot;Loaded Files&quot; list.</span></p></body></html>"))
-        self.actionMerge_files.setText(_translate("PyC2MC", "Merge all species (Attributed)"))
-        self.actionMerge_files.setToolTip(_translate("PyC2MC", "<html><head/><body><p><span style=\" font-size:10pt;\">Merges all attributions in the selected files, enabling the statistical functions of the software.</span></p><p><span style=\" font-size:10pt;\">(Venn,PCA,etc...)</span></p></body></html>"))
-        self.actionMerge_merged_files.setText(_translate("PyC2MC", "Merge already merged files OR fused files"))
-        self.actionMerge_merged_files.setToolTip(_translate("PyC2MC", "<html><head/><body><p><span style=\" font-size:10pt;\">Merges already merged files.</span></p><p><span style=\" font-size:10pt;\">Useful for PCA on different replicated samples.</span></p></body></html>"))
-        self.actionFusion_my_replicats.setText(_translate("PyC2MC", "Merge only species in common (For replicates)"))
-        self.actionFusion_my_replicats.setIconText(_translate("PyC2MC", "Merge only species in common"))
-        self.actionFusion_my_replicats.setToolTip(_translate("PyC2MC", "<html><head/><body><p><span style=\" font-size:10pt;\">Special merging process only keeping the species found in at least a defined number of analysis</span></p><p><span style=\" font-size:10pt;\">/!\\ Mean data are saved so use it with analytical replicates of a same sample. /!\\</span></p></body></html>"))
+        self.actionClear_list.setToolTip(
+            _translate(
+                "PyC2MC",
+                '<html><head/><body><p><span style=" font-size:10pt;">Clears &quot;Loaded Files&quot; list.</span></p></body></html>',
+            )
+        )
+        self.actionMerge_files.setText(
+            _translate("PyC2MC", "Merge all species (Attributed)")
+        )
+        self.actionMerge_files.setToolTip(
+            _translate(
+                "PyC2MC",
+                '<html><head/><body><p><span style=" font-size:10pt;">Merges all attributions in the selected files, enabling the statistical functions of the software.</span></p><p><span style=" font-size:10pt;">(Venn,PCA,etc...)</span></p></body></html>',
+            )
+        )
+        self.actionMerge_merged_files.setText(
+            _translate("PyC2MC", "Merge already merged files OR fused files")
+        )
+        self.actionMerge_merged_files.setToolTip(
+            _translate(
+                "PyC2MC",
+                '<html><head/><body><p><span style=" font-size:10pt;">Merges already merged files.</span></p><p><span style=" font-size:10pt;">Useful for PCA on different replicated samples.</span></p></body></html>',
+            )
+        )
+        self.actionFusion_my_replicats.setText(
+            _translate("PyC2MC", "Merge only species in common (For replicates)")
+        )
+        self.actionFusion_my_replicats.setIconText(
+            _translate("PyC2MC", "Merge only species in common")
+        )
+        self.actionFusion_my_replicats.setToolTip(
+            _translate(
+                "PyC2MC",
+                '<html><head/><body><p><span style=" font-size:10pt;">Special merging process only keeping the species found in at least a defined number of analysis</span></p><p><span style=" font-size:10pt;">/!\\ Mean data are saved so use it with analytical replicates of a same sample. /!\\</span></p></body></html>',
+            )
+        )
         self.actionIsotopinator.setText(_translate("PyC2MC", "Isotope Finder"))
-        self.actionIsotopinator.setToolTip(_translate("PyC2MC", "<html><head/><body><p><span style=\" font-size:10pt;\">Assigns split(s) to a potential pair of isotopes.</span></p></body></html>"))
-        self.actionMerge_csv_from_same_spectrum.setText(_translate("PyC2MC", "Merge csv from same spectrum (XCalibur files only)"))
-        self.actionMerge_csv_from_same_spectrum.setToolTip(_translate("PyC2MC", "<html><head/><body><p><span style=\" font-size:10pt;\">Merges .csv files obtained from a same spectrum in case of sequential attribution.</span></p><p><span style=\" font-size:10pt;\">/!\\ For orbitrap only /!\\</span></p></body></html>"))
+        self.actionIsotopinator.setToolTip(
+            _translate(
+                "PyC2MC",
+                '<html><head/><body><p><span style=" font-size:10pt;">Assigns split(s) to a potential pair of isotopes.</span></p></body></html>',
+            )
+        )
+        self.actionMerge_csv_from_same_spectrum.setText(
+            _translate("PyC2MC", "Merge csv from same spectrum (XCalibur files only)")
+        )
+        self.actionMerge_csv_from_same_spectrum.setToolTip(
+            _translate(
+                "PyC2MC",
+                '<html><head/><body><p><span style=" font-size:10pt;">Merges .csv files obtained from a same spectrum in case of sequential attribution.</span></p><p><span style=" font-size:10pt;">/!\\ For orbitrap only /!\\</span></p></body></html>',
+            )
+        )
         self.actionAbout.setText(_translate("PyC2MC", "About"))
-        self.actionGraphic_parameters.setText(_translate("PyC2MC", "Graphic parameters"))
-        self.actionSave_classes.setText(_translate("PyC2MC", "Save classes of selected file"))
-        self.actionMerge_non_attributed_spectra_from_DA.setText(_translate("PyC2MC", "Merge all species (Unattributed spectra from DA)"))
+        self.actionGraphic_parameters.setText(
+            _translate("PyC2MC", "Graphic parameters")
+        )
+        self.actionSave_classes.setText(
+            _translate("PyC2MC", "Save classes of selected file")
+        )
+        self.actionMerge_non_attributed_spectra_from_DA.setText(
+            _translate("PyC2MC", "Merge all species (Unattributed spectra from DA)")
+        )
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     PyC2MC = QtWidgets.QMainWindow()
     ui = Ui_PyC2MC()
     ui.setupUi(PyC2MC)
     PyC2MC.show()
     sys.exit(app.exec_())
-
