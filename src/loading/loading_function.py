@@ -443,6 +443,9 @@ class Peak_list:
             ],
             axis=1,
         )
+
+        df[["m/z","absolute_intensity","err_ppm"]] = df[["m/z","absolute_intensity","err_ppm"]].astype(float)
+
         df["normalized_intensity"] = (
             df["absolute_intensity"].values
             * 100
