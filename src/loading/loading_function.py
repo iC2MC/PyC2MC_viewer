@@ -51,7 +51,7 @@ def load_MS_file(filename, isotopes_dict=None):
 
 def load_csv_file(filename):
     """
-    CSV file loading method for raw or attributted data.
+    CSV file loading method for raw or attributed data.
 
     Args:
         filename (path): Directory of the file.
@@ -60,12 +60,15 @@ def load_csv_file(filename):
     """
     header = get_header_csv(filename)
     if header == 2:  # Particular attributed csv file from PetroOrg
-        # data_df = pd.read_csv(filename, skiprows = 2,header=None,sep=',|;',encoding="utf-8", engine='python')
         data = Peak_list.from_csv_petroOrg(filename)
     else:
-        data_df = pd.read_csv(
-            filename, header=header, sep=",|;", encoding="utf-8", engine="python"
-        )
+        with open(filename, "r", encoding="utf-8") as f:
+            first_line = f.readline()
+
+        sep = ";" if first_line.count(";") > first_line.count(",") else ","
+
+        data_df = pd.read_csv(filename, header=header, sep=sep)
+
         if "#" in data_df:  # non-attributed csv file from DA
             data = Peak_list.from_csv_raw(data_df)
         elif "Observed Intens" in data_df:  # attributed CSV file from DA
