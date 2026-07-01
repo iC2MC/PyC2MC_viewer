@@ -4,9 +4,6 @@ from scipy.cluster.hierarchy import dendrogram
 from matplotlib import pyplot as plt
 
 
-
-
-
 def plot_dendrogram(model, **kwargs):
     """
     Create linkage matrix and then plot the dendrogram
@@ -15,13 +12,12 @@ def plot_dendrogram(model, **kwargs):
     ----------
     model : AgglomerativeClustering model
         HCA model.
-    **kwargs : 
+    **kwargs :
         truncate_mode, p, labels, orientation.
 
- 
+
 
     """
-    
 
     # create the counts of samples under each node
     counts = np.zeros(model.children_.shape[0])
@@ -35,9 +31,10 @@ def plot_dendrogram(model, **kwargs):
                 current_count += counts[child_idx - n_samples]
         counts[i] = current_count
 
-    linkage_matrix = np.column_stack([model.children_, model.distances_, counts]).astype(float)
+    linkage_matrix = np.column_stack(
+        [model.children_, model.distances_, counts]
+    ).astype(float)
 
     # Plot the corresponding dendrogram
     dendrogram(linkage_matrix, **kwargs)
     return model.labels_
-    
