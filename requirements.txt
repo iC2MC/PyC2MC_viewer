@@ -1,5 +1,5 @@
 matplotlib==3.5.1
-numpy==1.21.2
+numpy==1.22.0
 pandas==1.4.1
 pyqt==5.9.2
 openpyxl==3.0.9
